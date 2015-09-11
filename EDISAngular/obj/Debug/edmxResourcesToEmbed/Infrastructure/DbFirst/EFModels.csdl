@@ -1,0 +1,1291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="edisDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="AccountId" />
+    </Key>
+    <Property Name="AccountId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AccountNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AccountType" Type="Int32" Nullable="false" />
+    <Property Name="AccountInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClientGroup_ClientGroupId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Client_ClientId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ClientGroup" Relationship="Self.FK_dbo_Accounts_dbo_ClientGroups_ClientGroup_ClientGroupId" FromRole="Accounts" ToRole="ClientGroups" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_dbo_Accounts_dbo_Clients_Client_ClientId" FromRole="Accounts" ToRole="Clients" />
+    <NavigationProperty Name="BondTransactions" Relationship="Self.FK_dbo_BondTransactions_dbo_Accounts_Account_AccountId" FromRole="Accounts" ToRole="BondTransactions" />
+    <NavigationProperty Name="CashTransactions" Relationship="Self.FK_dbo_CashTransactions_dbo_Accounts_Account_AccountId" FromRole="Accounts" ToRole="CashTransactions" />
+    <NavigationProperty Name="ConsultancyExpenses" Relationship="Self.FK_dbo_ConsultancyExpenses_dbo_Accounts_AccountId" FromRole="Accounts" ToRole="ConsultancyExpenses" />
+    <NavigationProperty Name="CouponPayments" Relationship="Self.FK_dbo_CouponPayments_dbo_Accounts_Account_AccountId" FromRole="Accounts" ToRole="CouponPayments" />
+    <NavigationProperty Name="Dividends" Relationship="Self.FK_dbo_Dividends_dbo_Accounts_Account_AccountId" FromRole="Accounts" ToRole="Dividends" />
+    <NavigationProperty Name="EquityTransactions" Relationship="Self.FK_dbo_EquityTransactions_dbo_Accounts_Account_AccountId" FromRole="Accounts" ToRole="EquityTransactions" />
+    <NavigationProperty Name="InsuranceTransactions" Relationship="Self.FK_dbo_InsuranceTransactions_dbo_Accounts_AccountId" FromRole="Accounts" ToRole="InsuranceTransactions" />
+    <NavigationProperty Name="Interests" Relationship="Self.FK_dbo_Interests_dbo_Accounts_Account_AccountId" FromRole="Accounts" ToRole="Interests" />
+    <NavigationProperty Name="MarginLendingTransactions" Relationship="Self.FK_dbo_MarginLendingTransactions_dbo_Accounts_AccountId" FromRole="Accounts" ToRole="MarginLendingTransactions" />
+    <NavigationProperty Name="MortgageHomeLoanTransactions" Relationship="Self.FK_dbo_MortgageHomeLoanTransactions_dbo_Accounts_AccountId" FromRole="Accounts" ToRole="MortgageHomeLoanTransactions" />
+    <NavigationProperty Name="PropertyTransactions" Relationship="Self.FK_dbo_PropertyTransactions_dbo_Accounts_Account_AccountId" FromRole="Accounts" ToRole="PropertyTransactions" />
+    <NavigationProperty Name="Rentals" Relationship="Self.FK_dbo_Rentals_dbo_Accounts_Account_AccountId" FromRole="Accounts" ToRole="Rentals" />
+    <NavigationProperty Name="RepaymentRecords" Relationship="Self.FK_dbo_RepaymentRecords_dbo_Accounts_AccountId" FromRole="Accounts" ToRole="RepaymentRecords" />
+  </EntityType>
+  <EntityType Name="Adviser">
+    <Key>
+      <PropertyRef Name="AdviserId" />
+    </Key>
+    <Property Name="AdviserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AdviserNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="VerifiedId" Type="Int32" Nullable="false" />
+    <Property Name="ABNACN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AddressLn1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AddressLn2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AddressLn3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Suburb" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PostCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Fax" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CurrentTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ExperienceStartDate" Type="DateTime" Precision="3" />
+    <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Lng" Type="Double" />
+    <Property Name="Lat" Type="Double" />
+    <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ImageMimeType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IndustryExperienceStartDate" Type="DateTime" Precision="3" />
+    <Property Name="BusinessPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BusinessMobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BusinessFax" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RoleAndServicesSummary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DealerGroupName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Asfl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DAddressLine1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DAddressLine2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DAddressLine3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DSuburb" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DState" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DPostcode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DCountry" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DealerGroupHasDerivativesLicense" Type="Boolean" Nullable="false" />
+    <Property Name="IsAuthorizedRepresentative" Type="Boolean" Nullable="false" />
+    <Property Name="AuthorizedRepresentativeNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TotalAssetUnderManagement" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TotalInvestmentUndermanagement" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TotalDirectAustralianEquitiesUnderManagement" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TotalDirectInterantionalEquitiesUnderManagement" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TotalDirectFixedInterestUnderManagement" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TotalDirectLendingBookInterestUnderManagement" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ApproximateNumberOfClients" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Institution" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EducationLevelId" Type="Int32" Nullable="false" />
+    <Property Name="CourseTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CourseStatus" Type="Boolean" Nullable="false" />
+    <Property Name="ProfessiontypeId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NewsLetterServiceId" Type="Int32" Nullable="false" />
+    <Property Name="NewsLetterServiceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NewsLetterSelected" Type="Boolean" Nullable="false" />
+    <Property Name="GroupName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ServiceId" Type="Int32" Nullable="false" />
+    <Property Name="ServiceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Providing" Type="Boolean" Nullable="false" />
+    <Property Name="CAFId" Type="Int32" Nullable="false" />
+    <Property Name="CAFSelected" Type="Boolean" Nullable="false" />
+    <Property Name="CAFDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RemunerationMethodSpecified" Type="Boolean" Nullable="false" />
+    <Property Name="RemunerationMethod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NumberOfClientsId" Type="Int32" Nullable="false" />
+    <Property Name="InvestibleAssetLevel" Type="Int32" Nullable="false" />
+    <Property Name="TotalAssetLevelId" Type="Int32" Nullable="false" />
+    <Property Name="AnnualIncomeLevelId" Type="Int32" Nullable="false" />
+    <Property Name="TotalAssetLevel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ClientGroups" Relationship="Self.FK_dbo_ClientGroups_dbo_Advisers_Adviser_AdviserId" FromRole="Advisers" ToRole="ClientGroups" />
+    <NavigationProperty Name="ConsultancyExpenses" Relationship="Self.FK_dbo_ConsultancyExpenses_dbo_Advisers_AdviserId" FromRole="Advisers" ToRole="ConsultancyExpenses" />
+    <NavigationProperty Name="TransactionExpenses" Relationship="Self.FK_dbo_TransactionExpenses_dbo_Advisers_AdviserId" FromRole="Advisers" ToRole="TransactionExpenses" />
+  </EntityType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+  </EntityType>
+  <EntityType Name="AssetPrice">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AssetType" Type="Int32" Nullable="false" />
+    <Property Name="CorrespondingAssetKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Bond_BondId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Property_PropertyId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Equity_AssetId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Bond" Relationship="Self.FK_dbo_AssetPrices_dbo_Bonds_Bond_BondId" FromRole="AssetPrices" ToRole="Bonds" />
+    <NavigationProperty Name="Equity" Relationship="Self.FK_dbo_AssetPrices_dbo_Equities_Equity_AssetId" FromRole="AssetPrices" ToRole="Equities" />
+    <NavigationProperty Name="Property" Relationship="Self.FK_dbo_AssetPrices_dbo_Properties_Property_PropertyId" FromRole="AssetPrices" ToRole="Properties" />
+  </EntityType>
+  <EntityType Name="AustralianState">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Bond">
+    <Key>
+      <PropertyRef Name="BondId" />
+    </Key>
+    <Property Name="BondId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Ticker" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Frequency" Type="Int32" Nullable="false" />
+    <Property Name="BondType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Issuer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AssetPrices" Relationship="Self.FK_dbo_AssetPrices_dbo_Bonds_Bond_BondId" FromRole="Bonds" ToRole="AssetPrices" />
+    <NavigationProperty Name="BondTransactions" Relationship="Self.FK_dbo_BondTransactions_dbo_Bonds_BondId" FromRole="Bonds" ToRole="BondTransactions" />
+    <NavigationProperty Name="CouponPayments" Relationship="Self.FK_dbo_CouponPayments_dbo_Bonds_Bond_BondId" FromRole="Bonds" ToRole="CouponPayments" />
+    <NavigationProperty Name="ResearchValues" Relationship="Self.FK_dbo_ResearchValues_dbo_Bonds_Bond_BondId" FromRole="Bonds" ToRole="ResearchValues" />
+  </EntityType>
+  <EntityType Name="BondTransaction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="NumberOfUnits" Type="Int32" Nullable="false" />
+    <Property Name="UnitPriceAtPurchase" Type="Double" Nullable="false" />
+    <Property Name="BondId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Account_AccountId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_dbo_BondTransactions_dbo_Accounts_Account_AccountId" FromRole="BondTransactions" ToRole="Accounts" />
+    <NavigationProperty Name="Bond" Relationship="Self.FK_dbo_BondTransactions_dbo_Bonds_BondId" FromRole="BondTransactions" ToRole="Bonds" />
+  </EntityType>
+  <EntityType Name="BondType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TypeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CashAccount">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Bsb" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AccountName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AccountNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CashAccountType" Type="Int32" Nullable="false" />
+    <Property Name="MaturityDate" Type="DateTime" Precision="3" />
+    <Property Name="Frequency" Type="Int32" Nullable="false" />
+    <Property Name="CurrencyType" Type="Int32" Nullable="false" />
+    <Property Name="TermsInMonths" Type="Int32" />
+    <Property Name="InterestRate" Type="Double" />
+    <Property Name="AnnualInterest" Type="Double" />
+    <Property Name="FaceValue" Type="Double" Nullable="false" />
+    <NavigationProperty Name="CashTransactions" Relationship="Self.FK_dbo_CashTransactions_dbo_CashAccounts_CashAccount_Id" FromRole="CashAccounts" ToRole="CashTransactions" />
+    <NavigationProperty Name="Interests" Relationship="Self.FK_dbo_Interests_dbo_CashAccounts_CashAccount_Id" FromRole="CashAccounts" ToRole="Interests" />
+  </EntityType>
+  <EntityType Name="CashTransaction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Amount" Type="Double" Nullable="false" />
+    <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CashAccount_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Account_AccountId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_dbo_CashTransactions_dbo_Accounts_Account_AccountId" FromRole="CashTransactions" ToRole="Accounts" />
+    <NavigationProperty Name="CashAccount" Relationship="Self.FK_dbo_CashTransactions_dbo_CashAccounts_CashAccount_Id" FromRole="CashTransactions" ToRole="CashAccounts" />
+  </EntityType>
+  <EntityType Name="ClientGroup">
+    <Key>
+      <PropertyRef Name="ClientGroupId" />
+    </Key>
+    <Property Name="ClientGroupId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MainClientId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GroupNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Adviser_AdviserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="GroupName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="GroupAlias" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Accounts" Relationship="Self.FK_dbo_Accounts_dbo_ClientGroups_ClientGroup_ClientGroupId" FromRole="ClientGroups" ToRole="Accounts" />
+    <NavigationProperty Name="Adviser" Relationship="Self.FK_dbo_ClientGroups_dbo_Advisers_Adviser_AdviserId" FromRole="ClientGroups" ToRole="Advisers" />
+    <NavigationProperty Name="Clients" Relationship="Self.FK_dbo_Clients_dbo_ClientGroups_ClientGroupId" FromRole="ClientGroups" ToRole="Clients" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="ClientId" />
+    </Key>
+    <Property Name="ClientId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Dob" Type="DateTime" Precision="3" />
+    <Property Name="ClientNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ClientGroupId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Fax" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClientType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Age" Type="Int32" Nullable="false" />
+    <Property Name="EntityName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EntityType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ABN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ACN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Accounts" Relationship="Self.FK_dbo_Accounts_dbo_Clients_Client_ClientId" FromRole="Clients" ToRole="Accounts" />
+    <NavigationProperty Name="ClientGroup" Relationship="Self.FK_dbo_Clients_dbo_ClientGroups_ClientGroupId" FromRole="Clients" ToRole="ClientGroups" />
+  </EntityType>
+  <EntityType Name="ConsultancyExpens">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IncurredOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Amount" Type="Double" Nullable="false" />
+    <Property Name="ConsultancyExpenseType" Type="Int32" Nullable="false" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AdviserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AccountId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_dbo_ConsultancyExpenses_dbo_Accounts_AccountId" FromRole="ConsultancyExpenses" ToRole="Accounts" />
+    <NavigationProperty Name="Adviser" Relationship="Self.FK_dbo_ConsultancyExpenses_dbo_Advisers_AdviserId" FromRole="ConsultancyExpenses" ToRole="Advisers" />
+  </EntityType>
+  <EntityType Name="CouponPayment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PaymentOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Amount" Type="Double" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Bond_BondId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Account_AccountId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_dbo_CouponPayments_dbo_Accounts_Account_AccountId" FromRole="CouponPayments" ToRole="Accounts" />
+    <NavigationProperty Name="Bond" Relationship="Self.FK_dbo_CouponPayments_dbo_Bonds_Bond_BondId" FromRole="CouponPayments" ToRole="Bonds" />
+  </EntityType>
+  <EntityType Name="Dividend">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PaymentOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Amount" Type="Double" Nullable="false" />
+    <Property Name="FrankingCredit" Type="Double" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Equity_AssetId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Account_AccountId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_dbo_Dividends_dbo_Accounts_Account_AccountId" FromRole="Dividends" ToRole="Accounts" />
+    <NavigationProperty Name="Equity" Relationship="Self.FK_dbo_Dividends_dbo_Equities_Equity_AssetId" FromRole="Dividends" ToRole="Equities" />
+  </EntityType>
+  <EntityType Name="Equity">
+    <Key>
+      <PropertyRef Name="AssetId" />
+    </Key>
+    <Property Name="AssetId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Ticker" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Sector" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EquityType" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AssetPrices" Relationship="Self.FK_dbo_AssetPrices_dbo_Equities_Equity_AssetId" FromRole="Equities" ToRole="AssetPrices" />
+    <NavigationProperty Name="Dividends" Relationship="Self.FK_dbo_Dividends_dbo_Equities_Equity_AssetId" FromRole="Equities" ToRole="Dividends" />
+    <NavigationProperty Name="EquityTransactions" Relationship="Self.FK_dbo_EquityTransactions_dbo_Equities_EquityId" FromRole="Equities" ToRole="EquityTransactions" />
+    <NavigationProperty Name="ResearchValues" Relationship="Self.FK_dbo_ResearchValues_dbo_Equities_Equity_AssetId" FromRole="Equities" ToRole="ResearchValues" />
+  </EntityType>
+  <EntityType Name="EquityTransaction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="NumberOfUnits" Type="Int32" Nullable="false" />
+    <Property Name="UnitPriceAtPurchase" Type="Double" Nullable="false" />
+    <Property Name="EquityId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Account_AccountId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_dbo_EquityTransactions_dbo_Accounts_Account_AccountId" FromRole="EquityTransactions" ToRole="Accounts" />
+    <NavigationProperty Name="Equity" Relationship="Self.FK_dbo_EquityTransactions_dbo_Equities_EquityId" FromRole="EquityTransactions" ToRole="Equities" />
+  </EntityType>
+  <EntityType Name="IndexedEquity">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Ticker" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Weighting" Type="Double" Nullable="false" />
+    <Property Name="AsxIndexTypes" Type="Int32" Nullable="false" />
+    <Property Name="EquityType" Type="Int32" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="InsuranceTransaction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PurchasedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EntitiesInsured" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsAcquire" Type="Boolean" Nullable="false" />
+    <Property Name="Issuer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="InsuranceType" Type="Int32" Nullable="false" />
+    <Property Name="PolicyType" Type="Int32" Nullable="false" />
+    <Property Name="PolicyNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NameOfPolicy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PolicyAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AmountInsured" Type="Double" Nullable="false" />
+    <Property Name="Premium" Type="Double" Nullable="false" />
+    <Property Name="AccountId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_dbo_InsuranceTransactions_dbo_Accounts_AccountId" FromRole="InsuranceTransactions" ToRole="Accounts" />
+  </EntityType>
+  <EntityType Name="Interest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PaymentOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Amount" Type="Double" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CashAccount_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Account_AccountId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_dbo_Interests_dbo_Accounts_Account_AccountId" FromRole="Interests" ToRole="Accounts" />
+    <NavigationProperty Name="CashAccount" Relationship="Self.FK_dbo_Interests_dbo_CashAccounts_CashAccount_Id" FromRole="Interests" ToRole="CashAccounts" />
+  </EntityType>
+  <EntityType Name="LiabilityRate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Rate" Type="Double" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EffectiveFrom" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MortgageId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="MarginLendingId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MarginLendingTransaction" Relationship="Self.FK_dbo_LiabilityRates_dbo_MarginLendingTransactions_MarginLendingId" FromRole="LiabilityRates" ToRole="MarginLendingTransactions" />
+    <NavigationProperty Name="MortgageHomeLoanTransaction" Relationship="Self.FK_dbo_LiabilityRates_dbo_MortgageHomeLoanTransactions_MortgageId" FromRole="LiabilityRates" ToRole="MortgageHomeLoanTransactions" />
+  </EntityType>
+  <EntityType Name="LoanValueRatio">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Ratio" Type="Double" Nullable="false" />
+    <Property Name="AssetId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AssetTypes" Type="Int32" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ActiveDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MarginLendingTransaction_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MarginLendingTransaction" Relationship="Self.FK_dbo_LoanValueRatios_dbo_MarginLendingTransactions_MarginLendingTransaction_Id" FromRole="LoanValueRatios" ToRole="MarginLendingTransactions" />
+  </EntityType>
+  <EntityType Name="MarginLendingTransaction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="GrantedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LoanAmount" Type="Double" Nullable="false" />
+    <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsAcquire" Type="Boolean" Nullable="false" />
+    <Property Name="AccountId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_dbo_MarginLendingTransactions_dbo_Accounts_AccountId" FromRole="MarginLendingTransactions" ToRole="Accounts" />
+    <NavigationProperty Name="LiabilityRates" Relationship="Self.FK_dbo_LiabilityRates_dbo_MarginLendingTransactions_MarginLendingId" FromRole="MarginLendingTransactions" ToRole="LiabilityRates" />
+    <NavigationProperty Name="LoanValueRatios" Relationship="Self.FK_dbo_LoanValueRatios_dbo_MarginLendingTransactions_MarginLendingTransaction_Id" FromRole="MarginLendingTransactions" ToRole="LoanValueRatios" />
+  </EntityType>
+  <EntityType Name="MortgageHomeLoanTransaction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LoanAquiredOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PropertyId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LoanAmount" Type="Double" Nullable="false" />
+    <Property Name="LoanExpiryDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LoanRepaymentType" Type="Int32" Nullable="false" />
+    <Property Name="Institution" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TypeOfMortgageRates" Type="Int32" Nullable="false" />
+    <Property Name="AccountId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsAcquire" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_dbo_MortgageHomeLoanTransactions_dbo_Accounts_AccountId" FromRole="MortgageHomeLoanTransactions" ToRole="Accounts" />
+    <NavigationProperty Name="LiabilityRates" Relationship="Self.FK_dbo_LiabilityRates_dbo_MortgageHomeLoanTransactions_MortgageId" FromRole="MortgageHomeLoanTransactions" ToRole="LiabilityRates" />
+    <NavigationProperty Name="Property" Relationship="Self.FK_dbo_MortgageHomeLoanTransactions_dbo_Properties_PropertyId" FromRole="MortgageHomeLoanTransactions" ToRole="Properties" />
+  </EntityType>
+  <EntityType Name="Property">
+    <Key>
+      <PropertyRef Name="PropertyId" />
+    </Key>
+    <Property Name="PropertyId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GooglePlaceId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FullAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PropertyType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StreetAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Postcode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Longitude" Type="Double" />
+    <Property Name="Latitude" Type="Double" />
+    <NavigationProperty Name="AssetPrices" Relationship="Self.FK_dbo_AssetPrices_dbo_Properties_Property_PropertyId" FromRole="Properties" ToRole="AssetPrices" />
+    <NavigationProperty Name="MortgageHomeLoanTransactions" Relationship="Self.FK_dbo_MortgageHomeLoanTransactions_dbo_Properties_PropertyId" FromRole="Properties" ToRole="MortgageHomeLoanTransactions" />
+    <NavigationProperty Name="PropertyTransactions" Relationship="Self.FK_dbo_PropertyTransactions_dbo_Properties_PropertyAddress_PropertyId" FromRole="Properties" ToRole="PropertyTransactions" />
+    <NavigationProperty Name="Rentals" Relationship="Self.FK_dbo_Rentals_dbo_Properties_PropertyAddress_PropertyId" FromRole="Properties" ToRole="Rentals" />
+    <NavigationProperty Name="ResearchValues" Relationship="Self.FK_dbo_ResearchValues_dbo_Properties_Property_PropertyId" FromRole="Properties" ToRole="ResearchValues" />
+  </EntityType>
+  <EntityType Name="PropertyTransaction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="IsBuy" Type="Boolean" Nullable="false" />
+    <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PropertyAddress_PropertyId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Account_AccountId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_dbo_PropertyTransactions_dbo_Accounts_Account_AccountId" FromRole="PropertyTransactions" ToRole="Accounts" />
+    <NavigationProperty Name="Property" Relationship="Self.FK_dbo_PropertyTransactions_dbo_Properties_PropertyAddress_PropertyId" FromRole="PropertyTransactions" ToRole="Properties" />
+  </EntityType>
+  <EntityType Name="PropertyType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TypeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Rental">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PaymentOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Amount" Type="Double" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PropertyAddress_PropertyId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Account_AccountId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_dbo_Rentals_dbo_Accounts_Account_AccountId" FromRole="Rentals" ToRole="Accounts" />
+    <NavigationProperty Name="Property" Relationship="Self.FK_dbo_Rentals_dbo_Properties_PropertyAddress_PropertyId" FromRole="Rentals" ToRole="Properties" />
+  </EntityType>
+  <EntityType Name="RepaymentRecord">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CorrespondingLiabilityGroupingKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LiabilityType" Type="Int32" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PaymentOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PrincipleAmount" Type="Double" Nullable="false" />
+    <Property Name="InterestAmount" Type="Double" Nullable="false" />
+    <Property Name="AccountId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_dbo_RepaymentRecords_dbo_Accounts_AccountId" FromRole="RepaymentRecords" ToRole="Accounts" />
+  </EntityType>
+  <EntityType Name="ResearchValue">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Key" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Value" Type="Double" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Issuer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Bond_BondId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Property_PropertyId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Equity_AssetId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Bond" Relationship="Self.FK_dbo_ResearchValues_dbo_Bonds_Bond_BondId" FromRole="ResearchValues" ToRole="Bonds" />
+    <NavigationProperty Name="Equity" Relationship="Self.FK_dbo_ResearchValues_dbo_Equities_Equity_AssetId" FromRole="ResearchValues" ToRole="Equities" />
+    <NavigationProperty Name="Property" Relationship="Self.FK_dbo_ResearchValues_dbo_Properties_Property_PropertyId" FromRole="ResearchValues" ToRole="Properties" />
+  </EntityType>
+  <EntityType Name="Sector">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SectorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SectorGroup" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="TransactionExpens">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IncurredOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Amount" Type="Double" Nullable="false" />
+    <Property Name="ExpenseType" Type="Int32" Nullable="false" />
+    <Property Name="TransactionType" Type="Int32" Nullable="false" />
+    <Property Name="CorrespondingTransactionId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AdviserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Adviser" Relationship="Self.FK_dbo_TransactionExpenses_dbo_Advisers_AdviserId" FromRole="TransactionExpenses" ToRole="Advisers" />
+  </EntityType>
+  <Association Name="FK_dbo_Accounts_dbo_ClientGroups_ClientGroup_ClientGroupId">
+    <End Role="ClientGroups" Type="Self.ClientGroup" Multiplicity="0..1" />
+    <End Role="Accounts" Type="Self.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClientGroups">
+        <PropertyRef Name="ClientGroupId" />
+      </Principal>
+      <Dependent Role="Accounts">
+        <PropertyRef Name="ClientGroup_ClientGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Accounts_dbo_Clients_Client_ClientId">
+    <End Role="Clients" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="Accounts" Type="Self.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="ClientId" />
+      </Principal>
+      <Dependent Role="Accounts">
+        <PropertyRef Name="Client_ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_BondTransactions_dbo_Accounts_Account_AccountId">
+    <End Role="Accounts" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="BondTransactions" Type="Self.BondTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="BondTransactions">
+        <PropertyRef Name="Account_AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_CashTransactions_dbo_Accounts_Account_AccountId">
+    <End Role="Accounts" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="CashTransactions" Type="Self.CashTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="CashTransactions">
+        <PropertyRef Name="Account_AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_ConsultancyExpenses_dbo_Accounts_AccountId">
+    <End Role="Accounts" Type="Self.Account" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ConsultancyExpenses" Type="Self.ConsultancyExpens" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="ConsultancyExpenses">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_CouponPayments_dbo_Accounts_Account_AccountId">
+    <End Role="Accounts" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="CouponPayments" Type="Self.CouponPayment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="CouponPayments">
+        <PropertyRef Name="Account_AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Dividends_dbo_Accounts_Account_AccountId">
+    <End Role="Accounts" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Dividends" Type="Self.Dividend" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="Dividends">
+        <PropertyRef Name="Account_AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_EquityTransactions_dbo_Accounts_Account_AccountId">
+    <End Role="Accounts" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="EquityTransactions" Type="Self.EquityTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="EquityTransactions">
+        <PropertyRef Name="Account_AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_InsuranceTransactions_dbo_Accounts_AccountId">
+    <End Role="Accounts" Type="Self.Account" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="InsuranceTransactions" Type="Self.InsuranceTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="InsuranceTransactions">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Interests_dbo_Accounts_Account_AccountId">
+    <End Role="Accounts" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Interests" Type="Self.Interest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="Interests">
+        <PropertyRef Name="Account_AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_MarginLendingTransactions_dbo_Accounts_AccountId">
+    <End Role="Accounts" Type="Self.Account" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="MarginLendingTransactions" Type="Self.MarginLendingTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="MarginLendingTransactions">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_MortgageHomeLoanTransactions_dbo_Accounts_AccountId">
+    <End Role="Accounts" Type="Self.Account" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="MortgageHomeLoanTransactions" Type="Self.MortgageHomeLoanTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="MortgageHomeLoanTransactions">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_PropertyTransactions_dbo_Accounts_Account_AccountId">
+    <End Role="Accounts" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="PropertyTransactions" Type="Self.PropertyTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="PropertyTransactions">
+        <PropertyRef Name="Account_AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Rentals_dbo_Accounts_Account_AccountId">
+    <End Role="Accounts" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Rentals" Type="Self.Rental" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="Rentals">
+        <PropertyRef Name="Account_AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_RepaymentRecords_dbo_Accounts_AccountId">
+    <End Role="Accounts" Type="Self.Account" Multiplicity="1" />
+    <End Role="RepaymentRecords" Type="Self.RepaymentRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="RepaymentRecords">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_ClientGroups_dbo_Advisers_Adviser_AdviserId">
+    <End Role="Advisers" Type="Self.Adviser" Multiplicity="0..1" />
+    <End Role="ClientGroups" Type="Self.ClientGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Advisers">
+        <PropertyRef Name="AdviserId" />
+      </Principal>
+      <Dependent Role="ClientGroups">
+        <PropertyRef Name="Adviser_AdviserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_ConsultancyExpenses_dbo_Advisers_AdviserId">
+    <End Role="Advisers" Type="Self.Adviser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ConsultancyExpenses" Type="Self.ConsultancyExpens" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Advisers">
+        <PropertyRef Name="AdviserId" />
+      </Principal>
+      <Dependent Role="ConsultancyExpenses">
+        <PropertyRef Name="AdviserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_TransactionExpenses_dbo_Advisers_AdviserId">
+    <End Role="Advisers" Type="Self.Adviser" Multiplicity="0..1" />
+    <End Role="TransactionExpenses" Type="Self.TransactionExpens" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Advisers">
+        <PropertyRef Name="AdviserId" />
+      </Principal>
+      <Dependent Role="TransactionExpenses">
+        <PropertyRef Name="AdviserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AssetPrices_dbo_Bonds_Bond_BondId">
+    <End Role="Bonds" Type="Self.Bond" Multiplicity="0..1" />
+    <End Role="AssetPrices" Type="Self.AssetPrice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bonds">
+        <PropertyRef Name="BondId" />
+      </Principal>
+      <Dependent Role="AssetPrices">
+        <PropertyRef Name="Bond_BondId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AssetPrices_dbo_Equities_Equity_AssetId">
+    <End Role="Equities" Type="Self.Equity" Multiplicity="0..1" />
+    <End Role="AssetPrices" Type="Self.AssetPrice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equities">
+        <PropertyRef Name="AssetId" />
+      </Principal>
+      <Dependent Role="AssetPrices">
+        <PropertyRef Name="Equity_AssetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AssetPrices_dbo_Properties_Property_PropertyId">
+    <End Role="Properties" Type="Self.Property" Multiplicity="0..1" />
+    <End Role="AssetPrices" Type="Self.AssetPrice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Properties">
+        <PropertyRef Name="PropertyId" />
+      </Principal>
+      <Dependent Role="AssetPrices">
+        <PropertyRef Name="Property_PropertyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_BondTransactions_dbo_Bonds_BondId">
+    <End Role="Bonds" Type="Self.Bond" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="BondTransactions" Type="Self.BondTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bonds">
+        <PropertyRef Name="BondId" />
+      </Principal>
+      <Dependent Role="BondTransactions">
+        <PropertyRef Name="BondId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_CouponPayments_dbo_Bonds_Bond_BondId">
+    <End Role="Bonds" Type="Self.Bond" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CouponPayments" Type="Self.CouponPayment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bonds">
+        <PropertyRef Name="BondId" />
+      </Principal>
+      <Dependent Role="CouponPayments">
+        <PropertyRef Name="Bond_BondId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_ResearchValues_dbo_Bonds_Bond_BondId">
+    <End Role="Bonds" Type="Self.Bond" Multiplicity="0..1" />
+    <End Role="ResearchValues" Type="Self.ResearchValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bonds">
+        <PropertyRef Name="BondId" />
+      </Principal>
+      <Dependent Role="ResearchValues">
+        <PropertyRef Name="Bond_BondId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_CashTransactions_dbo_CashAccounts_CashAccount_Id">
+    <End Role="CashAccounts" Type="Self.CashAccount" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CashTransactions" Type="Self.CashTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CashAccounts">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CashTransactions">
+        <PropertyRef Name="CashAccount_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Interests_dbo_CashAccounts_CashAccount_Id">
+    <End Role="CashAccounts" Type="Self.CashAccount" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Interests" Type="Self.Interest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CashAccounts">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Interests">
+        <PropertyRef Name="CashAccount_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Clients_dbo_ClientGroups_ClientGroupId">
+    <End Role="ClientGroups" Type="Self.ClientGroup" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Clients" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClientGroups">
+        <PropertyRef Name="ClientGroupId" />
+      </Principal>
+      <Dependent Role="Clients">
+        <PropertyRef Name="ClientGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Dividends_dbo_Equities_Equity_AssetId">
+    <End Role="Equities" Type="Self.Equity" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Dividends" Type="Self.Dividend" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equities">
+        <PropertyRef Name="AssetId" />
+      </Principal>
+      <Dependent Role="Dividends">
+        <PropertyRef Name="Equity_AssetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_EquityTransactions_dbo_Equities_EquityId">
+    <End Role="Equities" Type="Self.Equity" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="EquityTransactions" Type="Self.EquityTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equities">
+        <PropertyRef Name="AssetId" />
+      </Principal>
+      <Dependent Role="EquityTransactions">
+        <PropertyRef Name="EquityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_ResearchValues_dbo_Equities_Equity_AssetId">
+    <End Role="Equities" Type="Self.Equity" Multiplicity="0..1" />
+    <End Role="ResearchValues" Type="Self.ResearchValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equities">
+        <PropertyRef Name="AssetId" />
+      </Principal>
+      <Dependent Role="ResearchValues">
+        <PropertyRef Name="Equity_AssetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_LiabilityRates_dbo_MarginLendingTransactions_MarginLendingId">
+    <End Role="MarginLendingTransactions" Type="Self.MarginLendingTransaction" Multiplicity="0..1" />
+    <End Role="LiabilityRates" Type="Self.LiabilityRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MarginLendingTransactions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LiabilityRates">
+        <PropertyRef Name="MarginLendingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_LiabilityRates_dbo_MortgageHomeLoanTransactions_MortgageId">
+    <End Role="MortgageHomeLoanTransactions" Type="Self.MortgageHomeLoanTransaction" Multiplicity="0..1" />
+    <End Role="LiabilityRates" Type="Self.LiabilityRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MortgageHomeLoanTransactions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LiabilityRates">
+        <PropertyRef Name="MortgageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_LoanValueRatios_dbo_MarginLendingTransactions_MarginLendingTransaction_Id">
+    <End Role="MarginLendingTransactions" Type="Self.MarginLendingTransaction" Multiplicity="0..1" />
+    <End Role="LoanValueRatios" Type="Self.LoanValueRatio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MarginLendingTransactions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LoanValueRatios">
+        <PropertyRef Name="MarginLendingTransaction_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_MortgageHomeLoanTransactions_dbo_Properties_PropertyId">
+    <End Role="Properties" Type="Self.Property" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="MortgageHomeLoanTransactions" Type="Self.MortgageHomeLoanTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Properties">
+        <PropertyRef Name="PropertyId" />
+      </Principal>
+      <Dependent Role="MortgageHomeLoanTransactions">
+        <PropertyRef Name="PropertyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_PropertyTransactions_dbo_Properties_PropertyAddress_PropertyId">
+    <End Role="Properties" Type="Self.Property" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PropertyTransactions" Type="Self.PropertyTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Properties">
+        <PropertyRef Name="PropertyId" />
+      </Principal>
+      <Dependent Role="PropertyTransactions">
+        <PropertyRef Name="PropertyAddress_PropertyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Rentals_dbo_Properties_PropertyAddress_PropertyId">
+    <End Role="Properties" Type="Self.Property" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Rentals" Type="Self.Rental" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Properties">
+        <PropertyRef Name="PropertyId" />
+      </Principal>
+      <Dependent Role="Rentals">
+        <PropertyRef Name="PropertyAddress_PropertyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_ResearchValues_dbo_Properties_Property_PropertyId">
+    <End Role="Properties" Type="Self.Property" Multiplicity="0..1" />
+    <End Role="ResearchValues" Type="Self.ResearchValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Properties">
+        <PropertyRef Name="PropertyId" />
+      </Principal>
+      <Dependent Role="ResearchValues">
+        <PropertyRef Name="Property_PropertyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="edisDbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="Accounts" EntityType="Self.Account" />
+    <EntitySet Name="Advisers" EntityType="Self.Adviser" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+    <EntitySet Name="AssetPrices" EntityType="Self.AssetPrice" />
+    <EntitySet Name="AustralianStates" EntityType="Self.AustralianState" />
+    <EntitySet Name="Bonds" EntityType="Self.Bond" />
+    <EntitySet Name="BondTransactions" EntityType="Self.BondTransaction" />
+    <EntitySet Name="BondTypes" EntityType="Self.BondType" />
+    <EntitySet Name="CashAccounts" EntityType="Self.CashAccount" />
+    <EntitySet Name="CashTransactions" EntityType="Self.CashTransaction" />
+    <EntitySet Name="ClientGroups" EntityType="Self.ClientGroup" />
+    <EntitySet Name="Clients" EntityType="Self.Client" />
+    <EntitySet Name="ConsultancyExpenses" EntityType="Self.ConsultancyExpens" />
+    <EntitySet Name="CouponPayments" EntityType="Self.CouponPayment" />
+    <EntitySet Name="Dividends" EntityType="Self.Dividend" />
+    <EntitySet Name="Equities" EntityType="Self.Equity" />
+    <EntitySet Name="EquityTransactions" EntityType="Self.EquityTransaction" />
+    <EntitySet Name="IndexedEquities" EntityType="Self.IndexedEquity" />
+    <EntitySet Name="InsuranceTransactions" EntityType="Self.InsuranceTransaction" />
+    <EntitySet Name="Interests" EntityType="Self.Interest" />
+    <EntitySet Name="LiabilityRates" EntityType="Self.LiabilityRate" />
+    <EntitySet Name="LoanValueRatios" EntityType="Self.LoanValueRatio" />
+    <EntitySet Name="MarginLendingTransactions" EntityType="Self.MarginLendingTransaction" />
+    <EntitySet Name="MortgageHomeLoanTransactions" EntityType="Self.MortgageHomeLoanTransaction" />
+    <EntitySet Name="Properties" EntityType="Self.Property" />
+    <EntitySet Name="PropertyTransactions" EntityType="Self.PropertyTransaction" />
+    <EntitySet Name="PropertyTypes" EntityType="Self.PropertyType" />
+    <EntitySet Name="Rentals" EntityType="Self.Rental" />
+    <EntitySet Name="RepaymentRecords" EntityType="Self.RepaymentRecord" />
+    <EntitySet Name="ResearchValues" EntityType="Self.ResearchValue" />
+    <EntitySet Name="Sectors" EntityType="Self.Sector" />
+    <EntitySet Name="TransactionExpenses" EntityType="Self.TransactionExpens" />
+    <AssociationSet Name="FK_dbo_Accounts_dbo_ClientGroups_ClientGroup_ClientGroupId" Association="Self.FK_dbo_Accounts_dbo_ClientGroups_ClientGroup_ClientGroupId">
+      <End Role="ClientGroups" EntitySet="ClientGroups" />
+      <End Role="Accounts" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Accounts_dbo_Clients_Client_ClientId" Association="Self.FK_dbo_Accounts_dbo_Clients_Client_ClientId">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Accounts" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_BondTransactions_dbo_Accounts_Account_AccountId" Association="Self.FK_dbo_BondTransactions_dbo_Accounts_Account_AccountId">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="BondTransactions" EntitySet="BondTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_CashTransactions_dbo_Accounts_Account_AccountId" Association="Self.FK_dbo_CashTransactions_dbo_Accounts_Account_AccountId">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="CashTransactions" EntitySet="CashTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_ConsultancyExpenses_dbo_Accounts_AccountId" Association="Self.FK_dbo_ConsultancyExpenses_dbo_Accounts_AccountId">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="ConsultancyExpenses" EntitySet="ConsultancyExpenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_CouponPayments_dbo_Accounts_Account_AccountId" Association="Self.FK_dbo_CouponPayments_dbo_Accounts_Account_AccountId">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="CouponPayments" EntitySet="CouponPayments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Dividends_dbo_Accounts_Account_AccountId" Association="Self.FK_dbo_Dividends_dbo_Accounts_Account_AccountId">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="Dividends" EntitySet="Dividends" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_EquityTransactions_dbo_Accounts_Account_AccountId" Association="Self.FK_dbo_EquityTransactions_dbo_Accounts_Account_AccountId">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="EquityTransactions" EntitySet="EquityTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_InsuranceTransactions_dbo_Accounts_AccountId" Association="Self.FK_dbo_InsuranceTransactions_dbo_Accounts_AccountId">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="InsuranceTransactions" EntitySet="InsuranceTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Interests_dbo_Accounts_Account_AccountId" Association="Self.FK_dbo_Interests_dbo_Accounts_Account_AccountId">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="Interests" EntitySet="Interests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_MarginLendingTransactions_dbo_Accounts_AccountId" Association="Self.FK_dbo_MarginLendingTransactions_dbo_Accounts_AccountId">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="MarginLendingTransactions" EntitySet="MarginLendingTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_MortgageHomeLoanTransactions_dbo_Accounts_AccountId" Association="Self.FK_dbo_MortgageHomeLoanTransactions_dbo_Accounts_AccountId">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="MortgageHomeLoanTransactions" EntitySet="MortgageHomeLoanTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_PropertyTransactions_dbo_Accounts_Account_AccountId" Association="Self.FK_dbo_PropertyTransactions_dbo_Accounts_Account_AccountId">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="PropertyTransactions" EntitySet="PropertyTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Rentals_dbo_Accounts_Account_AccountId" Association="Self.FK_dbo_Rentals_dbo_Accounts_Account_AccountId">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="Rentals" EntitySet="Rentals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_RepaymentRecords_dbo_Accounts_AccountId" Association="Self.FK_dbo_RepaymentRecords_dbo_Accounts_AccountId">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="RepaymentRecords" EntitySet="RepaymentRecords" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_ClientGroups_dbo_Advisers_Adviser_AdviserId" Association="Self.FK_dbo_ClientGroups_dbo_Advisers_Adviser_AdviserId">
+      <End Role="Advisers" EntitySet="Advisers" />
+      <End Role="ClientGroups" EntitySet="ClientGroups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_ConsultancyExpenses_dbo_Advisers_AdviserId" Association="Self.FK_dbo_ConsultancyExpenses_dbo_Advisers_AdviserId">
+      <End Role="Advisers" EntitySet="Advisers" />
+      <End Role="ConsultancyExpenses" EntitySet="ConsultancyExpenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_TransactionExpenses_dbo_Advisers_AdviserId" Association="Self.FK_dbo_TransactionExpenses_dbo_Advisers_AdviserId">
+      <End Role="Advisers" EntitySet="Advisers" />
+      <End Role="TransactionExpenses" EntitySet="TransactionExpenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AssetPrices_dbo_Bonds_Bond_BondId" Association="Self.FK_dbo_AssetPrices_dbo_Bonds_Bond_BondId">
+      <End Role="Bonds" EntitySet="Bonds" />
+      <End Role="AssetPrices" EntitySet="AssetPrices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AssetPrices_dbo_Equities_Equity_AssetId" Association="Self.FK_dbo_AssetPrices_dbo_Equities_Equity_AssetId">
+      <End Role="Equities" EntitySet="Equities" />
+      <End Role="AssetPrices" EntitySet="AssetPrices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AssetPrices_dbo_Properties_Property_PropertyId" Association="Self.FK_dbo_AssetPrices_dbo_Properties_Property_PropertyId">
+      <End Role="Properties" EntitySet="Properties" />
+      <End Role="AssetPrices" EntitySet="AssetPrices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_BondTransactions_dbo_Bonds_BondId" Association="Self.FK_dbo_BondTransactions_dbo_Bonds_BondId">
+      <End Role="Bonds" EntitySet="Bonds" />
+      <End Role="BondTransactions" EntitySet="BondTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_CouponPayments_dbo_Bonds_Bond_BondId" Association="Self.FK_dbo_CouponPayments_dbo_Bonds_Bond_BondId">
+      <End Role="Bonds" EntitySet="Bonds" />
+      <End Role="CouponPayments" EntitySet="CouponPayments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_ResearchValues_dbo_Bonds_Bond_BondId" Association="Self.FK_dbo_ResearchValues_dbo_Bonds_Bond_BondId">
+      <End Role="Bonds" EntitySet="Bonds" />
+      <End Role="ResearchValues" EntitySet="ResearchValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_CashTransactions_dbo_CashAccounts_CashAccount_Id" Association="Self.FK_dbo_CashTransactions_dbo_CashAccounts_CashAccount_Id">
+      <End Role="CashAccounts" EntitySet="CashAccounts" />
+      <End Role="CashTransactions" EntitySet="CashTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Interests_dbo_CashAccounts_CashAccount_Id" Association="Self.FK_dbo_Interests_dbo_CashAccounts_CashAccount_Id">
+      <End Role="CashAccounts" EntitySet="CashAccounts" />
+      <End Role="Interests" EntitySet="Interests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Clients_dbo_ClientGroups_ClientGroupId" Association="Self.FK_dbo_Clients_dbo_ClientGroups_ClientGroupId">
+      <End Role="ClientGroups" EntitySet="ClientGroups" />
+      <End Role="Clients" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Dividends_dbo_Equities_Equity_AssetId" Association="Self.FK_dbo_Dividends_dbo_Equities_Equity_AssetId">
+      <End Role="Equities" EntitySet="Equities" />
+      <End Role="Dividends" EntitySet="Dividends" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_EquityTransactions_dbo_Equities_EquityId" Association="Self.FK_dbo_EquityTransactions_dbo_Equities_EquityId">
+      <End Role="Equities" EntitySet="Equities" />
+      <End Role="EquityTransactions" EntitySet="EquityTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_ResearchValues_dbo_Equities_Equity_AssetId" Association="Self.FK_dbo_ResearchValues_dbo_Equities_Equity_AssetId">
+      <End Role="Equities" EntitySet="Equities" />
+      <End Role="ResearchValues" EntitySet="ResearchValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_LiabilityRates_dbo_MarginLendingTransactions_MarginLendingId" Association="Self.FK_dbo_LiabilityRates_dbo_MarginLendingTransactions_MarginLendingId">
+      <End Role="MarginLendingTransactions" EntitySet="MarginLendingTransactions" />
+      <End Role="LiabilityRates" EntitySet="LiabilityRates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_LiabilityRates_dbo_MortgageHomeLoanTransactions_MortgageId" Association="Self.FK_dbo_LiabilityRates_dbo_MortgageHomeLoanTransactions_MortgageId">
+      <End Role="MortgageHomeLoanTransactions" EntitySet="MortgageHomeLoanTransactions" />
+      <End Role="LiabilityRates" EntitySet="LiabilityRates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_LoanValueRatios_dbo_MarginLendingTransactions_MarginLendingTransaction_Id" Association="Self.FK_dbo_LoanValueRatios_dbo_MarginLendingTransactions_MarginLendingTransaction_Id">
+      <End Role="MarginLendingTransactions" EntitySet="MarginLendingTransactions" />
+      <End Role="LoanValueRatios" EntitySet="LoanValueRatios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_MortgageHomeLoanTransactions_dbo_Properties_PropertyId" Association="Self.FK_dbo_MortgageHomeLoanTransactions_dbo_Properties_PropertyId">
+      <End Role="Properties" EntitySet="Properties" />
+      <End Role="MortgageHomeLoanTransactions" EntitySet="MortgageHomeLoanTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_PropertyTransactions_dbo_Properties_PropertyAddress_PropertyId" Association="Self.FK_dbo_PropertyTransactions_dbo_Properties_PropertyAddress_PropertyId">
+      <End Role="Properties" EntitySet="Properties" />
+      <End Role="PropertyTransactions" EntitySet="PropertyTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Rentals_dbo_Properties_PropertyAddress_PropertyId" Association="Self.FK_dbo_Rentals_dbo_Properties_PropertyAddress_PropertyId">
+      <End Role="Properties" EntitySet="Properties" />
+      <End Role="Rentals" EntitySet="Rentals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_ResearchValues_dbo_Properties_Property_PropertyId" Association="Self.FK_dbo_ResearchValues_dbo_Properties_Property_PropertyId">
+      <End Role="Properties" EntitySet="Properties" />
+      <End Role="ResearchValues" EntitySet="ResearchValues" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
