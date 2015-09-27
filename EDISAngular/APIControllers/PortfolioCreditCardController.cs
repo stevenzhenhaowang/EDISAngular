@@ -90,7 +90,7 @@ namespace EDISAngular.APIControllers
         public CreditCardQuickStatsModel GetQuickStats_Client()
         {
             return repo.CreditCard_GetQuickStats_Client(User.Identity.GetUserId());
-        }
+        }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
 
         [HttpGet, Route("api/Adviser/CreditCardPortfolio/Cashflow")]
         public CashflowBriefModel GetCashflow_Adviser(string clientUserId = null)

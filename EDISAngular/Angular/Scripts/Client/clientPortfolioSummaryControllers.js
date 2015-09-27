@@ -45,6 +45,7 @@
         })
 
     }]);
+
     app.controller("clientPortfolioInvestmentPiechartController", ["$scope", "clientBusinessDetailsDBService", function ($scope, DBContext) {
 
         DBContext.GetInvestmentPorfolioData().get(function (data) {
@@ -68,8 +69,20 @@
                 }
             });
         })
-
     }]);
+    //app.controller("clientPortfolioCashflowBarchartController", ["$scope", "clientPortfolioFICashflowDetails", function ($scope, DBContext) {
+    //    DBContext().get(function (data) {
+    //        $scope.data = data;
+    //        $scope.dataSource = new kendo.data.DataSource({
+    //            data: $scope.data.data,
+    //            sort: {
+    //                field: "date",
+    //                dir: "asc"
+    //            }
+    //        });
+    //    })
+
+    //}]);
     app.controller("clientPortfolioStatisticsController", ["$scope", "clientPortfolioSummaryDBService", function ($scope, DBContext) {
         DBContext.portfolioStat().get(function (data) {
             $scope.data = data;

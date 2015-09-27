@@ -27,203 +27,219 @@
     });
 
     //START OF AE SERVICES
-    app.factory("adviserPortfolioAEGeneralInfo", function ($http, $resource, AppStrings) {
+    //app.factory("adviserPortfolioAEGeneralInfo",function ($http, $resource, AppStrings) {
+    //    return function () {
+    //        return $resource(AppStrings.EDIS_IP + "api/Adviser/AustralianEquityPortfolio/General");
+    //    }
+    //});
+    //app.factory("adviserPortfolioAEGeneralInfo", ["clientSelectionService", "$http", "$resource", "AppStrings", function (cselector, $http, $resource, AppStrings) {
+
+
+    //    var getData = function () {
+    //        var clientGroupId = cselector.getCurrentClientUserId();
+    //        return $http({
+    //            url: AppStrings.EDIS_IP + "api/Adviser/AustralianEquityPortfolio/General",
+    //            method: "GET",
+    //            params: { clientGroupId: clientGroupId }
+    //        });
+    //    }
+    //    return {
+    //        getData:getData
+    //    }
+    //}]);
+    app.factory("adviserPortfolioAEGeneralInfo", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/AustralianEquityPortfolio/General");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/AustralianEquityPortfolio/General" + clientSelector.getClientIdQueryString());
         }
-    });
-    app.factory("adviserPortfolioAECashflowDetails", function ($http, $resource, $filter, AppStrings) {
+    }]);
+
+    app.factory("adviserPortfolioAECashflowDetails", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/AustralianEquityPortfolio/Cashflow");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/AustralianEquityPortfolio/Cashflow" + clientSelector.getClientIdQueryString());
         };
-    });
-    app.factory("adviserPortfolioAECashflowInfoCompanySpecific", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioAECashflowInfoCompanySpecific", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         var DBContext = function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/AustralianEquityPortfolio/CashflowDetail");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/AustralianEquityPortfolio/CashflowDetail" + clientSelector.getClientIdQueryString());
         };
         return DBContext;
-    });
-    app.factory("adviserPortfolioAECompanyProfiles", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioAECompanyProfiles", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/AustralianEquityPortfolio/CompanyProfiles");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/AustralianEquityPortfolio/CompanyProfiles" + clientSelector.getClientIdQueryString());
         }
-    })
-    app.factory("adviserPortfolioAEEvaluationAgainstModel", function ($http, $resource, AppStrings) {
+    }])
+    app.factory("adviserPortfolioAEEvaluationAgainstModel", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/AustralianEquityPortfolio/EvaluationModel");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/AustralianEquityPortfolio/EvaluationModel" + clientSelector.getClientIdQueryString());
         };
-    })
-    app.factory("adviserPortfolioAEDiversificationInfo", function ($http, $resource, AppStrings) {
+    }])
+    app.factory("adviserPortfolioAEDiversificationInfo", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/AustralianEquityPortfolio/Diversification");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/AustralianEquityPortfolio/Diversification" + clientSelector.getClientIdQueryString());
         };
-    });
-    app.factory("adviserPortfolioAERatingInfo", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioAERatingInfo", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/AustralianEquityPortfolio/Rating");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/AustralianEquityPortfolio/Rating" + clientSelector.getClientIdQueryString());
         }
-    })
-    app.factory("adviserPortfolioAEQuickStats", function ($http, $resource, AppStrings) {
+    }])
+    app.factory("adviserPortfolioAEQuickStats", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/AustralianEquityPortfolio/QuickStats");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/AustralianEquityPortfolio/QuickStats" + clientSelector.getClientIdQueryString());
         }
-    })
+    }])
     //END OF AE SERVICES
 
     //START OF INT SERVICES
-    app.factory("adviserPortfolioINTGeneralInfo", function ($http, $resource, AppStrings) {
+    app.factory("adviserPortfolioINTGeneralInfo", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/InternationalEquityPortfolio/General");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/InternationalEquityPortfolio/General" + clientSelector.getClientIdQueryString());
         }
-    });
-    app.factory("adviserPortfolioINTCashflowDetails", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioINTCashflowDetails",["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/InternationalEquityPortfolio/Cashflow");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/InternationalEquityPortfolio/Cashflow" + clientSelector.getClientIdQueryString());
         };
-    });
-    app.factory("adviserPortfolioINTCashflowInfoCompanySpecific", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioINTCashflowInfoCompanySpecific", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         var DBContext = function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/InternationalEquityPortfolio/CashflowDetail");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/InternationalEquityPortfolio/CashflowDetail" + clientSelector.getClientIdQueryString());
         }
-
-
         return DBContext;
-    });
-    app.factory("adviserPortfolioINTCompanyProfiles", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioINTCompanyProfiles", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/InternationalEquityPortfolio/CompanyProfiles");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/InternationalEquityPortfolio/CompanyProfiles" + clientSelector.getClientIdQueryString());
         }
-    })
-    app.factory("adviserPortfolioINTCashflowMonthly", function ($http, $resource, AppStrings) {
+    }])
+    app.factory("adviserPortfolioINTCashflowMonthly", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/InternationalEquityPortfolio/Cashflow");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/InternationalEquityPortfolio/Cashflow" + clientSelector.getClientIdQueryString());
         }
-    })
-    app.factory("adviserPortfolioINTEvaluationAgainstModel", function ($http, $resource, AppStrings) {
+    }])
+    app.factory("adviserPortfolioINTEvaluationAgainstModel", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/InternationalEquityPortfolio/EvaluationModel");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/InternationalEquityPortfolio/EvaluationModel" + clientSelector.getClientIdQueryString());
         };
-    })
-    app.factory("adviserPortfolioINTDiversificationInfo", function ($http, $resource, AppStrings) {
+    }])
+    app.factory("adviserPortfolioINTDiversificationInfo", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/InternationalEquityPortfolio/Diversification");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/InternationalEquityPortfolio/Diversification" + clientSelector.getClientIdQueryString());
         }
-    });
-    app.factory("adviserPortfolioINTRatingInfo", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioINTRatingInfo", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/InternationalEquityPortfolio/Rating");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/InternationalEquityPortfolio/Rating" + clientSelector.getClientIdQueryString());
         }
-    })
-    app.factory("adviserPortfolioINTQuickStats", function ($http, $resource, AppStrings) {
+    }])
+    app.factory("adviserPortfolioINTQuickStats", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/AustralianEquityPortfolio/QuickStats");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/AustralianEquityPortfolio/QuickStats" + clientSelector.getClientIdQueryString());
         }
-    })
+    }])
     //END OF INT SERVICES
 
 
 
     //START OF MI SERVICES 
-    app.factory("adviserPortfolioMIGeneralInfo", function ($http, $resource, AppStrings) {
+    app.factory("adviserPortfolioMIGeneralInfo", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/ManagedInvestmentPortfolio/General");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/ManagedInvestmentPortfolio/General" + clientSelector.getClientIdQueryString());
         }
-    });
-    app.factory("adviserPortfolioMICashflowDetails", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioMICashflowDetails", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/ManagedInvestmentPortfolio/Cashflow");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/ManagedInvestmentPortfolio/Cashflow" + clientSelector.getClientIdQueryString());
         };
-    });
-    app.factory("advisorPortfolioMIAssetAllocation", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("advisorPortfolioMIAssetAllocation", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/ManagedInvestmentPortfolio/AssetAllocation");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/ManagedInvestmentPortfolio/AssetAllocation" + clientSelector.getClientIdQueryString());
         };
-    });
-    app.factory("adviserPortfolioMICashflowInfoCompanySpecific", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioMICashflowInfoCompanySpecific", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         var DBContext = function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/ManagedInvestmentPortfolio/CashflowDetail");
-
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/ManagedInvestmentPortfolio/CashflowDetail" + clientSelector.getClientIdQueryString());
         }
-
-
         return DBContext;
-    });
-    app.factory("adviserPortfolioMICompanyProfiles", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioMICompanyProfiles", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/ManagedInvestmentPortfolio/CompanyProfiles");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/ManagedInvestmentPortfolio/CompanyProfiles" + clientSelector.getClientIdQueryString());
         }
-    })
-    app.factory("adviserPortfolioMICashflowMonthly", function ($http, $resource, AppStrings) {
+    }])
+    app.factory("adviserPortfolioMICashflowMonthly", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/ManagedInvestmentPortfolio/Cashflow");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/ManagedInvestmentPortfolio/Cashflow" + clientSelector.getClientIdQueryString());
         }
-    })
-    app.factory("adviserPortfolioMIDiversificationInfo", function ($http, $resource, AppStrings) {
+    }])
+    app.factory("adviserPortfolioMIDiversificationInfo", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/ManagedInvestmentPortfolio/Diversification");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/ManagedInvestmentPortfolio/Diversification" + clientSelector.getClientIdQueryString());
         }
-    });
-    app.factory("adviserPortfolioMIRatingInfo", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioMIRatingInfo", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/ManagedInvestmentPortfolio/Rating");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/ManagedInvestmentPortfolio/Rating" + clientSelector.getClientIdQueryString());
         }
-    });
-    app.factory("adviserPortfolioMIQuickStats", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioMIQuickStats", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/ManagedInvestmentPortfolio/QuickStats");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/ManagedInvestmentPortfolio/QuickStats" + clientSelector.getClientIdQueryString());
         }
-    })
-    app.factory("adviserPortfolioMIDiversificationGroupSummary", function ($http, $resource, AppStrings) {
+    }])
+    app.factory("adviserPortfolioMIDiversificationGroupSummary", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/ManagedInvestmentPortfolio/DiversificationGroup");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/ManagedInvestmentPortfolio/DiversificationGroup" + clientSelector.getClientIdQueryString());
         }
-    });
+    }]);
     //END OF MI SERVICES 
 
 
     //START OF DP SERVICES
-    app.factory("adviserPortfolioDPGeneralInfo", function ($http, $resource, AppStrings) {
+    app.factory("adviserPortfolioDPGeneralInfo", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/DirectPropertyPortfolio/General");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/DirectPropertyPortfolio/General" + clientSelector.getClientIdQueryString());
         }
-    });
-    app.factory("adviserPortfolioDPCashflowDetails", function ($http, $resource, $filter,AppStrings) {
+    }]);
+    app.factory("adviserPortfolioDPCashflowDetails", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/InternationalEquityPortfolio/Cashflow");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/InternationalEquityPortfolio/Cashflow" + clientSelector.getClientIdQueryString());
         }
-    });
-    app.factory("adviserPortfolioDPCashflowInfoPropertySpecific", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioDPCashflowInfoPropertySpecific", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         var DBContext = function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/DirectPropertyPortfolio/CashflowDetail");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/DirectPropertyPortfolio/CashflowDetail" + clientSelector.getClientIdQueryString());
         };
-
-
         return DBContext;
-    });
-    app.factory("adviserPortfolioDPCashflowMonthly", function ($http, $resource, $filter, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioDPCashflowMonthly", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/DirectPropertyPortfolio/CashflowDetail");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/DirectPropertyPortfolio/CashflowDetail" + clientSelector.getClientIdQueryString());
         }
-    })
-    app.factory("adviserPortfolioDPRatingInfo", function ($http, $resource, AppStrings) {
+    }])
+    app.factory("adviserPortfolioDPRatingInfo", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/DirectPropertyPortfolio/Rating");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/DirectPropertyPortfolio/Rating" + clientSelector.getClientIdQueryString());
         }
-    });
-    app.factory("adviserPortfolioDPQuickStats", function ($http, $resource, AppStrings) {
+    }]);
+
+
+    app.factory("adviserPortfolioDPQuickStats", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/DirectPropertyPortfolio/QuickStats");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/DirectPropertyPortfolio/QuickStats" + clientSelector.getClientIdQueryString());
         }
-    })
+    }])
 
     //testing out
-    app.factory("adviserPortfolioDPRatingInfo", function ($http, $resource, AppStrings) {
-        return function () {
-            return function () {
-                return $resource(AppStrings.EDIS_IP + "api/Adviser/DirectPropertyPortfolio/Rating");
-            }
-        }
-    })
+    //app.factory("adviserPortfolioDPRatingInfo", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
+    //    return function () {
+    //        return function () {
+    //            return $resource(AppStrings.EDIS_IP + "api/Adviser/DirectPropertyPortfolio/Rating" + clientSelector.getClientIdQueryString());
+    //        }
+    //    }
+    //}])
 
     //not implemented Services
     app.factory("adviserPortfolioDPCompanyProfiles", function ($http, $resource) {
@@ -569,54 +585,54 @@
             };
         }
     });
-    app.factory("adviserPortfolioDPgeoInfo", function ($http, $resource, AppStrings) {
+    app.factory("adviserPortfolioDPgeoInfo", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/DirectPropertyPortfolio/GeoInfo");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/DirectPropertyPortfolio/GeoInfo" + clientSelector.getClientIdQueryString());
         }
-    });
+    }]);
     //END OF DP SERVICES
 
     //START OF FI SERVICES
-    app.factory("adviserPortfolioFIGeneralInfo", function ($http, $resource, AppStrings) {
+    app.factory("adviserPortfolioFIGeneralInfo", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/FixedIncomePortfolio/General");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/FixedIncomePortfolio/General" + clientSelector.getClientIdQueryString());
 
         }
-    });
-    app.factory("adviserPortfolioFICashflowDetails", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioFICashflowDetails", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/FixedIncomePortfolio/Cashflow");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/FixedIncomePortfolio/Cashflow" + clientSelector.getClientIdQueryString());
         };
-    });
-    app.factory("adviserPortfolioFICashflowInfoIncomeSpecific", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioFICashflowInfoIncomeSpecific", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         var DBContext = function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/FixedIncomePortfolio/CashflowDetailed");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/FixedIncomePortfolio/CashflowDetailed" + clientSelector.getClientIdQueryString());
 
         }
 
 
         return DBContext;
-    });
-    app.factory("adviserPortfolioFIIncomeProfiles", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioFIIncomeProfiles", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/FixedIncomePortfolio/Profiles");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/FixedIncomePortfolio/Profiles" + clientSelector.getClientIdQueryString());
         }
-    })
-    app.factory("adviserPortfolioFIDiversificationInfo", function ($http, $resource, AppStrings) {
+    }])
+    app.factory("adviserPortfolioFIDiversificationInfo", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/FixedIncomePortfolio/Diversifications");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/FixedIncomePortfolio/Diversifications" + clientSelector.getClientIdQueryString());
         };
-    });
-    app.factory("adviserPortfolioFIStatistics", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioFIStatistics", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/FixedIncomePortfolio/Stats");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/FixedIncomePortfolio/Stats" + clientSelector.getClientIdQueryString());
         }
-    });
-    app.factory("adviserPortfolioFIPriceChartData", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioFIPriceChartData", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/FixedIncomePortfolio/Price");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/FixedIncomePortfolio/Price" + clientSelector.getClientIdQueryString());
         };
-    });
+    }]);
        
     //not implemented services
     app.factory("adviserPortfolioFIEvaluationAgainstModel", function ($http, $resource) {
@@ -847,84 +863,84 @@
     //END OF FI SERVICES 
 
     //START OF CTD SERVICES
-    app.factory("adviserPortfolioCTDGeneralInfo", function ($http, $resource, AppStrings) {
+    app.factory("adviserPortfolioCTDGeneralInfo", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/CashTermDepositPortfolio/General");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/CashTermDepositPortfolio/General" + clientSelector.getClientIdQueryString());
         }
-    });
-    app.factory("adviserPortfolioCTDCashflowDetails", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioCTDCashflowDetails", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/CashTermDepositPortfolio/Cashflow");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/CashTermDepositPortfolio/Cashflow" + clientSelector.getClientIdQueryString());
         }
-    });
-    app.factory("adviserPortfolioCTDCashflowInfoDepositSpecific", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioCTDCashflowInfoDepositSpecific", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         var DBContext = function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/CashTermDepositPortfolio/CashflowDetailed");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/CashTermDepositPortfolio/CashflowDetailed" + clientSelector.getClientIdQueryString());
         }
         return DBContext;
-    });
-    app.factory("adviserPortfolioCTDDepositProfiles", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioCTDDepositProfiles", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/CashTermDepositPortfolio/Profiles");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/CashTermDepositPortfolio/Profiles" + clientSelector.getClientIdQueryString());
         }
-    })
-    app.factory("adviserPortfolioCTDDiversificationInfo", function ($http, $resource, AppStrings) {
+    }])
+    app.factory("adviserPortfolioCTDDiversificationInfo", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/CashTermDepositPortfolio/Diversifications");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/CashTermDepositPortfolio/Diversifications" + clientSelector.getClientIdQueryString());
         }
-    });
-    app.factory("adviserPortfolioCTDPriceChartData", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioCTDPriceChartData", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/CashTermDepositPortfolio/Price");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/CashTermDepositPortfolio/Price" + clientSelector.getClientIdQueryString());
         }
-    });
-    app.factory("adviserPortfolioCTDStatistics", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioCTDStatistics", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/CashTermDepositPortfolio/Stats");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/CashTermDepositPortfolio/Stats" + clientSelector.getClientIdQueryString());
         }
-    });
-    app.factory("adviserPortfolioCTDRatingInfo", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioCTDRatingInfo", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/CashTermDepositPortfolio/Rating");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/CashTermDepositPortfolio/Rating" + clientSelector.getClientIdQueryString());
         }
-    });
+    }]);
     //END OF CTD SERVICES
 
 
     //START OF MHL SERVICES
-    app.factory("adviserPortfolioMHLGeneralInfo", function ($http, $resource, AppStrings) {
+    app.factory("adviserPortfolioMHLGeneralInfo",  ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/MortgageInvestmentPortfolio/General");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/MortgageInvestmentPortfolio/General" + clientSelector.getClientIdQueryString());
         }
-    });
-    app.factory("adviserPortfolioMHLCashflowDetails", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioMHLCashflowDetails",  ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/MortgageInvestmentPortfolio/Cashflow");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/MortgageInvestmentPortfolio/Cashflow" + clientSelector.getClientIdQueryString());
         };
-    });
-    app.factory("adviserPortfolioMHLStatistics", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioMHLStatistics",  ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/MortgageInvestmentPortfolio/Stats");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/MortgageInvestmentPortfolio/Stats" + clientSelector.getClientIdQueryString());
         }
-    });
-    app.factory("adviserPortfolioMHLRatingInfo", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioMHLRatingInfo",  ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/MortgageInvestmentPortfolio/Rating");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/MortgageInvestmentPortfolio/Rating" + clientSelector.getClientIdQueryString());
         }
-    });
-    app.factory("adviserPortfolioMHLInvestmentProfiles", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioMHLInvestmentProfiles",  ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/MortgageInvestmentPortfolio/Profiles");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/MortgageInvestmentPortfolio/Profiles" + clientSelector.getClientIdQueryString());
         }
-    });
-    app.factory("adviserPortfolioMHLCashflowInfoPropertySpecific", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioMHLCashflowInfoPropertySpecific",  ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         var DBContext = function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/MortgageInvestmentPortfolio/CashflowDetailed");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/MortgageInvestmentPortfolio/CashflowDetailed" + clientSelector.getClientIdQueryString());
         }
 
 
         return DBContext;
-    });
+    }]);
     //END OF MHL SERVICES
 
     //START OF ML SERVICES
@@ -1398,27 +1414,27 @@
     //END OF CC SERVICES
 
     //START OF Insurance SERVICES
-    app.factory("adviserPortfolioINSCashflowDetails", function ($http, $resource, AppStrings) {
+    app.factory("adviserPortfolioINSCashflowDetails",  ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/InsurancePortfolio/CashflowDetail");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/InsurancePortfolio/CashflowDetail" + clientSelector.getClientIdQueryString());
         };
-    });
-    app.factory("adviserPortfolioINSStatistics", function ($http, $resource, AppStrings) {
+    }]);
+    app.factory("adviserPortfolioINSStatistics",  ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/InsurancePortfolio/Statistics");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/InsurancePortfolio/Statistics" + clientSelector.getClientIdQueryString());
         }
-    })
-    app.factory("adviserPortfolioINSList", function ($http, $resource, AppStrings) {
+    }])
+    app.factory("adviserPortfolioINSList", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/InsurancePortfolio/InsuranceList");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/InsurancePortfolio/InsuranceList" + clientSelector.getClientIdQueryString());
 
         }
-    })
-    app.factory("adviserPortfolioINSConditions", function ($http, $resource, AppStrings) {
+    }])
+    app.factory("adviserPortfolioINSConditions", ["clientSelectionService", "$http", "$resource", "AppStrings", function (clientSelector, $http, $resource, AppStrings) {
         return function () {
-            return $resource(AppStrings.EDIS_IP + "api/Adviser/InsurancePortfolio/Conditions");
+            return $resource(AppStrings.EDIS_IP + "api/Adviser/InsurancePortfolio/Conditions" + clientSelector.getClientIdQueryString());
         }
-    })
+    }])
     //END OF Insurance SERVICES
     
 

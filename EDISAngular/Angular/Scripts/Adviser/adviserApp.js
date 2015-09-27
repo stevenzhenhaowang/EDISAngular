@@ -207,7 +207,7 @@
         }
         function getClientIdQueryString(){
             if (currentClientUserId !== "") {
-                return "?clientUserId=" + currentClientUserId;
+                return "?clientGroupId=" + currentClientUserId;
             } else {
                 return "";
             }

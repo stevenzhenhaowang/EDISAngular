@@ -58,7 +58,8 @@ namespace EDISAngular.APIControllers
         [HttpGet, Route("api/adviser/insertAssetsData")]
         public string insertAssetsData()
         {
-            edisRepo.InsertRandomDataIntoAssets();
+            //edisRepo.InsertRandomDataIntoAssets();
+            edisRepo.insertData2();
             return "success";
 
         }
@@ -67,7 +68,8 @@ namespace EDISAngular.APIControllers
         [Authorize(Roles = AuthorizationRoles.Role_Adviser)]
         public List<ClientView> getAllAdviserClientsForGroup(ClientAccountCreationBindingModel clientGroupNumber)
         {
-            var clientList = edisRepo.GetClientsForGroupSync(clientGroupNumber.clientGroup, DateTime.Now);
+            var clientGroup = edisRepo.getClientGroupByGroupId(clientGroupNumber.clientGroup);              //Add this statement .............
+            var clientList = edisRepo.GetClientsForGroupSync(clientGroup.ClientGroupNumber, DateTime.Now);
 
             List<ClientView> clients = new List<ClientView>();
             foreach (var client in clientList)

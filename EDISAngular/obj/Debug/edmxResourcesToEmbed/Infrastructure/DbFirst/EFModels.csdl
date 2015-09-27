@@ -254,7 +254,7 @@
     <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Amount" Type="Double" Nullable="false" />
     <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="CashAccount_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CashAccountId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Account_AccountId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Account" Relationship="Self.FK_dbo_CashTransactions_dbo_Accounts_Account_AccountId" FromRole="CashTransactions" ToRole="Accounts" />
     <NavigationProperty Name="CashAccount" Relationship="Self.FK_dbo_CashTransactions_dbo_CashAccounts_CashAccount_Id" FromRole="CashTransactions" ToRole="CashAccounts" />
@@ -924,7 +924,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="CashTransactions">
-        <PropertyRef Name="CashAccount_Id" />
+        <PropertyRef Name="CashAccountId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

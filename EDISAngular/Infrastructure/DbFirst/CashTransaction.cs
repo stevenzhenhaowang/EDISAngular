@@ -18,7 +18,7 @@ namespace EDISAngular.Infrastructure.DbFirst
         public System.DateTime CreatedOn { get; set; }
         public double Amount { get; set; }
         public System.DateTime TransactionDate { get; set; }
-        public string CashAccount_Id { get; set; }
+        public string CashAccountId { get; set; }
         public string Account_AccountId { get; set; }
     
         public virtual Account Account { get; set; }

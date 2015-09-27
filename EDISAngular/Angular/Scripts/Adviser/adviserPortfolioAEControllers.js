@@ -4,14 +4,56 @@
 (function () {
     var app = angular.module("EDIS");
     app.controller("adviserPortfolioAEViewController", function ($scope) {
+        $scope.changeClient = function () {
+            $http.get(AppStrings.EDIS_IP + "api/adviser/insertAssetsData").success(function () {
+                alert("success");
+            }).error(function (data) {
+                alert("failed:" + data);
+            })
+        }
 
+
+
+
+
+
+
+
+
+
+
+
+        
     });
+
     app.controller("adviserPortfolioAEBriefInfoController", ["$scope", "adviserPortfolioAEGeneralInfo", function ($scope, DBContext) {
         DBContext().get(function (data) {
+
             $scope.data = data;
         })
 
     }]);
+
+
+    //app.controller("adviserPortfolioAEBriefInfoController", ["$scope", "adviserPortfolioAEGeneralInfo", function ($scope, DBContext) {
+    //    DBContext.getData().then(function (data) {
+    //        $scope.data = data.data;
+    //    })
+    //}]);
+
+    //app.controller("adviserPortfolioAEBriefInfoController", ["$scope", "clientSelectionService", "$http", "$resource", "AppStrings", function ($scope, cselector, $http, $resource, AppStrings) {
+
+    //    var clientGroupId = cselector.getCurrentClientUserId();
+
+    //    $scope.data = $resource(AppStrings.EDIS_IP + "api/Adviser/AustralianEquityPortfolio/General/:clientGroupId", { clientGroupId: '@clientGroupId' });
+
+    //    //DBContext().get(function (data) {
+    //    //    $scope.data = data;
+    //    //})
+
+    //}]);
+
+
     app.controller("adviserPortfolioAECashflowController", ["$scope", "adviserPortfolioAECashflowDetails", function ($scope, DBContext) {
         DBContext().get(function (data) {
 
@@ -167,6 +209,48 @@
     app.controller("adviserPortfolioAERatingController", ["$scope", "adviserPortfolioAERatingInfo", function ($scope, DBContext) {
         DBContext().get(function (data) {
             $scope.data = data;
+
+
+
+            //$scope.options = {
+            //    title: {
+            //        text: "Portfolio Rating"
+            //    },
+            //    legend: {
+            //        position: "top"
+            //    },
+            //    seriesDefaults: {
+            //        type: "column"
+            //    },
+            //    series: [{
+            //        name: "Risk",
+            //        data: [$scope.data.risk]
+            //    }, {
+            //        name: "Suitability",
+            //        data: [$scope.data.suitability]
+            //    }, {
+            //        name: "% of Asset Not Suited",
+            //        data: [$scope.data.notSuited]
+            //    }],
+            //    valueAxis: {
+            //        labels: {
+            //            format: "{0}"
+            //        },
+            //        line: {
+            //            visible: false
+            //        },
+            //        axisCrossingValue: 0
+            //    },
+            //    tooltip: {
+            //        visible: true,
+            //        format: "{0}",
+            //        template: "#= series.name # rating is #= value #"
+            //    }
+            //};
+
+
+
+
 
             $scope.suitability = data.suitability;
             $scope.suitabilityDesc = data.SuitabilityDesc;

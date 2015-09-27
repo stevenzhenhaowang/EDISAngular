@@ -45,21 +45,21 @@ namespace EDISAngular.Infrastructure.DatabaseAccess
                 networth = new SummaryItem() { data = new List<DataNameAmountPair>() }
             };
 
-            foreach (var assetType in db.BalanceTypes)
-            {
+            //foreach (var assetType in db.BalanceTypes)
+            //{
 
-                var clientTransactions = this
-                    .GetAllTransactionsForAdviserWithAssetType(adviserUserId, assetType.ID);
-                result.investment.data.Add(new DataNameAmountPair
-                {
-                     //amount=clientTransactions
-
-
-
-                });
+            //    var clientTransactions = this
+            //        .GetAllTransactionsForAdviserWithAssetType(adviserUserId, assetType.ID);
+            //    result.investment.data.Add(new DataNameAmountPair
+            //    {
+            //         //amount=clientTransactions
 
 
-            }
+
+            //    });
+
+
+            //}
 
 
 
@@ -4333,25 +4333,27 @@ namespace EDISAngular.Infrastructure.DatabaseAccess
         }
         public MortgageInvestmentStatModel Mortgage_GetStats_Adviser(string adviserUserId)
         {
-            return new MortgageInvestmentStatModel
-            {
-                debtLevel = rdm.Next() * 10,
-                cashfFlowLevel = RandomMoney(),
-                incomeLevel = RandomMoney(),
-                marketValue = RandomMoney(),
-                repayments = RandomMoney()
-            };
+            //return new MortgageInvestmentStatModel
+            //{
+            //    debtLevel = rdm.Next() * 10,
+            //    cashfFlowLevel = RandomMoney(),
+            //    incomeLevel = RandomMoney(),
+            //    marketValue = RandomMoney(),
+            //    repayments = RandomMoney()
+            //};
+            return null;
         }
         public MortgageInvestmentStatModel Mortgage_GetStats_Client(string clientUserId)
         {
-            return new MortgageInvestmentStatModel
-            {
-                debtLevel = rdm.Next() * 10,
-                cashfFlowLevel = RandomMoney(),
-                incomeLevel = RandomMoney(),
-                marketValue = RandomMoney(),
-                repayments = RandomMoney()
-            };
+            //return new MortgageInvestmentStatModel
+            //{
+            //    debtLevel = rdm.Next() * 10,
+            //    cashfFlowLevel = RandomMoney(),
+            //    incomeLevel = RandomMoney(),
+            //    marketValue = RandomMoney(),
+            //    repayments = RandomMoney()
+            //};
+            return null;
         }
         public PortfolioRatingModel Mortgage_GetPortfolioRating_Adviser(string advsierUserId)
         {

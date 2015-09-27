@@ -187,6 +187,16 @@
     <Compile Include="APIControllers\EducationLevelController.cs" />
     <Compile Include="APIControllers\EntityClientController.cs" />
     <Compile Include="APIControllers\PersonClientController.cs" />
+    <Compile Include="APIControllers\PortfolioAustralianEquityController.cs" />
+    <Compile Include="APIControllers\PortfolioCashTermDepositController.cs" />
+    <Compile Include="APIControllers\PortfolioCreditCardController.cs" />
+    <Compile Include="APIControllers\PortfolioDirectPropertyController.cs" />
+    <Compile Include="APIControllers\PortfolioFixedIncomeController.cs" />
+    <Compile Include="APIControllers\PortfolioInsuranceController.cs" />
+    <Compile Include="APIControllers\PortfolioInternationalEquityController.cs" />
+    <Compile Include="APIControllers\PortfolioManagedInvestmentController.cs" />
+    <Compile Include="APIControllers\PortfolioMortgageInvestmentController.cs" />
+    <Compile Include="APIControllers\PortfolioOverviewController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -232,6 +242,7 @@
     <Compile Include="Infrastructure\Authorization\AuthorizationParameters.cs" />
     <Compile Include="Infrastructure\DatabaseAccess\BaseRepository.cs" />
     <Compile Include="Infrastructure\DatabaseAccess\CommonReferenceDataRepository.cs" />
+    <Compile Include="Infrastructure\DatabaseAccess\PortfolioRepository.cs" />
     <Compile Include="Infrastructure\DbFirst\Account.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>

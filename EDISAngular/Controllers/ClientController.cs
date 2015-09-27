@@ -125,8 +125,8 @@ namespace EDISAngular.Controllers
 
                 edisRopo.UpdateClientSync(clientRegistration);
 
-                //UserManager.RemoveFromRole(userId, AuthorizationRoles.Role_Preclient);
-                //UserManager.AddToRole(userId, AuthorizationRoles.Role_Client);
+                UserManager.RemoveFromRole(userId, AuthorizationRoles.Role_Preclient);
+                UserManager.AddToRole(userId, AuthorizationRoles.Role_Client);
 
                 //TempData["message"] = "Your profile has been successfully updated";
                 //return JavaScript("document.location.replace('" + Url.Action("showMessage") + "');");
@@ -165,8 +165,8 @@ namespace EDISAngular.Controllers
                 edisRopo.UpdateClientSync(clientRegistration);
 
 
-                //UserManager.RemoveFromRole(userId, AuthorizationRoles.Role_Preclient);
-                //UserManager.AddToRole(userId, AuthorizationRoles.Role_Client);
+                UserManager.RemoveFromRole(userId, AuthorizationRoles.Role_Preclient);
+                UserManager.AddToRole(userId, AuthorizationRoles.Role_Client);
 
                 //redirect to client dashboard here
                 //return RedirectToAction("Index", "Client");

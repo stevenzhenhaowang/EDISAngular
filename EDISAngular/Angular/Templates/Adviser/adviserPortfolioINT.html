@@ -538,28 +538,32 @@
                         </div>
                       
                         <div class="widget">
-                            <div class="widget-header">
-                                <h3><i class="fa fa-bar-chart-o"></i>Sectorial Pie Chart</h3>
 
-                            </div>
-                            <div class="widget-content">
-                                <kendo-chart k-title="{ text: 'Sectorial Pie Chart', position: 'top' }"
-                                             k-series-defaults="{ type: 'donut', startAngle: 270 }"
-                                             k-series="[{
+
+                            <div class="widget" ng-controller="adviserPortfolioSectorDiversificationController">
+
+                                <div class="widget-header">
+                                    <h3><i class="fa fa-bar-chart-o"></i>Sectorial Pie Chart</h3>
+
+                                </div>
+                                <div class="widget-content">
+                                    <kendo-chart k-title="{ text: 'Sectorial Pie Chart', position: 'top' }"
+                                                 k-series-defaults="{ type: 'donut', startAngle: 270 }"
+                                                 k-series="[{
                                                 field: 'value',
                                                 categoryField: 'sector',
                                                 padding: 0
                                                 }]"
-                                             k-series-colors="['#42a7ff', '#666666', '#999999', '#cccccc','#42a7ff', '#666666', '#999999', '#cccccc', '#42a7ff']"
-                                             k-data-source="pieSource" k-rebind="data"
-                                             k-legend="{ position: 'bottom' }"
-                                             k-tooltip="{
+                                                 k-series-colors="['#42a7ff', '#666666', '#999999', '#cccccc','#42a7ff', '#666666', '#999999', '#cccccc', '#42a7ff']"
+                                                 k-data-source="pieSource" k-rebind="data"
+                                                 k-legend="{ position: 'bottom' }"
+                                                 k-tooltip="{
                                                 visible: true,
                                                 color: 'white',
                                                 template: '${ category } - $${ value }'}"></kendo-chart>
+                                </div>
                             </div>
                         </div>
-
                         <!--
     <div class="widget" ng-controller="adviserPortfolioINTCashflowController">
         <div class="widget-header">

@@ -227,7 +227,7 @@
     <Property Name="CreatedOn" Type="datetime" Nullable="false" />
     <Property Name="Amount" Type="float" Nullable="false" />
     <Property Name="TransactionDate" Type="datetime" Nullable="false" />
-    <Property Name="CashAccount_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CashAccountId" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="Account_AccountId" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="ClientGroups">
@@ -676,7 +676,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="CashTransactions">
-        <PropertyRef Name="CashAccount_Id" />
+        <PropertyRef Name="CashAccountId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

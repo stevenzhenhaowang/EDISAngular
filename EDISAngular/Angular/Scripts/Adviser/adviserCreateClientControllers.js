@@ -40,6 +40,7 @@
                     existingGroupId: $scope.collection.personProfile.isGroupLeader === "true" ? "" : $scope.collection.personProfile.group.id
                 };
 
+
                 $http.post(AppStrings.EDIS_IP + "api/Personclient/Create", data).success(function () {
                     alert("success");
                 }).error(function (data) {

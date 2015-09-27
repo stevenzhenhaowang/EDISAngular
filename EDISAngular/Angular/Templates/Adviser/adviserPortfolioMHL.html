@@ -90,7 +90,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row">
+                                                <!--<div class="row">
                                                     <div class="col-sm-8" ng-controller="adviserPortfolioMHLRatingController">
                                                         <div class="widget">
                                                             <div class="widget-header">
@@ -102,7 +102,7 @@
 
                                                     </div>
 
-                                                </div>
+                                                </div>-->
                                             </div>
 
                                         </div>
@@ -390,6 +390,30 @@
                                     </thead>
                                     <tbody>
                                         <tr>
+                                            <td>Not Specified</td>
+                                            <td>{{data.NotSpecified | currency}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Fixed</td>
+                                            <td>{{data.Fixed | currency}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Variable</td>
+                                            <td>{{data.Variable | currency}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Combination</td>
+                                            <td>{{data.Combination | currency}}</td>
+                                        </tr>
+                                        <tr class="summary-table-row">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+
+                                    <!--tbody>
+                                        <tr>
                                             <td>Debt Level</td>
                                             <td>{{data.debtLevel | number : 0}}%</td>
                                         </tr>
@@ -414,7 +438,7 @@
                                             <td></td>
                                             <td></td>
                                         </tr>
-                                    </tbody>
+                                    </tbody>-->
                                 </table>
                             </div>
                         </div>

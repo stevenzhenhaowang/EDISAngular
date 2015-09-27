@@ -53,8 +53,6 @@
     }]);
     app.controller("adviserPortfolioDPRatingController", ["$scope", "adviserPortfolioDPRatingInfo", function ($scope, DBContext) {
         DBContext().get(function (data) {
-
-
             $scope.data = data;
             $scope.suitability = data.suitability;
             $scope.suitabilityDesc = data.SuitabilityDesc;

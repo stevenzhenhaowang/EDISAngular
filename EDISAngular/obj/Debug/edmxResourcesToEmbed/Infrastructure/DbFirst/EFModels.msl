@@ -229,7 +229,7 @@
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="Amount" ColumnName="Amount" />
           <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
-          <ScalarProperty Name="CashAccount_Id" ColumnName="CashAccount_Id" />
+          <ScalarProperty Name="CashAccountId" ColumnName="CashAccountId" />
           <ScalarProperty Name="Account_AccountId" ColumnName="Account_AccountId" />
         </MappingFragment>
       </EntityTypeMapping>
