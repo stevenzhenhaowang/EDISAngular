@@ -15,7 +15,6 @@ using SqlRepository;
 using Domain.Portfolio.Entities.CreationModels;
 using Microsoft.AspNet.Identity.Owin;
 
-//ClientController
 namespace EDISAngular.Controllers
 {
 
