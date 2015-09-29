@@ -11,6 +11,13 @@
         allocateIPOAction: function () { return $resource(AppStrings.EDIS_IP + "api/Adviser/CorporateAction/IPO/Allocation"); },
         addOtherAction: function () { return $resource(AppStrings.EDIS_IP + "api/Adviser/CorprateAction/Other"); },
         addIpoAction: function () { return $resource(AppStrings.EDIS_IP + "api/Adviser/CorprateAction/IPO"); },
+
+        existingReturnOfCapitals: function () { return $resource(AppStrings.EDIS_IP + "api/Adviser/CorprateAction/ReturnOfCapital"); },
+
+
+
+
+
     }
 
 
