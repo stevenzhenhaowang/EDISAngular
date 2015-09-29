@@ -54,24 +54,24 @@ namespace EDISAngular.Models.ServiceModels.CorporateActions
     }
 
 
-    public class returnOfCapitalParticipant
-    {
-        public string edisAccountNumber { get; set; }
-    }
+    //public class returnOfCapitalParticipant
+    //{
+    //    public string edisAccountNumber { get; set; }
+    //}
 
 
-    public class DividendReinvestmentPlan {
-        public string actionId { get; set; }
-        public string actionCode { get; set; }
-        public string reinvestmentShares { get; set; }
-        public DateTime DRPDate { get; set; }
-        public List<DRPParticipant> participant { get; set; }
-    }
+    //public class DividendReinvestmentPlan {
+    //    public string actionId { get; set; }
+    //    public string actionCode { get; set; }
+    //    public string reinvestmentShares { get; set; }
+    //    public DateTime DRPDate { get; set; }
+    //    public List<DRPParticipant> participant { get; set; }
+    //}
 
-    public class DRPParticipant {
-        public string edisAccountNumber { get; set; }
+    //public class DRPParticipant {
+    //    public string edisAccountNumber { get; set; }
 
-    }
+    //}
 
 
 
