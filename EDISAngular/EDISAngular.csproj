@@ -240,6 +240,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Authorization\AuthorizationParameters.cs" />
+    <Compile Include="Infrastructure\DatabaseAccess\AdviserRepository.cs" />
     <Compile Include="Infrastructure\DatabaseAccess\BaseRepository.cs" />
     <Compile Include="Infrastructure\DatabaseAccess\CommonReferenceDataRepository.cs" />
     <Compile Include="Infrastructure\DatabaseAccess\PortfolioRepository.cs" />

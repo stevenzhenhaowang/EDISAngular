@@ -72,12 +72,18 @@ namespace EDISAngular.Controllers
         {
             var userId = User.Identity.GetUserId();
             var client = edisRopo.GetClientSync(userId, DateTime.Now);
-            ClientPersonCompleteProfileBinding model = new ClientPersonCompleteProfileBinding();
-            model.UserId = userId;
-            model.FirstName = client.FirstName;
-            model.MiddleName = client.MiddleName;
-            model.LastName = client.LastName;
-            model.Phone = client.Phone;
+            ClientPersonCompleteProfileBinding model = new ClientPersonCompleteProfileBinding { 
+            
+                UserId = userId,
+                FirstName = client.FirstName,
+                MiddleName = client.MiddleName,
+                LastName = client.LastName,
+                Phone = client.Phone,
+                Mobile = client.Mobile,
+                DOB = client.Dob,
+                Fax = client.Fax,
+                Gender = client.Gender
+            };
             return PartialView(model);
         }
         [Authorize(Roles = AuthorizationRoles.Role_Preclient + "," + AuthorizationRoles.Role_Client)]
@@ -85,13 +91,16 @@ namespace EDISAngular.Controllers
         {
             var userId = User.Identity.GetUserId();
             var client = edisRopo.GetClientSync(userId, DateTime.Now);
-            ClientEntityCompleteProfileBinding model = new ClientEntityCompleteProfileBinding();
-            model.UserID = userId;
-            model.EntityName = client.EntityName;
-            model.EntityType = client.EntityType;
-            model.Phone = client.Phone;
-            model.ABN = client.ABN;
-            model.ACN = client.ACN;
+            ClientEntityCompleteProfileBinding model = new ClientEntityCompleteProfileBinding { 
+            
+                UserID = userId,
+                EntityName = client.EntityName,
+                EntityType = client.EntityType,
+                Phone = client.Phone,
+                ABN = client.ABN,
+                ACN = client.ACN,
+                Fax = client.Fax,
+            };
 
             return PartialView(model);
         }
@@ -120,7 +129,7 @@ namespace EDISAngular.Controllers
                     Phone = model.Phone,
                     Mobile = model.Mobile,
                     Gender = model.Gender,
-                    Fax = model.Fax
+                    Fax = model.Fax,
                 };
 
                 edisRopo.UpdateClientSync(clientRegistration);

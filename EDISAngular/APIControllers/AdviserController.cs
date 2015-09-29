@@ -24,13 +24,13 @@ namespace EDISAngular.APIControllers
 {
     public class AdviserController : ApiController
     {
-        //private AdviserRepository advisorRepo;
+        private AdviserRepository advisorRepo;
         private EdisRepository edisRepo;
 
         public AdviserController()
         {
             edisRepo = new EdisRepository();
-            //advisorRepo = new AdviserRepository();
+            advisorRepo = new AdviserRepository();
         }
         [HttpGet, Route("api/adviser/accountNumber")]
         public string getAdviserAccountNumber()
@@ -175,97 +175,97 @@ namespace EDISAngular.APIControllers
             //return advisorRepo.GetClientGroupsByAdviserId(userid);
 
         }
-        //[HttpGet, Route("api/adviser/businessRevenueBrief")]
-        //public BusinessPortfolioOverviewBriefModel GetBriefBusinessRevenue()
-        //{
-        //    return advisorRepo.GetBusinessRevenueData(User.Identity.GetUserId());
-        //}
-        //[HttpGet, Route("api/adviser/debtInstruments")]
-        //public BusinessPortfolioOverviewBriefModel GetInstrumentsData()
-        //{
-        //    return advisorRepo.GetDebtInstrumentsData(User.Identity.GetUserId());
-        //}
-        //[HttpGet, Route("api/adviser/insuranceStatistics")]
-        //public ProfileInsuranceStatisticsModel GetInsuranceStatistics()
-        //{
-        //    return advisorRepo.GetInsuranceStatisticsData(User.Identity.GetUserId());
-        //}
-        //[HttpGet, Route("api/adviser/worldMarkets")]
-        //public List<WordMarketItemModel> GetWorldMarkets()
-        //{
-        //    return advisorRepo.GetWorldMarketData(User.Identity.GetUserId());
-        //}
-        //[HttpGet, Route("api/adviser/currencies")]
-        //public List<WordMarketItemModel> GetCurrencies()
-        //{
-        //    return advisorRepo.GetCurrencies(User.Identity.GetUserId());
-        //}
-        //[HttpGet, Route("api/adviser/historicalrevenue")]
-        //public HistoricalRevenueModel GetHistoricalRevenue()
-        //{
-        //    return advisorRepo.GetHistoricalRevenueData(User.Identity.GetUserId());
-        //}
-        //[HttpGet, Route("api/adviser/investmentstat")]
-        //public BusinessStatDetailModel GetInvestmentStat()
-        //{
-        //    return advisorRepo.GetInvestmentStat(User.Identity.GetUserId());
-        //}
-        //[HttpGet, Route("api/adviser/lendingstat")]
-        //public BusinessStatDetailModel GetLendingStat()
-        //{
-        //    return advisorRepo.GetLendingStat(User.Identity.GetUserId());
-        //}
-        //[HttpGet, Route("api/adviser/InsuranceStat")]
-        //public InsuranceStatModel GetInsuranceStats()
-        //{
-        //    return advisorRepo.GetInsuranceStatDetailed(User.Identity.GetUserId());
-        //}
-        //[HttpGet, Route("api/adviser/clientPositionsMonitor")]
-        //public List<ClientPositionMonitorModel> GetClientPositionMonitor()
-        //{
-        //    return advisorRepo.GetClientPositionMonitor(User.Identity.GetUserId());
-        //}
-        //[HttpGet, Route("api/adviser/GeoLocations")]
-        //public List<GeoGraphicalLocations> GetGeoLocations()
-        //{
-        //    return advisorRepo.GetGeoLocations(User.Identity.GetUserId());
-        //}
-        //[HttpGet, Route("api/adviser/GeoDetails")]
-        //public GeoStatsModel GetGeoStat([FromUri] string[] locations)
-        //{
-        //    if (locations == null)
-        //    {
-        //        return advisorRepo.GetGeoStats(User.Identity.GetUserId(), new[] { "" });
-        //    }
-        //    else
-        //    {
-        //        return advisorRepo.GetGeoStats(User.Identity.GetUserId(), new[] { "" });
-        //    }
-        //}
-        //[HttpGet, Route("api/adviser/BusinessReenueDetails")]
-        //public BuisnessRevenueDetailsDataModel GetBusinessRevenueDetails()
-        //{
-        //    return advisorRepo.GetBusinessRevenueDetails(User.Identity.GetUserId());
-        //}
-        //[HttpGet, Route("api/adviser/ComplianceDetails")]
-        //public CompliantModel GetComplianceDetails()
-        //{
-        //    return advisorRepo.GetComplianceDetails(User.Identity.GetUserId());
-        //}
-        //[HttpGet, Route("api/adviser/reminders")]
-        //public ReminderModel GetReminders()
-        //{
-        //    return advisorRepo.GetReminders(User.Identity.GetUserId());
-        //}
-        //[HttpGet, Route("api/adviser/companyList")]
-        //public List<AnalysisCityBrief> GetCityList()
-        //{
-        //    return advisorRepo.GetAnalysisCompaniesList(User.Identity.GetUserId());
-        //}
-        //[HttpGet, Route("api/adviser/research/companyProfile")]
-        //public CompanyProfileDataItem GetCompanyProfile(string companyId)
-        //{
-        //    return advisorRepo.GetCompanyProfile(User.Identity.GetUserId(), companyId);
-        //}
+        [HttpGet, Route("api/adviser/businessRevenueBrief")]
+        public BusinessPortfolioOverviewBriefModel GetBriefBusinessRevenue()
+        {
+            return advisorRepo.GetBusinessRevenueData(User.Identity.GetUserId());
+        }
+        [HttpGet, Route("api/adviser/debtInstruments")]
+        public BusinessPortfolioOverviewBriefModel GetInstrumentsData()
+        {
+            return advisorRepo.GetDebtInstrumentsData(User.Identity.GetUserId());
+        }
+        [HttpGet, Route("api/adviser/insuranceStatistics")]
+        public ProfileInsuranceStatisticsModel GetInsuranceStatistics()
+        {
+            return advisorRepo.GetInsuranceStatisticsData(User.Identity.GetUserId());
+        }
+        [HttpGet, Route("api/adviser/worldMarkets")]
+        public List<WordMarketItemModel> GetWorldMarkets()
+        {
+            return advisorRepo.GetWorldMarketData(User.Identity.GetUserId());
+        }
+        [HttpGet, Route("api/adviser/currencies")]
+        public List<WordMarketItemModel> GetCurrencies()
+        {
+            return advisorRepo.GetCurrencies(User.Identity.GetUserId());
+        }
+        [HttpGet, Route("api/adviser/historicalrevenue")]
+        public HistoricalRevenueModel GetHistoricalRevenue()
+        {
+            return advisorRepo.GetHistoricalRevenueData(User.Identity.GetUserId());
+        }
+        [HttpGet, Route("api/adviser/investmentstat")]
+        public BusinessStatDetailModel GetInvestmentStat()
+        {
+            return advisorRepo.GetInvestmentStat(User.Identity.GetUserId());
+        }
+        [HttpGet, Route("api/adviser/lendingstat")]
+        public BusinessStatDetailModel GetLendingStat()
+        {
+            return advisorRepo.GetLendingStat(User.Identity.GetUserId());
+        }
+        [HttpGet, Route("api/adviser/InsuranceStat")]
+        public InsuranceStatModel GetInsuranceStats()
+        {
+            return advisorRepo.GetInsuranceStatDetailed(User.Identity.GetUserId());
+        }
+        [HttpGet, Route("api/adviser/clientPositionsMonitor")]
+        public List<ClientPositionMonitorModel> GetClientPositionMonitor()
+        {
+            return advisorRepo.GetClientPositionMonitor(User.Identity.GetUserId());
+        }
+        [HttpGet, Route("api/adviser/GeoLocations")]
+        public List<GeoGraphicalLocations> GetGeoLocations()
+        {
+            return advisorRepo.GetGeoLocations(User.Identity.GetUserId());
+        }
+        [HttpGet, Route("api/adviser/GeoDetails")]
+        public GeoStatsModel GetGeoStat([FromUri] string[] locations)
+        {
+            if (locations == null)
+            {
+                return advisorRepo.GetGeoStats(User.Identity.GetUserId(), new[] { "" });
+            }
+            else
+            {
+                return advisorRepo.GetGeoStats(User.Identity.GetUserId(), new[] { "" });
+            }
+        }
+        [HttpGet, Route("api/adviser/BusinessReenueDetails")]
+        public BuisnessRevenueDetailsDataModel GetBusinessRevenueDetails()
+        {
+            return advisorRepo.GetBusinessRevenueDetails(User.Identity.GetUserId());
+        }
+        [HttpGet, Route("api/adviser/ComplianceDetails")]
+        public CompliantModel GetComplianceDetails()
+        {
+            return advisorRepo.GetComplianceDetails(User.Identity.GetUserId());
+        }
+        [HttpGet, Route("api/adviser/reminders")]
+        public ReminderModel GetReminders()
+        {
+            return advisorRepo.GetReminders(User.Identity.GetUserId());
+        }
+        [HttpGet, Route("api/adviser/companyList")]
+        public List<AnalysisCityBrief> GetCityList()
+        {
+            return advisorRepo.GetAnalysisCompaniesList(User.Identity.GetUserId());
+        }
+        [HttpGet, Route("api/adviser/research/companyProfile")]
+        public CompanyProfileDataItem GetCompanyProfile(string companyId)
+        {
+            return advisorRepo.GetCompanyProfile(User.Identity.GetUserId(), companyId);
+        }
     }
 }
