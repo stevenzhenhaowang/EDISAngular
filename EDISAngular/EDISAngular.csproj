@@ -436,6 +436,8 @@
     <Compile Include="Models\ServiceModels\CorporateActions\IPOActionData.cs" />
     <Compile Include="Models\ServiceModels\CorporateActions\OtherActionCreationModel.cs" />
     <Compile Include="Models\ServiceModels\CorporateActions\OtherCorporateActionData.cs" />
+    <Compile Include="Models\ServiceModels\CorporateActions\ReturnOfCapitalActionCreationModel.cs" />
+    <Compile Include="Models\ServiceModels\CorporateActions\ReturnOfCapitalData.cs" />
     <Compile Include="Models\ServiceModels\DataNameAmountPair.cs" />
     <Compile Include="Models\ServiceModels\FixedIncomePriceChartModel.cs" />
     <Compile Include="Models\ServiceModels\PortfolioModels\AssetPerformanceModel.cs" />

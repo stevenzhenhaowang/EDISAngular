@@ -26,7 +26,18 @@
         $scope.selectedOtherCorporateAction = action;
     }
 
+    $scope.newReturnOfCapital = function () {
+        var modalInstance = $modal.open({
+            templateUrl: "existingReturnOfCapitals",
+            controller: "newReturnOfCapitalActionController",
+            backdrop: true
+        });
+        modalInstance.result.then(function (result) {
+            $scope.selectModel(result.reason);
+        });
 
+
+    }
     $scope.newother = function () {
         var modalInstance = $modal.open({
             templateUrl: "ExistingOtherCorporateActions",
@@ -201,6 +212,43 @@
         
     }])
 
+  .controller("newReturnOfCapitalActionController",
+["$scope", "corporateActionServices", "$modalInstance", "dateParser", "adviserGetId", function ($scope, service, $modalInstance, dateParser, adviserGetId) {
+    service.allCompanies().query(function (data) {
+        $scope.allCompanies = data;
+    })
 
+    var adviserId = "";
+    adviserGetId().then(function (data) {
+        adviserId = data;
+    })
+  
+    $scope.add = function () {
+        var data = {
+            corporateActionName: $scope.actionName,
+            corporateActionCode: $scope.actionCode,
+           
+            adviserUserId: adviserId,
+            purposeForCorporateAction: $scope.returnAmount,
+            recordDateEntitlement: dateParser($scope.returnDate),
+          
+            participants: []
+        };
+
+        for (var i = 0; i < $scope.allClients.length; i++) {
+            if ($scope.allClients[i].selected) {
+                data.participants.push($scope.allClients[i])
+            }
+        }
+
+        service.addOtherAction().save(data, function () {
+            $modalInstance.close({ reason: "success" });
+
+        })
+
+
+
+    }
+}])
 
 ;

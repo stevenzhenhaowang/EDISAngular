@@ -1173,66 +1173,19 @@
             </div>
             <div class="row">
                 <div class="col-md-6 form-group">
-                    <label>Underlying Company</label>
-                    <select class="form-control" ng-change="companyChanged(item.companyTicker)" ng-model="underlyingCompany" name="underlyingCompany" required ng-options="item as item.companyName for item in allCompanies">
-                        <option value="">Please select.....</option>
-                    </select>
-                    <div class="error" ng-show="newOtherAction.underlyingCompany.$error.required&&newOtherAction.underlyingCompany.$touched">Please select underlying company</div>
-
-                </div>
-                <div class="col-md-6 form-group">
-                    <label>Purpose for Corporate Action</label>
-                    <textarea class="form-control" name="actionPurpose" ng-model="actionPurpose" required></textarea>
-                    <div class="error" ng-show="newOtherAction.actionPurpose.$error.required&&newOtherAction.actionPurpose.$touched">Please enter corporate action purpose</div>
-
+                    <label>Return of Capital Amount</label>
+                    <input class="form-control" name="returnAmount" ng-model="returnAmount" required />
+                    <div class="error" ng-show="newReturnOfCapitalAction.returnAmount.$error.required&&newReturnOfCapitalAction.returnAmount.$touched">Please enter the amount </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 form-group">
-                    <label>Record Date Entitlement</label>
-                    <input class="form-control" name="recordDateEntitlement" edis-datepicker ng-model="recordDateEntitlement" required />
-                    <div class="error" ng-show="newOtherAction.recordDateEntitlement.$error.required&&newOtherAction.recordDateEntitlement.$touched">Please enter record date entitlement</div>
-                </div>
-                <div class="col-md-6 form-group">
-                    <label>Ex - Entitlement</label>
-                    <input class="form-control" name="exEntitlement" edis-datepicker ng-model="exEntitlement" required />
-                    <div class="error" ng-show="newOtherAction.exEntitlement.$error.required&&newOtherAction.exEntitlement.$touched">Please enter ex-entitlement</div>
-                </div>
-
-
-            </div>
-            <div class="row">
-                <div class="col-md-6 form-group">
-                    <label>Corporate Action Start Date</label>
-                    <input class="form-control" name="corporateActionStartDate" edis-datepicker ng-model="corporateActionStartDate" required />
-                    <div class="error" ng-show="newOtherAction.corporateActionStartDate.$error.required&&newOtherAction.corporateActionStartDate.$touched">Please enter corporate action start date</div>
-                </div>
-                <div class="col-md-6 form-group">
-                    <label>Corporate Action Closing Date</label>
-                    <input class="form-control" name="corporateActionClosingDate" edis-datepicker ng-model="corporateActionClosingDate" required />
-                    <div class="error" ng-show="newOtherAction.corporateActionClosingDate.$error.required&&newOtherAction.corporateActionClosingDate.$touched">Please enter corporate action closing date</div>
+                    <label>Adjustment Date</label>
+                    <input class="form-control" name="returnDate" edis-datepicker ng-model="returnDate" required />
+                    <div class="error" ng-show="newReturnOfCapitalAction.returnDate.$error.required&&newReturnOfCapitalAction.returnDate.$touched">Please enter record date</div>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-md-6 form-group">
-                    <label>Deferred Settlement Trading Date</label>
-                    <input class="form-control" name="deferredSettlementTradingDate" edis-datepicker ng-model="deferredSettlementTradingDate" required />
-                    <div class="error" ng-show="newOtherAction.deferredSettlementTradingDate.$error.required&&newOtherAction.deferredSettlementTradingDate.$touched">Please enter deferred settlement trading date</div>
-                </div>
-                <div class="col-md-6 form-group">
-                    <label>Normal Trading Date</label>
-                    <input class="form-control" name="normalTradingDate" edis-datepicker ng-model="normalTradingDate" required />
-                    <div class="error" ng-show="newOtherAction.normalTradingDate.$error.required&&newOtherAction.normalTradingDate.$touched">Please enter normal trading date</div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 form-group">
-                    <label>Dispatch of Holding</label>
-                    <input class="form-control" name="dispatchOfHolding" ng-model="dispatchOfHolding" required />
-                    <div class="error" ng-show="newOtherAction.dispatchOfHolding.$error.required&&newOtherAction.dispatchOfHolding.$touched">Please enter dispatch of holding</div>
-                </div>
-            </div>
+ <!--
             <div class="row">
                 <div class="col-md-12 parameters-view">
                     <table class="table table-bordered table-hover">
@@ -1260,10 +1213,90 @@
                     </table>
                 </div>
             </div>
-
+-->
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <button class="btn btn-success" ng-click="add()" ng-disabled="!newOtherAction.$valid||!hasClientsSelected()">Save</button>
+                    <button class="btn btn-success" ng-click="add()" ng-disabled="!newReturnOfCapitalAction.$valid||!hasClientsSelected()">Save</button>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</script>
+
+
+
+
+
+<!-----------------------------------------4----------------------------------------------------->
+
+
+<script type="text/ng-template" id="exsistingReinvestment">
+    <div class="newModel">
+        <form name="newReinvestment" novalidate>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>
+                        Corporate Action Name
+                    </label>
+                    <input class="form-control" name="actionName" ng-model="actionName" required />
+                    <div class="error" ng-show="newReturnOfCapitalAction.actionName.$error.required&&newReturnOfCapitalAction.actionName.$touched">Please enter corporate action name</div>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label>
+                        Corporate Action Code
+                    </label>
+                    <input class="form-control" name="actionCode" ng-model="actionCode" required />
+                    <div class="error" ng-show="newReturnOfCapitalAction.actionCode.$error.required&&newReturnOfCapitalAction.actionCode.$touched">Please enter corporate action code</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>Return of Capital Amount</label>
+                    <input class="form-control" name="returnAmount" ng-model="returnAmount" required />
+                    <div class="error" ng-show="newReturnOfCapitalAction.returnAmount.$error.required&&newReturnOfCapitalAction.returnAmount.$touched">Please enter the amount </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>Adjustment Date</label>
+                    <input class="form-control" name="returnDate" edis-datepicker ng-model="returnDate" required />
+                    <div class="error" ng-show="newReturnOfCapitalAction.returnDate.$error.required&&newReturnOfCapitalAction.returnDate.$touched">Please enter record date</div>
+                </div>
+            </div>
+            <!--
+                        <div class="row">
+                            <div class="col-md-12 parameters-view">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr class="summary-table-row">
+                                            <td></td>
+                                            <td>EDIS Account No.</td>
+                                            <td>Broker Account No.</td>
+                                            <td>Broker HIN/SRN</td>
+                                            <td>Type</td>
+                                            <td>Name</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in allClients">
+                                            <td><input type="checkbox" ng-model="item.selected" /></td>
+                                            <td>{{item.edisAccountNumber}}</td>
+                                            <td>{{item.brokerAccountNumber}}</td>
+                                            <td>{{item.brokerHinSrn}}</td>
+                                            <td>{{item.type}}</td>
+                                            <td>{{item.name}}</td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+            -->
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-success" ng-click="add()" ng-disabled="!newReturnOfCapitalAction.$valid||!hasClientsSelected()">Save</button>
                 </div>
             </div>
 
