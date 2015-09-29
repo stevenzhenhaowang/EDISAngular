@@ -437,10 +437,13 @@
     <Compile Include="Models\ServiceModels\CorporateActions\IPOActionData.cs" />
     <Compile Include="Models\ServiceModels\CorporateActions\OtherActionCreationModel.cs" />
     <Compile Include="Models\ServiceModels\CorporateActions\OtherCorporateActionData.cs" />
+<<<<<<< HEAD
     <Compile Include="Models\ServiceModels\CorporateActions\ReinvestmentActionCreationModel.cs" />
     <Compile Include="Models\ServiceModels\CorporateActions\ReinvestmentPlan.cs" />
     <Compile Include="Models\ServiceModels\CorporateActions\ReturnOfCapitalActionCreationModel.cs" />
     <Compile Include="Models\ServiceModels\CorporateActions\ReturnOfCapitalData.cs" />
+=======
+>>>>>>> parent of c605101... afternoon
     <Compile Include="Models\ServiceModels\DataNameAmountPair.cs" />
     <Compile Include="Models\ServiceModels\FixedIncomePriceChartModel.cs" />
     <Compile Include="Models\ServiceModels\PortfolioModels\AssetPerformanceModel.cs" />
