@@ -302,8 +302,15 @@ namespace EDISAngular.Controllers
                     adviser.EducationLevelId = model.educations[0].educationLevelId;
                 }
 
-                edisRepo.CreateAdviserSync(adviser);
-                
+                if (edisRepo.CreateAdviserSync(adviser) != null)
+                {
+                    TempData["success"] = "Profile has been updated";
+                }
+                else 
+                {
+                    TempData["error"] = "Profile update failed. Please try again.";
+                }
+
             }
 
             checkEducationList(model);
@@ -616,7 +623,14 @@ namespace EDISAngular.Controllers
                     adviser.EducationLevelId = model.educations[0].educationLevelId;
                 }
 
-                edisRepo.UpdateAdviser(adviser);
+                if (edisRepo.UpdateAdviser(adviser) != null)
+                {
+                    TempData["success"] = "Profile has been updated";
+                }
+                else
+                {
+                    TempData["error"] = "Profile update failed. Please try again.";
+                }
             }
 
 

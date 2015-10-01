@@ -72,6 +72,7 @@ namespace EDISAngular.Controllers
         {
             var userId = User.Identity.GetUserId();
             var client = edisRopo.GetClientSync(userId, DateTime.Now);
+
             ClientPersonCompleteProfileBinding model = new ClientPersonCompleteProfileBinding { 
             
                 UserId = userId,
@@ -84,6 +85,21 @@ namespace EDISAngular.Controllers
                 Fax = client.Fax,
                 Gender = client.Gender
             };
+            
+            if (!string.IsNullOrEmpty(client.Address))
+            {
+                string[] address = client.Address.Split(' ');
+                model.PostCode = address[address.Length - 1];
+                model.Country = address[address.Length - 2];
+                model.State = address[address.Length - 3];
+                model.Suburb = address[address.Length - 4];
+                for(int i = 0 ; i < address.Length - 4; i ++){
+                    model.line1 += address[i] + " ";
+                }
+            }
+
+            
+
             return PartialView(model);
         }
         [Authorize(Roles = AuthorizationRoles.Role_Preclient + "," + AuthorizationRoles.Role_Client)]
@@ -101,6 +117,20 @@ namespace EDISAngular.Controllers
                 ACN = client.ACN,
                 Fax = client.Fax,
             };
+
+
+            if (!string.IsNullOrEmpty(client.Address))
+            {
+                string[] address = client.Address.Split(' ');
+                model.PostCode = address[address.Length - 1];
+                model.Country = address[address.Length - 2];
+                model.State = address[address.Length - 3];
+                model.Suburb = address[address.Length - 4];
+                for (int i = 0; i < address.Length - 4; i++)
+                {
+                    model.line1 += address[i] + " ";
+                }
+            }
 
             return PartialView(model);
         }
@@ -121,7 +151,7 @@ namespace EDISAngular.Controllers
             {
                 ClientRegistration clientRegistration = new ClientRegistration() {
                     ClientNumber = model.UserId,
-                    Address = model.line1 + " " + model.line2 + " " + model.line3 + " " + model.Suburb + " " + model.State + " " + model.Country,
+                    Address = model.line1 + " " + model.line2 + " " + model.line3 + " " + model.Suburb + " " + model.State + " " + model.Country + " " + model.PostCode,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     MiddleName = model.MiddleName,
@@ -162,7 +192,7 @@ namespace EDISAngular.Controllers
                 ClientRegistration clientRegistration = new ClientRegistration()
                 {
                     ClientNumber = model.UserID,
-                    Address = model.line1 + " " + model.line2 + " " + model.line3 + " " + model.Suburb + " " + model.State + " " + model.Country,
+                    Address = model.line1 + " " + model.line2 + " " + model.line3 + " " + model.Suburb + " " + model.State + " " + model.Country + " " + model.PostCode,
                     EntityName = model.EntityName,
                     EntityType = model.EntityType,
                     ABN = model.ABN,

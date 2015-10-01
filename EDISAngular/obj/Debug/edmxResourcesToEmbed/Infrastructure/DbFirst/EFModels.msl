@@ -512,6 +512,7 @@
           <ScalarProperty Name="Bond_BondId" ColumnName="Bond_BondId" />
           <ScalarProperty Name="Property_PropertyId" ColumnName="Property_PropertyId" />
           <ScalarProperty Name="Equity_AssetId" ColumnName="Equity_AssetId" />
+          <ScalarProperty Name="StringValue" ColumnName="StringValue" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

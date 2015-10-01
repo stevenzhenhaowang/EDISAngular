@@ -418,6 +418,8 @@ namespace EDISAngular.APIControllers
                 List<GroupAccount> groupAccounts = edisRepo.getAllClientGroupAccountsForAdviser(User.Identity.GetUserId(), DateTime.Now);
                 List<ClientAccount> clientAccounts = edisRepo.getAllClientAccountsForAdviser(User.Identity.GetUserId(), DateTime.Now);
 
+
+
                 List<InsuranceListItemDetailModel> assetInsurance = new List<InsuranceListItemDetailModel>();
                 List<InsuranceListItemDetailModel> persoanlInsurance = new List<InsuranceListItemDetailModel>();
                 List<InsuranceListItemDetailModel> liabilityInsurance = new List<InsuranceListItemDetailModel>();

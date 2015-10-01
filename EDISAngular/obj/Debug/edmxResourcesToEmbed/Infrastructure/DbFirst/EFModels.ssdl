@@ -490,6 +490,7 @@
     <Property Name="Bond_BondId" Type="nvarchar" MaxLength="128" />
     <Property Name="Property_PropertyId" Type="nvarchar" MaxLength="128" />
     <Property Name="Equity_AssetId" Type="nvarchar" MaxLength="128" />
+    <Property Name="StringValue" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Sectors">
     <Key>
