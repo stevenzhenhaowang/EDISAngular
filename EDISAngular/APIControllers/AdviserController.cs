@@ -19,6 +19,10 @@ using Domain.Portfolio.AggregateRoots;
 using SqlRepository;
 using EDISAngular.Models.BindingModels;
 using Shared;
+using Domain.Portfolio.AggregateRoots.Accounts;
+using Domain.Portfolio.AggregateRoots.Liability;
+using EDISAngular.Models.ServiceModels;
+using Domain.Portfolio.AggregateRoots.Asset;
 
 namespace EDISAngular.APIControllers
 {
@@ -59,7 +63,7 @@ namespace EDISAngular.APIControllers
         public string insertAssetsData()
         {
             //edisRepo.InsertRandomDataIntoAssets();
-            edisRepo.insertData2();
+            edisRepo.insertData3();
             return "success";
 
         }
@@ -188,8 +192,78 @@ namespace EDISAngular.APIControllers
         [HttpGet, Route("api/adviser/insuranceStatistics")]
         public ProfileInsuranceStatisticsModel GetInsuranceStatistics()
         {
+            List<GroupAccount> groupAccounts = edisRepo.getAllClientGroupAccountsForAdviser(User.Identity.GetUserId(), DateTime.Now);
+            List<ClientAccount> clientAccounts = edisRepo.getAllClientAccountsForAdviser(User.Identity.GetUserId(), DateTime.Now);
+
+            List<ProfileInsuranceStatisticsGroup> InsuranceGroup = new List<ProfileInsuranceStatisticsGroup>();
+            InsuranceGroup.Add(new ProfileInsuranceStatisticsGroup
+            {
+                name = "Asset Insurance",
+                stat = new List<DataNameAmountPair>()
+            });
+            InsuranceGroup.Add(new ProfileInsuranceStatisticsGroup
+            {
+                name = "Persoanl Insurance",
+                stat = new List<DataNameAmountPair>()
+            });
+            InsuranceGroup.Add(new ProfileInsuranceStatisticsGroup
+            {
+                name = "Liability Insurance",
+                stat = new List<DataNameAmountPair>()
+            });
+            InsuranceGroup.Add(new ProfileInsuranceStatisticsGroup
+            {
+                name = "Miscellaneous Insurance",
+                stat = new List<DataNameAmountPair>()
+            });
+
+            ProfileInsuranceStatisticsModel model = new ProfileInsuranceStatisticsModel
+            {
+                data = new List<DataNameAmountPair>(),
+                group = InsuranceGroup,
+            };
+
+
+            List<LiabilityBase> liabilities = new List<LiabilityBase>();
+            foreach (var account in groupAccounts)
+            {
+                liabilities.AddRange(account.GetLiabilitiesSync());
+            }
+            foreach (var account in clientAccounts)
+            {
+                liabilities.AddRange(account.GetLiabilitiesSync());
+            }
+
+            var insurancesGroups = liabilities.OfType<Insurance>().GroupBy(i => i.InsuranceType);
+            foreach (var insuranceMetaGroup in insurancesGroups)
+            {
+                var insurance = insuranceMetaGroup.FirstOrDefault();
+
+                switch (insuranceMetaGroup.Key)
+                {
+                    case InsuranceType.LiabilityInsurance:
+                        model.group.SingleOrDefault(i => i.name == "Liability Insurance").stat.Add(new DataNameAmountPair { name = insurance.PolicyType.ToString(), amount = insurance.AmountInsured });
+                        break;
+                    case InsuranceType.AssetInsurance:
+                        model.group.SingleOrDefault(i => i.name == "Asset Insurance").stat.Add(new DataNameAmountPair { name = insurance.PolicyType.ToString(), amount = insurance.AmountInsured });
+                        break;
+                    case InsuranceType.MiscellaneousInsurance:
+                        model.group.SingleOrDefault(i => i.name == "Miscellaneous Insurance").stat.Add(new DataNameAmountPair { name = insurance.PolicyType.ToString(), amount = insurance.AmountInsured });
+                        break;
+                    case InsuranceType.PersoanlInsurance:
+                        model.group.SingleOrDefault(i => i.name == "Persoanl Insurance").stat.Add(new DataNameAmountPair { name = insurance.PolicyType.ToString(), amount = insurance.AmountInsured });
+                        break;
+                }
+                model.data.Add(new DataNameAmountPair { name = insurance.PolicyType.ToString(), amount = insurance.AmountInsured });
+                model.total += insurance.AmountInsured;
+            }
+
+            return model;
+
             return advisorRepo.GetInsuranceStatisticsData(User.Identity.GetUserId());
         }
+
+
         [HttpGet, Route("api/adviser/worldMarkets")]
         public List<WordMarketItemModel> GetWorldMarkets()
         {
@@ -260,11 +334,113 @@ namespace EDISAngular.APIControllers
         [HttpGet, Route("api/adviser/companyList")]
         public List<AnalysisCityBrief> GetCityList()
         {
-            return advisorRepo.GetAnalysisCompaniesList(User.Identity.GetUserId());
+            List<Equity> equities = edisRepo.GetAllEquities();
+
+            List<AnalysisCityBrief> companies = new List<AnalysisCityBrief>();
+
+            foreach (var equity in equities) {
+                companies.Add(new AnalysisCityBrief { 
+                    id = equity.Id,
+                    name = equity.Name
+                });
+            }
+
+            return companies;
+            //return advisorRepo.GetAnalysisCompaniesList(User.Identity.GetUserId());
         }
         [HttpGet, Route("api/adviser/research/companyProfile")]
         public CompanyProfileDataItem GetCompanyProfile(string companyId)
         {
+            Equity equity = edisRepo.GetAllEquities().SingleOrDefault(eq => eq.Id == companyId);
+
+            CompanyProfileDataItem model = new CompanyProfileDataItem{
+                id = equity.Id,
+                ticker = equity.Ticker,
+                fullName= equity.Name,
+                closingPrice = equity.LatestPrice,
+                sector = equity.Sector,
+                assetClass = equity.EquityType.ToString(),
+                changeAmount = edisRepo.GetResearchValueForEquitySync("changeAmount", equity.Ticker) == null? 0: (double)edisRepo.GetResearchValueForEquitySync("changeAmount", equity.Ticker),
+                changeRatePercentage = edisRepo.GetResearchValueForEquitySync("changeRatePercentage", equity.Ticker) == null? 0: (double)edisRepo.GetResearchValueForEquitySync("changeRatePercentage", equity.Ticker),
+                weeksDifferenceAmount = edisRepo.GetResearchValueForEquitySync("weeksDifferenceAmount", equity.Ticker) == null? 0: (double)edisRepo.GetResearchValueForEquitySync("weeksDifferenceAmount", equity.Ticker),
+                weeksDifferenceRatePercentage = edisRepo.GetResearchValueForEquitySync("weeksDifferenceRatePercentage", equity.Ticker) == null? 0: (double)edisRepo.GetResearchValueForEquitySync("weeksDifferenceRatePercentage", equity.Ticker),
+                suitabilityScore = edisRepo.GetResearchValueForEquitySync("suitabilityScore", equity.Ticker) == null? 0: (double)edisRepo.GetResearchValueForEquitySync("suitabilityScore", equity.Ticker),
+                suitsTypeOfClients = edisRepo.GetStringResearchValueForEquitySync("suitsTypeOfClients", equity.Ticker),
+                country = edisRepo.GetStringResearchValueForEquitySync("country", equity.Ticker),
+                exchange = edisRepo.GetStringResearchValueForEquitySync("exchange", equity.Ticker),
+                marketCapitalisation = edisRepo.GetStringResearchValueForEquitySync("marketCapitalisation", equity.Ticker),
+                currencyType = edisRepo.GetStringResearchValueForEquitySync("currencyType", equity.Ticker),
+                reasons = edisRepo.GetStringResearchValueForEquitySync("reasons", equity.Ticker),
+                companyBriefing = edisRepo.GetStringResearchValueForEquitySync("companyBriefing", equity.Ticker),
+                companyStrategies = edisRepo.GetStringResearchValueForEquitySync("companyStrategies", equity.Ticker),
+                investment = edisRepo.GetStringResearchValueForEquitySync("investment", equity.Ticker),
+                investmentName = edisRepo.GetStringResearchValueForEquitySync("investmentName", equity.Ticker),
+                //priceDate = DateTime.Now,
+
+                currentAnalysis = new CurrentAnalysisPayload
+                {
+                    metaProperties = new List<AnalysisPayloadMetaProperty>
+                    {
+                        new AnalysisPayloadMetaProperty{propertyName="baseInformation",displayName="Base Information"},
+                        new AnalysisPayloadMetaProperty{propertyName="morningstar",displayName="Morningstar"},
+                        new AnalysisPayloadMetaProperty{propertyName="brokerX",displayName="Broker X"},
+                        new AnalysisPayloadMetaProperty{propertyName="ASX200Accumulation",displayName="ASX 200 Accumulation"},
+                    },
+                    groups = new List<AnalysisPayloadGroupModel>
+                    {
+                        new AnalysisPayloadGroupModel{
+                            name="Recommendation",
+                            data=new List<AnalysisPayloadGroupDataItem>{
+                                new AnalysisPayloadGroupDataItem{
+                                    name= "Current Short Term Recommendation",
+                                    baseInformation= edisRepo.GetStringResearchValueForEquitySync("baseInformationShort", equity.Ticker),
+                                    morningstar= edisRepo.GetStringResearchValueForEquitySync("morningstarShort", equity.Ticker),
+                                    brokerX= edisRepo.GetStringResearchValueForEquitySync("brokerXShort", equity.Ticker),
+                                    ASX200Accumulation= edisRepo.GetStringResearchValueForEquitySync("ASX200AccumulationShort", equity.Ticker),
+                                },new AnalysisPayloadGroupDataItem{
+                                    name= "Current Long Term Recommendation",
+                                    baseInformation= edisRepo.GetStringResearchValueForEquitySync("baseInformationLong", equity.Ticker),
+                                    morningstar= edisRepo.GetStringResearchValueForEquitySync("morningstarLong", equity.Ticker),
+                                    brokerX= edisRepo.GetStringResearchValueForEquitySync("brokerXLong", equity.Ticker),
+                                    ASX200Accumulation= edisRepo.GetStringResearchValueForEquitySync("ASX200AccumulationLong", equity.Ticker),
+                                },new AnalysisPayloadGroupDataItem{
+                                    name= "Price Target",
+                                    baseInformation= edisRepo.GetStringResearchValueForEquitySync("baseInformationPrice", equity.Ticker),
+                                    morningstar= edisRepo.GetStringResearchValueForEquitySync("morningstarPrice", equity.Ticker),
+                                    brokerX= edisRepo.GetStringResearchValueForEquitySync("brokerXPrice", equity.Ticker),
+                                    ASX200Accumulation= edisRepo.GetStringResearchValueForEquitySync("ASX200AccumulationPrice", equity.Ticker),
+                                },
+
+                            }
+                        },new AnalysisPayloadGroupModel{
+                            name="Income",
+                            data=new List<AnalysisPayloadGroupDataItem>{
+                                new AnalysisPayloadGroupDataItem{
+                                    name= "Current Short Term Recommendation",
+                                    baseInformation= "base information",
+                                    morningstar= "Morning star information",
+                                    brokerX= "brokerX information",
+                                    ASX200Accumulation= "Accumulation Details"
+                                },new AnalysisPayloadGroupDataItem{
+                                    name= "Current Long Term Recommendation",
+                                    baseInformation= "base information",
+                                    morningstar= "Morning star information",
+                                    brokerX= "brokerX information",
+                                    ASX200Accumulation= "Accumulation Details"
+                                },new AnalysisPayloadGroupDataItem{
+                                    name= "Price Target",
+                                    baseInformation= "base information",
+                                    morningstar= "Morning star information",
+                                    brokerX= "brokerX information",
+                                    ASX200Accumulation= "Accumulation Details"
+                                },
+                            }
+                        }
+                    }
+                },
+            };
+
+            return model;
             return advisorRepo.GetCompanyProfile(User.Identity.GetUserId(), companyId);
         }
     }

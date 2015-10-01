@@ -558,6 +558,7 @@
     <Property Name="Bond_BondId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Property_PropertyId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Equity_AssetId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="StringValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Bond" Relationship="Self.FK_dbo_ResearchValues_dbo_Bonds_Bond_BondId" FromRole="ResearchValues" ToRole="Bonds" />
     <NavigationProperty Name="Equity" Relationship="Self.FK_dbo_ResearchValues_dbo_Equities_Equity_AssetId" FromRole="ResearchValues" ToRole="Equities" />
     <NavigationProperty Name="Property" Relationship="Self.FK_dbo_ResearchValues_dbo_Properties_Property_PropertyId" FromRole="ResearchValues" ToRole="Properties" />

@@ -66,6 +66,7 @@ namespace EDISAngular.APIControllers
                     CreateOn = DateTime.Now,
                     ClientNumber = user.Id,
                     FirstName = model.firstName,
+                    MiddleName = model.middleName,
                     Email = model.email,
                     LastName = model.lastName,
                     Phone = model.contactPhone,                        
