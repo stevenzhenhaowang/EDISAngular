@@ -398,3 +398,6 @@ C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\EDISAngular\bin\zh-Han
 C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\EDISAngular\obj\Debug\EDISAngular.csprojResolveAssemblyReference.cache
 C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\EDISAngular\obj\Debug\EDISAngular.dll
 C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\EDISAngular\obj\Debug\EDISAngular.pdb
+C:\Users\ahksysuser03\Source\Repos\EDISAngular\EDISAngular\obj\Debug\EDISAngular.csprojResolveAssemblyReference.cache
+C:\Users\ahksysuser03\Source\Repos\EDISAngular\EDISAngular\obj\Debug\EDISAngular.dll
+C:\Users\ahksysuser03\Source\Repos\EDISAngular\EDISAngular\obj\Debug\EDISAngular.pdb
