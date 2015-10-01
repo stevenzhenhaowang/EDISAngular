@@ -1241,28 +1241,28 @@
                         Corporate Action Name
                     </label>
                     <input class="form-control" name="actionName" ng-model="actionName" required />
-                    <div class="error" ng-show="newReturnOfCapitalAction.actionName.$error.required&&newReturnOfCapitalAction.actionName.$touched">Please enter corporate action name</div>
+                    <div class="error" ng-show="newReinvestmentAction.actionName.$error.required&&newReinvestmentAction.actionName.$touched">Please enter corporate action name</div>
                 </div>
                 <div class="col-md-6 form-group">
                     <label>
                         Corporate Action Code
                     </label>
                     <input class="form-control" name="actionCode" ng-model="actionCode" required />
-                    <div class="error" ng-show="newReturnOfCapitalAction.actionCode.$error.required&&newReturnOfCapitalAction.actionCode.$touched">Please enter corporate action code</div>
+                    <div class="error" ng-show="newReinvestmentAction.actionCode.$error.required&&newReinvestmentAction.actionCode.$touched">Please enter corporate action code</div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 form-group">
-                    <label>Return of Capital Amount</label>
-                    <input class="form-control" name="returnAmount" ng-model="returnAmount" required />
-                    <div class="error" ng-show="newReturnOfCapitalAction.returnAmount.$error.required&&newReturnOfCapitalAction.returnAmount.$touched">Please enter the amount </div>
+                    <label>Reinvestment Share Amount</label>
+                    <input class="form-control" name="reinvestmentShares" ng-model="reinvestmentShares" required />
+                    <div class="error" ng-show="newReinvestmentAction.returnAmount.$error.required&&newReinvestmentAction.returnAmount.$touched">Please enter the amount </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 form-group">
-                    <label>Adjustment Date</label>
-                    <input class="form-control" name="returnDate" edis-datepicker ng-model="returnDate" required />
-                    <div class="error" ng-show="newReturnOfCapitalAction.returnDate.$error.required&&newReturnOfCapitalAction.returnDate.$touched">Please enter record date</div>
+                    <label>Reinvestment Date</label>
+                    <input class="form-control" name="reinvestmentDate" edis-datepicker ng-model="reinvestmentDate" required />
+                    <div class="error" ng-show="newReinvestmentAction.returnDate.$error.required&&newReinvestmentAction.returnDate.$touched">Please enter record date</div>
                 </div>
             </div>
             <!--
@@ -1296,7 +1296,7 @@
             -->
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <button class="btn btn-success" ng-click="add()" ng-disabled="!newReturnOfCapitalAction.$valid||!hasClientsSelected()">Save</button>
+                    <button class="btn btn-success" ng-click="add()" ng-disabled="!newReinvestmentAction.$valid||!hasClientsSelected()">Save</button>
                 </div>
             </div>
 

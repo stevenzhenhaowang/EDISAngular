@@ -23,10 +23,6 @@ namespace EDISAngular.Models.ServiceModels.CorporateActions
         public DateTime deferredSettlementTradingDate { get; set; }
         public DateTime normalTradingDate { get; set; }
         public List<OtherActionParticipant> participants { get; set; }
-
-
-
-
     }
 
     public class OtherCorporateActionCompany
