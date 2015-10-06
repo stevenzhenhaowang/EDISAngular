@@ -6,20 +6,17 @@ using System.Web;
 
 namespace EDISAngular.Models.ServiceModels.CorporateActions
 {
-    public class ReturnOfCapitalActionCreationModel
+    public class BonusIsuueActionCreationModel
     {
-        public string actionId { get; set; }
+
         [Required]
         public string actionName { get; set; }
         [Required]
-        public string equityId { get; set; }
+        public string actionCode { get; set; }
         [Required]
-        public string shareAmount { get; set; }
-        [Required]
-        public string returnAmount { get; set; }
+        public string bonusIssue { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        public DateTime? returnDate { get; set; }
-
+        public DateTime bonusDate { get; set; }
     }
 }

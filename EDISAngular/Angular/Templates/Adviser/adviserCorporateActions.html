@@ -25,6 +25,7 @@
                             <li ng-class="{active:step === 5}"><a ng-click="step=5" class="left-btn"> Stock Split </a></li>
                             <li ng-class="{active:step === 6}"><a ng-click="step=6" class="left-btn"> Bonus Issue </a></li>
                             <li ng-class="{active:step === 7}"><a ng-click="step=7" class="left-btn"> Buy back program </a></li>
+                            <li ng-class="{active:step === 8}"><a ng-click="step=8" class="left-btn"> Rights Issues </a></li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active in" ng-if="step===1">
@@ -32,9 +33,7 @@
                                 <div class="widget">
                                     <div class="widget-header">
                                         <h3>Existing IPO Actions</h3>
-
                                     </div>
-
                                     <div class="widget-content">
                                         <div class="row">
                                             <div class="col-md-12">
@@ -64,27 +63,14 @@
                                                     <td>{{item.minimumAmount | currency}}</td>
                                                     <td>{{item.participants.length}}</td>
                                                     <td>{{item.allocationFinalised? "Yes":"No"}}</td>
-
-
                                                 </tr>
                                             </tbody>
-
-
                                         </table>
-
-
-
                                     </div>
-
-
-
                                 </div>
-
-
                                 <div class="widget" ng-show="selectedIPOAction&&selectedIPOAction.allocationFinalised">
                                     <div class="widget-header">
                                         <h3>Action Details</h3>
-
                                     </div>
                                     <div class="widget-content">
                                         <table class="table table-bordered table-hover">
@@ -95,14 +81,8 @@
                                                     <td>Type</td>
                                                     <td>Name</td>
                                                     <td>Invested Amount</td>
-                                                    <td>
-                                                        Number of Units Allocated
-                                                    </td>
-                                                    <td>
-                                                        Unit Price of Asset
-                                                    </td>
-
-
+                                                    <td>Number of Units Allocated</td>
+                                                    <td>Unit Price of Asset</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -114,13 +94,9 @@
                                                     <td>{{client.investedAmount | currency}}</td>
                                                     <td>{{client.numberOfUnits | number:0}}</td>
                                                     <td>{{client.unitPrice | currency}} </td>
-
-
-
                                                 </tr>
                                             </tbody>
                                         </table>
-
                                     </div>
                                 </div>
 
@@ -131,8 +107,6 @@
                                     </div>
                                     <div class="widget-content">
                                         <form name="allocationForm" novalidate>
-
-
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <table class="table table-bordered table-hover">
@@ -143,14 +117,8 @@
                                                                 <td>Type</td>
                                                                 <td>Name</td>
                                                                 <td>Invested Amount</td>
-                                                                <td>
-                                                                    Number of Units Allocated
-                                                                </td>
-                                                                <td>
-                                                                    Unit Price of Asset
-                                                                </td>
-
-
+                                                                <td>Number of Units Allocated</td>
+                                                                <td>Unit Price of Asset</td>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -325,9 +293,6 @@
                                                             <td>{{client.brokerAccountNumber}}</td>
                                                             <td>{{client.type}}</td>
                                                             <td>{{client.name}}</td>
-
-
-
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -369,7 +334,8 @@
                                             <thead>
                                                 <tr class="summary-table-row">
                                                     <td>Action Name</td>
-                                                    <td>Action Code</td>
+                                                    <td>Equity ID</td>
+                                                    <td>Share Amount</td>
                                                     <td>Return Cash Amount</td>
                                                     <td>Date</td>
                                                 </tr>
@@ -378,6 +344,7 @@
                                                 <tr ng-repeat="item in existingReturnOfCapitals" ng-click="selectReturnOfCapital(item)">
                                                     <td>{{item.corporateActionName}}</td>
                                                     <td>{{item.corporateActionCode}}</td>
+                                                    <td>{{item.equityId}}</td>
                                                     <td>{{item.returnAmount}}</td>
                                                     <td>{{item.returnDate}}</td>
                                                 </tr>
@@ -398,8 +365,12 @@
                                                 <span class="form-control">{{selectedReturnOfCapital.corporateActionName}}</span>
                                             </div>
                                             <div class="col-md-3 form-group">
-                                                <label>Action Code</label>
-                                                <span class="form-control">{{selectedReturnOfCapital.corporateActionCode}}</span>
+                                                <label>Equity ID</label>
+                                                <span class="form-control">{{selectedReturnOfCapital.equityId}}</span>
+                                            </div>
+                                            <div class="col-md-3 form-group">
+                                                <label>Share Amount</label>
+                                                <span class="form-control">{{selectedReturnOfCapital.shareAmount}}</span>
                                             </div>
                                             <div class="col-md-3 form-group">
                                                 <label>Return Amount</label>
@@ -460,7 +431,7 @@
                                         <thead>
                                             <tr class="summary-table-row">
                                                 <td>Action Name</td>
-                                                <td>Action Code</td>
+                                                <td>Equity ID</td>
                                                 <td>Reinvestment Shares</td>
                                                 <td>Date</td>
                                             </tr>
@@ -468,7 +439,7 @@
                                         <tbody>
                                             <tr ng-repeat="item in reinvestments" ng-click="selectReinvestment(item)">
                                                 <td>{{item.corporateActionName}}</td>
-                                                <td>{{item.corporateActionCode}}</td>
+                                                <td>{{item.equityId}}</td>
                                                 <td>{{item.reInvestmentShares}}</td>
                                                 <td>{{item.reinvestmentDate}}</td>
                                             </tr>
@@ -490,7 +461,7 @@
                                         </div>
                                         <div class="col-md-3 form-group">
                                             <label>Action Code</label>
-                                            <span class="form-control">{{selectedReinvestment.corporateActionCode}}</span>
+                                            <span class="form-control">{{selectedReinvestment.equityId}}</span>
                                         </div>
                                         <div class="col-md-3 form-group">
                                             <label>Reinvestment Shares</label>
@@ -510,7 +481,7 @@
                                             <thead>
                                                 <tr class="summary-table-row">
                                                     <td>EDIS Account Number</td>
-                                                    <td>Broker Account Number</td>
+                                          <!--          <td>Broker Account Number</td>   -->
                                                     <td>Type</td>
                                                     <td>Name</td>
                                                 </tr>
@@ -518,7 +489,7 @@
                                             <tbody>
                                                 <tr ng-repeat="client in selectedOtherCorporateAction.participants">
                                                     <td>{{client.edisAccountNumber}}</td>
-                                                    <td>{{client.brokerAccountNumber}}</td>
+                                              <!--      <td>{{client.brokerAccountNumber}}</td>  -->
                                                     <td>{{client.type}}</td>
                                                     <td>{{client.name}}</td>
                                                 </tr>
@@ -546,7 +517,7 @@
                                         <thead>
                                             <tr class="summary-table-row">
                                                 <td>Action Name</td>
-                                                <td>Action Code</td>
+                                                <td>Equity ID</td>
                                                 <td>Stock Split Shares</td>
                                                 <td>Date</td>
                                             </tr>
@@ -554,7 +525,7 @@
                                         <tbody>
                                             <tr ng-repeat="item in stockSplits" ng-click="selectStockSplit(item)">
                                                 <td>{{item.corporateActionName}}</td>
-                                                <td>{{item.corporateActionCode}}</td>
+                                                <td>{{item.equityId}}</td>
                                                 <td>{{item.stockSpilt}}</td>
                                                 <td>{{item.splitDate}}</td>
                                             </tr>
@@ -627,7 +598,7 @@
                                 <div class="widget-content">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <button class="btn btn-info" ng-click="newBonus()">New Action</button>
+                                            <button class="btn btn-info" ng-click="newBonusesAction()">New Action</button>
                                         </div>
                                     </div>
                                     <table class="table table-bordered table-hover">
@@ -640,7 +611,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="item in returnOfCapitals" ng-click="selectbonus(item)">
+                                            <tr ng-repeat="item in Bonuses" ng-click="selectbonus(item)">
                                                 <td>{{item.corporateActionName}}</td>
                                                 <td>{{item.corporateActionCode}}</td>
                                                 <td>{{item.bonusIssue}}</td>
@@ -771,7 +742,7 @@
                                             <thead>
                                                 <tr class="summary-table-row">
                                                     <td>EDIS Account Number</td>
-                                                    <td>Broker Account Number</td>
+                                          <!--          <td>Broker Account Number</td>-->
                                                     <td>Type</td>
                                                     <td>Name</td>
                                                 </tr>
@@ -779,7 +750,99 @@
                                             <tbody>
                                                 <tr ng-repeat="client in selectedOtherCorporateAction.participants">
                                                     <td>{{client.edisAccountNumber}}</td>
-                                                    <td>{{client.brokerAccountNumber}}</td>
+                                           <!--         <td>{{client.brokerAccountNumber}}</td>-->
+                                                    <td>{{client.type}}</td>
+                                                    <td>{{client.name}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 8 -->
+
+                        <div class="tab-pane active in" ng-if="step===8">
+                            <div class="widget">
+                                <div class="widget-header">
+                                    <h3>Rights Issue</h3>
+                                </div>
+                                <div class="widget-content">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button class="btn btn-info" ng-click="newRightsIssue()">New Action</button>
+                                        </div>
+                                    </div>
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr class="summary-table-row">
+                                                <td>Action Name</td>
+                                                <td>Equity ID</td>
+                                                <td>Share Amount</td>
+                                                <td>Price</td>
+                                                <td>Date</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in rightsIssue" ng-click="selectRightsIssue(item)">
+                                                <td>{{item.corporateActionName}}</td>
+                                                <td>{{item.equityId}}</td>
+                                                <td>{{item.shareAmount}}</td>
+                                                <td>{{item.issuePrice}}</td>
+                                                <td>{{item.issueDate}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- select show -->
+                            <div class="widget" ng-show="selectRightsIssue">
+                                <div class="widget-header">
+                                    <h3>Action Details</h3>
+
+                                </div>
+                                <div class="widget-content">
+                                    <div class="row">
+                                        <div class="col-md-3 form-group">
+                                            <label>Action Name</label>
+                                            <span class="form-control">{{selectedRightsIssue.corporateActionName}}</span>
+                                        </div>
+                                        <div class="col-md-3 form-group">
+                                            <label>Cash Adjustments</label>
+                                            <span class="form-control">{{selectedRightsIssue.equityId}}</span>
+                                        </div>
+                                        <div class="col-md-3 form-group">
+                                            <label>Cash Adjustments</label>
+                                            <span class="form-control">{{selectedRightsIssue.shareAmount}}</span>
+                                        </div>
+                                        <div class="col-md-3 form-group">
+                                            <label>Stock Adjustments</label>
+                                            <span class="form-control">{{selectedRightsIssue.issuePrice}}</span>
+                                        </div>
+                                        <div class="col-md-3 form-group">
+                                            <label>Date</label>
+                                            <span class="form-control">{{selectedRightsIssue.issueDate | date}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr class="summary-table-row">
+                                                    <td>EDIS Account Number</td>
+                                                    <!--          <td>Broker Account Number</td>-->
+                                                    <td>Type</td>
+                                                    <td>Name</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="client in selectedOtherCorporateAction.participants">
+                                                    <td>{{client.edisAccountNumber}}</td>
+                                                    <!--         <td>{{client.brokerAccountNumber}}</td>-->
                                                     <td>{{client.type}}</td>
                                                     <td>{{client.name}}</td>
                                                 </tr>
@@ -801,9 +864,12 @@
             </div>
         </div>
 
-    </div>
-</div>
+ 
+   </div>
 
+<!--
+</div>
+-->
 
 <script type="text/ng-template" id="ExistingOtherCorporateActions">
     <div class="newModel">
@@ -1076,44 +1142,7 @@
 
             </div>
 
-            <div class="row">
-                <div class="col-md-12 parameters-view" style="overflow:auto">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr class="summary-table-row">
-                                <td></td>
-                                <td>EDIS<br/>Account No.</td>
-                                <td>Broker<br/>Account No.</td>
-                                <td>Broker<br/>HIN/SRN</td>
-                                <td>Type</td>
-                                <td>Name</td>
-                                <td>Invested Amount</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="item in allClients">
-                                <td><input type="checkbox" ng-model="item.selected" /></td>
-                                <td>{{item.edisAccountNumber}}</td>
-                                <td>{{item.brokerAccountNumber}}</td>
-                                <td>{{item.brokerHinSrn}}</td>
-                                <td>{{item.type}}</td>
-                                <td>{{item.name}}</td>
-                                <td style="display:inline-block;width:150px;height:100%">
-                                    <div ng-if="item.selected">
-                                        <input type="number" class="form-control" min="0" name="invested_{{$index}}" ng-model="item.investedAmount" required />
-                                        <span class="error" ng-show="newIpo.invested_{{$index}}.$error.required&&newIpo.invested_{{$index}}.$touched">Please enter invested amount</span>
-                                        <span class="error" ng-show="newIpo.invested_{{$index}}.$error.number&&newIpo.invested_{{$index}}.$touched">Please enter numeric value</span>
-                                        <span class="error" ng-show="newIpo.invested_{{$index}}.$error.min&&newIpo.invested_{{$index}}.$touched">minimum input is 0</span>
-                                    </div>
-                                    <div ng-if="!item.selected">
 
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
 
             <div class="row">
                 <div class="col-md-12 text-right">
@@ -1161,67 +1190,79 @@
                         Corporate Action Name
                     </label>
                     <input class="form-control" name="actionName" ng-model="actionName" required />
-                    <div class="error" ng-show="newReturnOfCapitalAction.actionName.$error.required&&newReturnOfCapitalAction.actionName.$touched">Please enter corporate action name</div>
+                    <div class="error" ng-show="newReturnOfCapital.actionName.$error.required&&newReturnOfCapital.actionName.$touched">Please enter corporate action name</div>
                 </div>
                 <div class="col-md-6 form-group">
                     <label>
-                        Corporate Action Code
+                        Equity ID
                     </label>
-                    <input class="form-control" name="actionCode" ng-model="actionCode" required />
-                    <div class="error" ng-show="newReturnOfCapitalAction.actionCode.$error.required&&newReturnOfCapitalAction.actionCode.$touched">Please enter corporate action code</div>
+                    <input class="form-control" name="equityId" ng-model="equityId" required />
+                    <div class="error" ng-show="newReturnOfCapital.equityId.$error.required&&newReturnOfCapital.equityId.$touched">Please enter the related equityId</div>
                 </div>
             </div>
             <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>
+                        Share Amount
+                    </label>
+                    <input class="form-control" name="shareAmount" ng-model="shareAmount" required />
+                    <div class="error" ng-show="newReturnOfCapital.shareAmount.$error.required&&newReturnOfCapital.shareAmount.$touched">Please enter the share amount</div>
+                </div>
+
+
                 <div class="col-md-6 form-group">
                     <label>Return of Capital Amount</label>
                     <input class="form-control" name="returnAmount" ng-model="returnAmount" required />
-                    <div class="error" ng-show="newReturnOfCapitalAction.returnAmount.$error.required&&newReturnOfCapitalAction.returnAmount.$touched">Please enter the amount </div>
+                    <div class="error" ng-show="newReturnOfCapital.returnAmount.$error.required&&newReturnOfCapital.returnAmount.$touched">Please enter the amount </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6 form-group">
-                    <label>Adjustment Date</label>
-                    <input class="form-control" name="returnDate" edis-datepicker ng-model="returnDate" required />
-                    <div class="error" ng-show="newReturnOfCapitalAction.returnDate.$error.required&&newReturnOfCapitalAction.returnDate.$touched">Please enter record date</div>
-                </div>
-            </div>
- <!--
-            <div class="row">
-                <div class="col-md-12 parameters-view">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr class="summary-table-row">
-                                <td></td>
-                                <td>EDIS Account No.</td>
-                                <td>Broker Account No.</td>
-                                <td>Broker HIN/SRN</td>
-                                <td>Type</td>
-                                <td>Name</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="item in allClients">
-                                <td><input type="checkbox" ng-model="item.selected" /></td>
-                                <td>{{item.edisAccountNumber}}</td>
-                                <td>{{item.brokerAccountNumber}}</td>
-                                <td>{{item.brokerHinSrn}}</td>
-                                <td>{{item.type}}</td>
-                                <td>{{item.name}}</td>
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <label>Adjustment Date</label>
+            <input class="form-control" name="returnDate" edis-datepicker ng-model="returnDate" required />
+            <div class="error" ng-show="newReturnOfCapital.returnDate.$error.required&&newReturnOfCapital.returnDate.$touched">Please enter record date</div>
+        </div>
+    </div>
+    <!--
+                <div class="row">
+                    <div class="col-md-12 parameters-view">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr class="summary-table-row">
+                                    <td></td>
+                                    <td>EDIS Account No.</td>
+                                    <td>Broker Account No.</td>
+                                    <td>Broker HIN/SRN</td>
+                                    <td>Type</td>
+                                    <td>Name</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in allClients">
+                                    <td><input type="checkbox" ng-model="item.selected" /></td>
+                                    <td>{{item.edisAccountNumber}}</td>
+                                    <td>{{item.brokerAccountNumber}}</td>
+                                    <td>{{item.brokerHinSrn}}</td>
+                                    <td>{{item.type}}</td>
+                                    <td>{{item.name}}</td>
 
-                            </tr>
-                        </tbody>
-                    </table>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
--->
-            <div class="row">
-                <div class="col-md-12 text-right">
-                    <button class="btn btn-success" ng-click="add()" ng-disabled="!newReturnOfCapitalAction.$valid||!hasClientsSelected()">Save</button>
-                </div>
-            </div>
+    -->
+    <div class="row">
+      
+        <div class="col-md-12 text-right">
+            
+            <button class="btn btn-success" ng-click="add()" ng-disabled="!newReturnOfCapital.$valid">Save</button>
+          
+        </div>
+    </div>
 
 
-        </form>
+    </form>
     </div>
 </script>
 
@@ -1234,7 +1275,7 @@
 
 <script type="text/ng-template" id="exsistingReinvestment">
     <div class="newModel">
-        <form name="newReinvestment" novalidate>
+        <form name="newReinvestmentAction" novalidate>
             <div class="row">
                 <div class="col-md-6 form-group">
                     <label>
@@ -1245,24 +1286,108 @@
                 </div>
                 <div class="col-md-6 form-group">
                     <label>
-                        Corporate Action Code
+                        Equity ID
                     </label>
-                    <input class="form-control" name="actionCode" ng-model="actionCode" required />
-                    <div class="error" ng-show="newReinvestmentAction.actionCode.$error.required&&newReinvestmentAction.actionCode.$touched">Please enter corporate action code</div>
+                    <input class="form-control" name="euqityId" ng-model="euqityId" required />
+                    <div class="error" ng-show="newReinvestmentAction.euqityId.$error.required&&newReinvestmentAction.euqityId.$touched">Please enter the related euqity ID</div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 form-group">
                     <label>Reinvestment Share Amount</label>
-                    <input class="form-control" name="reinvestmentShares" ng-model="reinvestmentShares" required />
-                    <div class="error" ng-show="newReinvestmentAction.returnAmount.$error.required&&newReinvestmentAction.returnAmount.$touched">Please enter the amount </div>
+                    <input class="form-control" name="reinvestmentShareAmount" ng-model="reinvestmentShareAmount" required />
+                    <div class="error" ng-show="newReinvestmentAction.reinvestmentShareAmount.$error.required&&newReinvestmentAction.reinvestmentShareAmount.$touched">Please enter the share amount </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 form-group">
                     <label>Reinvestment Date</label>
                     <input class="form-control" name="reinvestmentDate" edis-datepicker ng-model="reinvestmentDate" required />
-                    <div class="error" ng-show="newReinvestmentAction.returnDate.$error.required&&newReinvestmentAction.returnDate.$touched">Please enter record date</div>
+                    <div class="error" ng-show="newReinvestmentAction.reinvestmentDate.$error.required&&newReinvestmentAction.reinvestmentDate.$touched">Please enter record date</div>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col-md-12 parameters-view" style="overflow:auto">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr class="summary-table-row">
+                                <td></td>
+                                <td>EDIS<br />Account No.</td>
+                                <td>Type</td>
+                                <td>Name</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in allClients">
+                                <td><input type="checkbox" ng-model="item.selected" /></td>
+                                <td>{{item.edisAccountNumber}}</td>
+                                <td>{{item.type}}</td>
+                                <td>{{item.name}}</td>
+                           <!--     <td style="display:inline-block;width:150px;height:100%">
+                                    <div ng-if="item.selected">
+                                        <input type="number" class="form-control" min="0" name="invested_{{$index}}" ng-model="item.investedAmount" required />
+                                        <span class="error" ng-show="newReinvestmentAction.invested_{{$index}}.$error.required&&newReinvestmentAction.invested_{{$index}}.$touched">Please enter invested amount</span>
+                                        <span class="error" ng-show="newReinvestmentAction.invested_{{$index}}.$error.number&&newReinvestmentAction.invested_{{$index}}.$touched">Please enter numeric value</span>
+                                        <span class="error" ng-show="newReinvestmentAction.invested_{{$index}}.$error.min&&newReinvestmentAction.invested_{{$index}}.$touched">minimum input is 0</span>
+                                    </div>
+                                    <div ng-if="!item.selected">
+
+                                    </div>
+                                </td>-->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+          
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-success" ng-click="add()" ng-disabled="!newReinvestmentAction.$valid||!hasClientsSelected()">Save</button>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</script>
+
+
+
+
+
+<!------------------------555555555555555555555555555555555------------------------------------------------------------------------------>
+<script type="text/ng-template" id="exsistingStockSplit">
+    <div class="newModel">
+        <form name="newStockSplit" novalidate>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>
+                        Corporate Action Name
+                    </label>
+                    <input class="form-control" name="actionName" ng-model="actionName" required />
+                    <div class="error" ng-show="newStockSplitAction.actionName.$error.required&&newStockSplitAction.actionName.$touched">Please enter corporate action name</div>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label>
+                        Corporate Action Code
+                    </label>
+                    <input class="form-control" name="equityID" ng-model="equityID" required />
+                    <div class="error" ng-show="newStockSplitAction.equityID.$error.required&&newStockSplitAction.equityID.$touched">Please enter equityID</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>Stock Split Share Amount</label>
+                    <input class="form-control" name="stockSplitShares" ng-model="stockSplitShares" required />
+                    <div class="error" ng-show="newStockSplitAction.stockSplitShares.$error.required&&newStockSplitAction.stockSplitShares.$touched">Please enter the split amount </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>Stock Split Date</label>
+                    <input class="form-control" name="splitDate" edis-datepicker ng-model="splitDate" required />
+                    <div class="error" ng-show="newStockSplitAction.splitDate.$error.required&&newStockSplitAction.splitDate.$touched">Please enter record date</div>
                 </div>
             </div>
             <!--
@@ -1296,7 +1421,245 @@
             -->
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <button class="btn btn-success" ng-click="add()" ng-disabled="!newReinvestmentAction.$valid||!hasClientsSelected()">Save</button>
+                    <button class="btn btn-success" ng-click="add()" ng-disabled="!newStockSplitAction.$valid||!hasClientsSelected()">Save</button>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</script>
+
+
+
+
+
+
+
+
+<!-------------------------------------------------------6666666666666666666666666666666666666666666666666666------------------------------>
+
+<script type="text/ng-template" id="exsistingBonusIssues">
+    <div class="newModel">
+        <form name="newBonusesAction" novalidate>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>
+                        Corporate Action Name
+                    </label>
+                    <input class="form-control" name="actionName" ng-model="actionName" required />
+                    <div class="error" ng-show="newBonusAction.actionName.$error.required&&newBonusAction.actionName.$touched">Please enter corporate action name</div>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label>
+                        Corporate Action Code
+                    </label>
+                    <input class="form-control" name="actionCode" ng-model="actionCode" required />
+                    <div class="error" ng-show="newBonusAction.actionCode.$error.required&&newBonusAction.actionCode.$touched">Please enter corporate action code</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>Stock Split Share Amount</label>
+                    <input class="form-control" name="bonusIssue" ng-model="bonusIssue" required />
+                    <div class="error" ng-show="newBonusAction.bonusIssue.$error.required&&newBonusAction.bonusIssue.$touched">Please enter the bonus amount </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>Stock Split Date</label>
+                    <input class="form-control" name="bonusDate" edis-datepicker ng-model="bonusDate" required />
+                    <div class="error" ng-show="newBonusAction.bonusDate.$error.required&&newBonusAction.bonusDate.$touched">Please enter record date</div>
+                </div>
+            </div>
+         
+                        <div class="row">
+                            <div class="col-md-12 parameters-view">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr class="summary-table-row">
+                                            <td></td>
+                                            <td>EDIS Account No.</td>
+                                          
+                                            <td>Type</td>
+                                            <td>Name</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in allClients">
+                                            <td><input type="checkbox" ng-model="item.selected" /></td>
+                                            <td>{{item.edisAccountNumber}}</td>
+                                      
+                                            <td>{{item.type}}</td>
+                                            <td>{{item.name}}</td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+       
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-success" ng-click="add()" ng-disabled="!newBonusAction.$valid||!hasClientsSelected()">Save</button>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</script>
+
+
+
+
+<!------------------------------------------------------777777777777777777777777777777777777777777777------------------------------>
+
+
+<script type="text/ng-template" id="exsistingBuyBack">
+    <div class="newModel">
+        <form name="newBuyBackAction" novalidate>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>
+                        Corporate Action Name
+                    </label>
+                    <input class="form-control" name="actionName" ng-model="actionName" required />
+                    <div class="error" ng-show="newBuyBackAction.actionName.$error.required&&newBuyBackAction.actionName.$touched">Please enter corporate action name</div>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label>
+                        Equity ID
+                    </label>
+                    <input class="form-control" name="euqityId" ng-model="euqityId" required />
+                    <div class="error" ng-show="newBuyBackAction.euqityId.$error.required&&newBuyBackAction.euqityId.$touched">Please enter euqity Id</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>Share Amount</label>
+                    <input class="form-control" name="shareAmount" ng-model="shareAmount" required />
+                    <div class="error" ng-show="newBuyBackAction.shareAmount.$error.required&&newBuyBackAction.shareAmount.$touched">Please enter the Share Amount</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>Offer Price</label>
+                    <input class="form-control" name="buyBackPrice" ng-model="buyBackPrice" required />
+                    <div class="error" ng-show="newBuyBackAction.buyBackPrice.$error.required&&newBuyBackAction.buyBackPrice.$touched">Please enter the Buy Back Price</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>Issue Date</label>
+                    <input class="form-control" name="buyBackDate" edis-datepicker ng-model="issueDate" required />
+                    <div class="error" ng-show="newBuyBackAction.buyBackDate.$error.required&&newBuyBackAction.buyBackDate.$touched">Please enter Buy Back date</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 parameters-view">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr class="summary-table-row">
+                                <td></td>
+                                <td>EDIS Account No.</td>
+
+                                <td>Type</td>
+                                <td>Name</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in allClients">
+                                <td><input type="checkbox" ng-model="item.selected" /></td>
+                                <td>{{item.edisAccountNumber}}</td>
+
+                                <td>{{item.type}}</td>
+                                <td>{{item.name}}</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-success" ng-click="add()" ng-disabled="!newBuyBackAction.$valid||!hasClientsSelected()">Save</button>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</script>
+
+<!-----------------------------------------------------8888888888888888888888888888888888888888888888888888---------------------------->
+
+
+<script type="text/ng-template" id="exsistingRightsIssues">
+    <div class="newModel">
+        <form name="newRightsIssueAction" novalidate>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>
+                        Corporate Action Name
+                    </label>
+                    <input class="form-control" name="actionName" ng-model="actionName" required />
+                    <div class="error" ng-show="newRightsIssueAction.actionName.$error.required&&newRightsIssueAction.actionName.$touched">Please enter corporate action name</div>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label>
+                        Equity ID
+                    </label>
+                    <input class="form-control" name="euqityId" ng-model="euqityId" required />
+                    <div class="error" ng-show="newRightsIssueAction.euqityId.$error.required&&newRightsIssueAction.euqityId.$touched">Please enter euqity Id</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>Offer Price</label>
+                    <input class="form-control" name="issuePrice" ng-model="issuePrice" required />
+                    <div class="error" ng-show="newRightsIssueAction.issuePrice.$error.required&&newRightsIssueAction.issuePrice.$touched">Please enter the Right Issue Price</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>Issue Date</label>
+                    <input class="form-control" name="issueDate" edis-datepicker ng-model="issueDate" required />
+                    <div class="error" ng-show="newRightsIssueAction.issueDate.$error.required&&newRightsIssueAction.issueDate.$touched">Please enter issue date</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 parameters-view">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr class="summary-table-row">
+                                <td></td>
+                                <td>EDIS Account No.</td>
+
+                                <td>Type</td>
+                                <td>Name</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in allClients">
+                                <td><input type="checkbox" ng-model="item.selected" /></td>
+                                <td>{{item.edisAccountNumber}}</td>
+
+                                <td>{{item.type}}</td>
+                                <td>{{item.name}}</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-success" ng-click="add()" ng-disabled="!newRightsIssueAction.$valid||!hasClientsSelected()">Save</button>
                 </div>
             </div>
 

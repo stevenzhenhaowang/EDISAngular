@@ -6,6 +6,8 @@
     service.existingOtherCorporateActions().query(function (data) {
         $scope.existingOtherCorporateActions = data;
     })
+    //here needs to implement existing corperate Action and services needs to be implemented too
+    
 
     $scope.selectIPOAction = function (item) {
         $scope.selectedIPOAction = item;
@@ -25,7 +27,8 @@
     $scope.selectOtherCorporateAction = function (action) {
         $scope.selectedOtherCorporateAction = action;
     }
-
+   
+    //new return of capital action
     $scope.newReturnOfCapital = function () {
         var modalInstance = $modal.open({
             templateUrl: "existingReturnOfCapitals",
@@ -35,9 +38,8 @@
         modalInstance.result.then(function (result) {
             $scope.selectModel(result.reason);
         });
-
-
     }
+
     $scope.newother = function () {
         var modalInstance = $modal.open({
             templateUrl: "ExistingOtherCorporateActions",
@@ -61,6 +63,73 @@
             $scope.selectModel(result.reason);
         });
     }
+    //
+    $scope.newReinvestment = function () {
+        var modalInstance = $modal.open({
+            templateUrl: "exsistingReinvestment",
+            controller: "newReinvestmentActionController",
+            backdrop:true
+
+        });
+
+        modalInstance.result.then(function (result) {
+            $scope.selectModel(result.reason);
+        });
+    }
+    //
+    $scope.newStockSplit = function () {
+        var modalInstance = $modal.open({
+            templateUrl: "exsistingStockSplit",
+            controller: "newStockSplitActionController",
+            backdrop:true
+        });
+        modalInstance.result.then(function (result) {
+            $scope.selectModel(result.reason);
+        });
+
+
+    }
+    //
+    $scope.newBonusesAction = function () {
+        var modalInstance = $modal.open({
+            templateUrl: "exsistingBonusIssues",
+            controller: "newBonusesActionController",
+            backdrop: true
+        });
+        modalInstance.result.then(function (result) {
+            $scope.selectModel(result.reason);
+        });
+
+            
+    }
+
+
+    $scope.newBuyBack = function () {
+        var modalInstance = $modal.open({
+            templateUrl: "exsistingBuyBack",
+            controller: "newBuyBackController",
+            backdrop: true
+        });
+        modalInstance.result.then(function (result) {
+            $scope.selectModel(result.reason);
+        });
+
+    }
+
+    $scope.newRightsIssue = function () {
+        var modalInstance = $modal.open({
+            templateUrl: "exsistingRightsIssues",
+            controller: "newRightsIssueController",
+            backdrop: true
+        });
+        modalInstance.result.then(function (result) {
+            $scope.selectModel(result.reason);
+        });
+
+    }
+      
+
+
 }])
 
 
@@ -212,11 +281,13 @@
         
     }])
 
+
+
   .controller("newReturnOfCapitalActionController",
 ["$scope", "corporateActionServices", "$modalInstance", "dateParser", "adviserGetId", function ($scope, service, $modalInstance, dateParser, adviserGetId) {
-    service.allCompanies().query(function (data) {
-        $scope.allCompanies = data;
-    })
+    //service.allCompanies().query(function (data) {
+    //    $scope.allCompanies = data;
+    //})
 
     var adviserId = "";
     adviserGetId().then(function (data) {
@@ -226,12 +297,142 @@
     $scope.add = function () {
         var data = {
             corporateActionName: $scope.actionName,
-            corporateActionCode: $scope.actionCode,
-           
+            equityId: $scope.equityId,
+            shareAmount: $scope.shareAmount,
             adviserUserId: adviserId,
-            purposeForCorporateAction: $scope.returnAmount,
-            recordDateEntitlement: dateParser($scope.returnDate),
+            returnAmount: $scope.returnAmount,
+            returnDate: dateParser($scope.returnDate),
           
+            participants: []
+        };
+        //this corperate action is mandatory all clients should participate which needs to be implemented
+        var allClients = service.allClients().query(function (data) {
+            data.participants = data;
+        })
+
+
+        //for (var i = 0; i < $scope.allClients.length; i++) {
+        //    if ($scope.allClients[i].selected) {
+        //        data.participants.push($scope.allClients[i])
+        //    }
+        //}
+
+        service.addReturnOfCapitalAction().save(data, function () {
+            $modalInstance.close({ reason: "success" });
+
+        })
+
+
+
+    }
+}])
+
+
+
+
+  .controller("newReinvestmentActionController",
+["$scope", "corporateActionServices", "$modalInstance", "dateParser", "adviserGetId", function ($scope, service, $modalInstance, dateParser, adviserGetId) {
+    //service.allCompanies().query(function (data) {
+    //    $scope.allCompanies = data;
+    //})
+
+    var adviserId = "";
+    adviserGetId().then(function (data) {
+        adviserId = data;
+    })
+
+    service.allClients().query(function (data) {
+        $scope.allClients = data;
+    })
+
+
+    $scope.add = function () {
+        var data = {
+            corporateActionName: $scope.actionName,
+            equityId: $scope.equityId,
+
+            adviserUserId: adviserId,
+            reinvestmentShareAmount: $scope.reinvestmentShareAmount,
+            reinvestmentDate: dateParser($scope.reinvestmentDate),
+
+            participants: []
+        };
+
+        //for (var i = 0; i < $scope.allClients.length; i++) {
+        //    if ($scope.allClients[i].selected) {
+        //        data.participants.push($scope.allClients[i])
+        //    }
+        //}
+        for (var i = 0; i < $scope.allClients.length; i++) {
+            if ($scope.allClients[i].selected) {
+                var client = $scope.allClients[i];
+                data.participants.push({
+                    edisAccountNumber: client.edisAccountNumber,
+                  
+                    type: client.type,
+                    name: client.name,
+                    //investedAmount: client.investedAmount,
+                    //numberOfUnits: 0,
+                    //unitPrice: 0,
+                    //tickerNumber: ""
+                });
+            }
+        }
+
+
+
+        $scope.hasClientsSelected = function () {
+            if ($scope.allClients === undefined || $scope.allClients === null || $scope.allClients.length === 0) {
+                return false;
+            } else {
+                var numberOfSelected = 0;
+                for (var i = 0; i < $scope.allClients.length; i++) {
+                    if ($scope.allClients[i].selected) {
+                        numberOfSelected++;
+                    }
+                }
+                if (numberOfSelected > 0) {
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        service.addnewReinvestmentAction().save(data, function () {
+            $modalInstance.close({ reason: "success" });
+
+        })
+
+
+
+    }
+}])
+
+
+ .controller("newStockSplitActionController",
+["$scope", "corporateActionServices", "$modalInstance", "dateParser", "adviserGetId", function ($scope, service, $modalInstance, dateParser, adviserGetId) {
+    //service.allCompanies().query(function (data) {
+    //    $scope.allCompanies = data;
+    //})
+
+    var adviserId = "";
+    adviserGetId().then(function (data) {
+        adviserId = data;
+    })
+
+    service.allClients().query(function (data) {
+        $scope.allClients = data;
+    })
+
+    $scope.add = function () {
+        var data = {
+            corporateActionName: $scope.actionName,
+            corporateActionCode: $scope.actionCode,
+
+            adviserUserId: adviserId,
+            stockSplitShares: $scope.stockSplitShares,
+            splitDate: dateParser($scope.splitDate),
+
             participants: []
         };
 
@@ -250,5 +451,137 @@
 
     }
 }])
+
+
+ .controller("newBonusesActionController",
+["$scope", "corporateActionServices", "$modalInstance", "dateParser", "adviserGetId", function ($scope, service, $modalInstance, dateParser, adviserGetId) {
+    service.allCompanies().query(function (data) {
+        $scope.allCompanies = data;
+    })
+
+    var adviserId = "";
+    adviserGetId().then(function (data) {
+        adviserId = data;
+    })
+
+    service.allClients().query(function (data) {
+        $scope.allClients = data;
+    })
+
+    $scope.add = function () {
+        var data = {
+            corporateActionName: $scope.actionName,
+            corporateActionCode: $scope.actionCode,
+
+            adviserUserId: adviserId,
+            bonusIssue: $scope.bonusIssue,
+            bonusDate: dateParser($scope.bonusDate),
+
+            participants: []
+        };
+
+        for (var i = 0; i < $scope.allClients.length; i++) {
+            if ($scope.allClients[i].selected) {
+                data.participants.push($scope.allClients[i])
+            }
+        }
+
+        service.addOtherAction().save(data, function () {
+            $modalInstance.close({ reason: "success" });
+
+        })
+
+
+
+    }
+}])
+    //newBuyBackController
+    .controller("newBuyBackController",
+["$scope", "corporateActionServices", "$modalInstance", "dateParser", "adviserGetId", function ($scope, service, $modalInstance, dateParser, adviserGetId) {
+    //service.allCompanies().query(function (data) {
+    //    $scope.allCompanies = data;
+    //})
+
+    var adviserId = "";
+    adviserGetId().then(function (data) {
+        adviserId = data;
+    })
+
+    service.allClients().query(function (data) {
+        $scope.allClients = data;
+    })
+
+    $scope.add = function () {
+        var data = {
+            corporateActionName: $scope.actionName,
+            corporateActionCode: $scope.actionCode,
+
+            adviserUserId: adviserId,
+            rightsIssue: $scope.rightsIssue,
+            rightsDate: dateParser($scope.issue),
+
+            participants: []
+        };
+
+        for (var i = 0; i < $scope.allClients.length; i++) {
+            if ($scope.allClients[i].selected) {
+                data.participants.push($scope.allClients[i])
+            }
+        }
+
+        service.addOtherAction().save(data, function () {
+            $modalInstance.close({ reason: "success" });
+
+        })
+
+
+
+    }
+}])
+
+
+.controller("newRightsIssueController",
+["$scope", "corporateActionServices", "$modalInstance", "dateParser", "adviserGetId", function ($scope, service, $modalInstance, dateParser, adviserGetId) {
+    //service.allCompanies().query(function (data) {
+    //    $scope.allCompanies = data;
+    //})
+
+    var adviserId = "";
+    adviserGetId().then(function (data) {
+        adviserId = data;
+    })
+
+    service.allClients().query(function (data) {
+        $scope.allClients = data;
+    })
+
+    $scope.add = function () {
+        var data = {
+            corporateActionName: $scope.actionName,
+            corporateActionCode: $scope.actionCode,
+
+            adviserUserId: adviserId,
+            rightsIssue: $scope.rightsIssue,
+            rightsDate: dateParser($scope.issue),
+
+            participants: []
+        };
+
+        for (var i = 0; i < $scope.allClients.length; i++) {
+            if ($scope.allClients[i].selected) {
+                data.participants.push($scope.allClients[i])
+            }
+        }
+
+        service.addOtherAction().save(data, function () {
+            $modalInstance.close({ reason: "success" });
+
+        })
+
+
+
+    }
+}])
+
 
 ;

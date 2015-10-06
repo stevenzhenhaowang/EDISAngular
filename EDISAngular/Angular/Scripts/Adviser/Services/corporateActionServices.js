@@ -2,10 +2,16 @@
 .factory("corporateActionServices", function ($http, $resource, $filter, $q, AppStrings) {
     
     return {
-        allClients: function () { return $resource(AppStrings.EDIS_IP + "api/adviser/clientaccounts"); },
+        allClients: function () { return $resource(AppStrings.EDIS_IP + "api/adviser/clientaccounts"); },//clients
         allCompanies: function () { return $resource(AppStrings.EDIS_IP + "api/Adviser/CorporateAction/Company"); },
         existingOtherCorporateActions: function () { return $resource(AppStrings.EDIS_IP + "api/Adviser/CorporateAction/Other"); },
         existingIPOActions: function () { return $resource(AppStrings.EDIS_IP + "api/Adviser/CorporateAction/IPO"); },
+        //
+        //existingReturnOfCapitals: function () { return $resource(AppStrings.EDIS_IP + "api/Adviser/CorporateAction/ReturnOfCapital"); },
+        exsistingReinvestment: function () { return $resource(AppStrings.EDIS_IP + "api/Adviser/CorporateAction/Reinvestment"); },
+        exsistingStockSplit: function () { return $resource(AppStrings.EDIS_IP + "api/Adviser/CorporateAction/StockSplit"); },
+        exsistingBonusIssues: function () { return $resource(AppStrings.EDIS_IP + "api/Adviser/CorporateAction/BonusIssues"); },
+        //function () { return $resource(AppStrings.EDIS_IP + "api/Adviser/CorporateAction/IPO"); },
         getClientsBasedOnCompany: function () { return $resource(AppStrings.EDIS_IP + "api/adviser/clientaccounts"); },
         allTickers: function () { return $resource(AppStrings.EDIS_IP + "api/Adviser/CorprateAction/Ticker"); },
         allocateIPOAction: function () { return $resource(AppStrings.EDIS_IP + "api/Adviser/CorporateAction/IPO/Allocation"); },

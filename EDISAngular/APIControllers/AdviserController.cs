@@ -41,12 +41,34 @@ namespace EDISAngular.APIControllers
         }
 
         //#region added actions 13/05/2015
-        //[HttpGet, Route("api/adviser/clientaccounts")]
-        //[Authorize(Roles=AuthorizationRoles.Role_Adviser)]
-        //public List<CorporateActionClientAccountModel> GetAllClientAccounts()
-        //{
-        //    return advisorRepo.GetAllClientAccounts(User.Identity.GetUserId());
-        //}
+        [HttpGet, Route("api/adviser/clientaccounts")]
+        [Authorize(Roles = AuthorizationRoles.Role_Adviser)]
+        public List<CorporateActionClientAccountModel> GetAllClientAccounts()
+        {
+            //return advisorRepo.GetAllClientAccounts(User.Identity.GetUserId());
+            var userid = User.Identity.GetUserId();
+            var allGroups = edisRepo.GetAllClientGroupsForAdviserSync(userid,DateTime.Now);
+            var clients = new List<Client>();
+            List<CorporateActionClientAccountModel> allClients = new List<CorporateActionClientAccountModel>();
+            foreach (var group in allGroups) {
+              clients.AddRange( group.GetClientsSync());
+            }
+              //to get account number
+            foreach (var client in clients)
+            {
+               var accounts =  edisRepo.GetAccountsForClientSync(client.ClientNumber, DateTime.Now);
+                foreach (var account in accounts) { 
+                   allClients.Add(new CorporateActionClientAccountModel
+                   {
+                      
+                        edisAccountNumber = account.AccountNumber,
+                        type = account.AccountType.ToString(),
+                        name = client.FirstName + " " + client.LastName
+                   });
+                }
+            }
+            return allClients;
+        }
         //[HttpGet,Route("api/adviser/clientaccounts")]
         //[Authorize(Roles=AuthorizationRoles.Role_Adviser)]
         //public List<CorporateActionClientAccountModel> GetClientAccountsForCompany(string companyTicker)
@@ -131,18 +153,30 @@ namespace EDISAngular.APIControllers
             edisRepo.CreateNewClientGroupAccountSync(model.clientGroup, model.accountName, model.accountType);
         }
 
-        //[HttpGet, Route("api/adviser/clients")]
-        //[Authorize(Roles = AuthorizationRoles.Role_Adviser)]
-        //public List<ClientView> getAllAdviserClients()
-        //{
 
-        //    var userid = User.Identity.GetUserId();
+        //added 1006 for corperate action usage
+        [HttpGet, Route("api/adviser/clients")]
+        [Authorize(Roles = AuthorizationRoles.Role_Adviser)]
+        public List<ClientView> getAllAdviserClients()
+        {
+            var userid = User.Identity.GetUserId();
+            var allAccounts = edisRepo.getAllClientAccountsForAdviser(userid, DateTime.Now);
+            var clients = new List<Client>();
+            foreach (var account in allAccounts) {
+                var client = edisRepo.GetClientSync(account.AccountNumber, DateTime.Now);
+                clients.Add(client);
+            }
+            List<ClientView> allClients = new List<ClientView>();
+            foreach (var individual in clients) {
+                allClients.Add(new ClientView {
+                   id = individual.Id,
+                   name = individual.FirstName + " " + individual.LastName
+                });
 
+            }
+            return allClients;
 
-
-        //    return advisorRepo.GetAdvisorClients(userid);
-
-        //}
+        }
 
         ////////[HttpGet, Route("api/adviser/clientgroupsTest")]
         ////////[Authorize(Roles = AuthorizationRoles.Role_Adviser)]
@@ -154,7 +188,7 @@ namespace EDISAngular.APIControllers
         ////////    return await repo.GetAllClientGroupsForAdviser(userid, DateTime.Now);
 
         ////////}
-        
+
         [HttpGet, Route("api/adviser/clientgroups")]
         [Authorize(Roles = AuthorizationRoles.Role_Adviser)]
         public List<ClientView> getAllClientGroups()
