@@ -3419,19 +3419,19 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\EDISV2-master\Domain.Portfolio\Domain.Portfolio.csproj">
+    <ProjectReference Include="..\Domain.Portfolio\Domain.Portfolio.csproj">
       <Project>{4eeadcba-e82e-46a9-a0e4-f60efea90fd9}</Project>
       <Name>Domain.Portfolio</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\EDISV2-master\Edis.Db\Edis.Db.csproj">
+    <ProjectReference Include="..\Edis.Db\Edis.Db.csproj">
       <Project>{601c87fb-067d-4b38-b1c2-da9cc6c6d43d}</Project>
       <Name>Edis.Db</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\EDISV2-master\Shared\Shared.csproj">
+    <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{e5bc73b2-7418-4fee-a5b9-a268e9501523}</Project>
       <Name>Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\EDISV2-master\SqlRepository\SqlRepository.csproj">
+    <ProjectReference Include="..\SqlRepository\SqlRepository.csproj">
       <Project>{79a3d390-0fa5-4975-a62e-600c00094884}</Project>
       <Name>SqlRepository</Name>
     </ProjectReference>

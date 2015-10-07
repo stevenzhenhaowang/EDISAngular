@@ -1,0 +1,12 @@
+C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISV2-master\Shared\bin\Debug\Shared.dll.config
+C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISV2-master\Shared\bin\Debug\Shared.dll
+C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISV2-master\Shared\bin\Debug\Shared.pdb
+C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISV2-master\Shared\obj\Debug\Shared.dll
+C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISV2-master\Shared\obj\Debug\Shared.pdb
+C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISV2-master\Shared\obj\Debug\Shared.csprojResolveAssemblyReference.cache
+C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISAngular\Shared\bin\Debug\Shared.dll.config
+C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISAngular\Shared\bin\Debug\Shared.dll
+C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISAngular\Shared\bin\Debug\Shared.pdb
+C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISAngular\Shared\obj\Debug\Shared.csprojResolveAssemblyReference.cache
+C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISAngular\Shared\obj\Debug\Shared.dll
+C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISAngular\Shared\obj\Debug\Shared.pdb
