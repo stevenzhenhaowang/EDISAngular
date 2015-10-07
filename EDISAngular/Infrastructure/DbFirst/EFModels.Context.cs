@@ -33,6 +33,7 @@ namespace EDISAngular.Infrastructure.DbFirst
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<AssetPrice> AssetPrices { get; set; }
+        public virtual DbSet<Attachment> Attachments { get; set; }
         public virtual DbSet<AustralianState> AustralianStates { get; set; }
         public virtual DbSet<Bond> Bonds { get; set; }
         public virtual DbSet<BondTransaction> BondTransactions { get; set; }
@@ -53,12 +54,15 @@ namespace EDISAngular.Infrastructure.DbFirst
         public virtual DbSet<LoanValueRatio> LoanValueRatios { get; set; }
         public virtual DbSet<MarginLendingTransaction> MarginLendingTransactions { get; set; }
         public virtual DbSet<MortgageHomeLoanTransaction> MortgageHomeLoanTransactions { get; set; }
+        public virtual DbSet<NoteLink> NoteLinks { get; set; }
+        public virtual DbSet<Note> Notes { get; set; }
         public virtual DbSet<Property> Properties { get; set; }
         public virtual DbSet<PropertyTransaction> PropertyTransactions { get; set; }
         public virtual DbSet<PropertyType> PropertyTypes { get; set; }
         public virtual DbSet<Rental> Rentals { get; set; }
         public virtual DbSet<RepaymentRecord> RepaymentRecords { get; set; }
         public virtual DbSet<ResearchValue> ResearchValues { get; set; }
+        public virtual DbSet<ResourcesReference> ResourcesReferences { get; set; }
         public virtual DbSet<Sector> Sectors { get; set; }
         public virtual DbSet<TransactionExpens> TransactionExpenses { get; set; }
     }

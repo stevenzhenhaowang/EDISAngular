@@ -184,6 +184,21 @@
     <NavigationProperty Name="Equity" Relationship="Self.FK_dbo_AssetPrices_dbo_Equities_Equity_AssetId" FromRole="AssetPrices" ToRole="Equities" />
     <NavigationProperty Name="Property" Relationship="Self.FK_dbo_AssetPrices_dbo_Properties_Property_PropertyId" FromRole="AssetPrices" ToRole="Properties" />
   </EntityType>
+  <EntityType Name="Attachment">
+    <Key>
+      <PropertyRef Name="AttachmentId" />
+    </Key>
+    <Property Name="AttachmentId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Data" Type="Byte" Nullable="false" />
+    <Property Name="AttachmentType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NoteId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Note" Relationship="Self.FK_dbo_Attachments_dbo_Notes_NoteId" FromRole="Attachments" ToRole="Notes" />
+  </EntityType>
   <EntityType Name="AustralianState">
     <Key>
       <PropertyRef Name="Id" />
@@ -300,6 +315,7 @@
     <Property Name="ACN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Accounts" Relationship="Self.FK_dbo_Accounts_dbo_Clients_Client_ClientId" FromRole="Clients" ToRole="Accounts" />
     <NavigationProperty Name="ClientGroup" Relationship="Self.FK_dbo_Clients_dbo_ClientGroups_ClientGroupId" FromRole="Clients" ToRole="ClientGroups" />
+    <NavigationProperty Name="Notes" Relationship="Self.FK_dbo_Notes_dbo_Clients_ClientId" FromRole="Clients" ToRole="Notes" />
   </EntityType>
   <EntityType Name="ConsultancyExpens">
     <Key>
@@ -477,6 +493,48 @@
     <NavigationProperty Name="LiabilityRates" Relationship="Self.FK_dbo_LiabilityRates_dbo_MortgageHomeLoanTransactions_MortgageId" FromRole="MortgageHomeLoanTransactions" ToRole="LiabilityRates" />
     <NavigationProperty Name="Property" Relationship="Self.FK_dbo_MortgageHomeLoanTransactions_dbo_Properties_PropertyId" FromRole="MortgageHomeLoanTransactions" ToRole="Properties" />
   </EntityType>
+  <EntityType Name="NoteLink">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="NoteId1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NoteId2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Note">
+    <Key>
+      <PropertyRef Name="NoteId" />
+    </Key>
+    <Property Name="NoteId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Subject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NoteType" Type="Int32" Nullable="false" />
+    <Property Name="SenderRole" Type="Int32" Nullable="false" />
+    <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AdviserId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AssetClass" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProductClass" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Product" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Purpose" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TimeSpend" Type="Single" Nullable="false" />
+    <Property Name="NoteSerial" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FollowupActions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateDue" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FollowupDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateCompleted" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ReminderDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Reminder" Type="Boolean" Nullable="false" />
+    <Property Name="IsAccepted" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeclined" Type="Boolean" Nullable="false" />
+    <Property Name="AssetTypeId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AccountId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClientId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Attachments" Relationship="Self.FK_dbo_Attachments_dbo_Notes_NoteId" FromRole="Notes" ToRole="Attachments" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_dbo_Notes_dbo_Clients_ClientId" FromRole="Notes" ToRole="Clients" />
+  </EntityType>
   <EntityType Name="Property">
     <Key>
       <PropertyRef Name="PropertyId" />
@@ -562,6 +620,16 @@
     <NavigationProperty Name="Bond" Relationship="Self.FK_dbo_ResearchValues_dbo_Bonds_Bond_BondId" FromRole="ResearchValues" ToRole="Bonds" />
     <NavigationProperty Name="Equity" Relationship="Self.FK_dbo_ResearchValues_dbo_Equities_Equity_AssetId" FromRole="ResearchValues" ToRole="Equities" />
     <NavigationProperty Name="Property" Relationship="Self.FK_dbo_ResearchValues_dbo_Properties_Property_PropertyId" FromRole="ResearchValues" ToRole="Properties" />
+  </EntityType>
+  <EntityType Name="ResourcesReference">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TokenValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FileExtension" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ResourceUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Sector">
     <Key>
@@ -875,6 +943,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_dbo_Attachments_dbo_Notes_NoteId">
+    <End Role="Notes" Type="Self.Note" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Attachments" Type="Self.Attachment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Notes">
+        <PropertyRef Name="NoteId" />
+      </Principal>
+      <Dependent Role="Attachments">
+        <PropertyRef Name="NoteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_dbo_BondTransactions_dbo_Bonds_BondId">
     <End Role="Bonds" Type="Self.Bond" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -954,6 +1036,20 @@
       </Principal>
       <Dependent Role="Clients">
         <PropertyRef Name="ClientGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Notes_dbo_Clients_ClientId">
+    <End Role="Clients" Type="Self.Client" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Notes" Type="Self.Note" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="ClientId" />
+      </Principal>
+      <Dependent Role="Notes">
+        <PropertyRef Name="ClientId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1100,6 +1196,7 @@
     <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
     <EntitySet Name="AssetPrices" EntityType="Self.AssetPrice" />
+    <EntitySet Name="Attachments" EntityType="Self.Attachment" />
     <EntitySet Name="AustralianStates" EntityType="Self.AustralianState" />
     <EntitySet Name="Bonds" EntityType="Self.Bond" />
     <EntitySet Name="BondTransactions" EntityType="Self.BondTransaction" />
@@ -1120,12 +1217,15 @@
     <EntitySet Name="LoanValueRatios" EntityType="Self.LoanValueRatio" />
     <EntitySet Name="MarginLendingTransactions" EntityType="Self.MarginLendingTransaction" />
     <EntitySet Name="MortgageHomeLoanTransactions" EntityType="Self.MortgageHomeLoanTransaction" />
+    <EntitySet Name="NoteLinks" EntityType="Self.NoteLink" />
+    <EntitySet Name="Notes" EntityType="Self.Note" />
     <EntitySet Name="Properties" EntityType="Self.Property" />
     <EntitySet Name="PropertyTransactions" EntityType="Self.PropertyTransaction" />
     <EntitySet Name="PropertyTypes" EntityType="Self.PropertyType" />
     <EntitySet Name="Rentals" EntityType="Self.Rental" />
     <EntitySet Name="RepaymentRecords" EntityType="Self.RepaymentRecord" />
     <EntitySet Name="ResearchValues" EntityType="Self.ResearchValue" />
+    <EntitySet Name="ResourcesReferences" EntityType="Self.ResourcesReference" />
     <EntitySet Name="Sectors" EntityType="Self.Sector" />
     <EntitySet Name="TransactionExpenses" EntityType="Self.TransactionExpens" />
     <AssociationSet Name="FK_dbo_Accounts_dbo_ClientGroups_ClientGroup_ClientGroupId" Association="Self.FK_dbo_Accounts_dbo_ClientGroups_ClientGroup_ClientGroupId">
@@ -1220,6 +1320,10 @@
       <End Role="Properties" EntitySet="Properties" />
       <End Role="AssetPrices" EntitySet="AssetPrices" />
     </AssociationSet>
+    <AssociationSet Name="FK_dbo_Attachments_dbo_Notes_NoteId" Association="Self.FK_dbo_Attachments_dbo_Notes_NoteId">
+      <End Role="Notes" EntitySet="Notes" />
+      <End Role="Attachments" EntitySet="Attachments" />
+    </AssociationSet>
     <AssociationSet Name="FK_dbo_BondTransactions_dbo_Bonds_BondId" Association="Self.FK_dbo_BondTransactions_dbo_Bonds_BondId">
       <End Role="Bonds" EntitySet="Bonds" />
       <End Role="BondTransactions" EntitySet="BondTransactions" />
@@ -1243,6 +1347,10 @@
     <AssociationSet Name="FK_dbo_Clients_dbo_ClientGroups_ClientGroupId" Association="Self.FK_dbo_Clients_dbo_ClientGroups_ClientGroupId">
       <End Role="ClientGroups" EntitySet="ClientGroups" />
       <End Role="Clients" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Notes_dbo_Clients_ClientId" Association="Self.FK_dbo_Notes_dbo_Clients_ClientId">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Notes" EntitySet="Notes" />
     </AssociationSet>
     <AssociationSet Name="FK_dbo_Dividends_dbo_Equities_Equity_AssetId" Association="Self.FK_dbo_Dividends_dbo_Equities_Equity_AssetId">
       <End Role="Equities" EntitySet="Equities" />

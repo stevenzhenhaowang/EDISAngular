@@ -25,6 +25,8 @@ using Domain.Portfolio.Entities.CreationModels;
 using Client = Domain.Portfolio.AggregateRoots.Client;
 using ClientGroup = Domain.Portfolio.AggregateRoots.ClientGroup;
 using SqlRepository;
+using Novacode;
+using Shared;
 
 
 
@@ -75,7 +77,6 @@ namespace EDISAngular.APIControllers
                 #endregion
 
                 #region create client group or add to existing group
-
                 if (model.isGroupLeader.HasValue && model.isGroupLeader.Value)
                 {
                     var adviserNumber = User.Identity.GetUserId();
@@ -88,9 +89,7 @@ namespace EDISAngular.APIControllers
                         CreateOn = DateTime.Now,
                         client = client,
                     };
-                    var newClientGroup = edisRepo.CreateNewClientGroup(group);
-
-
+                    edisRepo.CreateNewClientGroupSync(group);
                 }
                 else
                 {
@@ -98,6 +97,16 @@ namespace EDISAngular.APIControllers
                     edisRepo.CreateNewClientSync(client);
                 }
 
+                using (DocX document = DocX.Create("C:\\Test\\"+ client.FirstName + "_" + client.LastName +".docx"))
+                {
+                    Paragraph paragraph = document.InsertParagraph();
+                    paragraph.AppendLine(ClientDocInfo.FirstName + model.firstName);
+                    paragraph.AppendLine(ClientDocInfo.MiddleName + model.middleName);
+                    paragraph.AppendLine(ClientDocInfo.LastName + model.lastName);
+                    paragraph.AppendLine(ClientDocInfo.Email + model.email);
+                    paragraph.AppendLine(ClientDocInfo.ContactPhone + model.contactPhone);
+                    document.Save();
+                }
 
                 string code = userManager.GenerateEmailConfirmationTokenAsync(user.Id).Result;
                 string path = HttpContext.Current.Server.MapPath("~/EmailTemplate/ConfirmEmail.html");

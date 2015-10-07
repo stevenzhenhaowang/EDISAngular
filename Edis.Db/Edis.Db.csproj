@@ -59,6 +59,7 @@
     <Compile Include="Assets\CashAccount.cs" />
     <Compile Include="Assets\Equity.cs" />
     <Compile Include="Assets\Property.cs" />
+    <Compile Include="Attachments.cs" />
     <Compile Include="AustralianState.cs" />
     <Compile Include="BondType.cs" />
     <Compile Include="Client.cs" />
@@ -82,11 +83,22 @@
     <Compile Include="Migrations\201510010301316_init.Designer.cs">
       <DependentUpon>201510010301316_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510060438093_init1.cs" />
+    <Compile Include="Migrations\201510060438093_init1.Designer.cs">
+      <DependentUpon>201510060438093_init1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510060446441_init2.cs" />
+    <Compile Include="Migrations\201510060446441_init2.Designer.cs">
+      <DependentUpon>201510060446441_init2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="NoteLinks.cs" />
+    <Compile Include="Notes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyType.cs" />
     <Compile Include="RepaymentRecord.cs" />
     <Compile Include="ResearchValue.cs" />
+    <Compile Include="ResourcesReferences.cs" />
     <Compile Include="Sector.cs" />
     <Compile Include="Transactions\BondTransaction.cs" />
     <Compile Include="Transactions\CashTransaction.cs" />
@@ -108,6 +120,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201510010301316_init.resx">
       <DependentUpon>201510010301316_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510060438093_init1.resx">
+      <DependentUpon>201510060438093_init1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510060446441_init2.resx">
+      <DependentUpon>201510060446441_init2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

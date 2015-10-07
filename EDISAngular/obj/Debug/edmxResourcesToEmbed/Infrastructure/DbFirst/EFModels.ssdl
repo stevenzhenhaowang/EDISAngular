@@ -165,6 +165,20 @@
     <Property Name="Property_PropertyId" Type="nvarchar" MaxLength="128" />
     <Property Name="Equity_AssetId" Type="nvarchar" MaxLength="128" />
   </EntityType>
+  <EntityType Name="Attachments">
+    <Key>
+      <PropertyRef Name="AttachmentId" />
+    </Key>
+    <Property Name="AttachmentId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="Path" Type="nvarchar(max)" />
+    <Property Name="DateModified" Type="datetime" Nullable="false" />
+    <Property Name="Comments" Type="nvarchar(max)" />
+    <Property Name="Data" Type="tinyint" Nullable="false" />
+    <Property Name="AttachmentType" Type="nvarchar(max)" />
+    <Property Name="NoteId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
   <EntityType Name="AustralianStates">
     <Key>
       <PropertyRef Name="Id" />
@@ -419,6 +433,46 @@
     <Property Name="AccountId" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="IsAcquire" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="NoteLinks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="NoteId1" Type="nvarchar(max)" />
+    <Property Name="NoteId2" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Notes">
+    <Key>
+      <PropertyRef Name="NoteId" />
+    </Key>
+    <Property Name="NoteId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="Subject" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NoteType" Type="int" Nullable="false" />
+    <Property Name="SenderRole" Type="int" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" Nullable="false" />
+    <Property Name="AdviserId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AssetClass" Type="nvarchar(max)" />
+    <Property Name="ProductClass" Type="nvarchar(max)" />
+    <Property Name="Product" Type="nvarchar(max)" />
+    <Property Name="Purpose" Type="nvarchar(max)" />
+    <Property Name="TimeSpend" Type="real" Nullable="false" />
+    <Property Name="NoteSerial" Type="nvarchar(max)" />
+    <Property Name="Body" Type="nvarchar(max)" />
+    <Property Name="FollowupActions" Type="nvarchar(max)" />
+    <Property Name="DateDue" Type="datetime" Nullable="false" />
+    <Property Name="FollowupDate" Type="datetime" Nullable="false" />
+    <Property Name="DateCompleted" Type="datetime" Nullable="false" />
+    <Property Name="ReminderDate" Type="datetime" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" />
+    <Property Name="Reminder" Type="bit" Nullable="false" />
+    <Property Name="IsAccepted" Type="bit" Nullable="false" />
+    <Property Name="IsDeclined" Type="bit" Nullable="false" />
+    <Property Name="AssetTypeId" Type="nvarchar(max)" />
+    <Property Name="AccountId" Type="nvarchar(max)" />
+    <Property Name="ClientId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
   <EntityType Name="Properties">
     <Key>
       <PropertyRef Name="PropertyId" />
@@ -491,6 +545,16 @@
     <Property Name="Property_PropertyId" Type="nvarchar" MaxLength="128" />
     <Property Name="Equity_AssetId" Type="nvarchar" MaxLength="128" />
     <Property Name="StringValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="ResourcesReferences">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="TokenValue" Type="nvarchar(max)" />
+    <Property Name="FileExtension" Type="nvarchar(max)" />
+    <Property Name="ResourceUrl" Type="nvarchar(max)" />
+    <Property Name="UserId" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Sectors">
     <Key>
@@ -626,6 +690,20 @@
       </Principal>
       <Dependent Role="AssetPrices">
         <PropertyRef Name="Property_PropertyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Attachments_dbo_Notes_NoteId">
+    <End Role="Notes" Type="Self.Notes" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Attachments" Type="Self.Attachments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Notes">
+        <PropertyRef Name="NoteId" />
+      </Principal>
+      <Dependent Role="Attachments">
+        <PropertyRef Name="NoteId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -931,6 +1009,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_dbo_Notes_dbo_Clients_ClientId">
+    <End Role="Clients" Type="Self.Clients" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Notes" Type="Self.Notes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="ClientId" />
+      </Principal>
+      <Dependent Role="Notes">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_dbo_PropertyTransactions_dbo_Accounts_Account_AccountId">
     <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
     <End Role="PropertyTransactions" Type="Self.PropertyTransactions" Multiplicity="*" />
@@ -1053,6 +1145,7 @@
     <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AssetPrices" EntityType="Self.AssetPrices" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Attachments" EntityType="Self.Attachments" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AustralianStates" EntityType="Self.AustralianStates" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Bonds" EntityType="Self.Bonds" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BondTransactions" EntityType="Self.BondTransactions" Schema="dbo" store:Type="Tables" />
@@ -1073,12 +1166,15 @@
     <EntitySet Name="LoanValueRatios" EntityType="Self.LoanValueRatios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MarginLendingTransactions" EntityType="Self.MarginLendingTransactions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MortgageHomeLoanTransactions" EntityType="Self.MortgageHomeLoanTransactions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NoteLinks" EntityType="Self.NoteLinks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Notes" EntityType="Self.Notes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Properties" EntityType="Self.Properties" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PropertyTransactions" EntityType="Self.PropertyTransactions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PropertyTypes" EntityType="Self.PropertyTypes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Rentals" EntityType="Self.Rentals" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RepaymentRecords" EntityType="Self.RepaymentRecords" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ResearchValues" EntityType="Self.ResearchValues" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ResourcesReferences" EntityType="Self.ResourcesReferences" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Sectors" EntityType="Self.Sectors" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TransactionExpenses" EntityType="Self.TransactionExpenses" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_dbo_Accounts_dbo_ClientGroups_ClientGroup_ClientGroupId" Association="Self.FK_dbo_Accounts_dbo_ClientGroups_ClientGroup_ClientGroupId">
@@ -1116,6 +1212,10 @@
     <AssociationSet Name="FK_dbo_AssetPrices_dbo_Properties_Property_PropertyId" Association="Self.FK_dbo_AssetPrices_dbo_Properties_Property_PropertyId">
       <End Role="Properties" EntitySet="Properties" />
       <End Role="AssetPrices" EntitySet="AssetPrices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Attachments_dbo_Notes_NoteId" Association="Self.FK_dbo_Attachments_dbo_Notes_NoteId">
+      <End Role="Notes" EntitySet="Notes" />
+      <End Role="Attachments" EntitySet="Attachments" />
     </AssociationSet>
     <AssociationSet Name="FK_dbo_BondTransactions_dbo_Accounts_Account_AccountId" Association="Self.FK_dbo_BondTransactions_dbo_Accounts_Account_AccountId">
       <End Role="Accounts" EntitySet="Accounts" />
@@ -1208,6 +1308,10 @@
     <AssociationSet Name="FK_dbo_MortgageHomeLoanTransactions_dbo_Properties_PropertyId" Association="Self.FK_dbo_MortgageHomeLoanTransactions_dbo_Properties_PropertyId">
       <End Role="Properties" EntitySet="Properties" />
       <End Role="MortgageHomeLoanTransactions" EntitySet="MortgageHomeLoanTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Notes_dbo_Clients_ClientId" Association="Self.FK_dbo_Notes_dbo_Clients_ClientId">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Notes" EntitySet="Notes" />
     </AssociationSet>
     <AssociationSet Name="FK_dbo_PropertyTransactions_dbo_Accounts_Account_AccountId" Association="Self.FK_dbo_PropertyTransactions_dbo_Accounts_Account_AccountId">
       <End Role="Accounts" EntitySet="Accounts" />

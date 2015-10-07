@@ -40,7 +40,7 @@ namespace EDISAngular.APIControllers
         public string getAdviserAccountNumber()
         {
             var userid = User.Identity.GetUserId();
-            return edisRepo.GetAdviser(userid, DateTime.Now).Result.Id;
+            return edisRepo.GetAdviserSync(userid, DateTime.Now).AdviserNumber;
 
         }
 
@@ -123,6 +123,7 @@ namespace EDISAngular.APIControllers
         public void createClientAccount(ClientAccountCreationBindingModel model)
         {
             edisRepo.CreateNewClientAccountSync(model.client, model.accountName, model.accountType);
+
         }
 
         [HttpPost, Route("api/adviser/createGroupAccount")]
@@ -132,18 +133,33 @@ namespace EDISAngular.APIControllers
             edisRepo.CreateNewClientGroupAccountSync(model.clientGroup, model.accountName, model.accountType);
         }
 
-        //[HttpGet, Route("api/adviser/clients")]
-        //[Authorize(Roles = AuthorizationRoles.Role_Adviser)]
-        //public List<ClientView> getAllAdviserClients()
-        //{
+        [HttpGet, Route("api/adviser/clients")]
+        [Authorize(Roles = AuthorizationRoles.Role_Adviser)]
+        public List<ClientView> getAllAdviserClients()
+        {
 
-        //    var userid = User.Identity.GetUserId();
+            var userid = User.Identity.GetUserId();
+
+            List<Domain.Portfolio.AggregateRoots.ClientGroup> groups = edisRepo.GetAllClientGroupsForAdviserSync(User.Identity.GetUserId(), DateTime.Now);
+            List<Domain.Portfolio.AggregateRoots.Client> clients = new List<Domain.Portfolio.AggregateRoots.Client>();
+            List<ClientView> views = new List<ClientView>();
+            foreach (var group in groups) {
+                clients.AddRange(group.GetClientsSync(DateTime.Now));
+            }
+
+            foreach (var client in clients) {
+                views.Add(new ClientView
+                {
+                    id = client.Id,
+                    name = client.FirstName + " " + client.LastName
+                });
+            }
 
 
+            //return advisorRepo.GetAdvisorClients(userid);
+            return views;
 
-        //    return advisorRepo.GetAdvisorClients(userid);
-
-        //}
+        }
 
         ////////[HttpGet, Route("api/adviser/clientgroupsTest")]
         ////////[Authorize(Roles = AuthorizationRoles.Role_Adviser)]

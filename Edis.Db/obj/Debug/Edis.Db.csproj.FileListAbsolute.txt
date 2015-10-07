@@ -71,6 +71,8 @@ C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\Edis.Db\bin\Debug\Enti
 C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\Edis.Db\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\Edis.Db\obj\Debug\Edis.Db.csprojResolveAssemblyReference.cache
 C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\Edis.Db\obj\Debug\Edis.Db.Migrations.init.resources
+C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\Edis.Db\obj\Debug\Edis.Db.Migrations.init1.resources
+C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\Edis.Db\obj\Debug\Edis.Db.Migrations.init2.resources
 C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\Edis.Db\obj\Debug\Edis.Db.csproj.GenerateResource.Cache
 C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\Edis.Db\obj\Debug\Edis.Db.dll
 C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\Edis.Db\obj\Debug\Edis.Db.pdb
