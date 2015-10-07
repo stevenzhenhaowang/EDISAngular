@@ -185,6 +185,7 @@
     <Compile Include="Abstract\IRepository.cs" />
     <Compile Include="APIControllers\AccountController.cs" />
     <Compile Include="APIControllers\AdviserController.cs" />
+    <Compile Include="APIControllers\CorporateActionController.cs" />
     <Compile Include="APIControllers\EducationLevelController.cs" />
     <Compile Include="APIControllers\EntityClientController.cs" />
     <Compile Include="APIControllers\PersonClientController.cs" />

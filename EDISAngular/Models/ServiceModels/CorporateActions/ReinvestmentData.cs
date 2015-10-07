@@ -8,7 +8,7 @@ namespace EDISAngular.Models.ServiceModels.CorporateActions
     public class ReinvestmentData
     {
         public string actionName { get; set; }
-        public string actionCode { get; set; }
+        public string equtiyId { get; set; }
         public string reinvestmentShareAmount { get; set; }
         public DateTime reinvestmentDate { get; set; }
         public List<ReinvestmentParticipant> participants { get; set; }

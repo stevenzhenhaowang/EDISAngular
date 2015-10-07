@@ -7,7 +7,36 @@
         $scope.existingOtherCorporateActions = data;
     })
     //here needs to implement existing corperate Action and services needs to be implemented too
+    service.existingReturnOfCapitals().query(function (data) {
+        $scope.existingReturnOfCapitals = data;
+    })
     
+
+    service.exsistingReinvestment().query(function (data) {
+        $scope.existingReinvestments = data;
+    })
+
+    service.existingStockSplit().query(function (data) {
+        $scope.existingStockSplits = data;
+    })
+
+    service.existingBonusIssues().query(function (data) {
+        $scope.existingBonuses = data;
+    })
+
+
+     
+
+
+
+
+
+
+
+
+
+
+
 
     $scope.selectIPOAction = function (item) {
         $scope.selectedIPOAction = item;
