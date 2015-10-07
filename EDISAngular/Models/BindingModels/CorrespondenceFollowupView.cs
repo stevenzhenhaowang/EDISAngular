@@ -11,7 +11,7 @@ namespace EDISAngular.Models.BindingModels
     public class CorrespondenceFollowupBindingModel
     {
         [Required]
-        [NoteMustExisting(ErrorMessage="Follow-up note is not valid")]
+        //[NoteMustExisting(ErrorMessage="Follow-up note is not valid")]
         public string existingNoteId { get; set; }
         [Required]
         public string body { get; set; }

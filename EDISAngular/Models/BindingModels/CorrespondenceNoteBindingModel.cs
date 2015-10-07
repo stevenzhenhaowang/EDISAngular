@@ -15,12 +15,19 @@ namespace EDISAngular.Models.BindingModels
         [AdviserAccountNumberMustExisting(ErrorMessage="adviser does not exist")]
         public string adviserNumber { get; set; }
         [Required]
-        [ClientMustExisting(ErrorMessage="client does not exist")]
+      //  [ClientMustExisting(ErrorMessage="client does not exist")]
         public string clientId { get; set; }
+<<<<<<< HEAD
         [AssetTypeMustExisting(ErrorMessage="asset type does not exist")]
         public string assetTypeId { get; set; }
         [ProductTypeMustExisting(ErrorMessage="Product type id is invalid")]
         public string productTypeId { get; set; }
+=======
+     //   [AssetTypeMustExisting(ErrorMessage="asset type does not exist")]
+        public int? assetTypeId { get; set; }
+    //    [ProductTypeMustExisting(ErrorMessage="Product type id is invalid")]
+        public int? productTypeId { get; set; }
+>>>>>>> master
 
         public double timespent { get; set; }
         public string noteSerial { get; set; }//self generated
@@ -36,14 +43,21 @@ namespace EDISAngular.Models.BindingModels
         public bool reminder { get; set; }
         public DateTime reminderDate { get; set; }//not supplied from client
         [Required]
+<<<<<<< HEAD
         [NoteTypeMustExisting(ErrorMessage="Note type supplied does not exist in database")]
         public int noteTypeId { get; set; }
         public bool isAccepted { get; set; }
         public bool isDeclined { get; set; }
+=======
+      //  [NoteTypeMustExisting(ErrorMessage="Note type supplied does not exist in database")]
+        public int? noteTypeId { get; set; }
+        public bool? isAccepted { get; set; }
+        public bool? isDeclined { get; set; }
+>>>>>>> master
         public string accountId { get; set; }
 
         [Required]
-        [ResourceTokenMustExisting(ErrorMessage="Resource token is invalid")]
+     //   [ResourceTokenMustExisting(ErrorMessage="Resource token is invalid")]
         public string resourceToken { get; set; }
 
 

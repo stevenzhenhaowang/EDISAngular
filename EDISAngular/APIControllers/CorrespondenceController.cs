@@ -21,7 +21,7 @@ using EDISAngular.Infrastructure.DbFirst;
 using SqlRepository;
 using Domain.Portfolio.Correspondence;
 
-
+using SqlRepository;
 
 
 namespace EDISAngular.APIControllers
@@ -32,15 +32,21 @@ namespace EDISAngular.APIControllers
         private EdisRepository edisRepo;
         private CommonReferenceDataRepository comRepo;
         private CorrespondenceRepository corresRepo;
-        private AdviserRepository advRepo;
-
+        // private AdviserRepository advRepo;
+        private edisDbEntities db;
+        private EdisRepository repo;
         public CorrespondenceController()
         {
             edisDbEntities db = new edisDbEntities();
             comRepo = new CommonReferenceDataRepository(db);
             corresRepo = new CorrespondenceRepository(db);
+<<<<<<< HEAD
             advRepo = new AdviserRepository(db);
             edisRepo = new EdisRepository();
+=======
+            // advRepo = new AdviserRepository(db);
+            repo = new EdisRepository();
+>>>>>>> master
         }
 
 
@@ -88,7 +94,12 @@ namespace EDISAngular.APIControllers
 
                 if (User.IsInRole(AuthorizationRoles.Role_Adviser))
                 {
+<<<<<<< HEAD
                     var adviser = edisRepo.GetAdviserSync(message.adviserNumber, DateTime.Now);
+=======
+                    var adviser = repo.GetAdviserSync(message.adviserNumber, DateTime.Now);
+                    //var adviser = advRepo.GetAdviserDetailsByNumber(message.adviserNumber);
+>>>>>>> master
                     if (adviser == null || adviser.AdviserNumber != User.Identity.GetUserId())
                     {
                         ModelState.AddModelError("", "Invalid adviser id supplied, or current adviser is trying to add note for another adviser, which is illegal.");

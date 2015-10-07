@@ -5,6 +5,9 @@ using System.Web;
 
 namespace EDISAngular.Models.ServiceModels.CorporateActions
 {
+
+
+
     public class OtherCorporateActionData
     {
         public string actionId { get; set; }
@@ -39,6 +42,115 @@ namespace EDISAngular.Models.ServiceModels.CorporateActions
         public string brokerHinSrn { get; set; }
         public string type { get; set; }
         public string name { get; set; }
+    }
+
+    public class ReturnOfCapital
+    {
+        public string actionId { get; set; }
+        public string actionCode { get; set; }
+        public string returnAmount { get; set; }
+        public DateTime returnDate { get; set; }
+        public List<returnOfCapitalParticipant> participants { get; set; }
+    }
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
+>>>>>>> parent of c605101... afternoon
+
+    //public class returnOfCapitalParticipant
+    //{
+    //    public string edisAccountNumber { get; set; }
+    //}
+
+<<<<<<< HEAD
+=======
+>>>>>>> parent of c605101... afternoon
+
+    //public class DividendReinvestmentPlan {
+    //    public string actionId { get; set; }
+    //    public string actionCode { get; set; }
+    //    public string reinvestmentShares { get; set; }
+    //    public DateTime DRPDate { get; set; }
+    //    public List<DRPParticipant> participant { get; set; }
+    //}
+
+<<<<<<< HEAD
+    //public class DRPParticipant {
+    //    public string edisAccountNumber { get; set; }
+
+    //}
+=======
+    public class returnOfCapitalParticipant
+    {
+        public string edisAccountNumber { get; set; }
+    }
+
+
+=======
+    public class returnOfCapitalParticipant
+    {
+        public string edisAccountNumber { get; set; }
+    }
+
+
+>>>>>>> parent of c605101... afternoon
+    public class DividendReinvestmentPlan {
+        public string actionId { get; set; }
+        public string actionCode { get; set; }
+        public string reinvestmentShares { get; set; }
+        public DateTime DRPDate { get; set; }
+        public List<DRPParticipant> participant { get; set; }
+    }
+
+    public class DRPParticipant {
+        public string edisAccountNumber { get; set; }
+
+    }
+<<<<<<< HEAD
+>>>>>>> parent of c605101... afternoon
+=======
+>>>>>>> parent of c605101... afternoon
+
+
+
+    public class StockSplit {
+        public string actionId { get; set; }
+        public string actionCode { get; set; }
+        public string stockSplitShares { get; set; }
+        public DateTime splitDate { get; set; }
+        public List<StockSplitParticipant> participants { get; set; }
+    }
+
+    public class StockSplitParticipant {
+        public string edisAccountNumber { get; set; }
+    }
+
+    public class BonusIssue {
+        public string actionId { get; set; }
+        public string actionCode { get; set; }
+        public string bonusIssue { get; set; }
+        public DateTime bonusDate { get; set; }
+        public List<BonusParticipant> partcipants { get; set; }
+    }
+
+
+
+    public class BonusParticipant {
+        public string edisAccountNumber { get; set; }
+    }
+
+    public class BuybackProgram
+    {
+        public string actionId { get; set; }
+        public string cashAdjustments { get; set; }
+        public string stockAdjustments { get; set; }
+        public DateTime buyBackTime { get; set; }
+        public List<BuybackParticipant> participants { get; set; }
+    }
+
+    public class BuybackParticipant {
+        public string edisAccountNumber { get; set; }
     }
 
 

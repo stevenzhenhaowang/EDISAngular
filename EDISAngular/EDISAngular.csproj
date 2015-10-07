@@ -26,6 +26,7 @@
     <SccProvider>SAK</SccProvider>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -187,11 +188,14 @@
     <Compile Include="Abstract\IRepository.cs" />
     <Compile Include="APIControllers\AccountController.cs" />
     <Compile Include="APIControllers\AdviserController.cs" />
+<<<<<<< HEAD
     <Compile Include="APIControllers\CommonController.cs" />
     <Compile Include="APIControllers\CorrespondenceController.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="APIControllers\EducationLevelController.cs" />
+=======
+>>>>>>> master
     <Compile Include="APIControllers\EntityClientController.cs" />
     <Compile Include="APIControllers\PersonClientController.cs" />
     <Compile Include="APIControllers\PortfolioAustralianEquityController.cs" />
@@ -466,6 +470,16 @@
     <Compile Include="Models\ServiceModels\CorporateActions\IPOActionData.cs" />
     <Compile Include="Models\ServiceModels\CorporateActions\OtherActionCreationModel.cs" />
     <Compile Include="Models\ServiceModels\CorporateActions\OtherCorporateActionData.cs" />
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <Compile Include="Models\ServiceModels\CorporateActions\ReinvestmentActionCreationModel.cs" />
+    <Compile Include="Models\ServiceModels\CorporateActions\ReinvestmentPlan.cs" />
+    <Compile Include="Models\ServiceModels\CorporateActions\ReturnOfCapitalActionCreationModel.cs" />
+    <Compile Include="Models\ServiceModels\CorporateActions\ReturnOfCapitalData.cs" />
+=======
+>>>>>>> parent of c605101... afternoon
+=======
+>>>>>>> parent of c605101... afternoon
     <Compile Include="Models\ServiceModels\DataNameAmountPair.cs" />
     <Compile Include="Models\ServiceModels\FixedIncomePriceChartModel.cs" />
     <Compile Include="Models\ServiceModels\PortfolioModels\AssetPerformanceModel.cs" />
@@ -3438,6 +3452,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ProjectReference Include="..\Domain.Portfolio\Domain.Portfolio.csproj">
       <Project>{4eeadcba-e82e-46a9-a0e4-f60efea90fd9}</Project>
       <Name>Domain.Portfolio</Name>
@@ -3455,6 +3470,21 @@
       <Name>Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\SqlRepository\SqlRepository.csproj">
+=======
+    <ProjectReference Include="..\..\EDISV2-master\Domain.Portfolio\Domain.Portfolio.csproj">
+      <Project>{4eeadcba-e82e-46a9-a0e4-f60efea90fd9}</Project>
+      <Name>Domain.Portfolio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EDISV2-master\Edis.Db\Edis.Db.csproj">
+      <Project>{601c87fb-067d-4b38-b1c2-da9cc6c6d43d}</Project>
+      <Name>Edis.Db</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EDISV2-master\Shared\Shared.csproj">
+      <Project>{e5bc73b2-7418-4fee-a5b9-a268e9501523}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EDISV2-master\SqlRepository\SqlRepository.csproj">
+>>>>>>> master
       <Project>{79a3d390-0fa5-4975-a62e-600c00094884}</Project>
       <Name>SqlRepository</Name>
     </ProjectReference>

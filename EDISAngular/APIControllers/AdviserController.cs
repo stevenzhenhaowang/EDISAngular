@@ -63,7 +63,14 @@ namespace EDISAngular.APIControllers
         public string insertAssetsData()
         {
             //edisRepo.InsertRandomDataIntoAssets();
+<<<<<<< HEAD
             edisRepo.insertData3();
+=======
+            edisRepo.insertData2();
+            //edisRepo.insertData1();
+            //edisRepo.InsertRandomDataIntoAssets();
+            //edisRepo.insertTestingData();
+>>>>>>> master
             return "success";
 
         }

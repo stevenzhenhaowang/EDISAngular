@@ -18,6 +18,8 @@
     $scope.finaliseAllocation = function (action) {
         service.allocateIPOAction().save(action, function () {
             action.allocationFinalised = true;
+
+
         })
     }
     $scope.selectOtherCorporateAction = function (action) {
@@ -48,7 +50,10 @@
             $scope.selectModel(result.reason);
         });
     }
-}]).controller("newOtherCorporateActionController",
+}])
+
+
+    .controller("newOtherCorporateActionController",
 ["$scope", "corporateActionServices", "$modalInstance", "dateParser", "adviserGetId", function ($scope, service, $modalInstance, dateParser, adviserGetId) {
     service.allCompanies().query(function (data) {
         $scope.allCompanies = data;
@@ -117,7 +122,10 @@
 
 
     }
-}]).controller("newIPOActionController", ["$scope", "corporateActionServices", "$modalInstance", "adviserGetId", "dateParser",
+}])
+
+
+    .controller("newIPOActionController", ["$scope", "corporateActionServices", "$modalInstance", "adviserGetId", "dateParser",
     function ($scope, service, $modalInstance, adviserGetId, dateParser) {
         var adviserId = "";
         adviserGetId().then(function (data) {
@@ -190,4 +198,9 @@
                 $modalInstance.close({ reason: "success" });
             })
         }
-    }]);
+        
+    }])
+
+
+
+;

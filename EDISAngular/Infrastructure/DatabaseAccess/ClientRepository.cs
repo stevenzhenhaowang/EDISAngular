@@ -12,7 +12,7 @@ using EDISAngular.Models.ServiceModels;
 using EDISAngular.Models.ServiceModels.CorporateActions;
 using EDISAngular.Infrastructure.DbFirst;
 
-
+using SqlRepository;
 
 namespace EDISAngular.Infrastructure.DatabaseAccess
 {
@@ -20,291 +20,293 @@ namespace EDISAngular.Infrastructure.DatabaseAccess
     {
         private edisDbEntities db;
         private Random rdm = new Random();
+        private EdisRepository repo;
         public ClientRepository()
         {
+            repo = new EdisRepository();
             db = new edisDbEntities();
         }
         public ClientRepository(edisDbEntities database)
         {
             db = database;
         }
-        public PreClientViewModel PopulatePreclientProfileAndReturnViewModel(string clientUserId)
-        {
+        //public PreClientViewModel PopulatePreclientProfileAndReturnViewModel(string clientUserId)
+        //{
 
-            var profile = db.Client_Details.Where(p => p.UserId == clientUserId).SingleOrDefault();
-            if (profile == null)
-            {
-                profile = new Client_Details
-                {
-                    UserId = clientUserId
-                };
-                db.Client_Details.Add(profile);
-                db.SaveChanges();
-            }
-            PreClientViewModel model = new PreClientViewModel
-            {
-                ClientType = profile.ClientType
-            };
-            return model;
+        //    var profile = db.Client_Details.Where(p => p.UserId == clientUserId).SingleOrDefault();
+        //    if (profile == null)
+        //    {
+        //        profile = new Client_Details
+        //        {
+        //            UserId = clientUserId
+        //        };
+        //        db.Client_Details.Add(profile);
+        //        db.SaveChanges();
+        //    }
+        //    PreClientViewModel model = new PreClientViewModel
+        //    {
+        //        ClientType = profile.ClientType
+        //    };
+        //    return model;
 
-        }
-        public ClientPersonCompleteProfileBinding GetPersonClientProfileBindingModel(string clientUserId)
-        {
-            var profile = db.Client_Details.SingleOrDefault(p => p.UserId == clientUserId);
-            if (profile == null)
-            {
-                return (new ClientPersonCompleteProfileBinding());
-            }
-            ClientPersonCompleteProfileBinding model = new ClientPersonCompleteProfileBinding
-            {
-                Country = profile.Country,
-                DOB = profile.DateOfBirth,
-                Fax = profile.Fax,
-                FirstName = profile.FirstName,
-                Gender = profile.Gender,
-                LastName = profile.LastName,
-                line1 = profile.AddressLn1,
-                line2 = profile.AddressLn2,
-                line3 = profile.AddressLn3,
-                MiddleName = profile.MiddleName,
-                Mobile = profile.Mobile,
-                Phone = profile.Phone,
-                PostCode = profile.PostCode,
-                State = profile.State,
-                Suburb = profile.Suburb,
-                Title = profile.Title,
-                UserId = clientUserId
-            };
-            return model;
-        }
-        public ClientEntityCompleteProfileBinding GetEntityClientProfileBindingModel(string clientUserId)
-        {
-            var profile = db.Client_Details.SingleOrDefault(p => p.UserId == clientUserId);
-            if (profile == null)
-            {
-                return (new ClientEntityCompleteProfileBinding());
-            }
+        //}
+        //public ClientPersonCompleteProfileBinding GetPersonClientProfileBindingModel(string clientUserId)
+        //{
+        //    var profile = db.Client_Details.SingleOrDefault(p => p.UserId == clientUserId);
+        //    if (profile == null)
+        //    {
+        //        return (new ClientPersonCompleteProfileBinding());
+        //    }
+        //    ClientPersonCompleteProfileBinding model = new ClientPersonCompleteProfileBinding
+        //    {
+        //        Country = profile.Country,
+        //        DOB = profile.DateOfBirth,
+        //        Fax = profile.Fax,
+        //        FirstName = profile.FirstName,
+        //        Gender = profile.Gender,
+        //        LastName = profile.LastName,
+        //        line1 = profile.AddressLn1,
+        //        line2 = profile.AddressLn2,
+        //        line3 = profile.AddressLn3,
+        //        MiddleName = profile.MiddleName,
+        //        Mobile = profile.Mobile,
+        //        Phone = profile.Phone,
+        //        PostCode = profile.PostCode,
+        //        State = profile.State,
+        //        Suburb = profile.Suburb,
+        //        Title = profile.Title,
+        //        UserId = clientUserId
+        //    };
+        //    return model;
+        //}
+        //public ClientEntityCompleteProfileBinding GetEntityClientProfileBindingModel(string clientUserId)
+        //{
+        //    var profile = db.Client_Details.SingleOrDefault(p => p.UserId == clientUserId);
+        //    if (profile == null)
+        //    {
+        //        return (new ClientEntityCompleteProfileBinding());
+        //    }
 
-            ClientEntityCompleteProfileBinding model = new ClientEntityCompleteProfileBinding
-            {
-                ABN = profile.abn,
-                ACN = profile.acn,
-                Country = profile.Country,
-                EntityName = profile.EntityName,
-                EntityType = profile.EntityType,
-                Fax = profile.Fax,
-                line1 = profile.AddressLn1,
-                line2 = profile.AddressLn2,
-                line3 = profile.AddressLn3,
-                Mobile = profile.Mobile,
-                Phone = profile.Phone,
-                PostCode = profile.PostCode,
-                State = profile.State,
-                Suburb = profile.Suburb,
-                UserID = clientUserId
-            };
-            return model;
-        }
-        public RiskProfileBindingModel GetRiskProfileBindingModel(string clientUserId)
-        {
-            var client = db.Clients.FirstOrDefault(c => c.ClientUserID == clientUserId);
-            if (client.RiskProfiles.Count > 0)
-            {
-                var profile = client.RiskProfiles.OrderByDescending(p => p.DateModified).FirstOrDefault();
-                return (new RiskProfileBindingModel
-                {
-                    capitalLossAttitude = profile.CapitalLossAttitude,
-                    shortTermTrading = profile.ShortTermTrading,
-                    shortTermGoal3 = profile.ShortTermGoal3,
-                    shortTermGoal2 = profile.ShortTermGoal2,
-                    shortTermGoal1 = profile.ShortTermGoal1,
-                    shortTermEquityPercent = profile.ShortTermEquityPercent,
-                    shortTermAssetPercent = profile.ShortTermAssetPercent,
-                    riskAttitude = profile.RiskAttitude,
-                    retirementIncome = profile.RetirementIncome,
-                    retirementAge = profile.RetirementAge.ToString(),
-                    investmentProfile = profile.InvestmentProfile,
-                    clientId = profile.ClientID,
-                    comments = profile.Comments,
-                    incomeSource = profile.IncomeSource,
-                    investmentKnowledge = profile.InvestmentKnowledge,
-                    investmentObjective1 = profile.InvestmentObjective1,
-                    investmentObjective2 = profile.InvestmentObjective2,
-                    investmentObjective3 = profile.InvestmentObjective3,
-                    investmentTimeHorizon = profile.InvestmentTimeHorizon,
-                    longTermGoal1 = profile.LongTermGoal1,
-                    longTermGoal2 = profile.LongTermGoal2,
-                    longTermGoal3 = profile.LongTermGoal3,
-                    medTermGoal1 = profile.MedTermGoal1,
-                    medTermGoal2 = profile.MedTermGoal2,
-                    medTermGoal3 = profile.MedTermGoal3,
-                    profileId = profile.RiskProfileID
-                });
-            }
+        //    ClientEntityCompleteProfileBinding model = new ClientEntityCompleteProfileBinding
+        //    {
+        //        ABN = profile.abn,
+        //        ACN = profile.acn,
+        //        Country = profile.Country,
+        //        EntityName = profile.EntityName,
+        //        EntityType = profile.EntityType,
+        //        Fax = profile.Fax,
+        //        line1 = profile.AddressLn1,
+        //        line2 = profile.AddressLn2,
+        //        line3 = profile.AddressLn3,
+        //        Mobile = profile.Mobile,
+        //        Phone = profile.Phone,
+        //        PostCode = profile.PostCode,
+        //        State = profile.State,
+        //        Suburb = profile.Suburb,
+        //        UserID = clientUserId
+        //    };
+        //    return model;
+        //}
+        //public RiskProfileBindingModel GetRiskProfileBindingModel(string clientUserId)
+        //{
+        //    var client = db.Clients.FirstOrDefault(c => c.ClientUserID == clientUserId);
+        //    if (client.RiskProfiles.Count > 0)
+        //    {
+        //        var profile = client.RiskProfiles.OrderByDescending(p => p.DateModified).FirstOrDefault();
+        //        return (new RiskProfileBindingModel
+        //        {
+        //            capitalLossAttitude = profile.CapitalLossAttitude,
+        //            shortTermTrading = profile.ShortTermTrading,
+        //            shortTermGoal3 = profile.ShortTermGoal3,
+        //            shortTermGoal2 = profile.ShortTermGoal2,
+        //            shortTermGoal1 = profile.ShortTermGoal1,
+        //            shortTermEquityPercent = profile.ShortTermEquityPercent,
+        //            shortTermAssetPercent = profile.ShortTermAssetPercent,
+        //            riskAttitude = profile.RiskAttitude,
+        //            retirementIncome = profile.RetirementIncome,
+        //            retirementAge = profile.RetirementAge.ToString(),
+        //            investmentProfile = profile.InvestmentProfile,
+        //            clientId = profile.ClientID,
+        //            comments = profile.Comments,
+        //            incomeSource = profile.IncomeSource,
+        //            investmentKnowledge = profile.InvestmentKnowledge,
+        //            investmentObjective1 = profile.InvestmentObjective1,
+        //            investmentObjective2 = profile.InvestmentObjective2,
+        //            investmentObjective3 = profile.InvestmentObjective3,
+        //            investmentTimeHorizon = profile.InvestmentTimeHorizon,
+        //            longTermGoal1 = profile.LongTermGoal1,
+        //            longTermGoal2 = profile.LongTermGoal2,
+        //            longTermGoal3 = profile.LongTermGoal3,
+        //            medTermGoal1 = profile.MedTermGoal1,
+        //            medTermGoal2 = profile.MedTermGoal2,
+        //            medTermGoal3 = profile.MedTermGoal3,
+        //            profileId = profile.RiskProfileID
+        //        });
+        //    }
 
 
-            return (new RiskProfileBindingModel { clientId = client.ClientUserID });
-        }
-        public IQueryable<Client> GetAllClients()
-        {
-            return db.Clients;
-        }
-        public void AddOrUpdatePersonProfile(ClientPersonCompleteProfileBinding model)
-        {
-            var profile = db.Client_Details.SingleOrDefault(c => c.UserId == model.UserId);
-            profile.AddressLn1 = model.line1;
-            profile.AddressLn2 = model.line2;
-            profile.AddressLn3 = model.line3;
-            profile.ClientType = BusinessLayerParameters.clientType_person;
-            profile.Country = model.Country;
-            profile.DateOfBirth = model.DOB;
-            profile.Fax = model.Fax;
-            profile.FirstName = model.FirstName;
-            profile.Gender = model.Gender;
-            profile.LastName = model.LastName;
-            profile.LastUpdated = DateTime.Now;
-            profile.MiddleName = model.MiddleName;
-            profile.Mobile = model.Mobile;
-            profile.Phone = model.Phone;
-            profile.PostCode = model.PostCode;
-            profile.State = model.State;
-            profile.Suburb = model.Suburb;
-            profile.Title = model.Title;
-            profile.Lat = GoogleGeoService.GetCoordinatesLat(model.line1 + " "
-                + model.line2 + " " + model.line3 + " " + model.State + " " + model.Country);
-            profile.Lng = GoogleGeoService.GetCoordinatesLng(model.line1 + " "
-                + model.line2 + " " + model.line3 + " " + model.State + " " + model.Country);
-        }
-        public void AddOrUpdateClientProfileImage(string clientUserId, HttpPostedFileBase image)
-        {
-            var client = db.Clients.FirstOrDefault(c => c.ClientUserID == clientUserId);
-            if (client != null)
-            {
+        //    return (new RiskProfileBindingModel { clientId = client.ClientUserID });
+        //}
+        //public IQueryable<Client> GetAllClients()
+        //{
+        //    return db.Clients;
+        //}
+        //public void AddOrUpdatePersonProfile(ClientPersonCompleteProfileBinding model)
+        //{
+        //    var profile = db.Client_Details.SingleOrDefault(c => c.UserId == model.UserId);
+        //    profile.AddressLn1 = model.line1;
+        //    profile.AddressLn2 = model.line2;
+        //    profile.AddressLn3 = model.line3;
+        //    profile.ClientType = BusinessLayerParameters.clientType_person;
+        //    profile.Country = model.Country;
+        //    profile.DateOfBirth = model.DOB;
+        //    profile.Fax = model.Fax;
+        //    profile.FirstName = model.FirstName;
+        //    profile.Gender = model.Gender;
+        //    profile.LastName = model.LastName;
+        //    profile.LastUpdated = DateTime.Now;
+        //    profile.MiddleName = model.MiddleName;
+        //    profile.Mobile = model.Mobile;
+        //    profile.Phone = model.Phone;
+        //    profile.PostCode = model.PostCode;
+        //    profile.State = model.State;
+        //    profile.Suburb = model.Suburb;
+        //    profile.Title = model.Title;
+        //    profile.Lat = GoogleGeoService.GetCoordinatesLat(model.line1 + " "
+        //        + model.line2 + " " + model.line3 + " " + model.State + " " + model.Country);
+        //    profile.Lng = GoogleGeoService.GetCoordinatesLng(model.line1 + " "
+        //        + model.line2 + " " + model.line3 + " " + model.State + " " + model.Country);
+        //}
+        //public void AddOrUpdateClientProfileImage(string clientUserId, HttpPostedFileBase image)
+        //{
+        //    var client = db.Clients.FirstOrDefault(c => c.ClientUserID == clientUserId);
+        //    if (client != null)
+        //    {
 
-                client.ImageMimeType = image.ContentType;
-                client.Image = new byte[image.ContentLength];
-                image.InputStream.Read(client.Image, 0, image.ContentLength);
-            }
-            else
-            {
-                throw new Exception("Cannot find client profile, invalid client user id supplied");
-            }
-        }
-        public void AddOrUpdateEntityProfile(ClientEntityCompleteProfileBinding model)
-        {
-            var profile = db.Client_Details.SingleOrDefault(c => c.UserId == model.UserID);
-            profile.AddressLn1 = model.line1;
-            profile.AddressLn2 = model.line2;
-            profile.AddressLn3 = model.line3;
-            profile.ClientType = BusinessLayerParameters.clientType_person;
-            profile.Country = model.Country;
-            profile.Fax = model.Fax;
-            profile.LastUpdated = DateTime.Now;
-            profile.Mobile = model.Mobile;
-            profile.Phone = model.Phone;
-            profile.PostCode = model.PostCode;
-            profile.State = model.State;
-            profile.Suburb = model.Suburb;
-            profile.abn = model.ABN;
-            profile.acn = model.ACN;
-            profile.EntityName = model.EntityName;
-            profile.EntityType = model.EntityType;
-        }
-        public void AddOrUpdateRiskProfile(RiskProfileBindingModel model)
-        {
-            var newProfile = new RiskProfile
-            {
-                CapitalLossAttitude = model.capitalLossAttitude,
-                ClientID = model.clientId,
-                Comments = model.comments,
-                DateCreated = DateTime.Now,
-                DateModified = DateTime.Now,
-                IncomeSource = model.incomeSource,
-                InvestmentKnowledge = model.investmentKnowledge,
-                InvestmentObjective1 = model.investmentObjective1,
-                InvestmentObjective2 = model.investmentObjective2,
-                InvestmentObjective3 = model.investmentObjective3,
-                InvestmentProfile = model.investmentProfile,
-                InvestmentTimeHorizon = model.investmentTimeHorizon,
-                LongTermGoal1 = model.longTermGoal1,
-                LongTermGoal2 = model.longTermGoal2,
-                LongTermGoal3 = model.longTermGoal3,
-                MedTermGoal1 = model.medTermGoal1,
-                MedTermGoal2 = model.medTermGoal2,
-                MedTermGoal3 = model.medTermGoal3,
-                RetirementAge = string.IsNullOrEmpty(model.retirementAge) ? (int?)null : Convert.ToInt32(model.retirementAge),
-                RetirementIncome = model.retirementIncome,
-                RiskProfileID = Guid.NewGuid().ToString(),
-                RiskAttitude = model.riskAttitude,
-                ShortTermAssetPercent = model.shortTermAssetPercent,
-                ShortTermEquityPercent = model.shortTermEquityPercent,
-                ShortTermGoal1 = model.shortTermGoal1,
-                ShortTermGoal2 = model.shortTermGoal2,
-                ShortTermGoal3 = model.shortTermGoal3,
-                ShortTermTrading = model.shortTermTrading
-            };
+        //        client.ImageMimeType = image.ContentType;
+        //        client.Image = new byte[image.ContentLength];
+        //        image.InputStream.Read(client.Image, 0, image.ContentLength);
+        //    }
+        //    else
+        //    {
+        //        throw new Exception("Cannot find client profile, invalid client user id supplied");
+        //    }
+        //}
+        //public void AddOrUpdateEntityProfile(ClientEntityCompleteProfileBinding model)
+        //{
+        //    var profile = db.Client_Details.SingleOrDefault(c => c.UserId == model.UserID);
+        //    profile.AddressLn1 = model.line1;
+        //    profile.AddressLn2 = model.line2;
+        //    profile.AddressLn3 = model.line3;
+        //    profile.ClientType = BusinessLayerParameters.clientType_person;
+        //    profile.Country = model.Country;
+        //    profile.Fax = model.Fax;
+        //    profile.LastUpdated = DateTime.Now;
+        //    profile.Mobile = model.Mobile;
+        //    profile.Phone = model.Phone;
+        //    profile.PostCode = model.PostCode;
+        //    profile.State = model.State;
+        //    profile.Suburb = model.Suburb;
+        //    profile.abn = model.ABN;
+        //    profile.acn = model.ACN;
+        //    profile.EntityName = model.EntityName;
+        //    profile.EntityType = model.EntityType;
+        //}
+        //public void AddOrUpdateRiskProfile(RiskProfileBindingModel model)
+        //{
+        //    var newProfile = new RiskProfile
+        //    {
+        //        CapitalLossAttitude = model.capitalLossAttitude,
+        //        ClientID = model.clientId,
+        //        Comments = model.comments,
+        //        DateCreated = DateTime.Now,
+        //        DateModified = DateTime.Now,
+        //        IncomeSource = model.incomeSource,
+        //        InvestmentKnowledge = model.investmentKnowledge,
+        //        InvestmentObjective1 = model.investmentObjective1,
+        //        InvestmentObjective2 = model.investmentObjective2,
+        //        InvestmentObjective3 = model.investmentObjective3,
+        //        InvestmentProfile = model.investmentProfile,
+        //        InvestmentTimeHorizon = model.investmentTimeHorizon,
+        //        LongTermGoal1 = model.longTermGoal1,
+        //        LongTermGoal2 = model.longTermGoal2,
+        //        LongTermGoal3 = model.longTermGoal3,
+        //        MedTermGoal1 = model.medTermGoal1,
+        //        MedTermGoal2 = model.medTermGoal2,
+        //        MedTermGoal3 = model.medTermGoal3,
+        //        RetirementAge = string.IsNullOrEmpty(model.retirementAge) ? (int?)null : Convert.ToInt32(model.retirementAge),
+        //        RetirementIncome = model.retirementIncome,
+        //        RiskProfileID = Guid.NewGuid().ToString(),
+        //        RiskAttitude = model.riskAttitude,
+        //        ShortTermAssetPercent = model.shortTermAssetPercent,
+        //        ShortTermEquityPercent = model.shortTermEquityPercent,
+        //        ShortTermGoal1 = model.shortTermGoal1,
+        //        ShortTermGoal2 = model.shortTermGoal2,
+        //        ShortTermGoal3 = model.shortTermGoal3,
+        //        ShortTermTrading = model.shortTermTrading
+        //    };
 
-            if (string.IsNullOrEmpty(model.profileId))
-            {
-                db.RiskProfiles.Add(newProfile);
-            }
-            else
-            {
-                var profile = db.RiskProfiles.FirstOrDefault(p => p.RiskProfileID == model.profileId);
+        //    if (string.IsNullOrEmpty(model.profileId))
+        //    {
+        //        db.RiskProfiles.Add(newProfile);
+        //    }
+        //    else
+        //    {
+        //        var profile = db.RiskProfiles.FirstOrDefault(p => p.RiskProfileID == model.profileId);
 
-                if (profile == null)
-                {
-                    throw new Exception("Cannot find risk profile for client");
-                }
-                profile.CapitalLossAttitude = newProfile.CapitalLossAttitude;
-                profile.Comments = newProfile.Comments;
-                profile.DateModified = DateTime.Now;
-                profile.IncomeSource = newProfile.IncomeSource;
-                profile.InvestmentKnowledge = newProfile.InvestmentKnowledge;
-                profile.InvestmentObjective1 = newProfile.InvestmentObjective1;
-                profile.InvestmentObjective2 = newProfile.InvestmentObjective2;
-                profile.InvestmentObjective3 = newProfile.InvestmentObjective3;
-                profile.InvestmentProfile = newProfile.InvestmentProfile;
-                profile.InvestmentTimeHorizon = newProfile.InvestmentTimeHorizon;
-                profile.LongTermGoal1 = newProfile.LongTermGoal1;
-                profile.LongTermGoal2 = newProfile.LongTermGoal2;
-                profile.LongTermGoal3 = newProfile.LongTermGoal3;
-                profile.MedTermGoal1 = newProfile.MedTermGoal1;
-                profile.MedTermGoal2 = newProfile.MedTermGoal2;
-                profile.MedTermGoal3 = newProfile.MedTermGoal3;
-                profile.RetirementAge = newProfile.RetirementAge;
-                profile.RetirementIncome = newProfile.RetirementIncome;
-                profile.RiskAttitude = newProfile.RiskAttitude;
-                profile.ShortTermAssetPercent = newProfile.ShortTermAssetPercent;
-                profile.ShortTermEquityPercent = newProfile.ShortTermEquityPercent;
-                profile.ShortTermGoal1 = newProfile.ShortTermGoal1;
-                profile.ShortTermGoal2 = newProfile.ShortTermGoal2;
-                profile.ShortTermGoal3 = newProfile.ShortTermGoal3;
-                profile.ShortTermTrading = newProfile.ShortTermTrading;
-            }
+        //        if (profile == null)
+        //        {
+        //            throw new Exception("Cannot find risk profile for client");
+        //        }
+        //        profile.CapitalLossAttitude = newProfile.CapitalLossAttitude;
+        //        profile.Comments = newProfile.Comments;
+        //        profile.DateModified = DateTime.Now;
+        //        profile.IncomeSource = newProfile.IncomeSource;
+        //        profile.InvestmentKnowledge = newProfile.InvestmentKnowledge;
+        //        profile.InvestmentObjective1 = newProfile.InvestmentObjective1;
+        //        profile.InvestmentObjective2 = newProfile.InvestmentObjective2;
+        //        profile.InvestmentObjective3 = newProfile.InvestmentObjective3;
+        //        profile.InvestmentProfile = newProfile.InvestmentProfile;
+        //        profile.InvestmentTimeHorizon = newProfile.InvestmentTimeHorizon;
+        //        profile.LongTermGoal1 = newProfile.LongTermGoal1;
+        //        profile.LongTermGoal2 = newProfile.LongTermGoal2;
+        //        profile.LongTermGoal3 = newProfile.LongTermGoal3;
+        //        profile.MedTermGoal1 = newProfile.MedTermGoal1;
+        //        profile.MedTermGoal2 = newProfile.MedTermGoal2;
+        //        profile.MedTermGoal3 = newProfile.MedTermGoal3;
+        //        profile.RetirementAge = newProfile.RetirementAge;
+        //        profile.RetirementIncome = newProfile.RetirementIncome;
+        //        profile.RiskAttitude = newProfile.RiskAttitude;
+        //        profile.ShortTermAssetPercent = newProfile.ShortTermAssetPercent;
+        //        profile.ShortTermEquityPercent = newProfile.ShortTermEquityPercent;
+        //        profile.ShortTermGoal1 = newProfile.ShortTermGoal1;
+        //        profile.ShortTermGoal2 = newProfile.ShortTermGoal2;
+        //        profile.ShortTermGoal3 = newProfile.ShortTermGoal3;
+        //        profile.ShortTermTrading = newProfile.ShortTermTrading;
+        //    }
 
-        }
-        private Client RetrieveProfileAndEnsureClientProfileExist(string clientUserId)
-        {
-            if (string.IsNullOrEmpty(clientUserId))
-            {
-                throw new Exception("Invalid client user id supplied");
-            }
-            var profile = db.Clients.FirstOrDefault(c => c.ClientUserID == clientUserId);
-            if (profile != null)
-            {
-                return profile;
-            }
-            else
-            {
-                profile = new Client
-                {
-                    ClientUserID = clientUserId
-                };
-                db.Clients.Add(profile);
-                return profile;
-            }
-        }
+        //}
+        //private Client RetrieveProfileAndEnsureClientProfileExist(string clientUserId)
+        //{
+        //    if (string.IsNullOrEmpty(clientUserId))
+        //    {
+        //        throw new Exception("Invalid client user id supplied");
+        //    }
+        //    var profile = db.Clients.FirstOrDefault(c => c.ClientUserID == clientUserId);
+        //    if (profile != null)
+        //    {
+        //        return profile;
+        //    }
+        //    else
+        //    {
+        //        profile = new Client
+        //        {
+        //            ClientUserID = clientUserId
+        //        };
+        //        db.Clients.Add(profile);
+        //        return profile;
+        //    }
+        //}
 
         #region services added on 18/05/2015
         public BusinessPortfolioOverviewBriefModel GetBusinessRevenueData(string clientUserId)
@@ -1538,13 +1540,13 @@ namespace EDISAngular.Infrastructure.DatabaseAccess
 
         public AdviserView GetAdviserAccountNumberForClient(string clientUserId)
         {
-            var client = db.Clients.FirstOrDefault(c => c.ClientUserID == clientUserId);
-            var clientGroup = db.ClientGroups.FirstOrDefault(g => g.ClientGroupID == client.ClientGroupID);
-            var adviser = db.Adviser_Details.FirstOrDefault(a => a.AccountNumber == clientGroup.AdviserNumber);
+            var client = db.Clients.FirstOrDefault(c => c.ClientId == clientUserId);
+            var clientGroup = db.ClientGroups.FirstOrDefault(g => g.ClientGroupId == client.ClientGroupId);
+            var adviser = db.Advisers.FirstOrDefault(a => a.AdviserNumber == clientGroup.Adviser_AdviserId);
             return new AdviserView
             {
-                accountNumber = clientGroup.AdviserNumber.Value,
-                name = adviser.FirstName + " " + adviser.LastName
+                //accountNumber = clientGroup.Adviser.,
+                //name = adviser.FirstName + " " + adviser.LastName
             };
         }
 
