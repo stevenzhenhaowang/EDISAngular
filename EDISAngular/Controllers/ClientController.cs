@@ -72,12 +72,34 @@ namespace EDISAngular.Controllers
         {
             var userId = User.Identity.GetUserId();
             var client = edisRopo.GetClientSync(userId, DateTime.Now);
-            ClientPersonCompleteProfileBinding model = new ClientPersonCompleteProfileBinding();
-            model.UserId = userId;
-            model.FirstName = client.FirstName;
-            model.MiddleName = client.MiddleName;
-            model.LastName = client.LastName;
-            model.Phone = client.Phone;
+
+            ClientPersonCompleteProfileBinding model = new ClientPersonCompleteProfileBinding { 
+            
+                UserId = userId,
+                FirstName = client.FirstName,
+                MiddleName = client.MiddleName,
+                LastName = client.LastName,
+                Phone = client.Phone,
+                Mobile = client.Mobile,
+                DOB = client.Dob,
+                Fax = client.Fax,
+                Gender = client.Gender
+            };
+            
+            if (!string.IsNullOrEmpty(client.Address))
+            {
+                string[] address = client.Address.Split(' ');
+                model.PostCode = address[address.Length - 1];
+                model.Country = address[address.Length - 2];
+                model.State = address[address.Length - 3];
+                model.Suburb = address[address.Length - 4];
+                for(int i = 0 ; i < address.Length - 4; i ++){
+                    model.line1 += address[i] + " ";
+                }
+            }
+
+            
+
             return PartialView(model);
         }
         [Authorize(Roles = AuthorizationRoles.Role_Preclient + "," + AuthorizationRoles.Role_Client)]
@@ -85,13 +107,30 @@ namespace EDISAngular.Controllers
         {
             var userId = User.Identity.GetUserId();
             var client = edisRopo.GetClientSync(userId, DateTime.Now);
-            ClientEntityCompleteProfileBinding model = new ClientEntityCompleteProfileBinding();
-            model.UserID = userId;
-            model.EntityName = client.EntityName;
-            model.EntityType = client.EntityType;
-            model.Phone = client.Phone;
-            model.ABN = client.ABN;
-            model.ACN = client.ACN;
+            ClientEntityCompleteProfileBinding model = new ClientEntityCompleteProfileBinding { 
+            
+                UserID = userId,
+                EntityName = client.EntityName,
+                EntityType = client.EntityType,
+                Phone = client.Phone,
+                ABN = client.ABN,
+                ACN = client.ACN,
+                Fax = client.Fax,
+            };
+
+
+            if (!string.IsNullOrEmpty(client.Address))
+            {
+                string[] address = client.Address.Split(' ');
+                model.PostCode = address[address.Length - 1];
+                model.Country = address[address.Length - 2];
+                model.State = address[address.Length - 3];
+                model.Suburb = address[address.Length - 4];
+                for (int i = 0; i < address.Length - 4; i++)
+                {
+                    model.line1 += address[i] + " ";
+                }
+            }
 
             return PartialView(model);
         }
@@ -112,7 +151,7 @@ namespace EDISAngular.Controllers
             {
                 ClientRegistration clientRegistration = new ClientRegistration() {
                     ClientNumber = model.UserId,
-                    Address = model.line1 + " " + model.line2 + " " + model.line3 + " " + model.Suburb + " " + model.State + " " + model.Country,
+                    Address = model.line1 + " " + model.line2 + " " + model.line3 + " " + model.Suburb + " " + model.State + " " + model.Country + " " + model.PostCode,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     MiddleName = model.MiddleName,
@@ -120,7 +159,7 @@ namespace EDISAngular.Controllers
                     Phone = model.Phone,
                     Mobile = model.Mobile,
                     Gender = model.Gender,
-                    Fax = model.Fax
+                    Fax = model.Fax,
                 };
 
                 edisRopo.UpdateClientSync(clientRegistration);
@@ -153,7 +192,7 @@ namespace EDISAngular.Controllers
                 ClientRegistration clientRegistration = new ClientRegistration()
                 {
                     ClientNumber = model.UserID,
-                    Address = model.line1 + " " + model.line2 + " " + model.line3 + " " + model.Suburb + " " + model.State + " " + model.Country,
+                    Address = model.line1 + " " + model.line2 + " " + model.line3 + " " + model.Suburb + " " + model.State + " " + model.Country + " " + model.PostCode,
                     EntityName = model.EntityName,
                     EntityType = model.EntityType,
                     ABN = model.ABN,

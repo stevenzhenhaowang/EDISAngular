@@ -31,53 +31,57 @@ namespace EDISAngular.Infrastructure.DatabaseAccess
             var fileName = BusinessLayerParameters.UserDocumentFolderPrefix + Guid.NewGuid().ToString() + extension;
             var filePath = HttpContext.Current.Server.MapPath(fileName);
             postedFile.SaveAs(filePath);
-            var resource = db.ResourcesReferences.FirstOrDefault(s => s.tokenValue == resourceToken);
+            var resource = db.ResourcesReferences.FirstOrDefault(s => s.TokenValue == resourceToken);
             if (resource != null)
             {
-                resource.fileExtension = extension;
-                resource.resourceUrl = fileName;
+                resource.FileExtension = extension;
+                resource.ResourceUrl = fileName;
                 db.SaveChanges();
             }
         }
         public string CreateNewMessageToken(string userId)
         {
-            ResourcesReference resource = new ResourcesReference()
+            EDISAngular.Infrastructure.DbFirst.ResourcesReference resource = new EDISAngular.Infrastructure.DbFirst.ResourcesReference()
             {
-                resourceUrl = "",
-                tokenValue = Guid.NewGuid().ToString(),
+                Id = Guid.NewGuid().ToString(),
+                FileExtension = "mp3",
+
+
+                ResourceUrl = "",
+                TokenValue = Guid.NewGuid().ToString(),
                 UserId = userId
             };
             db.ResourcesReferences.Add(resource);
             db.SaveChanges();
 
-            return resource.tokenValue;
+            return resource.TokenValue;
         }
         public async Task RemoveResourceFile(string resourceToken)
         {
-            var resource = db.ResourcesReferences.FirstOrDefault(r => r.tokenValue == resourceToken);
+            var resource = db.ResourcesReferences.FirstOrDefault(r => r.TokenValue == resourceToken);
             if (resource != null)
             {
-                if (!string.IsNullOrEmpty(resource.resourceUrl))
+                if (!string.IsNullOrEmpty(resource.ResourceUrl))
                 {
-                    if (File.Exists(HttpContext.Current.Server.MapPath(resource.resourceUrl)))
+                    if (File.Exists(HttpContext.Current.Server.MapPath(resource.ResourceUrl)))
                     {
-                        File.Delete(HttpContext.Current.Server.MapPath(resource.resourceUrl));
+                        File.Delete(HttpContext.Current.Server.MapPath(resource.ResourceUrl));
                     }
                 }
-                resource.resourceUrl = "";
+                resource.ResourceUrl = "";
                 await db.SaveChangesAsync();
             }
         }
-        public async Task CreateNewMessage(CorrespondenceNoteBindingModel message, int senderRole)
+        public void CreateNewMessageSync(CorrespondenceNoteBindingModel message, int senderRole)
         {
-            var resource = db.ResourcesReferences.SingleOrDefault(r => r.tokenValue == message.resourceToken);
-            Note note = new Note()
+            var resource = db.ResourcesReferences.SingleOrDefault(r => r.TokenValue == message.resourceToken);
+            EDISAngular.Infrastructure.DbFirst.Note note = new EDISAngular.Infrastructure.DbFirst.Note()
             {
-                AccountID = "",
-                AdviserID = message.adviserNumber,
-                AssetTypeID = message.assetTypeId,
+                AccountId = "",
+                AdviserId = message.adviserNumber,
+                AssetTypeId = message.assetTypeId,
                 Body = message.body,
-                ClientID = message.clientId,
+                ClientId = message.clientId,
                 DateCompleted = message.dateCompleted,
                 DateCreated = DateTime.Now,
                 DateDue = message.dateDue,
@@ -86,41 +90,41 @@ namespace EDISAngular.Infrastructure.DatabaseAccess
                 FollowupDate = message.followupDate,
                 IsAccepted = message.isAccepted,
                 IsDeclined = message.isDeclined,
-                NoteType = message.noteTypeId.Value,
-                NoteID = Guid.NewGuid().ToString(),
+                NoteType = message.noteTypeId,
+                NoteId = Guid.NewGuid().ToString(),
                 Subject = message.subject,
                 SenderRole = senderRole
             };
             db.Notes.Add(note);
-            if (!string.IsNullOrEmpty(resource.resourceUrl))
+            if (!string.IsNullOrEmpty(resource.ResourceUrl))
             {
-                Attachment attachment = new Attachment()
+                EDISAngular.Infrastructure.DbFirst.Attachment attachment = new EDISAngular.Infrastructure.DbFirst.Attachment()
                 {
-                    AttachmentID = Guid.NewGuid().ToString(),
+                    AttachmentId = Guid.NewGuid().ToString(),
                     DateCreated = DateTime.Now,
                     DateModified = DateTime.Now,
-                    NoteID = note.NoteID,
-                    Path = resource.resourceUrl,
+                    NoteId = note.NoteId,
+                    Path = resource.ResourceUrl,
                     Title = note.Subject,
-                    AttachmentType = resource.fileExtension
+                    AttachmentType = resource.FileExtension
                 };
                 db.Attachments.Add(attachment);
             }
 
-            await db.SaveChangesAsync();
+            db.SaveChanges();
         }
         public async Task CreateMessageFollowup(CorrespondenceFollowupBindingModel model, int senderRole)
         {
-            var correspondingNote = db.Notes.SingleOrDefault(n => n.NoteID == model.existingNoteId);
-            Note note = new Note()
+            var correspondingNote = db.Notes.SingleOrDefault(n => n.NoteId == model.existingNoteId);
+            EDISAngular.Infrastructure.DbFirst.Note note = new EDISAngular.Infrastructure.DbFirst.Note()
             {
-                NoteID = Guid.NewGuid().ToString(),
-                AdviserID = correspondingNote.AdviserID,
-                AccountID = correspondingNote.AccountID,
+                NoteId = Guid.NewGuid().ToString(),
+                AdviserId= correspondingNote.AdviserId,
+                AccountId = correspondingNote.AccountId,
                 AssetClass = correspondingNote.AssetClass,
-                AssetTypeID = correspondingNote.AssetTypeID,
+                AssetTypeId = correspondingNote.AssetTypeId,
                 Body = model.body,
-                ClientID = correspondingNote.ClientID,
+                ClientId = correspondingNote.ClientId,
                 DateCompleted = correspondingNote.DateCompleted,
                 DateCreated = DateTime.Now,
                 DateDue = correspondingNote.DateDue,
@@ -130,11 +134,11 @@ namespace EDISAngular.Infrastructure.DatabaseAccess
                 SenderRole = senderRole
             };
 
-            NoteLink link = new NoteLink()
+            EDISAngular.Infrastructure.DbFirst.NoteLink link = new EDISAngular.Infrastructure.DbFirst.NoteLink()
             {
                 DateCreated = DateTime.Now,
-                NoteID1 = correspondingNote.NoteID,
-                NoteID2 = note.NoteID
+                NoteId1 = correspondingNote.NoteId,
+                NoteId2 = note.NoteId
             };
             db.Notes.Add(note);
             db.NoteLinks.Add(link);
@@ -143,23 +147,23 @@ namespace EDISAngular.Infrastructure.DatabaseAccess
         public List<CorrespondenceView> GetNotesForAdviserByUserId(string adviserUserId, int noteType)
         {
             List<CorrespondenceView> result = new List<CorrespondenceView>();
-            var adviser = db.Adviser_Details.SingleOrDefault(ad => ad.AdvisorUserId == adviserUserId);
-            var adviserId = adviser.AdvisorUserId.ToString();
+            var adviser = db.Advisers.SingleOrDefault(ad => ad.AdviserNumber == adviserUserId);
+            var adviserId = adviser.AdviserId.ToString();
             var relevantNoteType = noteType;
-            foreach (var note in db.Notes.Where(n => n.AdviserID == adviserId &&
-                n.NoteType == relevantNoteType && db.NoteLinks.Where(l => l.NoteID2 == n.NoteID).Count() == 0))
+            foreach (var note in db.Notes.Where(n => n.AccountId == adviserId &&
+                n.NoteType == relevantNoteType && db.NoteLinks.Where(l => l.NoteId2 == n.NoteId).Count() == 0))
             {
-                var client = db.Client_Details.SingleOrDefault(c => c.UserId == note.Client.ClientUserID);
+                var client = db.Clients.SingleOrDefault(c => c.ClientId == note.Client.ClientId);
                 var resource = note.Attachments.FirstOrDefault();
                 #region create correspondence payload skeleton first
                 CorrespondenceView item = new CorrespondenceView()
                 {
-                    adviserId = adviser.AdvisorUserId.ToString(),
+                    adviserId = adviser.AdviserId.ToString(),
                     adviserName = adviser.FirstName + " " + adviser.LastName,
-                    clientId = note.ClientID,
+                    clientId = note.ClientId,
                     clientName = client.ClientType == BusinessLayerParameters.clientType_person ? client.FirstName + " " + client.LastName : client.EntityName,
                     date = note.DateCreated,
-                    noteId = note.NoteID,
+                    noteId = note.NoteId,
                     path = resource == null ? "" : System.Web.VirtualPathUtility.ToAbsolute(resource.Path),
                     subject = note.Subject,
                     typeName = CommonHelpers.GetEnumDescription((NoteTypes)note.NoteType),
@@ -184,9 +188,9 @@ namespace EDISAngular.Infrastructure.DatabaseAccess
                 item.conversations.Add(initial);
                 #endregion
                 #region insert all other conversations
-                foreach (var subnote in db.NoteLinks.Where(n => n.NoteID1 == note.NoteID))
+                foreach (var subnote in db.NoteLinks.Where(n => n.NoteId1 == note.NoteId))
                 {
-                    var subNoteContent = db.Notes.SingleOrDefault(n => n.NoteID == subnote.NoteID2);
+                    var subNoteContent = db.Notes.SingleOrDefault(n => n.NoteId == subnote.NoteId2);
                     CorrespondenceConversation conversation = new CorrespondenceConversation()
                     {
                         content = subNoteContent.Body,
@@ -208,23 +212,23 @@ namespace EDISAngular.Infrastructure.DatabaseAccess
         public List<CorrespondenceView> GetNotesForClientByUserId(string clientUserId, int noteType)
         {
             List<CorrespondenceView> result = new List<CorrespondenceView>();
-            var client = db.Client_Details.SingleOrDefault(c => c.UserId == clientUserId);
-            var clientId = db.Clients.SingleOrDefault(c => c.ClientUserID == clientUserId).ClientUserID;
+            var client = db.Clients.SingleOrDefault(c => c.ClientId == clientUserId);
+            var clientId = db.Clients.SingleOrDefault(c => c.ClientId == clientUserId).ClientId;
             var relevantNoteType = noteType;
-            foreach (var note in db.Notes.Where(n => n.ClientID == clientId &&
-                n.NoteType == relevantNoteType && db.NoteLinks.Where(l => l.NoteID2 == n.NoteID).Count() == 0))
+            foreach (var note in db.Notes.Where(n => n.ClientId == clientId &&
+                n.NoteType == relevantNoteType && db.NoteLinks.Where(l => l.NoteId2 == n.NoteId).Count() == 0))
             {
-                var adviser = db.Adviser_Details.FirstOrDefault(ad => ad.AdvisorUserId.ToString() == note.AdviserID);
+                var adviser = db.Advisers.FirstOrDefault(ad => ad.AdviserId.ToString() == note.AccountId);
                 var resource = note.Attachments.FirstOrDefault();
                 #region create correspondence payload skeleton first
                 CorrespondenceView item = new CorrespondenceView()
                 {
-                    adviserId = adviser.AccountNumber.ToString(),
+                    adviserId = adviser.AdviserNumber.ToString(),
                     adviserName = adviser.FirstName + " " + adviser.LastName,
-                    clientId = note.ClientID,
+                    clientId = note.ClientId,
                     clientName = client.ClientType == BusinessLayerParameters.clientType_person ? client.FirstName + " " + client.LastName : client.EntityName,
                     date = note.DateCreated,
-                    noteId = note.NoteID,
+                    noteId = note.NoteId,
                     path = resource == null ? "" : System.Web.VirtualPathUtility.ToAbsolute(resource.Path),
                     subject = note.Subject,
                     typeName = CommonHelpers.GetEnumDescription((NoteTypes)note.NoteType),
@@ -249,9 +253,9 @@ namespace EDISAngular.Infrastructure.DatabaseAccess
                 item.conversations.Add(initial);
                 #endregion
                 #region insert all other conversations
-                foreach (var subnote in db.NoteLinks.Where(n => n.NoteID1 == note.NoteID))
+                foreach (var subnote in db.NoteLinks.Where(n => n.NoteId1 == note.NoteId))
                 {
-                    var subNoteContent = db.Notes.SingleOrDefault(n => n.NoteID == subnote.NoteID2);
+                    var subNoteContent = db.Notes.SingleOrDefault(n => n.NoteId == subnote.NoteId2);
                     CorrespondenceConversation conversation = new CorrespondenceConversation()
                     {
                         content = subNoteContent.Body,

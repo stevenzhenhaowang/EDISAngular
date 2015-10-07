@@ -29,6 +29,7 @@ C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\EDIS.Domain\bin\Debug\
 C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\EDIS.Domain\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\EDIS.Domain\bin\Debug\EntityFramework.xml
 C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\EDIS.Domain\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\EDIS.Domain\obj\Debug\EDIS.Domain.csprojResolveAssemblyReference.cache
 C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\EDIS.Domain\obj\Debug\EDIS.Domain.Migrations.initial.resources
 C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\EDIS.Domain\obj\Debug\EDIS.Domain.Migrations.modifiedClientGroup.resources
 C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\EDIS.Domain\obj\Debug\EDIS.Domain.csproj.GenerateResource.Cache

@@ -500,18 +500,18 @@
                                 <legend>Client Management Settings</legend>
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.professiontypeId, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    @*<div class="col-md-10">
+                                    <div class="col-md-10">
                                         @Html.DropDownListFor(model => model.professiontypeId, (IEnumerable<SelectListItem>)ViewBag.professTypes, "Please select", new { @class = "form-control" })
                                         @Html.ValidationMessageFor(model => model.professiontypeId, "", new { @class = "text-danger" })
-                                    </div>*@
+                                    </div>
                                 </div>
 
 
-                                <div class="form-group">
+                                @*<div class="form-group">
                                     @Html.LabelFor(model => model.services, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-10">
 
-                                        @*@for (var i = 0; i < Model.services.Count; i++)
+                                        @for (var i = 0; i < Model.services.Count; i++)
                                         {
                                             var group = Model.services[i];
                                             <div class="row">
@@ -532,17 +532,17 @@
                                                 }
                                             </div>
 
-                                        }*@
+                                        }
 
 
 
                                     </div>
-                                </div>
+                                </div>*@
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.newsLetterServices, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-10">
                                         <div class="row">
-                                            @*@for (int i = 0; i < Model.newsLetterServices.Count; i++)
+                                            @for (int i = 0; i < Model.newsLetterServices.Count; i++)
                                             {
                                                 var service = Model.newsLetterServices[i];
 
@@ -555,7 +555,7 @@
                                                     </label>
                                                 </div>
 
-                                            }*@
+                                            }
                                         </div>
 
 
@@ -564,11 +564,11 @@
 
 
 
-                                <div class="form-group">
+                                @*<div class="form-group">
                                     @Html.LabelFor(model => model.commissionsAndFees, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-10">
                                         <div class="row">
-                                            @*@for (int i = 0; i < Model.commissionsAndFees.Count; i++)
+                                            @for (int i = 0; i < Model.commissionsAndFees.Count; i++)
                                             {
                                                 var question = Model.commissionsAndFees[i];
 
@@ -581,12 +581,12 @@
                                                     </label>
                                                 </div>
 
-                                            }*@
+                                            }
                                         </div>
 
 
                                     </div>
-                                </div>
+                                </div>*@
 
 
                                 <div class="form-group">

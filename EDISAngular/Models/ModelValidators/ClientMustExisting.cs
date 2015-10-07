@@ -29,7 +29,7 @@ namespace EDISAngular.Models.ModelValidators
 
             using (edisDbEntities db = new edisDbEntities())
             {
-                var client = db.Clients.SingleOrDefault(s => s.ClientUserID == valueString);
+                var client = db.Clients.SingleOrDefault(s => s.ClientId == valueString);
                 if (client != null)
                 {
                     return ValidationResult.Success;

@@ -22,7 +22,7 @@ namespace EDISAngular.Models.ModelValidators
             int valueNumber = -1;
             try
             {
-                valueNumber = (int)value;
+                valueNumber = Int32.Parse(value.ToString());
             }
             catch (Exception)
             {
