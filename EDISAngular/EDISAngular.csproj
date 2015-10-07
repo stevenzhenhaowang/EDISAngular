@@ -185,6 +185,8 @@
     <Compile Include="Abstract\IRepository.cs" />
     <Compile Include="APIControllers\AccountController.cs" />
     <Compile Include="APIControllers\AdviserController.cs" />
+    <Compile Include="APIControllers\CorporateActionController.cs" />
+    <Compile Include="APIControllers\EducationLevelController.cs" />
     <Compile Include="APIControllers\EntityClientController.cs" />
     <Compile Include="APIControllers\PersonClientController.cs" />
     <Compile Include="APIControllers\PortfolioAustralianEquityController.cs" />
@@ -373,8 +375,6 @@
     <Compile Include="Models\BindingModels\ClientAccountCreationBindingModel.cs" />
     <Compile Include="Models\BindingModels\ClientEntityCompleteProfileBinding.cs" />
     <Compile Include="Models\BindingModels\ClientPersonCompleteProfileBinding.cs" />
-    <Compile Include="Models\BindingModels\CorrespondenceFollowupView.cs" />
-    <Compile Include="Models\BindingModels\CorrespondenceNoteBindingModel.cs" />
     <Compile Include="Models\BindingModels\EntityClientCreationBindingModel.cs" />
     <Compile Include="Models\BindingModels\PersonClientCreationBindingModel.cs" />
     <Compile Include="Models\BindingModels\PersonClinetCreationBindingModel2.cs" />
@@ -432,21 +432,21 @@
     <Compile Include="Models\ServiceModels\AdviserProfile\WordMarketItemModel.cs" />
     <Compile Include="Models\ServiceModels\CashTermDepositProfileModel.cs" />
     <Compile Include="Models\ServiceModels\CompanyBriefModel.cs" />
+    <Compile Include="Models\ServiceModels\CorporateActions\BonusIssueData.cs" />
+    <Compile Include="Models\ServiceModels\CorporateActions\BonusIsuueActionCreationModel.cs" />
+    <Compile Include="Models\ServiceModels\CorporateActions\BuybackProgramActionCreationModel.cs" />
+    <Compile Include="Models\ServiceModels\CorporateActions\BuyBackProgramData.cs" />
     <Compile Include="Models\ServiceModels\CorporateActions\CorporateActionClientAccountModel.cs" />
     <Compile Include="Models\ServiceModels\CorporateActions\IpoActionCreationModel.cs" />
     <Compile Include="Models\ServiceModels\CorporateActions\IPOActionData.cs" />
     <Compile Include="Models\ServiceModels\CorporateActions\OtherActionCreationModel.cs" />
     <Compile Include="Models\ServiceModels\CorporateActions\OtherCorporateActionData.cs" />
-<<<<<<< HEAD
-<<<<<<< HEAD
     <Compile Include="Models\ServiceModels\CorporateActions\ReinvestmentActionCreationModel.cs" />
-    <Compile Include="Models\ServiceModels\CorporateActions\ReinvestmentPlan.cs" />
+    <Compile Include="Models\ServiceModels\CorporateActions\ReinvestmentData.cs" />
     <Compile Include="Models\ServiceModels\CorporateActions\ReturnOfCapitalActionCreationModel.cs" />
     <Compile Include="Models\ServiceModels\CorporateActions\ReturnOfCapitalData.cs" />
-=======
->>>>>>> parent of c605101... afternoon
-=======
->>>>>>> parent of c605101... afternoon
+    <Compile Include="Models\ServiceModels\CorporateActions\StockSplitActionCreationModel.cs" />
+    <Compile Include="Models\ServiceModels\CorporateActions\StockSplitData.cs" />
     <Compile Include="Models\ServiceModels\DataNameAmountPair.cs" />
     <Compile Include="Models\ServiceModels\FixedIncomePriceChartModel.cs" />
     <Compile Include="Models\ServiceModels\PortfolioModels\AssetPerformanceModel.cs" />
@@ -3419,19 +3419,19 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\EDISV2-master\Domain.Portfolio\Domain.Portfolio.csproj">
+    <ProjectReference Include="..\Domain.Portfolio\Domain.Portfolio.csproj">
       <Project>{4eeadcba-e82e-46a9-a0e4-f60efea90fd9}</Project>
       <Name>Domain.Portfolio</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\EDISV2-master\Edis.Db\Edis.Db.csproj">
+    <ProjectReference Include="..\Edis.Db\Edis.Db.csproj">
       <Project>{601c87fb-067d-4b38-b1c2-da9cc6c6d43d}</Project>
       <Name>Edis.Db</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\EDISV2-master\Shared\Shared.csproj">
+    <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{e5bc73b2-7418-4fee-a5b9-a268e9501523}</Project>
       <Name>Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\EDISV2-master\SqlRepository\SqlRepository.csproj">
+    <ProjectReference Include="..\SqlRepository\SqlRepository.csproj">
       <Project>{79a3d390-0fa5-4975-a62e-600c00094884}</Project>
       <Name>SqlRepository</Name>
     </ProjectReference>
