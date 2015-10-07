@@ -1,20 +1,3 @@
-C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISV2-master\SqlRepository\bin\Debug\SqlRepository.dll.config
-C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISV2-master\SqlRepository\bin\Debug\SqlRepository.dll
-C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISV2-master\SqlRepository\bin\Debug\SqlRepository.pdb
-C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISV2-master\SqlRepository\bin\Debug\Domain.Portfolio.dll
-C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISV2-master\SqlRepository\bin\Debug\Edis.Db.dll
-C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISV2-master\SqlRepository\bin\Debug\EntityFramework.dll
-C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISV2-master\SqlRepository\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISV2-master\SqlRepository\bin\Debug\Shared.dll
-C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISV2-master\SqlRepository\bin\Debug\Domain.Portfolio.pdb
-C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISV2-master\SqlRepository\bin\Debug\Edis.Db.pdb
-C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISV2-master\SqlRepository\bin\Debug\Shared.pdb
-C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISV2-master\SqlRepository\bin\Debug\EntityFramework.xml
-C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISV2-master\SqlRepository\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISV2-master\SqlRepository\obj\Debug\SqlRepository.csprojResolveAssemblyReference.cache
-C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISV2-master\SqlRepository\obj\Debug\SqlRepository.dll
-C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISV2-master\SqlRepository\obj\Debug\SqlRepository.pdb
-<<<<<<< HEAD
 C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISAngular\SqlRepository\bin\Debug\SqlRepository.dll.config
 C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISAngular\SqlRepository\bin\Debug\SqlRepository.dll
 C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISAngular\SqlRepository\bin\Debug\SqlRepository.pdb
@@ -31,5 +14,3 @@ C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISAngular\SqlRepository\bin\Debug\Entit
 C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISAngular\SqlRepository\obj\Debug\SqlRepository.csprojResolveAssemblyReference.cache
 C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISAngular\SqlRepository\obj\Debug\SqlRepository.dll
 C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISAngular\SqlRepository\obj\Debug\SqlRepository.pdb
-=======
->>>>>>> master
