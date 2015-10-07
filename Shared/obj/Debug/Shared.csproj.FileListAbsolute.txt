@@ -21,5 +21,6 @@ C:\Users\ahksysuser06\Desktop\new\EDISV2-master\EDISV2-master\Shared\obj\Debug\S
 C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\Shared\bin\Debug\Shared.dll.config
 C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\Shared\bin\Debug\Shared.dll
 C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\Shared\bin\Debug\Shared.pdb
+C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\Shared\obj\Debug\Shared.csprojResolveAssemblyReference.cache
 C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\Shared\obj\Debug\Shared.dll
 C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\Shared\obj\Debug\Shared.pdb
