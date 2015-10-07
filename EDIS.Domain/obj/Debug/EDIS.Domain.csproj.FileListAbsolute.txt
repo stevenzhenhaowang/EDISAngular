@@ -35,3 +35,15 @@ C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\EDIS.Domain\obj\Debug\
 C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\EDIS.Domain\obj\Debug\EDIS.Domain.csproj.GenerateResource.Cache
 C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\EDIS.Domain\obj\Debug\EDIS.Domain.dll
 C:\Users\ahksysuser06\Desktop\oldVersion\8.14\EDISAngular\EDIS.Domain\obj\Debug\EDIS.Domain.pdb
+C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISAngular\EDIS.Domain\bin\Debug\EDIS.Domain.dll.config
+C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISAngular\EDIS.Domain\bin\Debug\EDIS.Domain.dll
+C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISAngular\EDIS.Domain\bin\Debug\EDIS.Domain.pdb
+C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISAngular\EDIS.Domain\bin\Debug\EntityFramework.dll
+C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISAngular\EDIS.Domain\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISAngular\EDIS.Domain\bin\Debug\EntityFramework.xml
+C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISAngular\EDIS.Domain\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISAngular\EDIS.Domain\obj\Debug\EDIS.Domain.Migrations.initial.resources
+C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISAngular\EDIS.Domain\obj\Debug\EDIS.Domain.Migrations.modifiedClientGroup.resources
+C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISAngular\EDIS.Domain\obj\Debug\EDIS.Domain.csproj.GenerateResource.Cache
+C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISAngular\EDIS.Domain\obj\Debug\EDIS.Domain.dll
+C:\Users\ahksysuser10\Desktop\EDIS_Git\EDISAngular\EDIS.Domain\obj\Debug\EDIS.Domain.pdb
