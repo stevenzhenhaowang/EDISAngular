@@ -163,6 +163,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Attachments">
+      <EntityTypeMapping TypeName="edisDbModel.Attachment">
+        <MappingFragment StoreEntitySet="Attachments">
+          <ScalarProperty Name="AttachmentId" ColumnName="AttachmentId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="AttachmentType" ColumnName="AttachmentType" />
+          <ScalarProperty Name="NoteId" ColumnName="NoteId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="AustralianStates">
       <EntityTypeMapping TypeName="edisDbModel.AustralianState">
         <MappingFragment StoreEntitySet="AustralianStates">
@@ -437,6 +452,48 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="NoteLinks">
+      <EntityTypeMapping TypeName="edisDbModel.NoteLink">
+        <MappingFragment StoreEntitySet="NoteLinks">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="NoteId1" ColumnName="NoteId1" />
+          <ScalarProperty Name="NoteId2" ColumnName="NoteId2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notes">
+      <EntityTypeMapping TypeName="edisDbModel.Note">
+        <MappingFragment StoreEntitySet="Notes">
+          <ScalarProperty Name="NoteId" ColumnName="NoteId" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="NoteType" ColumnName="NoteType" />
+          <ScalarProperty Name="SenderRole" ColumnName="SenderRole" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="AdviserId" ColumnName="AdviserId" />
+          <ScalarProperty Name="AssetClass" ColumnName="AssetClass" />
+          <ScalarProperty Name="ProductClass" ColumnName="ProductClass" />
+          <ScalarProperty Name="Product" ColumnName="Product" />
+          <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+          <ScalarProperty Name="TimeSpend" ColumnName="TimeSpend" />
+          <ScalarProperty Name="NoteSerial" ColumnName="NoteSerial" />
+          <ScalarProperty Name="Body" ColumnName="Body" />
+          <ScalarProperty Name="FollowupActions" ColumnName="FollowupActions" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="FollowupDate" ColumnName="FollowupDate" />
+          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+          <ScalarProperty Name="ReminderDate" ColumnName="ReminderDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Reminder" ColumnName="Reminder" />
+          <ScalarProperty Name="IsAccepted" ColumnName="IsAccepted" />
+          <ScalarProperty Name="IsDeclined" ColumnName="IsDeclined" />
+          <ScalarProperty Name="AssetTypeId" ColumnName="AssetTypeId" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Properties">
       <EntityTypeMapping TypeName="edisDbModel.Property">
         <MappingFragment StoreEntitySet="Properties">
@@ -512,6 +569,18 @@
           <ScalarProperty Name="Bond_BondId" ColumnName="Bond_BondId" />
           <ScalarProperty Name="Property_PropertyId" ColumnName="Property_PropertyId" />
           <ScalarProperty Name="Equity_AssetId" ColumnName="Equity_AssetId" />
+          <ScalarProperty Name="StringValue" ColumnName="StringValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ResourcesReferences">
+      <EntityTypeMapping TypeName="edisDbModel.ResourcesReference">
+        <MappingFragment StoreEntitySet="ResourcesReferences">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TokenValue" ColumnName="TokenValue" />
+          <ScalarProperty Name="FileExtension" ColumnName="FileExtension" />
+          <ScalarProperty Name="ResourceUrl" ColumnName="ResourceUrl" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

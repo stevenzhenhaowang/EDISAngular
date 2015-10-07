@@ -16,6 +16,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using SqlRepository;
 using System.Security.Claims;
+using EDISAngular.Models.Enums;
 
 
 namespace EDISAngular.Controllers
@@ -84,41 +85,64 @@ namespace EDISAngular.Controllers
             {
                 return HttpNotFound();
             }
-            AdviserRegistrationBindingModel model = new AdviserRegistrationBindingModel();
+            AdviserRegistrationBindingModel model = new AdviserRegistrationBindingModel { 
+                ABN = adviser.ABNACN,
+                addressLine1 = adviser.AddressLn1,
+                addressLine2 = adviser.AddressLn2,
+                addressLine3 = adviser.AddressLn3,
+                adviserUserId = adviser.AdviserNumber,
+                businessFax = adviser.Fax,
+                businessMobile = adviser.Mobile,
+                businessPhone = adviser.Phone,
+                companyName = adviser.CompanyName,
+                country = adviser.Country,
+                currentPositionTitle = adviser.CurrentTitle,
+                firstName = adviser.FirstName,
+                gender = adviser.Gender,
+                lastName = adviser.LastName,
+                middleName = adviser.MiddleName,
+                postCode = adviser.PostCode,
+                industryExperienceStartDate = adviser.ExperienceStartDate,
+                GeoString = NullableDoubleToString(adviser.Lat, null) + " " + NullableDoubleToString(adviser.Lng, null),
+
+                dealerGroupName = adviser.GroupName,
+                dealerGroup_addressLine1 = adviser.DAddressLine1,
+                dealerGroup_addressLine2 = adviser.DAddressLine2,
+                dealerGroup_addressLine3 = adviser.DAddressLine3,
+                dealerGroup_country = adviser.DCountry,
+                dealerGroup_postCode = adviser.DPostcode,
+                dealerGroup_suburb = adviser.DSuburb,
+                dealerGroup_state = adviser.DState,
+                asfl = adviser.Asfl,
+                dealerGroupHasDerivativesLicense = adviser.DealerGroupHasDerivativesLicense,
+                isAuthorizedRepresentative = adviser.IsAuthorizedRepresentative,
+                authorizedRepresentativeNumber = adviser.AuthorizedRepresentativeNumber,
+                AnnualIncomeLevel = ((EDIS_DOMAIN.Enum.Enums.AnnualIncomeLevel)adviser.AnnualIncomeLevelId).ToString(),
+                annualIncomeLevelId = adviser.AnnualIncomeLevelId,
+                approximateNumberOfClients = adviser.ApproximateNumberOfClients,
+                approxNumberOfClients = adviser.ApproximateNumberOfClients,
+                investibleAssetLevel = adviser.InvestibleAssetLevel,
+                InvestibleAssetLevelString = ((EDIS_DOMAIN.Enum.Enums.InvestibleAssetsLevel)adviser.InvestibleAssetLevel).ToString(),
+                numberOfClientsId = adviser.NumberOfClientsId,
+                professiontypeId = adviser.ProfessiontypeId,
+                remunerationMethod = adviser.RemunerationMethod,
+                remunerationMethodSpecified = adviser.RemunerationMethodSpecified,
+                roleAndServicesSummary = adviser.RoleAndServicesSummary,
+                state = adviser.State,
+                suburb = adviser.Suburb,
+                title = adviser.Title,
+                TotalAssetLevel = adviser.TotalAssetLevel,
+                totalAssetLevelId = adviser.TotalAssetLevelId,
+                totalAssetUnderManagement = adviser.TotalAssetUnderManagement,
+                totalDirectAustralianEquitiesUnderManagement = adviser.TotalDirectAustralianEquitiesUnderManagement,
+                totalDirectFixedInterestUnderManagement = adviser.TotalDirectFixedInterestUnderManagement,
+                totalDirectInterantionalEquitiesUnderManagement = adviser.TotalDirectInterantionalEquitiesUnderManagement,
+                totalDirectLendingBookInterestUnderManagement = adviser.TotalDirectLendingBookInterestUnderManagement,
+                totalInvestmentUndermanagement = adviser.TotalInvestmentUndermanagement
+            };
+
             #region personal details
-            model.ABN = adviser.ABNACN;
-            model.addressLine1 = adviser.AddressLn1;
-            model.addressLine2 = adviser.AddressLn2;
-            model.addressLine3 = adviser.AddressLn3;
-            model.adviserUserId = adviser.AdviserNumber;
-            model.businessFax = adviser.Fax;
-            model.businessMobile = adviser.Mobile;
-            model.businessPhone = adviser.Phone;
-            model.companyName = adviser.CompanyName;
-            model.country = adviser.Country;
-            model.currentPositionTitle = adviser.CurrentTitle;
-            model.firstName = adviser.FirstName;
-            model.gender = adviser.Gender;
-            model.lastName = adviser.LastName;
-            model.middleName = adviser.MiddleName;
-            model.postCode = adviser.PostCode;
-            model.industryExperienceStartDate = adviser.ExperienceStartDate;
-            model.GeoString = NullableDoubleToString(adviser.Lat, null) + " " + NullableDoubleToString(adviser.Lng, null);
-
-            model.dealerGroupName = adviser.GroupName;
-            model.dealerGroup_addressLine1 = adviser.DAddressLine1;
-            model.dealerGroup_addressLine2 = adviser.DAddressLine2;
-            model.dealerGroup_addressLine3 = adviser.DAddressLine3;
-            model.dealerGroup_country = adviser.DCountry;
-            model.dealerGroup_postCode = adviser.DPostcode;
-            model.dealerGroup_suburb = adviser.DSuburb;
-            model.dealerGroup_state = adviser.DState;
-            model.asfl = adviser.Asfl;
-            model.dealerGroupHasDerivativesLicense = adviser.DealerGroupHasDerivativesLicense;
-            model.isAuthorizedRepresentative = adviser.IsAuthorizedRepresentative;
-            model.authorizedRepresentativeNumber = adviser.AuthorizedRepresentativeNumber;
-
-
+            
 
 
             #endregion

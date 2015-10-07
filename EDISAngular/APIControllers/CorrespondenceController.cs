@@ -18,6 +18,8 @@ using EDIS_DOMAIN;
 using EDIS_DOMAIN.Enum.Enums;
 using EDISAngular.Infrastructure.DatabaseAccess;
 using EDISAngular.Infrastructure.DbFirst;
+using SqlRepository;
+using Domain.Portfolio.Correspondence;
 
 using SqlRepository;
 
@@ -27,7 +29,7 @@ namespace EDISAngular.APIControllers
 
     public class CorrespondenceController : ApiController
     {
-
+        private EdisRepository edisRepo;
         private CommonReferenceDataRepository comRepo;
         private CorrespondenceRepository corresRepo;
         // private AdviserRepository advRepo;
@@ -38,8 +40,13 @@ namespace EDISAngular.APIControllers
             edisDbEntities db = new edisDbEntities();
             comRepo = new CommonReferenceDataRepository(db);
             corresRepo = new CorrespondenceRepository(db);
+<<<<<<< HEAD
+            advRepo = new AdviserRepository(db);
+            edisRepo = new EdisRepository();
+=======
             // advRepo = new AdviserRepository(db);
             repo = new EdisRepository();
+>>>>>>> master
         }
 
 
@@ -80,15 +87,19 @@ namespace EDISAngular.APIControllers
         }
         [HttpPost, Route("api/correspondence/create")]
         [Authorize(Roles = AuthorizationRoles.Role_Client + "," + AuthorizationRoles.Role_Adviser)]
-        public async Task<IHttpActionResult> createNewNote(CorrespondenceNoteBindingModel message)
+        public IHttpActionResult createNewNote(CorrespondenceNoteBindingModel message)
         {
             if (message != null && ModelState.IsValid)
             {
 
                 if (User.IsInRole(AuthorizationRoles.Role_Adviser))
                 {
+<<<<<<< HEAD
+                    var adviser = edisRepo.GetAdviserSync(message.adviserNumber, DateTime.Now);
+=======
                     var adviser = repo.GetAdviserSync(message.adviserNumber, DateTime.Now);
                     //var adviser = advRepo.GetAdviserDetailsByNumber(message.adviserNumber);
+>>>>>>> master
                     if (adviser == null || adviser.AdviserNumber != User.Identity.GetUserId())
                     {
                         ModelState.AddModelError("", "Invalid adviser id supplied, or current adviser is trying to add note for another adviser, which is illegal.");
@@ -106,7 +117,30 @@ namespace EDISAngular.APIControllers
 
                     #endregion
 
-                    await corresRepo.CreateNewMessage(message, senderRole);
+                    Message messageData = new Message(edisRepo) { 
+                        adviserNumber = message.adviserNumber,
+                        assetTypeId = message.assetTypeId,
+                        body = message.body,
+                        accountId = message.accountId,
+                        clientId = message.clientId,
+                        dateCompleted = message.dateCompleted,
+                        dateDue = message.dateDue,
+                        followupActions = message.followupActions,
+                        followupDate = message.followupDate,
+                        isAccepted = message.isAccepted,
+                        isDeclined = message.isDeclined,
+                        noteSerial = message.noteSerial,
+                        noteTypeId = message.noteTypeId,
+                        productTypeId = message.productTypeId,
+                        reminder = message.reminder,
+                        reminderDate = DateTime.Now,                    //need to be changed
+                        resourceToken = message.resourceToken,
+                        status = message.status,
+                        subject = message.subject,
+                        timespent = message.timespent
+                    };
+
+                    edisRepo.CreateNewMessageSync(messageData, senderRole);
 
                 }
 
@@ -147,9 +181,25 @@ namespace EDISAngular.APIControllers
             }
         }
 
+        //[HttpGet, Route("api/correspondence/noteType")]
+        //[Authorize(Roles = AuthorizationRoles.Role_Client + "," + AuthorizationRoles.Role_Adviser)]
+        //public async Task<List<NoteTypeView>> getNoteTypes()
+        //{
+        //    if (User.IsInRole(AuthorizationRoles.Role_Adviser))
+        //    {
+        //        return comRepo.GetAllNoteTypes();
+        //    }
+        //    else
+        //    {
+        //        return comRepo.GetAllNoteTypes().Where(t => t.id != BusinessLayerParameters.noteType_note).ToList();
+        //    }
+
+        //}
+
+
         [HttpGet, Route("api/correspondence/noteType")]
         [Authorize(Roles = AuthorizationRoles.Role_Client + "," + AuthorizationRoles.Role_Adviser)]
-        public async Task<List<NoteTypeView>> getNoteTypes()
+        public List<NoteTypeView> getNoteTypes()
         {
             if (User.IsInRole(AuthorizationRoles.Role_Adviser))
             {

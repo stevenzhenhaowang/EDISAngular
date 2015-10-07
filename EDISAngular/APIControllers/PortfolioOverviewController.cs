@@ -1342,6 +1342,8 @@ namespace EDISAngular.APIControllers
                     },
                 };
 
+                model.total = model.data.Sum(d => d.amount);
+
                 return model;
             }
             else
@@ -1379,6 +1381,8 @@ namespace EDISAngular.APIControllers
                         new DataNameAmountPair{name="Cash & Term Deposit", amount= totalMarketValueCD},
                     },
                 };
+
+                model.total = model.data.Sum(d => d.amount);
 
                 return model;
             }
