@@ -23,6 +23,7 @@ namespace EDISAngular.Controllers
     public class AdviserController : Controller
     {
         //private AdviserRepository adviserRepo = new AdviserRepository();
+
         private CommonReferenceDataRepository cmRepo = new CommonReferenceDataRepository();
 
         private EdisRepository edisRepo = new EdisRepository();
@@ -79,8 +80,10 @@ namespace EDISAngular.Controllers
 
 
             List<NewsletterServiceModel> newsModelList = new List<NewsletterServiceModel>();
-            foreach (var news in cmRepo.GetNewsletterService()) {
-                newsModelList.Add(new NewsletterServiceModel { 
+            foreach (var news in cmRepo.GetNewsletterService())
+            {
+                newsModelList.Add(new NewsletterServiceModel
+                {
                     newsLetterServiceId = news.NewsletterServicesId,
                     serviceName = news.NewsletterServices
                 });
@@ -158,7 +161,7 @@ namespace EDISAngular.Controllers
                 ViewBag.numberOfEducations = 0;
             }
             else
-            {   
+            {
                 ViewBag.numberOfEducations = model.educations.Count;
             }
         }
@@ -167,42 +170,42 @@ namespace EDISAngular.Controllers
         //[HttpPost]
         //public ActionResult Create(AdviserRegistrationBindingModel model)   //AdviserRegistrationBindingModel model  -->  string userId
         //{
-            
-
-            //ViewBag.professTypes = cmRepo.GetAllProfessionTypes().Select(p => new SelectListItem
-            //{
-            //    Text = p.ProfessionType1,
-            //    Value = p.ProfessionTypeId.ToString()
-            //}).ToList();
-
-            //var allErrors = ModelState.Values.Where(v => v.Errors.Count > 0).ToList();
-            //if (ModelState.IsValid)
-            //{
 
 
+        //ViewBag.professTypes = cmRepo.GetAllProfessionTypes().Select(p => new SelectListItem
+        //{
+        //    Text = p.ProfessionType1,
+        //    Value = p.ProfessionTypeId.ToString()
+        //}).ToList();
 
-                //adviserRepo.InsertOrUpdateAdviserProfile_Complete(model);
-                //try
-                //{
-                //    adviserRepo.Save();
-                //    var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-                //    userManager.AddToRole(User.Identity.GetUserId(), AuthorizationRoles.Role_Adviser);
-                //    userManager.RemoveFromRole(User.Identity.GetUserId(), AuthorizationRoles.Role_Preadviser);
-                //    var authenticationManager = HttpContext.GetOwinContext().Authentication;
-                //    authenticationManager.SignOut();
-                //    return RedirectToAction("Index", "Adviser");
-
-                //}
-                //catch (Exception ex)
-                //{
-                //    ModelState.AddModelError("", "Cannot store information: " + ex.Message);
-                //}
+        //var allErrors = ModelState.Values.Where(v => v.Errors.Count > 0).ToList();
+        //if (ModelState.IsValid)
+        //{
 
 
-            //}
 
-            //checkEducationList(model);
-            //return View(model);
+        //adviserRepo.InsertOrUpdateAdviserProfile_Complete(model);
+        //try
+        //{
+        //    adviserRepo.Save();
+        //    var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+        //    userManager.AddToRole(User.Identity.GetUserId(), AuthorizationRoles.Role_Adviser);
+        //    userManager.RemoveFromRole(User.Identity.GetUserId(), AuthorizationRoles.Role_Preadviser);
+        //    var authenticationManager = HttpContext.GetOwinContext().Authentication;
+        //    authenticationManager.SignOut();
+        //    return RedirectToAction("Index", "Adviser");
+
+        //}
+        //catch (Exception ex)
+        //{
+        //    ModelState.AddModelError("", "Cannot store information: " + ex.Message);
+        //}
+
+
+        //}
+
+        //checkEducationList(model);
+        //return View(model);
         //}
 
 
@@ -255,7 +258,7 @@ namespace EDISAngular.Controllers
                     Suburb = model.suburb,
                     Title = model.title,
                     VerifiedId = BusinessLayerParameters.verificationStatus_NotVerified,
-                    
+
                     IndustryExperienceStartDate = model.industryExperienceStartDate,
                     BusinessPhone = model.businessPhone,
                     BusinessMobile = model.businessMobile,
@@ -273,7 +276,7 @@ namespace EDISAngular.Controllers
                     DealerGroupName = model.dealerGroupName,
                     DealerGroupHasDerivativesLicense = model.dealerGroupHasDerivativesLicense ? true : false,
                     IsAuthorizedRepresentative = model.isAuthorizedRepresentative ? true : false,
-                    
+
                     TotalAssetUnderManagement = model.totalAssetUnderManagement,
                     TotalInvestmentUndermanagement = model.totalInvestmentUndermanagement,
                     TotalDirectAustralianEquitiesUnderManagement = model.totalDirectAustralianEquitiesUnderManagement,
@@ -290,10 +293,10 @@ namespace EDISAngular.Controllers
                     InvestibleAssetLevel = model.investibleAssetLevel,
                     TotalAssetLevel = ((EDIS_DOMAIN.Enum.Enums.TotalAssetLevels)model.totalAssetLevelId).ToString(),
                     TotalAssetLevelId = model.totalAssetLevelId,
-                    
+
                 };
 
-                if(model.educations != null && model.educations.Count != 0)
+                if (model.educations != null && model.educations.Count != 0)
                 {
                     adviser.Institution = model.educations[0].institution;
                     adviser.CourseTitle = model.educations[0].courseTitle;
@@ -305,7 +308,7 @@ namespace EDISAngular.Controllers
                 {
                     TempData["success"] = "Profile has been updated";
                 }
-                else 
+                else
                 {
                     TempData["error"] = "Profile update failed. Please try again.";
                 }
@@ -418,7 +421,8 @@ namespace EDISAngular.Controllers
 
 
             Adviser adviser = edisRepo.GetAdviserSync(User.Identity.GetUserId(), DateTime.Now);
-            AdviserRegistrationBindingModel adviserModel = new AdviserRegistrationBindingModel { 
+            AdviserRegistrationBindingModel adviserModel = new AdviserRegistrationBindingModel
+            {
                 adviserUserId = adviser.Id,
                 ABN = adviser.ABNACN,
                 addressLine1 = adviser.AddressLn1,
@@ -493,7 +497,7 @@ namespace EDISAngular.Controllers
                         serviceName = news.NewsletterServices,
                         selected = false,
                     });
-                    
+
                 }
             }
             adviserModel.newsLetterServices = newsModelList;
@@ -607,8 +611,10 @@ namespace EDISAngular.Controllers
 
                 };
 
-                foreach (var news in model.newsLetterServices) {
-                    if (news.selected == true) {
+                foreach (var news in model.newsLetterServices)
+                {
+                    if (news.selected == true)
+                    {
                         adviser.NewsLetterServiceId = news.newsLetterServiceId;
                         adviser.NewsLetterServiceName = news.serviceName;
                     }
@@ -622,7 +628,7 @@ namespace EDISAngular.Controllers
                     adviser.EducationLevelId = model.educations[0].educationLevelId;
                 }
 
-                if (edisRepo.UpdateAdviser(adviser) != null)
+                if (edisRepo.UpdateAdviser(adviser, DateTime.Now) != null)
                 {
                     TempData["success"] = "Profile has been updated";
                 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="edisDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="EdisDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -24,8 +24,8 @@
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="AccountType" Type="int" Nullable="false" />
           <Property Name="AccountInfo" Type="nvarchar(max)" />
-          <Property Name="ClientGroup_ClientGroupId" Type="nvarchar" MaxLength="128" />
           <Property Name="Client_ClientId" Type="nvarchar" MaxLength="128" />
+          <Property Name="ClientGroup_ClientGroupId" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="Advisers">
           <Key>
@@ -38,13 +38,6 @@
           <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="VerifiedId" Type="int" Nullable="false" />
           <Property Name="ABNACN" Type="nvarchar(max)" />
-          <Property Name="AddressLn1" Type="nvarchar(max)" />
-          <Property Name="AddressLn2" Type="nvarchar(max)" />
-          <Property Name="AddressLn3" Type="nvarchar(max)" />
-          <Property Name="State" Type="nvarchar(max)" />
-          <Property Name="Suburb" Type="nvarchar(max)" />
-          <Property Name="Country" Type="nvarchar(max)" />
-          <Property Name="PostCode" Type="nvarchar(max)" />
           <Property Name="Fax" Type="nvarchar(max)" />
           <Property Name="Mobile" Type="nvarchar(max)" />
           <Property Name="Phone" Type="nvarchar(max)" />
@@ -63,6 +56,13 @@
           <Property Name="BusinessPhone" Type="nvarchar(max)" />
           <Property Name="BusinessMobile" Type="nvarchar(max)" />
           <Property Name="BusinessFax" Type="nvarchar(max)" />
+          <Property Name="AddressLn1" Type="nvarchar(max)" />
+          <Property Name="AddressLn2" Type="nvarchar(max)" />
+          <Property Name="AddressLn3" Type="nvarchar(max)" />
+          <Property Name="State" Type="nvarchar(max)" />
+          <Property Name="Suburb" Type="nvarchar(max)" />
+          <Property Name="Country" Type="nvarchar(max)" />
+          <Property Name="PostCode" Type="nvarchar(max)" />
           <Property Name="RoleAndServicesSummary" Type="nvarchar(max)" />
           <Property Name="DealerGroupName" Type="nvarchar(max)" />
           <Property Name="Asfl" Type="nvarchar(max)" />
@@ -101,61 +101,10 @@
           <Property Name="RemunerationMethodSpecified" Type="bit" Nullable="false" />
           <Property Name="RemunerationMethod" Type="nvarchar(max)" />
           <Property Name="NumberOfClientsId" Type="int" Nullable="false" />
+          <Property Name="AnnualIncomeLevelId" Type="int" Nullable="false" />
           <Property Name="InvestibleAssetLevel" Type="int" Nullable="false" />
           <Property Name="TotalAssetLevelId" Type="int" Nullable="false" />
-          <Property Name="AnnualIncomeLevelId" Type="int" Nullable="false" />
           <Property Name="TotalAssetLevel" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="AspNetRoles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AspNetUserClaims">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="ClaimType" Type="nvarchar(max)" />
-          <Property Name="ClaimValue" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="AspNetUserLogins">
-          <Key>
-            <PropertyRef Name="LoginProvider" />
-            <PropertyRef Name="ProviderKey" />
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AspNetUserRoles">
-          <Key>
-            <PropertyRef Name="UserId" />
-            <PropertyRef Name="RoleId" />
-          </Key>
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AspNetUsers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="256" />
-          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
-          <Property Name="PasswordHash" Type="nvarchar(max)" />
-          <Property Name="SecurityStamp" Type="nvarchar(max)" />
-          <Property Name="PhoneNumber" Type="nvarchar(max)" />
-          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
-          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="datetime" />
-          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
-          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
-          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <EntityType Name="AssetPrices">
           <Key>
@@ -244,9 +193,9 @@
           </Key>
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="CashAccountId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Amount" Type="float" Nullable="false" />
           <Property Name="TransactionDate" Type="datetime" Nullable="false" />
-          <Property Name="CashAccountId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Account_AccountId" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="ClientGroups">
@@ -257,9 +206,9 @@
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="MainClientId" Type="nvarchar(max)" Nullable="false" />
           <Property Name="GroupNumber" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Adviser_AdviserId" Type="nvarchar" MaxLength="128" />
           <Property Name="GroupName" Type="nvarchar(max)" />
           <Property Name="GroupAlias" Type="nvarchar(max)" />
+          <Property Name="Adviser_AdviserId" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="Clients">
           <Key>
@@ -267,19 +216,19 @@
           </Key>
           <Property Name="ClientId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar(max)" />
-          <Property Name="LastName" Type="nvarchar(max)" />
-          <Property Name="Dob" Type="datetime" />
           <Property Name="ClientNumber" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ClientGroupId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="ClientType" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="MiddleName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="Dob" Type="datetime" />
           <Property Name="Gender" Type="nvarchar(max)" />
           <Property Name="Mobile" Type="nvarchar(max)" />
           <Property Name="Fax" Type="nvarchar(max)" />
-          <Property Name="MiddleName" Type="nvarchar(max)" />
-          <Property Name="ClientType" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" />
           <Property Name="Age" Type="int" Nullable="false" />
           <Property Name="EntityName" Type="nvarchar(max)" />
           <Property Name="EntityType" Type="nvarchar(max)" />
@@ -549,7 +498,6 @@
           <Property Name="Bond_BondId" Type="nvarchar" MaxLength="128" />
           <Property Name="Property_PropertyId" Type="nvarchar" MaxLength="128" />
           <Property Name="Equity_AssetId" Type="nvarchar" MaxLength="128" />
-          <Property Name="StringValue" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="ResourcesReferences">
           <Key>
@@ -603,62 +551,6 @@
             </Principal>
             <Dependent Role="Accounts">
               <PropertyRef Name="Client_ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserClaims">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserLogins">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetRoles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserRoles">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserRoles">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -750,7 +642,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_CashTransactions_dbo_CashAccounts_CashAccount_Id">
+        <Association Name="FK_dbo_CashTransactions_dbo_CashAccounts_CashAccountId">
           <End Role="CashAccounts" Type="Self.CashAccounts" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -1140,15 +1032,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="edisDbModelStoreContainer">
+        <EntityContainer Name="EdisDbModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Advisers" EntityType="Self.Advisers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AssetPrices" EntityType="Self.AssetPrices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Attachments" EntityType="Self.Attachments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AustralianStates" EntityType="Self.AustralianStates" Schema="dbo" store:Type="Tables" />
@@ -1190,22 +1077,6 @@
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Accounts" EntitySet="Accounts" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-          </AssociationSet>
           <AssociationSet Name="FK_dbo_AssetPrices_dbo_Bonds_Bond_BondId" Association="Self.FK_dbo_AssetPrices_dbo_Bonds_Bond_BondId">
             <End Role="Bonds" EntitySet="Bonds" />
             <End Role="AssetPrices" EntitySet="AssetPrices" />
@@ -1234,7 +1105,7 @@
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="CashTransactions" EntitySet="CashTransactions" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_CashTransactions_dbo_CashAccounts_CashAccount_Id" Association="Self.FK_dbo_CashTransactions_dbo_CashAccounts_CashAccount_Id">
+          <AssociationSet Name="FK_dbo_CashTransactions_dbo_CashAccounts_CashAccountId" Association="Self.FK_dbo_CashTransactions_dbo_CashAccounts_CashAccountId">
             <End Role="CashAccounts" EntitySet="CashAccounts" />
             <End Role="CashTransactions" EntitySet="CashTransactions" />
           </AssociationSet>
@@ -1359,7 +1230,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="edisDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="EdisDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="C__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -1379,8 +1250,8 @@
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="AccountType" Type="Int32" Nullable="false" />
           <Property Name="AccountInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ClientGroup_ClientGroupId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Client_ClientId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClientGroup_ClientGroupId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ClientGroup" Relationship="Self.FK_dbo_Accounts_dbo_ClientGroups_ClientGroup_ClientGroupId" FromRole="Accounts" ToRole="ClientGroups" />
           <NavigationProperty Name="Client" Relationship="Self.FK_dbo_Accounts_dbo_Clients_Client_ClientId" FromRole="Accounts" ToRole="Clients" />
           <NavigationProperty Name="BondTransactions" Relationship="Self.FK_dbo_BondTransactions_dbo_Accounts_Account_AccountId" FromRole="Accounts" ToRole="BondTransactions" />
@@ -1408,13 +1279,6 @@
           <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="VerifiedId" Type="Int32" Nullable="false" />
           <Property Name="ABNACN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AddressLn1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AddressLn2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AddressLn3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Suburb" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PostCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Fax" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Mobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -1433,6 +1297,13 @@
           <Property Name="BusinessPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="BusinessMobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="BusinessFax" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLn1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLn2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLn3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Suburb" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="RoleAndServicesSummary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DealerGroupName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Asfl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -1471,62 +1342,13 @@
           <Property Name="RemunerationMethodSpecified" Type="Boolean" Nullable="false" />
           <Property Name="RemunerationMethod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NumberOfClientsId" Type="Int32" Nullable="false" />
+          <Property Name="AnnualIncomeLevelId" Type="Int32" Nullable="false" />
           <Property Name="InvestibleAssetLevel" Type="Int32" Nullable="false" />
           <Property Name="TotalAssetLevelId" Type="Int32" Nullable="false" />
-          <Property Name="AnnualIncomeLevelId" Type="Int32" Nullable="false" />
           <Property Name="TotalAssetLevel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ClientGroups" Relationship="Self.FK_dbo_ClientGroups_dbo_Advisers_Adviser_AdviserId" FromRole="Advisers" ToRole="ClientGroups" />
           <NavigationProperty Name="ConsultancyExpenses" Relationship="Self.FK_dbo_ConsultancyExpenses_dbo_Advisers_AdviserId" FromRole="Advisers" ToRole="ConsultancyExpenses" />
           <NavigationProperty Name="TransactionExpenses" Relationship="Self.FK_dbo_TransactionExpenses_dbo_Advisers_AdviserId" FromRole="Advisers" ToRole="TransactionExpenses" />
-        </EntityType>
-        <EntityType Name="AspNetRole">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUserClaim">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUserLogin">
-          <Key>
-            <PropertyRef Name="LoginProvider" />
-            <PropertyRef Name="ProviderKey" />
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUser">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
-          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
         <EntityType Name="AssetPrice">
           <Key>
@@ -1618,7 +1440,7 @@
           <Property Name="InterestRate" Type="Double" />
           <Property Name="AnnualInterest" Type="Double" />
           <Property Name="FaceValue" Type="Double" Nullable="false" />
-          <NavigationProperty Name="CashTransactions" Relationship="Self.FK_dbo_CashTransactions_dbo_CashAccounts_CashAccount_Id" FromRole="CashAccounts" ToRole="CashTransactions" />
+          <NavigationProperty Name="CashTransactions" Relationship="Self.FK_dbo_CashTransactions_dbo_CashAccounts_CashAccountId" FromRole="CashAccounts" ToRole="CashTransactions" />
           <NavigationProperty Name="Interests" Relationship="Self.FK_dbo_Interests_dbo_CashAccounts_CashAccount_Id" FromRole="CashAccounts" ToRole="Interests" />
         </EntityType>
         <EntityType Name="CashTransaction">
@@ -1627,12 +1449,12 @@
           </Key>
           <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CashAccountId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Amount" Type="Double" Nullable="false" />
           <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CashAccountId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Account_AccountId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Account" Relationship="Self.FK_dbo_CashTransactions_dbo_Accounts_Account_AccountId" FromRole="CashTransactions" ToRole="Accounts" />
-          <NavigationProperty Name="CashAccount" Relationship="Self.FK_dbo_CashTransactions_dbo_CashAccounts_CashAccount_Id" FromRole="CashTransactions" ToRole="CashAccounts" />
+          <NavigationProperty Name="CashAccount" Relationship="Self.FK_dbo_CashTransactions_dbo_CashAccounts_CashAccountId" FromRole="CashTransactions" ToRole="CashAccounts" />
         </EntityType>
         <EntityType Name="ClientGroup">
           <Key>
@@ -1642,9 +1464,9 @@
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="MainClientId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="GroupNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Adviser_AdviserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="GroupName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="GroupAlias" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Adviser_AdviserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Accounts" Relationship="Self.FK_dbo_Accounts_dbo_ClientGroups_ClientGroup_ClientGroupId" FromRole="ClientGroups" ToRole="Accounts" />
           <NavigationProperty Name="Adviser" Relationship="Self.FK_dbo_ClientGroups_dbo_Advisers_Adviser_AdviserId" FromRole="ClientGroups" ToRole="Advisers" />
           <NavigationProperty Name="Clients" Relationship="Self.FK_dbo_Clients_dbo_ClientGroups_ClientGroupId" FromRole="ClientGroups" ToRole="Clients" />
@@ -1655,19 +1477,19 @@
           </Key>
           <Property Name="ClientId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Dob" Type="DateTime" Precision="3" />
           <Property Name="ClientNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ClientGroupId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClientType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Dob" Type="DateTime" Precision="3" />
           <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Mobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Fax" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ClientType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Age" Type="Int32" Nullable="false" />
           <Property Name="EntityName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="EntityType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -1976,7 +1798,6 @@
           <Property Name="Bond_BondId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Property_PropertyId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Equity_AssetId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="StringValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Bond" Relationship="Self.FK_dbo_ResearchValues_dbo_Bonds_Bond_BondId" FromRole="ResearchValues" ToRole="Bonds" />
           <NavigationProperty Name="Equity" Relationship="Self.FK_dbo_ResearchValues_dbo_Equities_Equity_AssetId" FromRole="ResearchValues" ToRole="Equities" />
           <NavigationProperty Name="Property" Relationship="Self.FK_dbo_ResearchValues_dbo_Properties_Property_PropertyId" FromRole="ResearchValues" ToRole="Properties" />
@@ -2239,34 +2060,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserClaims">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserLogins">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dbo_AssetPrices_dbo_Bonds_Bond_BondId">
           <End Role="Bonds" Type="Self.Bond" Multiplicity="0..1" />
           <End Role="AssetPrices" Type="Self.AssetPrice" Multiplicity="*" />
@@ -2357,7 +2150,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_CashTransactions_dbo_CashAccounts_CashAccount_Id">
+        <Association Name="FK_dbo_CashTransactions_dbo_CashAccounts_CashAccountId">
           <End Role="CashAccounts" Type="Self.CashAccount" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -2543,18 +2336,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="AspNetUserRoles">
-          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="edisDbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="Advisers" EntityType="Self.Adviser" />
-          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
-          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
-          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
           <EntitySet Name="AssetPrices" EntityType="Self.AssetPrice" />
           <EntitySet Name="Attachments" EntityType="Self.Attachment" />
           <EntitySet Name="AustralianStates" EntityType="Self.AustralianState" />
@@ -2660,14 +2445,6 @@
             <End Role="Advisers" EntitySet="Advisers" />
             <End Role="TransactionExpenses" EntitySet="TransactionExpenses" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
           <AssociationSet Name="FK_dbo_AssetPrices_dbo_Bonds_Bond_BondId" Association="Self.FK_dbo_AssetPrices_dbo_Bonds_Bond_BondId">
             <End Role="Bonds" EntitySet="Bonds" />
             <End Role="AssetPrices" EntitySet="AssetPrices" />
@@ -2696,7 +2473,7 @@
             <End Role="Bonds" EntitySet="Bonds" />
             <End Role="ResearchValues" EntitySet="ResearchValues" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_CashTransactions_dbo_CashAccounts_CashAccount_Id" Association="Self.FK_dbo_CashTransactions_dbo_CashAccounts_CashAccount_Id">
+          <AssociationSet Name="FK_dbo_CashTransactions_dbo_CashAccounts_CashAccountId" Association="Self.FK_dbo_CashTransactions_dbo_CashAccounts_CashAccountId">
             <End Role="CashAccounts" EntitySet="CashAccounts" />
             <End Role="CashTransactions" EntitySet="CashTransactions" />
           </AssociationSet>
@@ -2752,19 +2529,15 @@
             <End Role="Properties" EntitySet="Properties" />
             <End Role="ResearchValues" EntitySet="ResearchValues" />
           </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="edisDbModelStoreContainer" CdmEntityContainer="edisDbEntities">
+        <EntityContainerMapping StorageEntityContainer="EdisDbModelStoreContainer" CdmEntityContainer="edisDbEntities">
           <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="edisDbModel.C__MigrationHistory">
+            <EntityTypeMapping TypeName="EdisDbModel.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
                 <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
                 <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
@@ -2774,20 +2547,20 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Accounts">
-            <EntityTypeMapping TypeName="edisDbModel.Account">
+            <EntityTypeMapping TypeName="EdisDbModel.Account">
               <MappingFragment StoreEntitySet="Accounts">
                 <ScalarProperty Name="AccountId" ColumnName="AccountId" />
                 <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="AccountType" ColumnName="AccountType" />
                 <ScalarProperty Name="AccountInfo" ColumnName="AccountInfo" />
-                <ScalarProperty Name="ClientGroup_ClientGroupId" ColumnName="ClientGroup_ClientGroupId" />
                 <ScalarProperty Name="Client_ClientId" ColumnName="Client_ClientId" />
+                <ScalarProperty Name="ClientGroup_ClientGroupId" ColumnName="ClientGroup_ClientGroupId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Advisers">
-            <EntityTypeMapping TypeName="edisDbModel.Adviser">
+            <EntityTypeMapping TypeName="EdisDbModel.Adviser">
               <MappingFragment StoreEntitySet="Advisers">
                 <ScalarProperty Name="AdviserId" ColumnName="AdviserId" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
@@ -2796,13 +2569,6 @@
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="VerifiedId" ColumnName="VerifiedId" />
                 <ScalarProperty Name="ABNACN" ColumnName="ABNACN" />
-                <ScalarProperty Name="AddressLn1" ColumnName="AddressLn1" />
-                <ScalarProperty Name="AddressLn2" ColumnName="AddressLn2" />
-                <ScalarProperty Name="AddressLn3" ColumnName="AddressLn3" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Suburb" ColumnName="Suburb" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
                 <ScalarProperty Name="Fax" ColumnName="Fax" />
                 <ScalarProperty Name="Mobile" ColumnName="Mobile" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
@@ -2821,6 +2587,13 @@
                 <ScalarProperty Name="BusinessPhone" ColumnName="BusinessPhone" />
                 <ScalarProperty Name="BusinessMobile" ColumnName="BusinessMobile" />
                 <ScalarProperty Name="BusinessFax" ColumnName="BusinessFax" />
+                <ScalarProperty Name="AddressLn1" ColumnName="AddressLn1" />
+                <ScalarProperty Name="AddressLn2" ColumnName="AddressLn2" />
+                <ScalarProperty Name="AddressLn3" ColumnName="AddressLn3" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Suburb" ColumnName="Suburb" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
                 <ScalarProperty Name="RoleAndServicesSummary" ColumnName="RoleAndServicesSummary" />
                 <ScalarProperty Name="DealerGroupName" ColumnName="DealerGroupName" />
                 <ScalarProperty Name="Asfl" ColumnName="Asfl" />
@@ -2859,60 +2632,15 @@
                 <ScalarProperty Name="RemunerationMethodSpecified" ColumnName="RemunerationMethodSpecified" />
                 <ScalarProperty Name="RemunerationMethod" ColumnName="RemunerationMethod" />
                 <ScalarProperty Name="NumberOfClientsId" ColumnName="NumberOfClientsId" />
+                <ScalarProperty Name="AnnualIncomeLevelId" ColumnName="AnnualIncomeLevelId" />
                 <ScalarProperty Name="InvestibleAssetLevel" ColumnName="InvestibleAssetLevel" />
                 <ScalarProperty Name="TotalAssetLevelId" ColumnName="TotalAssetLevelId" />
-                <ScalarProperty Name="AnnualIncomeLevelId" ColumnName="AnnualIncomeLevelId" />
                 <ScalarProperty Name="TotalAssetLevel" ColumnName="TotalAssetLevel" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="edisDbModel.AspNetRole">
-              <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="edisDbModel.AspNetUserClaim">
-              <MappingFragment StoreEntitySet="AspNetUserClaims">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
-                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="edisDbModel.AspNetUserLogin">
-              <MappingFragment StoreEntitySet="AspNetUserLogins">
-                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="edisDbModel.AspNetUser">
-              <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="AssetPrices">
-            <EntityTypeMapping TypeName="edisDbModel.AssetPrice">
+            <EntityTypeMapping TypeName="EdisDbModel.AssetPrice">
               <MappingFragment StoreEntitySet="AssetPrices">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
@@ -2926,7 +2654,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Attachments">
-            <EntityTypeMapping TypeName="edisDbModel.Attachment">
+            <EntityTypeMapping TypeName="EdisDbModel.Attachment">
               <MappingFragment StoreEntitySet="Attachments">
                 <ScalarProperty Name="AttachmentId" ColumnName="AttachmentId" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -2941,7 +2669,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AustralianStates">
-            <EntityTypeMapping TypeName="edisDbModel.AustralianState">
+            <EntityTypeMapping TypeName="EdisDbModel.AustralianState">
               <MappingFragment StoreEntitySet="AustralianStates">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="State" ColumnName="State" />
@@ -2949,7 +2677,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Bonds">
-            <EntityTypeMapping TypeName="edisDbModel.Bond">
+            <EntityTypeMapping TypeName="EdisDbModel.Bond">
               <MappingFragment StoreEntitySet="Bonds">
                 <ScalarProperty Name="BondId" ColumnName="BondId" />
                 <ScalarProperty Name="Ticker" ColumnName="Ticker" />
@@ -2961,7 +2689,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BondTransactions">
-            <EntityTypeMapping TypeName="edisDbModel.BondTransaction">
+            <EntityTypeMapping TypeName="EdisDbModel.BondTransaction">
               <MappingFragment StoreEntitySet="BondTransactions">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
@@ -2974,7 +2702,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BondTypes">
-            <EntityTypeMapping TypeName="edisDbModel.BondType">
+            <EntityTypeMapping TypeName="EdisDbModel.BondType">
               <MappingFragment StoreEntitySet="BondTypes">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TypeName" ColumnName="TypeName" />
@@ -2982,7 +2710,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CashAccounts">
-            <EntityTypeMapping TypeName="edisDbModel.CashAccount">
+            <EntityTypeMapping TypeName="EdisDbModel.CashAccount">
               <MappingFragment StoreEntitySet="CashAccounts">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Bsb" ColumnName="Bsb" />
@@ -3000,48 +2728,48 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CashTransactions">
-            <EntityTypeMapping TypeName="edisDbModel.CashTransaction">
+            <EntityTypeMapping TypeName="EdisDbModel.CashTransaction">
               <MappingFragment StoreEntitySet="CashTransactions">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CashAccountId" ColumnName="CashAccountId" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
-                <ScalarProperty Name="CashAccountId" ColumnName="CashAccountId" />
                 <ScalarProperty Name="Account_AccountId" ColumnName="Account_AccountId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ClientGroups">
-            <EntityTypeMapping TypeName="edisDbModel.ClientGroup">
+            <EntityTypeMapping TypeName="EdisDbModel.ClientGroup">
               <MappingFragment StoreEntitySet="ClientGroups">
                 <ScalarProperty Name="ClientGroupId" ColumnName="ClientGroupId" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="MainClientId" ColumnName="MainClientId" />
                 <ScalarProperty Name="GroupNumber" ColumnName="GroupNumber" />
-                <ScalarProperty Name="Adviser_AdviserId" ColumnName="Adviser_AdviserId" />
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />
                 <ScalarProperty Name="GroupAlias" ColumnName="GroupAlias" />
+                <ScalarProperty Name="Adviser_AdviserId" ColumnName="Adviser_AdviserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Clients">
-            <EntityTypeMapping TypeName="edisDbModel.Client">
+            <EntityTypeMapping TypeName="EdisDbModel.Client">
               <MappingFragment StoreEntitySet="Clients">
                 <ScalarProperty Name="ClientId" ColumnName="ClientId" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Dob" ColumnName="Dob" />
                 <ScalarProperty Name="ClientNumber" ColumnName="ClientNumber" />
                 <ScalarProperty Name="ClientGroupId" ColumnName="ClientGroupId" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ClientType" ColumnName="ClientType" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Dob" ColumnName="Dob" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="Mobile" ColumnName="Mobile" />
                 <ScalarProperty Name="Fax" ColumnName="Fax" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-                <ScalarProperty Name="ClientType" ColumnName="ClientType" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="EntityName" ColumnName="EntityName" />
                 <ScalarProperty Name="EntityType" ColumnName="EntityType" />
@@ -3051,7 +2779,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ConsultancyExpenses">
-            <EntityTypeMapping TypeName="edisDbModel.ConsultancyExpens">
+            <EntityTypeMapping TypeName="EdisDbModel.ConsultancyExpens">
               <MappingFragment StoreEntitySet="ConsultancyExpenses">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
@@ -3065,7 +2793,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CouponPayments">
-            <EntityTypeMapping TypeName="edisDbModel.CouponPayment">
+            <EntityTypeMapping TypeName="EdisDbModel.CouponPayment">
               <MappingFragment StoreEntitySet="CouponPayments">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="PaymentOn" ColumnName="PaymentOn" />
@@ -3077,7 +2805,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Dividends">
-            <EntityTypeMapping TypeName="edisDbModel.Dividend">
+            <EntityTypeMapping TypeName="EdisDbModel.Dividend">
               <MappingFragment StoreEntitySet="Dividends">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="PaymentOn" ColumnName="PaymentOn" />
@@ -3090,7 +2818,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Equities">
-            <EntityTypeMapping TypeName="edisDbModel.Equity">
+            <EntityTypeMapping TypeName="EdisDbModel.Equity">
               <MappingFragment StoreEntitySet="Equities">
                 <ScalarProperty Name="AssetId" ColumnName="AssetId" />
                 <ScalarProperty Name="Ticker" ColumnName="Ticker" />
@@ -3101,7 +2829,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EquityTransactions">
-            <EntityTypeMapping TypeName="edisDbModel.EquityTransaction">
+            <EntityTypeMapping TypeName="EdisDbModel.EquityTransaction">
               <MappingFragment StoreEntitySet="EquityTransactions">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
@@ -3114,7 +2842,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="IndexedEquities">
-            <EntityTypeMapping TypeName="edisDbModel.IndexedEquity">
+            <EntityTypeMapping TypeName="EdisDbModel.IndexedEquity">
               <MappingFragment StoreEntitySet="IndexedEquities">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Ticker" ColumnName="Ticker" />
@@ -3127,7 +2855,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InsuranceTransactions">
-            <EntityTypeMapping TypeName="edisDbModel.InsuranceTransaction">
+            <EntityTypeMapping TypeName="EdisDbModel.InsuranceTransaction">
               <MappingFragment StoreEntitySet="InsuranceTransactions">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
@@ -3148,7 +2876,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Interests">
-            <EntityTypeMapping TypeName="edisDbModel.Interest">
+            <EntityTypeMapping TypeName="EdisDbModel.Interest">
               <MappingFragment StoreEntitySet="Interests">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="PaymentOn" ColumnName="PaymentOn" />
@@ -3160,7 +2888,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LiabilityRates">
-            <EntityTypeMapping TypeName="edisDbModel.LiabilityRate">
+            <EntityTypeMapping TypeName="EdisDbModel.LiabilityRate">
               <MappingFragment StoreEntitySet="LiabilityRates">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Rate" ColumnName="Rate" />
@@ -3172,7 +2900,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LoanValueRatios">
-            <EntityTypeMapping TypeName="edisDbModel.LoanValueRatio">
+            <EntityTypeMapping TypeName="EdisDbModel.LoanValueRatio">
               <MappingFragment StoreEntitySet="LoanValueRatios">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Ratio" ColumnName="Ratio" />
@@ -3185,7 +2913,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MarginLendingTransactions">
-            <EntityTypeMapping TypeName="edisDbModel.MarginLendingTransaction">
+            <EntityTypeMapping TypeName="EdisDbModel.MarginLendingTransaction">
               <MappingFragment StoreEntitySet="MarginLendingTransactions">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
@@ -3198,7 +2926,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MortgageHomeLoanTransactions">
-            <EntityTypeMapping TypeName="edisDbModel.MortgageHomeLoanTransaction">
+            <EntityTypeMapping TypeName="EdisDbModel.MortgageHomeLoanTransaction">
               <MappingFragment StoreEntitySet="MortgageHomeLoanTransactions">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
@@ -3215,7 +2943,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="NoteLinks">
-            <EntityTypeMapping TypeName="edisDbModel.NoteLink">
+            <EntityTypeMapping TypeName="EdisDbModel.NoteLink">
               <MappingFragment StoreEntitySet="NoteLinks">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
@@ -3225,7 +2953,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Notes">
-            <EntityTypeMapping TypeName="edisDbModel.Note">
+            <EntityTypeMapping TypeName="EdisDbModel.Note">
               <MappingFragment StoreEntitySet="Notes">
                 <ScalarProperty Name="NoteId" ColumnName="NoteId" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
@@ -3257,7 +2985,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Properties">
-            <EntityTypeMapping TypeName="edisDbModel.Property">
+            <EntityTypeMapping TypeName="EdisDbModel.Property">
               <MappingFragment StoreEntitySet="Properties">
                 <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
                 <ScalarProperty Name="GooglePlaceId" ColumnName="GooglePlaceId" />
@@ -3274,7 +3002,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PropertyTransactions">
-            <EntityTypeMapping TypeName="edisDbModel.PropertyTransaction">
+            <EntityTypeMapping TypeName="EdisDbModel.PropertyTransaction">
               <MappingFragment StoreEntitySet="PropertyTransactions">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
@@ -3287,7 +3015,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PropertyTypes">
-            <EntityTypeMapping TypeName="edisDbModel.PropertyType">
+            <EntityTypeMapping TypeName="EdisDbModel.PropertyType">
               <MappingFragment StoreEntitySet="PropertyTypes">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TypeName" ColumnName="TypeName" />
@@ -3295,7 +3023,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Rentals">
-            <EntityTypeMapping TypeName="edisDbModel.Rental">
+            <EntityTypeMapping TypeName="EdisDbModel.Rental">
               <MappingFragment StoreEntitySet="Rentals">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="PaymentOn" ColumnName="PaymentOn" />
@@ -3307,7 +3035,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RepaymentRecords">
-            <EntityTypeMapping TypeName="edisDbModel.RepaymentRecord">
+            <EntityTypeMapping TypeName="EdisDbModel.RepaymentRecord">
               <MappingFragment StoreEntitySet="RepaymentRecords">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CorrespondingLiabilityGroupingKey" ColumnName="CorrespondingLiabilityGroupingKey" />
@@ -3321,7 +3049,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ResearchValues">
-            <EntityTypeMapping TypeName="edisDbModel.ResearchValue">
+            <EntityTypeMapping TypeName="EdisDbModel.ResearchValue">
               <MappingFragment StoreEntitySet="ResearchValues">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Key" ColumnName="Key" />
@@ -3331,12 +3059,11 @@
                 <ScalarProperty Name="Bond_BondId" ColumnName="Bond_BondId" />
                 <ScalarProperty Name="Property_PropertyId" ColumnName="Property_PropertyId" />
                 <ScalarProperty Name="Equity_AssetId" ColumnName="Equity_AssetId" />
-                <ScalarProperty Name="StringValue" ColumnName="StringValue" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ResourcesReferences">
-            <EntityTypeMapping TypeName="edisDbModel.ResourcesReference">
+            <EntityTypeMapping TypeName="EdisDbModel.ResourcesReference">
               <MappingFragment StoreEntitySet="ResourcesReferences">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TokenValue" ColumnName="TokenValue" />
@@ -3347,7 +3074,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Sectors">
-            <EntityTypeMapping TypeName="edisDbModel.Sector">
+            <EntityTypeMapping TypeName="EdisDbModel.Sector">
               <MappingFragment StoreEntitySet="Sectors">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="SectorName" ColumnName="SectorName" />
@@ -3356,7 +3083,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TransactionExpenses">
-            <EntityTypeMapping TypeName="edisDbModel.TransactionExpens">
+            <EntityTypeMapping TypeName="EdisDbModel.TransactionExpens">
               <MappingFragment StoreEntitySet="TransactionExpenses">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IncurredOn" ColumnName="IncurredOn" />
@@ -3369,14 +3096,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="edisDbModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetRoles">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-            <EndProperty Name="AspNetUsers">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

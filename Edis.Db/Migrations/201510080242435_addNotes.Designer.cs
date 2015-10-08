@@ -7,13 +7,13 @@ namespace Edis.Db.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class init : IMigrationMetadata
+    public sealed partial class addNotes : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addNotes));
         
         string IMigrationMetadata.Id
         {
-            get { return "201509282307161_init"; }
+            get { return "201510080242435_addNotes"; }
         }
         
         string IMigrationMetadata.Source

@@ -37,8 +37,8 @@ namespace EDISAngular.Infrastructure.DbFirst
         public System.DateTime CreatedOn { get; set; }
         public int AccountType { get; set; }
         public string AccountInfo { get; set; }
-        public string ClientGroup_ClientGroupId { get; set; }
         public string Client_ClientId { get; set; }
+        public string ClientGroup_ClientGroupId { get; set; }
     
         public virtual ClientGroup ClientGroup { get; set; }
         public virtual Client Client { get; set; }

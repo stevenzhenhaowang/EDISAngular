@@ -3,7 +3,7 @@ namespace Edis.Db.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class init : DbMigration
+    public partial class addNotes : DbMigration
     {
         public override void Up()
         {
@@ -16,14 +16,14 @@ namespace Edis.Db.Migrations
                         CreatedOn = c.DateTime(nullable: false),
                         AccountType = c.Int(nullable: false),
                         AccountInfo = c.String(),
-                        ClientGroup_ClientGroupId = c.String(maxLength: 128),
                         Client_ClientId = c.String(maxLength: 128),
+                        ClientGroup_ClientGroupId = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.AccountId)
-                .ForeignKey("dbo.ClientGroups", t => t.ClientGroup_ClientGroupId)
                 .ForeignKey("dbo.Clients", t => t.Client_ClientId)
-                .Index(t => t.ClientGroup_ClientGroupId)
-                .Index(t => t.Client_ClientId);
+                .ForeignKey("dbo.ClientGroups", t => t.ClientGroup_ClientGroupId)
+                .Index(t => t.Client_ClientId)
+                .Index(t => t.ClientGroup_ClientGroupId);
             
             CreateTable(
                 "dbo.BondTransactions",
@@ -499,38 +499,57 @@ namespace Edis.Db.Migrations
                 .Index(t => t.AdviserId);
             
             CreateTable(
-                "dbo.AustralianStates",
+                "dbo.Attachments",
                 c => new
                     {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        State = c.String(nullable: false),
+                        AttachmentId = c.String(nullable: false, maxLength: 128),
+                        Title = c.String(nullable: false),
+                        DateCreated = c.DateTime(nullable: false),
+                        Path = c.String(),
+                        DateModified = c.DateTime(nullable: false),
+                        Comments = c.String(),
+                        Data = c.Byte(nullable: false),
+                        AttachmentType = c.String(),
+                        NoteId = c.String(nullable: false, maxLength: 128),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.AttachmentId)
+                .ForeignKey("dbo.Notes", t => t.NoteId, cascadeDelete: true)
+                .Index(t => t.NoteId);
             
             CreateTable(
-                "dbo.BondTypes",
+                "dbo.Notes",
                 c => new
                     {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        TypeName = c.String(nullable: false),
+                        NoteId = c.String(nullable: false, maxLength: 128),
+                        DateCreated = c.DateTime(nullable: false),
+                        Subject = c.String(nullable: false),
+                        NoteType = c.Int(nullable: false),
+                        SenderRole = c.Int(nullable: false),
+                        DateModified = c.DateTime(nullable: false),
+                        AdviserId = c.String(nullable: false),
+                        AssetClass = c.String(),
+                        ProductClass = c.String(),
+                        Product = c.String(),
+                        Purpose = c.String(),
+                        TimeSpend = c.Single(nullable: false),
+                        NoteSerial = c.String(),
+                        Body = c.String(),
+                        FollowupActions = c.String(),
+                        DateDue = c.DateTime(nullable: false),
+                        FollowupDate = c.DateTime(nullable: false),
+                        DateCompleted = c.DateTime(nullable: false),
+                        ReminderDate = c.DateTime(nullable: false),
+                        Status = c.String(),
+                        Reminder = c.Boolean(nullable: false),
+                        IsAccepted = c.Boolean(nullable: false),
+                        IsDeclined = c.Boolean(nullable: false),
+                        AssetTypeId = c.String(),
+                        AccountId = c.String(),
+                        ClientId = c.String(nullable: false, maxLength: 128),
                     })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.ClientGroups",
-                c => new
-                    {
-                        ClientGroupId = c.String(nullable: false, maxLength: 128),
-                        CreatedOn = c.DateTime(nullable: false),
-                        MainClientId = c.String(nullable: false),
-                        GroupNumber = c.String(nullable: false),
-                        GroupName = c.String(),
-                        GroupAlias = c.String(),
-                        Adviser_AdviserId = c.String(maxLength: 128),
-                    })
-                .PrimaryKey(t => t.ClientGroupId)
-                .ForeignKey("dbo.Advisers", t => t.Adviser_AdviserId)
-                .Index(t => t.Adviser_AdviserId);
+                .PrimaryKey(t => t.NoteId)
+                .ForeignKey("dbo.Clients", t => t.ClientId, cascadeDelete: true)
+                .Index(t => t.ClientId);
             
             CreateTable(
                 "dbo.Clients",
@@ -562,6 +581,40 @@ namespace Edis.Db.Migrations
                 .Index(t => t.ClientGroupId);
             
             CreateTable(
+                "dbo.ClientGroups",
+                c => new
+                    {
+                        ClientGroupId = c.String(nullable: false, maxLength: 128),
+                        CreatedOn = c.DateTime(nullable: false),
+                        MainClientId = c.String(nullable: false),
+                        GroupNumber = c.String(nullable: false),
+                        GroupName = c.String(),
+                        GroupAlias = c.String(),
+                        Adviser_AdviserId = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.ClientGroupId)
+                .ForeignKey("dbo.Advisers", t => t.Adviser_AdviserId)
+                .Index(t => t.Adviser_AdviserId);
+            
+            CreateTable(
+                "dbo.AustralianStates",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        State = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.BondTypes",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        TypeName = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.IndexedEquities",
                 c => new
                     {
@@ -576,11 +629,34 @@ namespace Edis.Db.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
+                "dbo.NoteLinks",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        DateCreated = c.DateTime(nullable: false),
+                        NoteId1 = c.String(),
+                        NoteId2 = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.PropertyTypes",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
                         TypeName = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.ResourcesReferences",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        TokenValue = c.String(),
+                        FileExtension = c.String(),
+                        ResourceUrl = c.String(),
+                        UserId = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -598,10 +674,12 @@ namespace Edis.Db.Migrations
         
         public override void Down()
         {
+            DropForeignKey("dbo.Attachments", "NoteId", "dbo.Notes");
+            DropForeignKey("dbo.Notes", "ClientId", "dbo.Clients");
             DropForeignKey("dbo.Clients", "ClientGroupId", "dbo.ClientGroups");
-            DropForeignKey("dbo.Accounts", "Client_ClientId", "dbo.Clients");
             DropForeignKey("dbo.Accounts", "ClientGroup_ClientGroupId", "dbo.ClientGroups");
             DropForeignKey("dbo.ClientGroups", "Adviser_AdviserId", "dbo.Advisers");
+            DropForeignKey("dbo.Accounts", "Client_ClientId", "dbo.Clients");
             DropForeignKey("dbo.TransactionExpenses", "AdviserId", "dbo.Advisers");
             DropForeignKey("dbo.ConsultancyExpenses", "AdviserId", "dbo.Advisers");
             DropForeignKey("dbo.ConsultancyExpenses", "AccountId", "dbo.Accounts");
@@ -635,8 +713,10 @@ namespace Edis.Db.Migrations
             DropForeignKey("dbo.ResearchValues", "Bond_BondId", "dbo.Bonds");
             DropForeignKey("dbo.AssetPrices", "Bond_BondId", "dbo.Bonds");
             DropForeignKey("dbo.CouponPayments", "Bond_BondId", "dbo.Bonds");
-            DropIndex("dbo.Clients", new[] { "ClientGroupId" });
             DropIndex("dbo.ClientGroups", new[] { "Adviser_AdviserId" });
+            DropIndex("dbo.Clients", new[] { "ClientGroupId" });
+            DropIndex("dbo.Notes", new[] { "ClientId" });
+            DropIndex("dbo.Attachments", new[] { "NoteId" });
             DropIndex("dbo.TransactionExpenses", new[] { "AdviserId" });
             DropIndex("dbo.ConsultancyExpenses", new[] { "AccountId" });
             DropIndex("dbo.ConsultancyExpenses", new[] { "AdviserId" });
@@ -670,15 +750,19 @@ namespace Edis.Db.Migrations
             DropIndex("dbo.CouponPayments", new[] { "Bond_BondId" });
             DropIndex("dbo.BondTransactions", new[] { "Account_AccountId" });
             DropIndex("dbo.BondTransactions", new[] { "BondId" });
-            DropIndex("dbo.Accounts", new[] { "Client_ClientId" });
             DropIndex("dbo.Accounts", new[] { "ClientGroup_ClientGroupId" });
+            DropIndex("dbo.Accounts", new[] { "Client_ClientId" });
             DropTable("dbo.Sectors");
+            DropTable("dbo.ResourcesReferences");
             DropTable("dbo.PropertyTypes");
+            DropTable("dbo.NoteLinks");
             DropTable("dbo.IndexedEquities");
-            DropTable("dbo.Clients");
-            DropTable("dbo.ClientGroups");
             DropTable("dbo.BondTypes");
             DropTable("dbo.AustralianStates");
+            DropTable("dbo.ClientGroups");
+            DropTable("dbo.Clients");
+            DropTable("dbo.Notes");
+            DropTable("dbo.Attachments");
             DropTable("dbo.TransactionExpenses");
             DropTable("dbo.ConsultancyExpenses");
             DropTable("dbo.Advisers");
