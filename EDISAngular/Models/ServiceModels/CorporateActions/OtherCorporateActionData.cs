@@ -52,21 +52,11 @@ namespace EDISAngular.Models.ServiceModels.CorporateActions
         public DateTime returnDate { get; set; }
         public List<returnOfCapitalParticipant> participants { get; set; }
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> parent of c605101... afternoon
 
     //public class returnOfCapitalParticipant
     //{
     //    public string edisAccountNumber { get; set; }
     //}
-
-<<<<<<< HEAD
-=======
->>>>>>> parent of c605101... afternoon
-
     //public class DividendReinvestmentPlan {
     //    public string actionId { get; set; }
     //    public string actionCode { get; set; }
@@ -75,26 +65,16 @@ namespace EDISAngular.Models.ServiceModels.CorporateActions
     //    public List<DRPParticipant> participant { get; set; }
     //}
 
-<<<<<<< HEAD
     //public class DRPParticipant {
     //    public string edisAccountNumber { get; set; }
 
     //}
-=======
+
     public class returnOfCapitalParticipant
     {
         public string edisAccountNumber { get; set; }
     }
 
-
-=======
-    public class returnOfCapitalParticipant
-    {
-        public string edisAccountNumber { get; set; }
-    }
-
-
->>>>>>> parent of c605101... afternoon
     public class DividendReinvestmentPlan {
         public string actionId { get; set; }
         public string actionCode { get; set; }
@@ -107,12 +87,6 @@ namespace EDISAngular.Models.ServiceModels.CorporateActions
         public string edisAccountNumber { get; set; }
 
     }
-<<<<<<< HEAD
->>>>>>> parent of c605101... afternoon
-=======
->>>>>>> parent of c605101... afternoon
-
-
 
     public class StockSplit {
         public string actionId { get; set; }
