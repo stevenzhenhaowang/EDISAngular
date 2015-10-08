@@ -17,6 +17,7 @@ namespace EDISAngular.Infrastructure.DatabaseAccess
 {
     public class AdviserRepository : BaseRepository
     {
+
         private CommonReferenceDataRepository comRepo;
         private Random rdm = new Random();
 
