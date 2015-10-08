@@ -26,26 +26,26 @@ namespace EDISAngular.Models.ModelValidators
             {
                 return ValidationResult.Success;
             }
-            int valueNumber = -1;
-            try
-            {
-                valueNumber = Convert.ToInt32(valueString);
-            }
-            catch (Exception)
-            {
+            //int valueNumber = -1;
+            //try
+            //{
+            //    valueNumber = Convert.ToInt32(valueString);
+            //}
+            //catch (Exception)
+            //{
 
-                return new ValidationResult("Property is invalid");
-            }
-            if (valueNumber < 0)
-            {
+            //    //return new ValidationResult("Property is invalid");
+            //}
+            //if (valueNumber < 0)
+            //{
 
-                return new ValidationResult("Property is invalid");
-            }
+            //    return new ValidationResult("Property is invalid");
+            //}
 
 
             using (edisDbEntities db = new edisDbEntities())
             {
-                var adviser = db.Advisers.SingleOrDefault(s => s.AdviserNumber == valueNumber+""); //AccountNumber --> AdviserNumber
+                var adviser = db.Advisers.SingleOrDefault(s => (s.AdviserNumber == valueString) || s.AdviserId == valueString); //AccountNumber --> AdviserNumber
                 if (adviser != null)
                 {
                     return ValidationResult.Success;

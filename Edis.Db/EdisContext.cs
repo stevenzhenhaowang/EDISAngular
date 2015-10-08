@@ -44,6 +44,10 @@ namespace Edis.Db
         public DbSet<MarginLendingTransaction> MarginLendingTransactions { get; set; }
         public DbSet<InsuranceTransaction> InsuranceTransactions { get; set; }
         public DbSet<RepaymentRecord> RepaymentRecords { get; set; }
+        public DbSet<ResourcesReferences> ResourcesReferences { get; set; }
+        public DbSet<Notes> Notes { get; set; }
+        public DbSet<NoteLinks> NoteLinks { get; set; }
+        public DbSet<Attachments> Attachments { get; set; }
 
 
 

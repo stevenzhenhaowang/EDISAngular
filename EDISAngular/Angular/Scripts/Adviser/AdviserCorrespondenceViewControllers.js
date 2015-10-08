@@ -111,7 +111,6 @@
                         adviserGetId: adviserGetId,
                         followUpNote: function () {
                             if (angular.isDefined(folowNote) && folowNote !== null) {
-
                                 return folowNote
                             } else {
                                 return null;
@@ -231,11 +230,12 @@
                     subject: $scope.subject,
                     body: $scope.commentary,
                     followupActions: $scope.actions,
-                    dateDue: convertStringToDate($scope.completionDate),
+                    dateCompleted: convertStringToDate($scope.completionDate),
                     followupDate: convertStringToDate($scope.followupDate),
                     reminder: $scope.removeFromReminder === "true" ? false : true,
                     noteTypeId: $scope.messageType,
-                    resourceToken: getToken
+                    resourceToken: getToken,
+                    dateDue: convertStringToDate($scope.completionDate),
                 };
                 $http.post(AppStrings.EDIS_IP + "api/correspondence/create", model)
                 .success(function () {
@@ -247,17 +247,11 @@
             }
 
 
-
-
-
-
-
-
         }
 
 
     });
-    app.controller("displayCorrespondenceDetailsController", function ($scope,detail) {
+    app.controller("displayCorrespondenceDetailsController", function ($scope, detail) {
         $scope.detail = detail;
     })
 

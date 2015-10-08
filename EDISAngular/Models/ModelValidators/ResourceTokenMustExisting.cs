@@ -27,18 +27,20 @@ namespace EDISAngular.Models.ModelValidators
                 return ValidationResult.Success;
             }
 
-            using (edisDbEntities db = new edisDbEntities())
-            {
-                var adviser = db.ResourcesReferences.SingleOrDefault(s => s.tokenValue == valueString);
-                if (adviser != null)
-                {
-                    return ValidationResult.Success;
-                }
-                else
-                {
-                    return new ValidationResult(ErrorMessage);
-                }
-            }
+            //using (edisDbEntities db = new edisDbEntities())
+            //{
+            //    var adviser = db.ResourcesReferences.SingleOrDefault(s => s.tokenValue == valueString);
+            //    if (adviser != null)
+            //    {
+            //        return ValidationResult.Success;
+            //    }
+            //    else
+            //    {
+            //        return new ValidationResult(ErrorMessage);
+            //    }
+            //}
+
+            return null;
         }
     }
 }

@@ -18,6 +18,7 @@ namespace EDISAngular.Infrastructure.DbFirst
         public Client()
         {
             this.Accounts = new HashSet<Account>();
+            this.Notes = new HashSet<Note>();
         }
     
         public string ClientId { get; set; }
@@ -44,5 +45,7 @@ namespace EDISAngular.Infrastructure.DbFirst
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Account> Accounts { get; set; }
         public virtual ClientGroup ClientGroup { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Note> Notes { get; set; }
     }
 }

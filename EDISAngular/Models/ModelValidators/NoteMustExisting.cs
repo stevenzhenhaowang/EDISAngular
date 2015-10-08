@@ -29,18 +29,19 @@ namespace EDISAngular.Models.ModelValidators
 
 
 
-                using (edisDbEntities db = new edisDbEntities())
-                {
-                    var note = db.Notes.SingleOrDefault(s => s.NoteID == valueString);
-                    if (note != null)
-                    {
-                        return ValidationResult.Success;
-                    }
-                    else
-                    {
-                        return new ValidationResult(ErrorMessage);
-                    }
-                }
+                //using (edisDbEntities db = new edisDbEntities())
+                //{
+                //    var note = db.Notes.SingleOrDefault(s => s.NoteID == valueString);
+                //    if (note != null)
+                //    {
+                //        return ValidationResult.Success;
+                //    }
+                //    else
+                //    {
+                //        return new ValidationResult(ErrorMessage);
+                //    }
+                //}
+                return null;
             }
     }
 }
