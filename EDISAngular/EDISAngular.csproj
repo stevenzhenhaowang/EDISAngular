@@ -190,6 +190,10 @@
     <Compile Include="APIControllers\AccountController.cs" />
     <Compile Include="APIControllers\AdviserController.cs" />
     <Compile Include="APIControllers\CorporateActionController.cs" />
+    <Compile Include="APIControllers\CommonController.cs" />
+    <Compile Include="APIControllers\CorrespondenceController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="APIControllers\EducationLevelController.cs" />
     <Compile Include="APIControllers\EntityClientController.cs" />
     <Compile Include="APIControllers\PersonClientController.cs" />
@@ -248,6 +252,9 @@
     <Compile Include="Infrastructure\Authorization\AuthorizationParameters.cs" />
     <Compile Include="Infrastructure\DatabaseAccess\BaseRepository.cs" />
     <Compile Include="Infrastructure\DatabaseAccess\CommonReferenceDataRepository.cs" />
+    <Compile Include="Infrastructure\DatabaseAccess\CorrespondenceRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Infrastructure\DatabaseAccess\PortfolioRepository.cs" />
     <Compile Include="Infrastructure\DbFirst\Account.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
@@ -256,6 +263,9 @@
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\DbFirst\AssetPrice.cs">
+      <DependentUpon>EFModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\DbFirst\Attachment.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\DbFirst\Attachment.cs">
@@ -379,6 +389,8 @@
     <Compile Include="Models\BindingModels\ClientAccountCreationBindingModel.cs" />
     <Compile Include="Models\BindingModels\ClientEntityCompleteProfileBinding.cs" />
     <Compile Include="Models\BindingModels\ClientPersonCompleteProfileBinding.cs" />
+    <Compile Include="Models\BindingModels\CorrespondenceFollowupView.cs" />
+    <Compile Include="Models\BindingModels\CorrespondenceNoteBindingModel.cs" />
     <Compile Include="Models\BindingModels\EntityClientCreationBindingModel.cs" />
     <Compile Include="Models\BindingModels\PersonClientCreationBindingModel.cs" />
     <Compile Include="Models\BindingModels\PersonClinetCreationBindingModel2.cs" />
@@ -415,12 +427,18 @@
     <Compile Include="Models\Enums\VerifiedStatus.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ModelValidators\AdviserMustExisting.cs" />
+    <Compile Include="Models\ModelValidators\AssetTypeMustExisting.cs" />
     <Compile Include="Models\ModelValidators\ClientGroupMustExisting.cs" />
+    <Compile Include="Models\ModelValidators\ClientMustExisting.cs" />
     <Compile Include="Models\ModelValidators\EmailAddressMustBeUnique.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\ModelValidators\NoteMustExisting.cs" />
+    <Compile Include="Models\ModelValidators\NoteTypeMustExisting.cs" />
+    <Compile Include="Models\ModelValidators\ProductTypeMustExisting.cs" />
     <Compile Include="Models\ModelValidators\RequiredIfBoolFalse.cs" />
     <Compile Include="Models\ModelValidators\RequiredIfBoolTrue.cs" />
+    <Compile Include="Models\ModelValidators\ResourceTokenMustExisting.cs" />
     <Compile Include="Models\ModelValidators\StringRangeValidator.cs" />
     <Compile Include="Models\ServiceModels\AdviserProfile\AdviserBusinessPortfolioOverviewBriefModel.cs" />
     <Compile Include="Models\ServiceModels\AdviserProfile\AdviserProfileInsuranceStatisticsModel.cs" />

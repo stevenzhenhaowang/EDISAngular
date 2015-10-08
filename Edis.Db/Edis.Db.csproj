@@ -83,6 +83,14 @@
     <Compile Include="Migrations\201510080242435_addNotes.Designer.cs">
       <DependentUpon>201510080242435_addNotes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510060438093_init1.cs" />
+    <Compile Include="Migrations\201510060438093_init1.Designer.cs">
+      <DependentUpon>201510060438093_init1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510060446441_init2.cs" />
+    <Compile Include="Migrations\201510060446441_init2.Designer.cs">
+      <DependentUpon>201510060446441_init2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NoteLinks.cs" />
     <Compile Include="Notes.cs" />
@@ -112,6 +120,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201510080242435_addNotes.resx">
       <DependentUpon>201510080242435_addNotes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510060438093_init1.resx">
+      <DependentUpon>201510060438093_init1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510060446441_init2.resx">
+      <DependentUpon>201510060446441_init2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

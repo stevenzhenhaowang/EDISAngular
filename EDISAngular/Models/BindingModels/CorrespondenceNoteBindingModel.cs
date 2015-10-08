@@ -23,7 +23,6 @@ namespace EDISAngular.Models.BindingModels
         [ProductTypeMustExisting(ErrorMessage="Product type id is invalid")]
         public string productTypeId { get; set; }
 
-
         public double timespent { get; set; }
         public string noteSerial { get; set; }//self generated
         [Required]
@@ -42,7 +41,6 @@ namespace EDISAngular.Models.BindingModels
         public int noteTypeId { get; set; }
         public bool isAccepted { get; set; }
         public bool isDeclined { get; set; }
-
         public string accountId { get; set; }
 
         [Required]

@@ -509,6 +509,16 @@
           <Property Name="ResourceUrl" Type="nvarchar(max)" />
           <Property Name="UserId" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="ResourcesReferences">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="TokenValue" Type="nvarchar(max)" />
+          <Property Name="FileExtension" Type="nvarchar(max)" />
+          <Property Name="ResourceUrl" Type="nvarchar(max)" />
+          <Property Name="UserId" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Sectors">
           <Key>
             <PropertyRef Name="Id" />
@@ -2654,7 +2664,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Attachments">
-            <EntityTypeMapping TypeName="EdisDbModel.Attachment">
+            <EntityTypeMapping TypeName="edisDbModel.Attachment">
               <MappingFragment StoreEntitySet="Attachments">
                 <ScalarProperty Name="AttachmentId" ColumnName="AttachmentId" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -2943,7 +2953,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="NoteLinks">
-            <EntityTypeMapping TypeName="EdisDbModel.NoteLink">
+            <EntityTypeMapping TypeName="edisDbModel.NoteLink">
               <MappingFragment StoreEntitySet="NoteLinks">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
@@ -2953,7 +2963,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Notes">
-            <EntityTypeMapping TypeName="EdisDbModel.Note">
+            <EntityTypeMapping TypeName="edisDbModel.Note">
               <MappingFragment StoreEntitySet="Notes">
                 <ScalarProperty Name="NoteId" ColumnName="NoteId" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
@@ -3064,6 +3074,17 @@
           </EntitySetMapping>
           <EntitySetMapping Name="ResourcesReferences">
             <EntityTypeMapping TypeName="EdisDbModel.ResourcesReference">
+              <MappingFragment StoreEntitySet="ResourcesReferences">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TokenValue" ColumnName="TokenValue" />
+                <ScalarProperty Name="FileExtension" ColumnName="FileExtension" />
+                <ScalarProperty Name="ResourceUrl" ColumnName="ResourceUrl" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResourcesReferences">
+            <EntityTypeMapping TypeName="edisDbModel.ResourcesReference">
               <MappingFragment StoreEntitySet="ResourcesReferences">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TokenValue" ColumnName="TokenValue" />

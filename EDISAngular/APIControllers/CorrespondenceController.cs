@@ -40,7 +40,7 @@ namespace EDISAngular.APIControllers
             edisDbEntities db = new edisDbEntities();
             comRepo = new CommonReferenceDataRepository(db);
             corresRepo = new CorrespondenceRepository(db);
-
+            advRepo = new AdviserRepository(db);
             edisRepo = new EdisRepository();
         }
 
@@ -89,7 +89,6 @@ namespace EDISAngular.APIControllers
 
                 if (User.IsInRole(AuthorizationRoles.Role_Adviser))
                 {
-
                     var adviser = edisRepo.GetAdviserSync(message.adviserNumber, DateTime.Now);
                     if (adviser == null || adviser.AdviserNumber != User.Identity.GetUserId())
                     {

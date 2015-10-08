@@ -40,6 +40,7 @@ using InsuranceTransaction = Domain.Portfolio.Entities.Transactions.InsuranceTra
 using MarginLendingTransactionCreation = Domain.Portfolio.Entities.CreationModels.Transaction.MarginLendingTransactionCreation;
 using PropertyTransaction = Edis.Db.Transactions.PropertyTransaction;
 using RepaymentCreation = Domain.Portfolio.Entities.CreationModels.RepaymentCreation;
+using Domain.Portfolio.Correspondence;
 
 namespace SqlRepository
 {
@@ -4318,7 +4319,7 @@ namespace SqlRepository
                 var clientAverageAge =
                     _db.Clients.Where(c => c.ClientGroupId == clientGroup.ClientGroupId)
                         .ToList()
-                        .Sum(c => (beforeDate - c.Dob.Value).Days) / 365 /
+                        .Sum(c => c.Dob == null || c.Dob.Value == null ? 0 : (beforeDate - c.Dob.Value).Days) / 365 /
                     _db.Clients.Count(c => c.ClientGroupId == clientGroup.ClientGroupId);
 
                 var key = group.Key.PropertyId + "*" + group.Key.AccountId;
@@ -4424,7 +4425,7 @@ namespace SqlRepository
                 var clientAverageAge =
                     _db.Clients.Where(c => c.ClientGroupId == clientGroup.ClientGroupId)
                         .ToList()
-                        .Sum(c => (beforeDate - c.Dob.Value).Days) / 365 /
+                        .Sum(c => c.Dob == null || c.Dob.Value == null ? 0 : (beforeDate - c.Dob.Value).Days) / 365 /                 //Dob == null ???
                     _db.Clients.Count(c => c.ClientGroupId == clientGroup.ClientGroupId);
 
                 var key = group.Key.PropertyId + "*" + group.Key.AccountId;
@@ -6125,7 +6126,7 @@ namespace SqlRepository
                         var clientAverageAge =
                             _db.Clients.Where(c => c.ClientGroupId == clientGroup.ClientGroupId)
                                 .ToList()
-                                .Sum(c => (todate - c.Dob.Value).Days) / 365 /
+                                .Sum(c => c.Dob == null || c.Dob.Value == null ? 0 : (todate - c.Dob.Value).Days) / 365 /
                             _db.Clients.Count(c => c.ClientGroupId == clientGroup.ClientGroupId);
 
                         var yearsToRetirement = RetirementAge - clientAverageAge;
@@ -6190,10 +6191,11 @@ namespace SqlRepository
                     if (transaction != null)
                     {
                         var property = transaction.PropertyAddress;
+                        
                         var clientAverageAge =
                             _db.Clients.Where(c => c.ClientGroupId == clientGroup.ClientGroupId)
                                 .ToList()
-                                .Sum(c => (todate - c.Dob.Value).Days) / 365 /
+                                .Sum(c => (c.Dob == null || c.Dob.Value == null ? 0 : (todate - c.Dob.Value).Days)) / 365 /
                             _db.Clients.Count(c => c.ClientGroupId == clientGroup.ClientGroupId);
 
                         var yearsToRetirement = RetirementAge - clientAverageAge;
@@ -6770,6 +6772,47 @@ namespace SqlRepository
 
         #endregion
 
+        public void CreateNewMessageSync(Message message, int senderRole)
+        {
+            var resource = _db.ResourcesReferences.SingleOrDefault(r => r.TokenValue == message.resourceToken);
+            Edis.Db.Notes note = new Edis.Db.Notes {
+                AccountId = "",
+                AdviserId = message.adviserNumber,
+                AssetTypeId = message.assetTypeId,
+                Body = message.body,
+                ClientId = message.clientId,
+                DateCompleted = message.dateCompleted,
+                DateCreated = DateTime.Now,
+                DateDue = message.dateDue,
+                DateModified = DateTime.Now,
+                FollowupActions = message.followupActions,
+                FollowupDate = message.followupDate,
+                IsAccepted = message.isAccepted,
+                ReminderDate = message.reminderDate,
+                IsDeclined = message.isDeclined,
+                NoteType = message.noteTypeId,
+                NoteId = Guid.NewGuid().ToString(),
+                Subject = message.subject,
+                SenderRole = senderRole
+            };
 
+            _db.Notes.Add(note);
+
+            if (!string.IsNullOrEmpty(resource.ResourceUrl))
+            {
+                _db.Attachments.Add(new Edis.Db.Attachments {
+                    AttachmentId = Guid.NewGuid().ToString(),
+                    DateCreated = DateTime.Now,
+                    DateModified = DateTime.Now,
+                    NoteId = note.NoteId,
+                    Path = resource.ResourceUrl,
+                    Title = note.Subject,
+                    AttachmentType = resource.FileExtension
+                });
+                
+            }
+
+            _db.SaveChanges();
+        }
     }
 }
