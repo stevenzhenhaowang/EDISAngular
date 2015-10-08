@@ -22,9 +22,7 @@ namespace EDISAngular.Controllers
     [Authorize]
     public class AdviserController : Controller
     {
-
         //private AdviserRepository adviserRepo = new AdviserRepository();
-
         private CommonReferenceDataRepository cmRepo = new CommonReferenceDataRepository();
 
         private EdisRepository edisRepo = new EdisRepository();
