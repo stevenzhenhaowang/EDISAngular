@@ -79,17 +79,13 @@
     <Compile Include="Liabilities\MarginLendingTransaction.cs" />
     <Compile Include="Liabilities\MortgageHomeLoanTransaction.cs" />
     <Compile Include="Markers\IAsset.cs" />
-    <Compile Include="Migrations\201510010301316_init.cs" />
-    <Compile Include="Migrations\201510010301316_init.Designer.cs">
-      <DependentUpon>201510010301316_init.cs</DependentUpon>
+    <Compile Include="Migrations\201510080003332_init.cs" />
+    <Compile Include="Migrations\201510080003332_init.Designer.cs">
+      <DependentUpon>201510080003332_init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201510060438093_init1.cs" />
-    <Compile Include="Migrations\201510060438093_init1.Designer.cs">
-      <DependentUpon>201510060438093_init1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510060446441_init2.cs" />
-    <Compile Include="Migrations\201510060446441_init2.Designer.cs">
-      <DependentUpon>201510060446441_init2.cs</DependentUpon>
+    <Compile Include="Migrations\201510080007189_addedNewClasses.cs" />
+    <Compile Include="Migrations\201510080007189_addedNewClasses.Designer.cs">
+      <DependentUpon>201510080007189_addedNewClasses.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NoteLinks.cs" />
@@ -118,14 +114,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201510010301316_init.resx">
-      <DependentUpon>201510010301316_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201510080003332_init.resx">
+      <DependentUpon>201510080003332_init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510060438093_init1.resx">
-      <DependentUpon>201510060438093_init1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510060446441_init2.resx">
-      <DependentUpon>201510060446441_init2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201510080007189_addedNewClasses.resx">
+      <DependentUpon>201510080007189_addedNewClasses.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -117,7 +117,6 @@ namespace Domain.Portfolio.Interfaces
 
         void RecordRepaymentSync(RepaymentCreation record); //added
 
-        Adviser UpdateAdviser(Adviser adviser);
-        Adviser UpdateAdviserImage(Adviser adviser);
+        Task<Adviser> UpdateAdviser(Adviser adviser, DateTime dateTime);
     }
 }

@@ -22,7 +22,6 @@ namespace EDISAngular.Infrastructure.DbFirst
         public string Bond_BondId { get; set; }
         public string Property_PropertyId { get; set; }
         public string Equity_AssetId { get; set; }
-        public string StringValue { get; set; }
     
         public virtual Bond Bond { get; set; }
         public virtual Equity Equity { get; set; }

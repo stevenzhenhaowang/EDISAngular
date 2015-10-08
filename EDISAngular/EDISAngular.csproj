@@ -46,8 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DocX">
-      <HintPath>..\..\..\..\DocX.dll</HintPath>
+    <Reference Include="DocX, Version=1.0.0.18, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocX.1.0.0.18\lib\net40\DocX.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.OData.Core">
@@ -188,10 +189,7 @@
     <Compile Include="Abstract\IRepository.cs" />
     <Compile Include="APIControllers\AccountController.cs" />
     <Compile Include="APIControllers\AdviserController.cs" />
-    <Compile Include="APIControllers\CommonController.cs" />
-    <Compile Include="APIControllers\CorrespondenceController.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="APIControllers\CorporateActionController.cs" />
     <Compile Include="APIControllers\EducationLevelController.cs" />
     <Compile Include="APIControllers\EntityClientController.cs" />
     <Compile Include="APIControllers\PersonClientController.cs" />
@@ -248,12 +246,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Authorization\AuthorizationParameters.cs" />
-    <Compile Include="Infrastructure\DatabaseAccess\AdviserRepository.cs" />
     <Compile Include="Infrastructure\DatabaseAccess\BaseRepository.cs" />
     <Compile Include="Infrastructure\DatabaseAccess\CommonReferenceDataRepository.cs" />
-    <Compile Include="Infrastructure\DatabaseAccess\CorrespondenceRepository.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Infrastructure\DatabaseAccess\PortfolioRepository.cs" />
     <Compile Include="Infrastructure\DbFirst\Account.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
@@ -397,8 +391,6 @@
     <Compile Include="Models\BindingModels\ClientAccountCreationBindingModel.cs" />
     <Compile Include="Models\BindingModels\ClientEntityCompleteProfileBinding.cs" />
     <Compile Include="Models\BindingModels\ClientPersonCompleteProfileBinding.cs" />
-    <Compile Include="Models\BindingModels\CorrespondenceFollowupView.cs" />
-    <Compile Include="Models\BindingModels\CorrespondenceNoteBindingModel.cs" />
     <Compile Include="Models\BindingModels\EntityClientCreationBindingModel.cs" />
     <Compile Include="Models\BindingModels\PersonClientCreationBindingModel.cs" />
     <Compile Include="Models\BindingModels\PersonClinetCreationBindingModel2.cs" />
@@ -435,18 +427,12 @@
     <Compile Include="Models\Enums\VerifiedStatus.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ModelValidators\AdviserMustExisting.cs" />
-    <Compile Include="Models\ModelValidators\AssetTypeMustExisting.cs" />
     <Compile Include="Models\ModelValidators\ClientGroupMustExisting.cs" />
-    <Compile Include="Models\ModelValidators\ClientMustExisting.cs" />
     <Compile Include="Models\ModelValidators\EmailAddressMustBeUnique.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\ModelValidators\NoteMustExisting.cs" />
-    <Compile Include="Models\ModelValidators\NoteTypeMustExisting.cs" />
-    <Compile Include="Models\ModelValidators\ProductTypeMustExisting.cs" />
     <Compile Include="Models\ModelValidators\RequiredIfBoolFalse.cs" />
     <Compile Include="Models\ModelValidators\RequiredIfBoolTrue.cs" />
-    <Compile Include="Models\ModelValidators\ResourceTokenMustExisting.cs" />
     <Compile Include="Models\ModelValidators\StringRangeValidator.cs" />
     <Compile Include="Models\ServiceModels\AdviserProfile\AdviserBusinessPortfolioOverviewBriefModel.cs" />
     <Compile Include="Models\ServiceModels\AdviserProfile\AdviserProfileInsuranceStatisticsModel.cs" />
@@ -462,11 +448,21 @@
     <Compile Include="Models\ServiceModels\AdviserProfile\WordMarketItemModel.cs" />
     <Compile Include="Models\ServiceModels\CashTermDepositProfileModel.cs" />
     <Compile Include="Models\ServiceModels\CompanyBriefModel.cs" />
+    <Compile Include="Models\ServiceModels\CorporateActions\BonusIssueData.cs" />
+    <Compile Include="Models\ServiceModels\CorporateActions\BonusIsuueActionCreationModel.cs" />
+    <Compile Include="Models\ServiceModels\CorporateActions\BuybackProgramActionCreationModel.cs" />
+    <Compile Include="Models\ServiceModels\CorporateActions\BuyBackProgramData.cs" />
     <Compile Include="Models\ServiceModels\CorporateActions\CorporateActionClientAccountModel.cs" />
     <Compile Include="Models\ServiceModels\CorporateActions\IpoActionCreationModel.cs" />
     <Compile Include="Models\ServiceModels\CorporateActions\IPOActionData.cs" />
     <Compile Include="Models\ServiceModels\CorporateActions\OtherActionCreationModel.cs" />
     <Compile Include="Models\ServiceModels\CorporateActions\OtherCorporateActionData.cs" />
+    <Compile Include="Models\ServiceModels\CorporateActions\ReinvestmentActionCreationModel.cs" />
+    <Compile Include="Models\ServiceModels\CorporateActions\ReinvestmentData.cs" />
+    <Compile Include="Models\ServiceModels\CorporateActions\ReturnOfCapitalActionCreationModel.cs" />
+    <Compile Include="Models\ServiceModels\CorporateActions\ReturnOfCapitalData.cs" />
+    <Compile Include="Models\ServiceModels\CorporateActions\StockSplitActionCreationModel.cs" />
+    <Compile Include="Models\ServiceModels\CorporateActions\StockSplitData.cs" />
     <Compile Include="Models\ServiceModels\DataNameAmountPair.cs" />
     <Compile Include="Models\ServiceModels\FixedIncomePriceChartModel.cs" />
     <Compile Include="Models\ServiceModels\PortfolioModels\AssetPerformanceModel.cs" />
@@ -2090,6 +2086,16 @@
     <Content Include="Images\validation_forclients.png" />
     <Content Include="Images\validation_marketupdates.png" />
     <Content Include="Images\_notes\dwsync.xml" />
+    <Content Include="Infrastructure\DbFirst\EFModels.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EFModels.edmx</DependentUpon>
+      <LastGenOutput>EFModels.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Infrastructure\DbFirst\EFModels.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EFModels.edmx</DependentUpon>
+      <LastGenOutput>EFModels.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
@@ -2216,18 +2222,8 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EFModels.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Infrastructure\DbFirst\EFModels.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EFModels.edmx</DependentUpon>
-      <LastGenOutput>EFModels.Context.cs</LastGenOutput>
-    </Content>
     <Content Include="Infrastructure\DbFirst\EFModels.edmx.diagram">
       <DependentUpon>EFModels.edmx</DependentUpon>
-    </Content>
-    <Content Include="Infrastructure\DbFirst\EFModels.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EFModels.edmx</DependentUpon>
-      <LastGenOutput>EFModels.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\globalize\cultures\globalize.culture.af-ZA.js" />
@@ -3446,10 +3442,6 @@
     <ProjectReference Include="..\Edis.Db\Edis.Db.csproj">
       <Project>{601c87fb-067d-4b38-b1c2-da9cc6c6d43d}</Project>
       <Name>Edis.Db</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EDIS.Domain\EDIS.Domain.csproj">
-      <Project>{58e1c65e-241a-48d4-8711-a8418bd1e3ba}</Project>
-      <Name>EDIS.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{e5bc73b2-7418-4fee-a5b9-a268e9501523}</Project>

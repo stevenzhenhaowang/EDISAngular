@@ -29,13 +29,6 @@ namespace EDISAngular.Infrastructure.DbFirst
         public string LastName { get; set; }
         public int VerifiedId { get; set; }
         public string ABNACN { get; set; }
-        public string AddressLn1 { get; set; }
-        public string AddressLn2 { get; set; }
-        public string AddressLn3 { get; set; }
-        public string State { get; set; }
-        public string Suburb { get; set; }
-        public string Country { get; set; }
-        public string PostCode { get; set; }
         public string Fax { get; set; }
         public string Mobile { get; set; }
         public string Phone { get; set; }
@@ -54,6 +47,13 @@ namespace EDISAngular.Infrastructure.DbFirst
         public string BusinessPhone { get; set; }
         public string BusinessMobile { get; set; }
         public string BusinessFax { get; set; }
+        public string AddressLn1 { get; set; }
+        public string AddressLn2 { get; set; }
+        public string AddressLn3 { get; set; }
+        public string State { get; set; }
+        public string Suburb { get; set; }
+        public string Country { get; set; }
+        public string PostCode { get; set; }
         public string RoleAndServicesSummary { get; set; }
         public string DealerGroupName { get; set; }
         public string Asfl { get; set; }
@@ -92,9 +92,9 @@ namespace EDISAngular.Infrastructure.DbFirst
         public bool RemunerationMethodSpecified { get; set; }
         public string RemunerationMethod { get; set; }
         public int NumberOfClientsId { get; set; }
+        public int AnnualIncomeLevelId { get; set; }
         public int InvestibleAssetLevel { get; set; }
         public int TotalAssetLevelId { get; set; }
-        public int AnnualIncomeLevelId { get; set; }
         public string TotalAssetLevel { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

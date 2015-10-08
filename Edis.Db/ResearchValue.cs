@@ -13,12 +13,10 @@ namespace Edis.Db
         public string Id { get; set; }
         [Required]
         public string Key { get; set; }
-
+        [Required]
         public double Value { get; set; }
         [Required]
         public DateTime? CreatedOn { get; set; }
-
-        public string StringValue { get; set; }
 
         public string Issuer { get; set; }
     }

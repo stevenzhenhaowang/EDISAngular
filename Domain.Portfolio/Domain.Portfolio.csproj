@@ -67,7 +67,6 @@
     <Compile Include="AggregateRoots\Accounts\AccountBase.cs" />
     <Compile Include="AggregateRoots\Accounts\ClientAccount.cs" />
     <Compile Include="AggregateRoots\Accounts\GroupAccount.cs" />
-    <Compile Include="Correspondence\Message.cs" />
     <Compile Include="Entities\Activity\ActivityBase.cs" />
     <Compile Include="AggregateRoots\AssetBase.cs" />
     <Compile Include="Entities\Activity\ConsultancyActivity.cs" />

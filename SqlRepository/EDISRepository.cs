@@ -40,7 +40,6 @@ using InsuranceTransaction = Domain.Portfolio.Entities.Transactions.InsuranceTra
 using MarginLendingTransactionCreation = Domain.Portfolio.Entities.CreationModels.Transaction.MarginLendingTransactionCreation;
 using PropertyTransaction = Edis.Db.Transactions.PropertyTransaction;
 using RepaymentCreation = Domain.Portfolio.Entities.CreationModels.RepaymentCreation;
-using Domain.Portfolio.Correspondence;
 
 namespace SqlRepository
 {
@@ -87,86 +86,6 @@ namespace SqlRepository
             });
 
             _db.SaveChanges();
-        }
-
-        public void insertData3()
-        {
-            var account = GetClientGroupAccountSync("65593420", DateTime.Now);
-            account.MakeTransactionSync(new InsuranceTransactionCreation()
-            {
-                AmountInsured = 20000,
-                EntitiesInsured = "123",
-                ExpiryDate = DateTime.Now.AddDays(30),
-                GrantedOn = DateTime.Now,
-                InsuranceType = InsuranceType.AssetInsurance,
-                NameOfPolicy = PolicyType.Car.ToString(),
-                PolicyType = PolicyType.Car,
-                Premium = 28000,
-                IsAcquire = true,
-                Issuer = "Steven",
-                PolicyAddress = "517 flinders lane, melbourne, vic",
-                PolicyNumber = "0193"
-            });
-            account.MakeTransactionSync(new InsuranceTransactionCreation()
-            {
-                AmountInsured = 23000,
-                EntitiesInsured = "123",
-                ExpiryDate = DateTime.Now.AddDays(30),
-                GrantedOn = DateTime.Now,
-                InsuranceType = InsuranceType.PersoanlInsurance,
-                NameOfPolicy = PolicyType.Accident.ToString(),
-                PolicyType = PolicyType.Accident,
-                Premium = 54000,
-                IsAcquire = true,
-                Issuer = "Steven",
-                PolicyAddress = "517 flinders lane, melbourne, vic",
-                PolicyNumber = "0193"
-            });
-            account.MakeTransactionSync(new InsuranceTransactionCreation()
-            {
-                AmountInsured = 10000,
-                EntitiesInsured = "123",
-                ExpiryDate = DateTime.Now.AddDays(30),
-                GrantedOn = DateTime.Now,
-                InsuranceType = InsuranceType.AssetInsurance,
-                NameOfPolicy = PolicyType.Boat.ToString(),
-                PolicyType = PolicyType.Boat,
-                Premium = 18000,
-                IsAcquire = true,
-                Issuer = "Steven",
-                PolicyAddress = "517 flinders lane, melbourne, vic",
-                PolicyNumber = "0193"
-            });
-            account.MakeTransactionSync(new InsuranceTransactionCreation()
-            {
-                AmountInsured = 80000,
-                EntitiesInsured = "123",
-                ExpiryDate = DateTime.Now.AddDays(30),
-                GrantedOn = DateTime.Now,
-                InsuranceType = InsuranceType.AssetInsurance,
-                NameOfPolicy = PolicyType.Building.ToString(),
-                PolicyType = PolicyType.Building,
-                Premium = 98000,
-                IsAcquire = true,
-                Issuer = "Steven",
-                PolicyAddress = "517 flinders lane, melbourne, vic",
-                PolicyNumber = "0193"
-            });
-            account.MakeTransactionSync(new InsuranceTransactionCreation()
-            {
-                AmountInsured = 10000,
-                EntitiesInsured = "123",
-                ExpiryDate = DateTime.Now.AddDays(30),
-                GrantedOn = DateTime.Now,
-                InsuranceType = InsuranceType.MiscellaneousInsurance,
-                NameOfPolicy = PolicyType.RentalIncome.ToString(),
-                PolicyType = PolicyType.RentalIncome,
-                Premium = 10099,
-                IsAcquire = true,
-                Issuer = "Steven",
-                PolicyAddress = "517 flinders lane, melbourne, vic",
-                PolicyNumber = "0193"
-            });
         }
 
 
@@ -1569,20 +1488,6 @@ namespace SqlRepository
                 CourseTitle = newAdviser.CourseTitle,
                 CourseStatus = newAdviser.CourseStatus,
                 EducationLevelId = newAdviser.EducationLevelId,
-                CAFDescription = newAdviser.CAFDescription,
-                CAFId = newAdviser.CAFId,
-                CAFSelected = newAdviser.CAFSelected,
-                GroupName = newAdviser.GroupName,
-                Image = newAdviser.Image,
-                ImageMimeType = newAdviser.ImageMimeType,
-                NewsLetterSelected = newAdviser.NewsLetterSelected,
-                NewsLetterServiceId = newAdviser.NewsLetterServiceId,
-                NewsLetterServiceName = newAdviser.NewsLetterServiceName,
-                Providing = newAdviser.Providing,
-                RoleAndServicesSummary = newAdviser.RoleAndServicesSummary,
-                ServiceId = newAdviser.ServiceId,
-                ServiceName = newAdviser.ServiceName,
-                TotalAssetLevelId = newAdviser.TotalAssetLevelId
             });
 
             //await _db.SaveChangesAsync();
@@ -1594,98 +1499,15 @@ namespace SqlRepository
             return GetAdviserSync(newAdviser.AdviserNumber, DateTime.Now.AddSeconds(20));
         }
 
-        public Adviser UpdateAdviser(Adviser adviser) {
+        public async Task<Adviser> UpdateAdviser(Adviser adviser, DateTime date) {
 
-            Edis.Db.Adviser currentAdviser = _db.Advisers.SingleOrDefault(a => a.AdviserNumber == adviser.AdviserNumber);
+            Edis.Db.Adviser currentAdviser = _db.Advisers.SingleOrDefault(a => a.AdviserId == adviser.Id);
 
             currentAdviser.FirstName = adviser.FirstName;
-            currentAdviser.ABNACN = adviser.ABNACN;
-            currentAdviser.AddressLn1 = adviser.AddressLn1;
-            currentAdviser.AddressLn2 = adviser.AddressLn2;
-            currentAdviser.AddressLn3 = adviser.AddressLn3;
-            currentAdviser.AnnualIncomeLevelId = adviser.AnnualIncomeLevelId;
-            currentAdviser.ApproximateNumberOfClients = adviser.ApproximateNumberOfClients;
-            currentAdviser.Asfl = adviser.Asfl;
-            currentAdviser.AuthorizedRepresentativeNumber = adviser.AuthorizedRepresentativeNumber;
-            currentAdviser.BusinessFax = adviser.BusinessFax;
-            currentAdviser.BusinessMobile = adviser.BusinessMobile;
-            currentAdviser.BusinessPhone = adviser.BusinessPhone;
-            currentAdviser.CAFDescription = adviser.CAFDescription;
-            currentAdviser.CAFId = adviser.CAFId;
-            currentAdviser.CAFSelected = adviser.CAFSelected;
-            currentAdviser.CompanyName = adviser.CompanyName;
-            currentAdviser.Country = adviser.Country;
-            currentAdviser.CourseStatus = adviser.CourseStatus;
-            currentAdviser.CourseTitle = adviser.CourseTitle;
-            currentAdviser.CreatedOn = adviser.CreatedOn;
-            currentAdviser.CurrentTitle = adviser.CurrentTitle;
-            currentAdviser.DAddressLine1 = adviser.DAddressLine1;
-            currentAdviser.DAddressLine2 = adviser.DAddressLine2;
-            currentAdviser.DAddressLine3 = adviser.DAddressLine3;
-            currentAdviser.DCountry = adviser.DCountry;
-            currentAdviser.DealerGroupHasDerivativesLicense = adviser.DealerGroupHasDerivativesLicense;
-            currentAdviser.DealerGroupName = adviser.DealerGroupName;
-            currentAdviser.DPostcode = adviser.DPostcode;
-            currentAdviser.DState = adviser.DState;
-            currentAdviser.DSuburb = adviser.DSuburb;
-            currentAdviser.EducationLevelId = adviser.EducationLevelId;
-            currentAdviser.ExperienceStartDate = adviser.ExperienceStartDate;
-            currentAdviser.Fax = adviser.Fax;
-            currentAdviser.FirstName = adviser.FirstName;
-            currentAdviser.Gender = adviser.Gender;
-            currentAdviser.GroupName = adviser.GroupName;
-            currentAdviser.IndustryExperienceStartDate = adviser.IndustryExperienceStartDate;
-            currentAdviser.Institution = adviser.Institution;
-            currentAdviser.InvestibleAssetLevel = adviser.InvestibleAssetLevel;
-            currentAdviser.IsAuthorizedRepresentative = adviser.IsAuthorizedRepresentative;
-            currentAdviser.LastName = adviser.LastName;
-            currentAdviser.LastUpdate = adviser.LastUpdate;
-            currentAdviser.Lat = adviser.Lat;
-            currentAdviser.Lng = adviser.Lng;
-            currentAdviser.MiddleName = adviser.MiddleName;
-            currentAdviser.Mobile = adviser.Mobile;
-            currentAdviser.NewsLetterSelected = adviser.NewsLetterSelected;
-            currentAdviser.NewsLetterServiceId = adviser.NewsLetterServiceId;
-            currentAdviser.NewsLetterServiceName = adviser.NewsLetterServiceName;
-            currentAdviser.NumberOfClientsId = adviser.NumberOfClientsId;
-            currentAdviser.Phone = adviser.Phone;
-            currentAdviser.PostCode = adviser.PostCode;
-            currentAdviser.ProfessiontypeId = adviser.ProfessiontypeId;
-            currentAdviser.Providing = adviser.Providing;
-            currentAdviser.RemunerationMethod = adviser.RemunerationMethod;
-            currentAdviser.RemunerationMethodSpecified = adviser.RemunerationMethodSpecified;
-            currentAdviser.RoleAndServicesSummary = adviser.RoleAndServicesSummary;
-            currentAdviser.ServiceId = adviser.ServiceId;
-            currentAdviser.ServiceName = adviser.ServiceName;
-            currentAdviser.State = adviser.State;
-            currentAdviser.Suburb = adviser.Suburb;
-            currentAdviser.Title = adviser.Title;
-            currentAdviser.TotalAssetLevel = adviser.TotalAssetLevel;
-            currentAdviser.TotalAssetLevelId = adviser.TotalAssetLevelId;
-            currentAdviser.TotalAssetUnderManagement = adviser.TotalAssetUnderManagement;
-            currentAdviser.TotalDirectAustralianEquitiesUnderManagement = adviser.TotalDirectAustralianEquitiesUnderManagement;
-            currentAdviser.TotalDirectFixedInterestUnderManagement = adviser.TotalDirectFixedInterestUnderManagement;
-            currentAdviser.TotalDirectInterantionalEquitiesUnderManagement = adviser.TotalDirectInterantionalEquitiesUnderManagement;
-            currentAdviser.TotalDirectLendingBookInterestUnderManagement = adviser.TotalDirectLendingBookInterestUnderManagement;
-            currentAdviser.TotalInvestmentUndermanagement = adviser.TotalInvestmentUndermanagement;
-            currentAdviser.VerifiedId = adviser.VerifiedId;
-            
-            _db.SaveChanges();
 
-            return GetAdviserSync(currentAdviser.AdviserNumber, DateTime.Now.AddSeconds(20));
-        }
+            await _db.SaveChangesAsync();
 
-        public Adviser UpdateAdviserImage(Adviser adviser)
-        {
-
-            Edis.Db.Adviser currentAdviser = _db.Advisers.SingleOrDefault(a => a.AdviserNumber == adviser.AdviserNumber);
-
-            currentAdviser.Image = adviser.Image;
-            currentAdviser.ImageMimeType = adviser.ImageMimeType;
-
-            _db.SaveChanges();
-
-            return GetAdviserSync(currentAdviser.AdviserNumber, DateTime.Now.AddSeconds(20));
+            return await GetAdviser(adviser.Id, date.AddSeconds(20));
         }
         
         public async Task CreateNewClient(ClientRegistration client)
@@ -3018,34 +2840,6 @@ namespace SqlRepository
             _db.SaveChanges();
         }
 
-        public List<Domain.Portfolio.AggregateRoots.Asset.Equity> GetAllEquities()
-        {
-            List<Domain.Portfolio.AggregateRoots.Asset.Equity> equities = new List<Domain.Portfolio.AggregateRoots.Asset.Equity>();
-
-            foreach (var equity in _db.Equities.ToList())
-            {
-                Domain.Portfolio.AggregateRoots.Asset.Equity subEquity = null;
-                switch (equity.EquityType) { 
-                    case EquityTypes.AustralianEquity:
-                        subEquity = new AustralianEquity(this);
-                        break;
-                    case EquityTypes.InternationalEquity:
-                        subEquity = new InternationalEquity(this);
-                        break;
-                    case EquityTypes.ManagedInvestments:
-                        subEquity = new ManagedInvestment(this);
-                        break;
-                }
-                subEquity.Id = equity.AssetId;
-                subEquity.Ticker = equity.Ticker;
-                subEquity.Name = equity.Name;
-                subEquity.Sector = equity.Sector;
-                subEquity.EquityType = equity.EquityType;
-                equities.Add(subEquity);
-            }
-            return equities;
-        }
-
         public async Task<double?> GetResearchValueForEquity(string key, string ticker)
         {
             var equity =
@@ -3087,28 +2881,6 @@ namespace SqlRepository
                     .OrderByDescending(c => c.CreatedOn)
                     .FirstOrDefault()
                     .Value;
-        }
-
-
-        public string GetStringResearchValueForEquitySync(string key, string ticker)             //added
-        {
-            var equity =
-                _db.Equities.Local.SingleOrDefault(
-                    eq => eq.Ticker == ticker) ??
-                    _db.Equities.Where(eq => eq.Ticker == ticker)
-                        .Include(eq => eq.ResearchValues)
-                        .FirstOrDefault();
-            if (equity == null)
-            {
-                throw new Exception("Cannot find equity with ticker " + ticker +
-                                    " or no research value for this equity of key " + key +
-                                    " is yet available from database");
-            }
-            return equity.ResearchValues == null || !equity.ResearchValues.Any() ? "" :
-                equity.ResearchValues.Where(v => v.Key == key)
-                    .OrderByDescending(c => c.CreatedOn)
-                    .FirstOrDefault()
-                    .StringValue;
         }
 
         public async Task FeedResearchValueForProperty(string key, double value, string propertyId, string issuer)
@@ -4546,7 +4318,7 @@ namespace SqlRepository
                 var clientAverageAge =
                     _db.Clients.Where(c => c.ClientGroupId == clientGroup.ClientGroupId)
                         .ToList()
-                        .Sum(c => c.Dob == null || c.Dob.Value == null ? 0 : (beforeDate - c.Dob.Value).Days) / 365 /
+                        .Sum(c => (beforeDate - c.Dob.Value).Days) / 365 /
                     _db.Clients.Count(c => c.ClientGroupId == clientGroup.ClientGroupId);
 
                 var key = group.Key.PropertyId + "*" + group.Key.AccountId;
@@ -4652,7 +4424,7 @@ namespace SqlRepository
                 var clientAverageAge =
                     _db.Clients.Where(c => c.ClientGroupId == clientGroup.ClientGroupId)
                         .ToList()
-                        .Sum(c => c.Dob == null || c.Dob.Value == null ? 0 : (beforeDate - c.Dob.Value).Days) / 365 /                 //Dob == null ???
+                        .Sum(c => (beforeDate - c.Dob.Value).Days) / 365 /
                     _db.Clients.Count(c => c.ClientGroupId == clientGroup.ClientGroupId);
 
                 var key = group.Key.PropertyId + "*" + group.Key.AccountId;
@@ -5118,77 +4890,7 @@ namespace SqlRepository
                 Id = dbAdviser.AdviserId,
                 AdviserNumber = dbAdviser.AdviserNumber,
                 FirstName = dbAdviser.FirstName,
-                LastName = dbAdviser.LastName,
-                ABNACN = dbAdviser.ABNACN,
-                AddressLn1 = dbAdviser.AddressLn1,
-                AddressLn2 = dbAdviser.AddressLn2,
-                AddressLn3 = dbAdviser.AddressLn3,
-                AnnualIncomeLevelId = dbAdviser.AnnualIncomeLevelId,
-                ApproximateNumberOfClients = dbAdviser.ApproximateNumberOfClients,
-                Asfl = dbAdviser.Asfl,
-                AuthorizedRepresentativeNumber = dbAdviser.AuthorizedRepresentativeNumber,
-                BusinessFax = dbAdviser.BusinessFax,
-                BusinessMobile = dbAdviser.BusinessMobile,
-                BusinessPhone = dbAdviser.BusinessPhone,
-                CAFDescription = dbAdviser.CAFDescription,
-                CAFId = dbAdviser.CAFId,
-                CAFSelected = dbAdviser.CAFSelected,
-                CompanyName = dbAdviser.CompanyName,
-                Country = dbAdviser.Country,
-                CourseStatus = dbAdviser.CourseStatus,
-                CourseTitle = dbAdviser.CourseTitle,
-                CreatedOn = dbAdviser.CreatedOn,
-                CurrentTitle = dbAdviser.CurrentTitle,
-                DAddressLine1 = dbAdviser.DAddressLine1,
-                DAddressLine2 = dbAdviser.DAddressLine2,
-                DAddressLine3 = dbAdviser.DAddressLine3,
-                DCountry = dbAdviser.DCountry,
-                DealerGroupHasDerivativesLicense = dbAdviser.DealerGroupHasDerivativesLicense,
-                DealerGroupName = dbAdviser.DealerGroupName,
-                DPostcode = dbAdviser.DPostcode,
-                DState = dbAdviser.DState,
-                DSuburb = dbAdviser.DSuburb,
-                EducationLevelId = dbAdviser.EducationLevelId,
-                ExperienceStartDate = dbAdviser.ExperienceStartDate,
-                Fax = dbAdviser.Fax,
-                Gender = dbAdviser.Gender,
-                GroupName = dbAdviser.GroupName,
-                Image = dbAdviser.Image,
-                ImageMimeType = dbAdviser.ImageMimeType,
-                IndustryExperienceStartDate = dbAdviser.IndustryExperienceStartDate,
-                Institution = dbAdviser.Institution,
-                InvestibleAssetLevel = dbAdviser.InvestibleAssetLevel,
-                IsAuthorizedRepresentative = dbAdviser.IsAuthorizedRepresentative,
-                LastUpdate = dbAdviser.LastUpdate,
-                Lat = dbAdviser.Lat,
-                Lng = dbAdviser.Lng,
-                MiddleName = dbAdviser.MiddleName,
-                Mobile = dbAdviser.Mobile,
-                NewsLetterSelected = dbAdviser.NewsLetterSelected,
-                NewsLetterServiceId = dbAdviser.NewsLetterServiceId,
-                NewsLetterServiceName = dbAdviser.NewsLetterServiceName,
-                NumberOfClientsId = dbAdviser.NumberOfClientsId,
-                Phone = dbAdviser.Phone,
-                PostCode = dbAdviser.PostCode,
-                ProfessiontypeId = dbAdviser.ProfessiontypeId,
-                Providing = dbAdviser.Providing,
-                RemunerationMethod = dbAdviser.RemunerationMethod,
-                RemunerationMethodSpecified = dbAdviser.RemunerationMethodSpecified,
-                RoleAndServicesSummary = dbAdviser.RoleAndServicesSummary,
-                ServiceId = dbAdviser.ServiceId,
-                ServiceName = dbAdviser.ServiceName,
-                State = dbAdviser.State,
-                Suburb = dbAdviser.Suburb,
-                Title = dbAdviser.Title,
-                TotalAssetLevel = dbAdviser.TotalAssetLevel,
-                TotalAssetLevelId = dbAdviser.TotalAssetLevelId,
-                TotalAssetUnderManagement = dbAdviser.TotalAssetUnderManagement,
-                TotalDirectAustralianEquitiesUnderManagement = dbAdviser.TotalDirectAustralianEquitiesUnderManagement,
-                TotalDirectFixedInterestUnderManagement = dbAdviser.TotalDirectFixedInterestUnderManagement,
-                TotalDirectInterantionalEquitiesUnderManagement = dbAdviser.TotalDirectInterantionalEquitiesUnderManagement,
-                TotalDirectLendingBookInterestUnderManagement = dbAdviser.TotalDirectLendingBookInterestUnderManagement,
-                TotalInvestmentUndermanagement = dbAdviser.TotalInvestmentUndermanagement,
-                VerifiedId = dbAdviser.VerifiedId
+                LastName = dbAdviser.LastName
             };
             return adviser;
         }
@@ -5213,16 +4915,7 @@ namespace SqlRepository
                 ClientGroupNumber = dbClient.ClientGroup.GroupNumber,
                 LastName = dbClient.LastName,
                 ClientNumber = dbClient.ClientNumber,
-                Id = dbClient.ClientId,
-                ABN = dbClient.ABN,
-                ACN = dbClient.ACN,
-                Address = dbClient.Address,
-                ClientGroupId = dbClient.ClientGroupId,
-                ClientType = dbClient.ClientType,
-                CreatedOn = dbClient.CreatedOn,
-                Dob = dbClient.Dob,
-                Email = dbClient.Email,
-                EntityName = dbClient.EntityName
+                Id = dbClient.ClientId
             };
 
             return client;
@@ -5260,7 +4953,7 @@ namespace SqlRepository
                 Phone = dbClient.Phone,
                 LastName = dbClient.LastName,
                 EntityName = dbClient.EntityName,
-                Age = dbClient.Dob == null ? 0 : (int)((todate - dbClient.Dob.Value).TotalDays / 365),
+                //Age = (int)((todate - dbClient.Dob.Value).TotalDays / 365),
                 ClientGroupNumber = dbClient.ClientGroup.GroupNumber,
                 ClientNumber = dbClient.ClientNumber,
                 Id = dbClient.ClientId
@@ -6432,7 +6125,7 @@ namespace SqlRepository
                         var clientAverageAge =
                             _db.Clients.Where(c => c.ClientGroupId == clientGroup.ClientGroupId)
                                 .ToList()
-                                .Sum(c => c.Dob == null || c.Dob.Value == null ? 0 : (todate - c.Dob.Value).Days) / 365 /
+                                .Sum(c => (todate - c.Dob.Value).Days) / 365 /
                             _db.Clients.Count(c => c.ClientGroupId == clientGroup.ClientGroupId);
 
                         var yearsToRetirement = RetirementAge - clientAverageAge;
@@ -6497,11 +6190,10 @@ namespace SqlRepository
                     if (transaction != null)
                     {
                         var property = transaction.PropertyAddress;
-                        
                         var clientAverageAge =
                             _db.Clients.Where(c => c.ClientGroupId == clientGroup.ClientGroupId)
                                 .ToList()
-                                .Sum(c => (c.Dob == null || c.Dob.Value == null ? 0 : (todate - c.Dob.Value).Days)) / 365 /
+                                .Sum(c => (todate - c.Dob.Value).Days) / 365 /
                             _db.Clients.Count(c => c.ClientGroupId == clientGroup.ClientGroupId);
 
                         var yearsToRetirement = RetirementAge - clientAverageAge;
@@ -7070,53 +6762,14 @@ namespace SqlRepository
                 PayoutRatio = (GetResearchValueForEquitySync(Nameof<Ratios>.Property(r => r.PayoutRatio), ticker)).GetValueOrDefault(),
                 ThreeYearReturn = (GetResearchValueForEquitySync(Nameof<Ratios>.Property(r => r.ThreeYearReturn), ticker)).GetValueOrDefault()
             };
+
+
+
             return ratio;
         }
 
         #endregion
 
-        public void CreateNewMessageSync(Message message, int senderRole)
-        {
-            var resource = _db.ResourcesReferences.SingleOrDefault(r => r.TokenValue == message.resourceToken);
-            Edis.Db.Notes note = new Edis.Db.Notes {
-                AccountId = "",
-                AdviserId = message.adviserNumber,
-                AssetTypeId = message.assetTypeId,
-                Body = message.body,
-                ClientId = message.clientId,
-                DateCompleted = message.dateCompleted,
-                DateCreated = DateTime.Now,
-                DateDue = message.dateDue,
-                DateModified = DateTime.Now,
-                FollowupActions = message.followupActions,
-                FollowupDate = message.followupDate,
-                IsAccepted = message.isAccepted,
-                ReminderDate = message.reminderDate,
-                IsDeclined = message.isDeclined,
-                NoteType = message.noteTypeId,
-                NoteId = Guid.NewGuid().ToString(),
-                Subject = message.subject,
-                SenderRole = senderRole
-            };
-
-            _db.Notes.Add(note);
-
-            if (!string.IsNullOrEmpty(resource.ResourceUrl))
-            {
-                _db.Attachments.Add(new Edis.Db.Attachments {
-                    AttachmentId = Guid.NewGuid().ToString(),
-                    DateCreated = DateTime.Now,
-                    DateModified = DateTime.Now,
-                    NoteId = note.NoteId,
-                    Path = resource.ResourceUrl,
-                    Title = note.Subject,
-                    AttachmentType = resource.FileExtension
-                });
-                
-            }
-
-            _db.SaveChanges();
-        }
 
     }
 }

@@ -27,7 +27,6 @@ namespace Domain.Portfolio.AggregateRoots.Asset
         public Ratios F0Ratios { get; set; }
         public Recommendation F1Recommendation { get; set; }
         public string Sector { get; set; }
-        public EquityTypes EquityType { get; set; }
 
         public abstract AssetSuitability GetRating();
 
