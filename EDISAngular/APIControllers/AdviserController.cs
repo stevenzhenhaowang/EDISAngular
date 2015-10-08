@@ -95,6 +95,7 @@ namespace EDISAngular.APIControllers
                 }
                 
             }
+            var a = 100;
             return clients;
         }
 
