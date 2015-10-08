@@ -23,19 +23,19 @@ namespace EDISAngular.Infrastructure.DbFirst
     
         public string ClientId { get; set; }
         public System.DateTime CreatedOn { get; set; }
-        public string ClientNumber { get; set; }
-        public string ClientGroupId { get; set; }
-        public string ClientType { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
         public string FirstName { get; set; }
-        public string MiddleName { get; set; }
         public string LastName { get; set; }
         public Nullable<System.DateTime> Dob { get; set; }
+        public string ClientNumber { get; set; }
+        public string ClientGroupId { get; set; }
+        public string Address { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
         public string Gender { get; set; }
         public string Mobile { get; set; }
         public string Fax { get; set; }
-        public string Address { get; set; }
+        public string MiddleName { get; set; }
+        public string ClientType { get; set; }
         public int Age { get; set; }
         public string EntityName { get; set; }
         public string EntityType { get; set; }

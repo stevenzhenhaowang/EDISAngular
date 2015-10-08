@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a0c0c26796b3410090adaddbb6c661a3" Name="Diagram1">
+      <Diagram DiagramId="065e33bc0ac94620b61a2ce487d1f846" Name="Diagram1">
         <EntityTypeShape EntityType="edisDbModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="edisDbModel.Account" Width="1.5" PointX="7.5" PointY="34.25" IsExpanded="true" />
         <EntityTypeShape EntityType="edisDbModel.Adviser" Width="1.5" PointX="0.75" PointY="26" IsExpanded="true" />
@@ -41,7 +41,7 @@
         <EntityTypeShape EntityType="edisDbModel.PropertyType" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="edisDbModel.Rental" Width="1.5" PointX="12.75" PointY="27.625" IsExpanded="true" />
         <EntityTypeShape EntityType="edisDbModel.RepaymentRecord" Width="1.5" PointX="9.75" PointY="75.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="edisDbModel.ResearchValue" Width="1.5" PointX="18.75" PointY="36.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="edisDbModel.ResearchValue" Width="1.5" PointX="18.75" PointY="36.125" IsExpanded="true" />
         <EntityTypeShape EntityType="edisDbModel.ResourcesReference" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="edisDbModel.Sector" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="edisDbModel.TransactionExpens" Width="1.5" PointX="3" PointY="36.125" IsExpanded="true" />
@@ -72,7 +72,7 @@
         <AssociationConnector Association="edisDbModel.FK_dbo_BondTransactions_dbo_Bonds_BondId" ManuallyRouted="false" />
         <AssociationConnector Association="edisDbModel.FK_dbo_CouponPayments_dbo_Bonds_Bond_BondId" ManuallyRouted="false" />
         <AssociationConnector Association="edisDbModel.FK_dbo_ResearchValues_dbo_Bonds_Bond_BondId" ManuallyRouted="false" />
-        <AssociationConnector Association="edisDbModel.FK_dbo_CashTransactions_dbo_CashAccounts_CashAccountId" ManuallyRouted="false" />
+        <AssociationConnector Association="edisDbModel.FK_dbo_CashTransactions_dbo_CashAccounts_CashAccount_Id" ManuallyRouted="false" />
         <AssociationConnector Association="edisDbModel.FK_dbo_Interests_dbo_CashAccounts_CashAccount_Id" ManuallyRouted="false" />
         <AssociationConnector Association="edisDbModel.FK_dbo_Clients_dbo_ClientGroups_ClientGroupId" ManuallyRouted="false" />
         <AssociationConnector Association="edisDbModel.FK_dbo_Notes_dbo_Clients_ClientId" ManuallyRouted="false" />

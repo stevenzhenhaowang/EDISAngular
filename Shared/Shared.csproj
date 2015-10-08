@@ -54,7 +54,6 @@
   <ItemGroup>
     <Compile Include="AccountType.cs" />
     <Compile Include="ASXIndexTypes.cs" />
-    <Compile Include="ClientDocInfo.cs" />
     <Compile Include="ConsultancyExpenseType.cs" />
     <Compile Include="CreditCardType.cs" />
     <Compile Include="Frequency.cs" />

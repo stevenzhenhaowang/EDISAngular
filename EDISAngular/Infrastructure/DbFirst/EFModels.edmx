@@ -38,6 +38,13 @@
           <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="VerifiedId" Type="int" Nullable="false" />
           <Property Name="ABNACN" Type="nvarchar(max)" />
+          <Property Name="AddressLn1" Type="nvarchar(max)" />
+          <Property Name="AddressLn2" Type="nvarchar(max)" />
+          <Property Name="AddressLn3" Type="nvarchar(max)" />
+          <Property Name="State" Type="nvarchar(max)" />
+          <Property Name="Suburb" Type="nvarchar(max)" />
+          <Property Name="Country" Type="nvarchar(max)" />
+          <Property Name="PostCode" Type="nvarchar(max)" />
           <Property Name="Fax" Type="nvarchar(max)" />
           <Property Name="Mobile" Type="nvarchar(max)" />
           <Property Name="Phone" Type="nvarchar(max)" />
@@ -56,13 +63,6 @@
           <Property Name="BusinessPhone" Type="nvarchar(max)" />
           <Property Name="BusinessMobile" Type="nvarchar(max)" />
           <Property Name="BusinessFax" Type="nvarchar(max)" />
-          <Property Name="AddressLn1" Type="nvarchar(max)" />
-          <Property Name="AddressLn2" Type="nvarchar(max)" />
-          <Property Name="AddressLn3" Type="nvarchar(max)" />
-          <Property Name="State" Type="nvarchar(max)" />
-          <Property Name="Suburb" Type="nvarchar(max)" />
-          <Property Name="Country" Type="nvarchar(max)" />
-          <Property Name="PostCode" Type="nvarchar(max)" />
           <Property Name="RoleAndServicesSummary" Type="nvarchar(max)" />
           <Property Name="DealerGroupName" Type="nvarchar(max)" />
           <Property Name="Asfl" Type="nvarchar(max)" />
@@ -101,9 +101,9 @@
           <Property Name="RemunerationMethodSpecified" Type="bit" Nullable="false" />
           <Property Name="RemunerationMethod" Type="nvarchar(max)" />
           <Property Name="NumberOfClientsId" Type="int" Nullable="false" />
-          <Property Name="AnnualIncomeLevelId" Type="int" Nullable="false" />
           <Property Name="InvestibleAssetLevel" Type="int" Nullable="false" />
           <Property Name="TotalAssetLevelId" Type="int" Nullable="false" />
+          <Property Name="AnnualIncomeLevelId" Type="int" Nullable="false" />
           <Property Name="TotalAssetLevel" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="AspNetRoles">
@@ -244,9 +244,9 @@
           </Key>
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
-          <Property Name="CashAccountId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Amount" Type="float" Nullable="false" />
           <Property Name="TransactionDate" Type="datetime" Nullable="false" />
+          <Property Name="CashAccountId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Account_AccountId" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="ClientGroups">
@@ -257,9 +257,9 @@
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="MainClientId" Type="nvarchar(max)" Nullable="false" />
           <Property Name="GroupNumber" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Adviser_AdviserId" Type="nvarchar" MaxLength="128" />
           <Property Name="GroupName" Type="nvarchar(max)" />
           <Property Name="GroupAlias" Type="nvarchar(max)" />
-          <Property Name="Adviser_AdviserId" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="Clients">
           <Key>
@@ -267,19 +267,19 @@
           </Key>
           <Property Name="ClientId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
-          <Property Name="ClientNumber" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="ClientGroupId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="ClientType" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar(max)" />
-          <Property Name="MiddleName" Type="nvarchar(max)" />
           <Property Name="LastName" Type="nvarchar(max)" />
           <Property Name="Dob" Type="datetime" />
+          <Property Name="ClientNumber" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ClientGroupId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Gender" Type="nvarchar(max)" />
           <Property Name="Mobile" Type="nvarchar(max)" />
           <Property Name="Fax" Type="nvarchar(max)" />
-          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="MiddleName" Type="nvarchar(max)" />
+          <Property Name="ClientType" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Age" Type="int" Nullable="false" />
           <Property Name="EntityName" Type="nvarchar(max)" />
           <Property Name="EntityType" Type="nvarchar(max)" />
@@ -549,6 +549,7 @@
           <Property Name="Bond_BondId" Type="nvarchar" MaxLength="128" />
           <Property Name="Property_PropertyId" Type="nvarchar" MaxLength="128" />
           <Property Name="Equity_AssetId" Type="nvarchar" MaxLength="128" />
+          <Property Name="StringValue" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="ResourcesReferences">
           <Key>
@@ -749,7 +750,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_CashTransactions_dbo_CashAccounts_CashAccountId">
+        <Association Name="FK_dbo_CashTransactions_dbo_CashAccounts_CashAccount_Id">
           <End Role="CashAccounts" Type="Self.CashAccounts" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -1233,7 +1234,7 @@
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="CashTransactions" EntitySet="CashTransactions" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_CashTransactions_dbo_CashAccounts_CashAccountId" Association="Self.FK_dbo_CashTransactions_dbo_CashAccounts_CashAccountId">
+          <AssociationSet Name="FK_dbo_CashTransactions_dbo_CashAccounts_CashAccount_Id" Association="Self.FK_dbo_CashTransactions_dbo_CashAccounts_CashAccount_Id">
             <End Role="CashAccounts" EntitySet="CashAccounts" />
             <End Role="CashTransactions" EntitySet="CashTransactions" />
           </AssociationSet>
@@ -1407,6 +1408,13 @@
           <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="VerifiedId" Type="Int32" Nullable="false" />
           <Property Name="ABNACN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLn1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLn2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLn3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Suburb" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Fax" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Mobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -1425,13 +1433,6 @@
           <Property Name="BusinessPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="BusinessMobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="BusinessFax" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AddressLn1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AddressLn2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AddressLn3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Suburb" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PostCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="RoleAndServicesSummary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DealerGroupName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Asfl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -1470,9 +1471,9 @@
           <Property Name="RemunerationMethodSpecified" Type="Boolean" Nullable="false" />
           <Property Name="RemunerationMethod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NumberOfClientsId" Type="Int32" Nullable="false" />
-          <Property Name="AnnualIncomeLevelId" Type="Int32" Nullable="false" />
           <Property Name="InvestibleAssetLevel" Type="Int32" Nullable="false" />
           <Property Name="TotalAssetLevelId" Type="Int32" Nullable="false" />
+          <Property Name="AnnualIncomeLevelId" Type="Int32" Nullable="false" />
           <Property Name="TotalAssetLevel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ClientGroups" Relationship="Self.FK_dbo_ClientGroups_dbo_Advisers_Adviser_AdviserId" FromRole="Advisers" ToRole="ClientGroups" />
           <NavigationProperty Name="ConsultancyExpenses" Relationship="Self.FK_dbo_ConsultancyExpenses_dbo_Advisers_AdviserId" FromRole="Advisers" ToRole="ConsultancyExpenses" />
@@ -1617,7 +1618,7 @@
           <Property Name="InterestRate" Type="Double" />
           <Property Name="AnnualInterest" Type="Double" />
           <Property Name="FaceValue" Type="Double" Nullable="false" />
-          <NavigationProperty Name="CashTransactions" Relationship="Self.FK_dbo_CashTransactions_dbo_CashAccounts_CashAccountId" FromRole="CashAccounts" ToRole="CashTransactions" />
+          <NavigationProperty Name="CashTransactions" Relationship="Self.FK_dbo_CashTransactions_dbo_CashAccounts_CashAccount_Id" FromRole="CashAccounts" ToRole="CashTransactions" />
           <NavigationProperty Name="Interests" Relationship="Self.FK_dbo_Interests_dbo_CashAccounts_CashAccount_Id" FromRole="CashAccounts" ToRole="Interests" />
         </EntityType>
         <EntityType Name="CashTransaction">
@@ -1626,12 +1627,12 @@
           </Key>
           <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CashAccountId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Amount" Type="Double" Nullable="false" />
           <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CashAccountId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Account_AccountId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Account" Relationship="Self.FK_dbo_CashTransactions_dbo_Accounts_Account_AccountId" FromRole="CashTransactions" ToRole="Accounts" />
-          <NavigationProperty Name="CashAccount" Relationship="Self.FK_dbo_CashTransactions_dbo_CashAccounts_CashAccountId" FromRole="CashTransactions" ToRole="CashAccounts" />
+          <NavigationProperty Name="CashAccount" Relationship="Self.FK_dbo_CashTransactions_dbo_CashAccounts_CashAccount_Id" FromRole="CashTransactions" ToRole="CashAccounts" />
         </EntityType>
         <EntityType Name="ClientGroup">
           <Key>
@@ -1641,9 +1642,9 @@
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="MainClientId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="GroupNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Adviser_AdviserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="GroupName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="GroupAlias" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Adviser_AdviserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Accounts" Relationship="Self.FK_dbo_Accounts_dbo_ClientGroups_ClientGroup_ClientGroupId" FromRole="ClientGroups" ToRole="Accounts" />
           <NavigationProperty Name="Adviser" Relationship="Self.FK_dbo_ClientGroups_dbo_Advisers_Adviser_AdviserId" FromRole="ClientGroups" ToRole="Advisers" />
           <NavigationProperty Name="Clients" Relationship="Self.FK_dbo_Clients_dbo_ClientGroups_ClientGroupId" FromRole="ClientGroups" ToRole="Clients" />
@@ -1654,19 +1655,19 @@
           </Key>
           <Property Name="ClientId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ClientNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ClientGroupId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ClientType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Dob" Type="DateTime" Precision="3" />
+          <Property Name="ClientNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClientGroupId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Mobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Fax" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClientType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Age" Type="Int32" Nullable="false" />
           <Property Name="EntityName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="EntityType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -1975,6 +1976,7 @@
           <Property Name="Bond_BondId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Property_PropertyId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Equity_AssetId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="StringValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Bond" Relationship="Self.FK_dbo_ResearchValues_dbo_Bonds_Bond_BondId" FromRole="ResearchValues" ToRole="Bonds" />
           <NavigationProperty Name="Equity" Relationship="Self.FK_dbo_ResearchValues_dbo_Equities_Equity_AssetId" FromRole="ResearchValues" ToRole="Equities" />
           <NavigationProperty Name="Property" Relationship="Self.FK_dbo_ResearchValues_dbo_Properties_Property_PropertyId" FromRole="ResearchValues" ToRole="Properties" />
@@ -2355,7 +2357,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_CashTransactions_dbo_CashAccounts_CashAccountId">
+        <Association Name="FK_dbo_CashTransactions_dbo_CashAccounts_CashAccount_Id">
           <End Role="CashAccounts" Type="Self.CashAccount" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -2694,7 +2696,7 @@
             <End Role="Bonds" EntitySet="Bonds" />
             <End Role="ResearchValues" EntitySet="ResearchValues" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_CashTransactions_dbo_CashAccounts_CashAccountId" Association="Self.FK_dbo_CashTransactions_dbo_CashAccounts_CashAccountId">
+          <AssociationSet Name="FK_dbo_CashTransactions_dbo_CashAccounts_CashAccount_Id" Association="Self.FK_dbo_CashTransactions_dbo_CashAccounts_CashAccount_Id">
             <End Role="CashAccounts" EntitySet="CashAccounts" />
             <End Role="CashTransactions" EntitySet="CashTransactions" />
           </AssociationSet>
@@ -2794,6 +2796,13 @@
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="VerifiedId" ColumnName="VerifiedId" />
                 <ScalarProperty Name="ABNACN" ColumnName="ABNACN" />
+                <ScalarProperty Name="AddressLn1" ColumnName="AddressLn1" />
+                <ScalarProperty Name="AddressLn2" ColumnName="AddressLn2" />
+                <ScalarProperty Name="AddressLn3" ColumnName="AddressLn3" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Suburb" ColumnName="Suburb" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
                 <ScalarProperty Name="Fax" ColumnName="Fax" />
                 <ScalarProperty Name="Mobile" ColumnName="Mobile" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
@@ -2812,13 +2821,6 @@
                 <ScalarProperty Name="BusinessPhone" ColumnName="BusinessPhone" />
                 <ScalarProperty Name="BusinessMobile" ColumnName="BusinessMobile" />
                 <ScalarProperty Name="BusinessFax" ColumnName="BusinessFax" />
-                <ScalarProperty Name="AddressLn1" ColumnName="AddressLn1" />
-                <ScalarProperty Name="AddressLn2" ColumnName="AddressLn2" />
-                <ScalarProperty Name="AddressLn3" ColumnName="AddressLn3" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Suburb" ColumnName="Suburb" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
                 <ScalarProperty Name="RoleAndServicesSummary" ColumnName="RoleAndServicesSummary" />
                 <ScalarProperty Name="DealerGroupName" ColumnName="DealerGroupName" />
                 <ScalarProperty Name="Asfl" ColumnName="Asfl" />
@@ -2857,9 +2859,9 @@
                 <ScalarProperty Name="RemunerationMethodSpecified" ColumnName="RemunerationMethodSpecified" />
                 <ScalarProperty Name="RemunerationMethod" ColumnName="RemunerationMethod" />
                 <ScalarProperty Name="NumberOfClientsId" ColumnName="NumberOfClientsId" />
-                <ScalarProperty Name="AnnualIncomeLevelId" ColumnName="AnnualIncomeLevelId" />
                 <ScalarProperty Name="InvestibleAssetLevel" ColumnName="InvestibleAssetLevel" />
                 <ScalarProperty Name="TotalAssetLevelId" ColumnName="TotalAssetLevelId" />
+                <ScalarProperty Name="AnnualIncomeLevelId" ColumnName="AnnualIncomeLevelId" />
                 <ScalarProperty Name="TotalAssetLevel" ColumnName="TotalAssetLevel" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3002,9 +3004,9 @@
               <MappingFragment StoreEntitySet="CashTransactions">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CashAccountId" ColumnName="CashAccountId" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="CashAccountId" ColumnName="CashAccountId" />
                 <ScalarProperty Name="Account_AccountId" ColumnName="Account_AccountId" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3016,9 +3018,9 @@
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="MainClientId" ColumnName="MainClientId" />
                 <ScalarProperty Name="GroupNumber" ColumnName="GroupNumber" />
+                <ScalarProperty Name="Adviser_AdviserId" ColumnName="Adviser_AdviserId" />
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />
                 <ScalarProperty Name="GroupAlias" ColumnName="GroupAlias" />
-                <ScalarProperty Name="Adviser_AdviserId" ColumnName="Adviser_AdviserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3027,19 +3029,19 @@
               <MappingFragment StoreEntitySet="Clients">
                 <ScalarProperty Name="ClientId" ColumnName="ClientId" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="ClientNumber" ColumnName="ClientNumber" />
-                <ScalarProperty Name="ClientGroupId" ColumnName="ClientGroupId" />
-                <ScalarProperty Name="ClientType" ColumnName="ClientType" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="Dob" ColumnName="Dob" />
+                <ScalarProperty Name="ClientNumber" ColumnName="ClientNumber" />
+                <ScalarProperty Name="ClientGroupId" ColumnName="ClientGroupId" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="Mobile" ColumnName="Mobile" />
                 <ScalarProperty Name="Fax" ColumnName="Fax" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="ClientType" ColumnName="ClientType" />
                 <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="EntityName" ColumnName="EntityName" />
                 <ScalarProperty Name="EntityType" ColumnName="EntityType" />
@@ -3329,6 +3331,7 @@
                 <ScalarProperty Name="Bond_BondId" ColumnName="Bond_BondId" />
                 <ScalarProperty Name="Property_PropertyId" ColumnName="Property_PropertyId" />
                 <ScalarProperty Name="Equity_AssetId" ColumnName="Equity_AssetId" />
+                <ScalarProperty Name="StringValue" ColumnName="StringValue" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

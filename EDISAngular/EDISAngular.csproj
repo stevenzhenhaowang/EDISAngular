@@ -46,10 +46,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DocX, Version=1.0.0.18, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DocX.1.0.0.18\lib\net40\DocX.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.OData.Core">
       <HintPath>..\packages\Microsoft.OData.Core.6.9.0\lib\portable-net40+sl5+wp8+win8+wpa\Microsoft.OData.Core.dll</HintPath>
@@ -270,9 +266,6 @@
     <Compile Include="Infrastructure\DbFirst\AssetPrice.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\DbFirst\Attachment.cs">
-      <DependentUpon>EFModels.tt</DependentUpon>
-    </Compile>
     <Compile Include="Infrastructure\DbFirst\AustralianState.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>
@@ -351,12 +344,6 @@
     <Compile Include="Infrastructure\DbFirst\MortgageHomeLoanTransaction.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\DbFirst\Note.cs">
-      <DependentUpon>EFModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\DbFirst\NoteLink.cs">
-      <DependentUpon>EFModels.tt</DependentUpon>
-    </Compile>
     <Compile Include="Infrastructure\DbFirst\Property.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>
@@ -373,9 +360,6 @@
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\DbFirst\ResearchValue.cs">
-      <DependentUpon>EFModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\DbFirst\ResourcesReference.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\DbFirst\Sector.cs">
@@ -2086,16 +2070,6 @@
     <Content Include="Images\validation_forclients.png" />
     <Content Include="Images\validation_marketupdates.png" />
     <Content Include="Images\_notes\dwsync.xml" />
-    <Content Include="Infrastructure\DbFirst\EFModels.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EFModels.edmx</DependentUpon>
-      <LastGenOutput>EFModels.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Infrastructure\DbFirst\EFModels.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EFModels.edmx</DependentUpon>
-      <LastGenOutput>EFModels.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
@@ -2222,8 +2196,18 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EFModels.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Infrastructure\DbFirst\EFModels.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EFModels.edmx</DependentUpon>
+      <LastGenOutput>EFModels.Context.cs</LastGenOutput>
+    </Content>
     <Content Include="Infrastructure\DbFirst\EFModels.edmx.diagram">
       <DependentUpon>EFModels.edmx</DependentUpon>
+    </Content>
+    <Content Include="Infrastructure\DbFirst\EFModels.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EFModels.edmx</DependentUpon>
+      <LastGenOutput>EFModels.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\globalize\cultures\globalize.culture.af-ZA.js" />

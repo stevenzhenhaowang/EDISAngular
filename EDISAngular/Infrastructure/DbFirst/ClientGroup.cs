@@ -25,9 +25,9 @@ namespace EDISAngular.Infrastructure.DbFirst
         public System.DateTime CreatedOn { get; set; }
         public string MainClientId { get; set; }
         public string GroupNumber { get; set; }
+        public string Adviser_AdviserId { get; set; }
         public string GroupName { get; set; }
         public string GroupAlias { get; set; }
-        public string Adviser_AdviserId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Account> Accounts { get; set; }
