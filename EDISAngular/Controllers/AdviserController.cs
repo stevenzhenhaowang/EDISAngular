@@ -628,7 +628,7 @@ namespace EDISAngular.Controllers
                     adviser.EducationLevelId = model.educations[0].educationLevelId;
                 }
 
-                if (edisRepo.UpdateAdviser(adviser, DateTime.Now) != null)
+                if (edisRepo.UpdateAdviser(adviser) != null)
                 {
                     TempData["success"] = "Profile has been updated";
                 }

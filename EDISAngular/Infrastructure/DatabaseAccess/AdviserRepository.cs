@@ -248,70 +248,70 @@ namespace EDISAngular.Infrastructure.DatabaseAccess
         //#endregion
 
 
-        #region service methods added 12/05/2015
-        public List<CorporateActionClientAccountModel> GetAllClientAccounts(string adviserUserId)
-        {
-            return new List<CorporateActionClientAccountModel>
-            {
-                new CorporateActionClientAccountModel{
-                    edisAccountNumber= "0008",
-                    brokerAccountNumber= "0008",
-                    brokerHinSrn= "X1111118",
-                    type= "Autolink",
-                    name="Peter Truong 008",
-                },new CorporateActionClientAccountModel{
-                    edisAccountNumber= "0007",
-                    brokerAccountNumber= "0007",
-                    brokerHinSrn= "X1111117",
-                    type= "Autolink",
-                    name="Peter Truong 007",
-                },new CorporateActionClientAccountModel{
-                    edisAccountNumber= "0006",
-                    brokerAccountNumber= "0006",
-                    brokerHinSrn= "X1111116",
-                    type= "Autolink",
-                    name="Peter Truong 006",
-                },new CorporateActionClientAccountModel{
-                    edisAccountNumber= "0005",
-                    brokerAccountNumber= "0005",
-                    brokerHinSrn= "X1111115",
-                    type= "Autolink",
-                    name="Peter Truong 005",
-                },
-            };
-        }
-        public List<CorporateActionClientAccountModel> GetClientAccountsForCompany(string adviserUserId, string companyTicker)
-        {
-            return new List<CorporateActionClientAccountModel>
-            {
-                new CorporateActionClientAccountModel{
-                    edisAccountNumber= "0008",
-                    brokerAccountNumber= "0008",
-                    brokerHinSrn= "X1111118",
-                    type= "Autolink",
-                    name="Peter Truong 008",
-                },new CorporateActionClientAccountModel{
-                    edisAccountNumber= "0007",
-                    brokerAccountNumber= "0007",
-                    brokerHinSrn= "X1111117",
-                    type= "Autolink",
-                    name="Peter Truong 007",
-                },new CorporateActionClientAccountModel{
-                    edisAccountNumber= "0006",
-                    brokerAccountNumber= "0006",
-                    brokerHinSrn= "X1111116",
-                    type= "Autolink",
-                    name="Peter Truong 006",
-                },new CorporateActionClientAccountModel{
-                    edisAccountNumber= "0005",
-                    brokerAccountNumber= "0005",
-                    brokerHinSrn= "X1111115",
-                    type= "Autolink",
-                    name="Peter Truong 005",
-                },
-            };
-        }
-        #endregion
+        //#region service methods added 12/05/2015
+        //public List<CorporateActionClientAccountModel> GetAllClientAccounts(string adviserUserId)
+        //{
+        //    return new List<CorporateActionClientAccountModel>
+        //    {
+        //        new CorporateActionClientAccountModel{
+        //            edisAccountNumber= "0008",
+        //            brokerAccountNumber= "0008",
+        //            brokerHinSrn= "X1111118",
+        //            type= "Autolink",
+        //            name="Peter Truong 008",
+        //        },new CorporateActionClientAccountModel{
+        //            edisAccountNumber= "0007",
+        //            brokerAccountNumber= "0007",
+        //            brokerHinSrn= "X1111117",
+        //            type= "Autolink",
+        //            name="Peter Truong 007",
+        //        },new CorporateActionClientAccountModel{
+        //            edisAccountNumber= "0006",
+        //            brokerAccountNumber= "0006",
+        //            brokerHinSrn= "X1111116",
+        //            type= "Autolink",
+        //            name="Peter Truong 006",
+        //        },new CorporateActionClientAccountModel{
+        //            edisAccountNumber= "0005",
+        //            brokerAccountNumber= "0005",
+        //            brokerHinSrn= "X1111115",
+        //            type= "Autolink",
+        //            name="Peter Truong 005",
+        //        },
+        //    };
+        //}
+        //public List<CorporateActionClientAccountModel> GetClientAccountsForCompany(string adviserUserId, string companyTicker)
+        //{
+        //    return new List<CorporateActionClientAccountModel>
+        //    {
+        //        new CorporateActionClientAccountModel{
+        //            edisAccountNumber= "0008",
+        //            brokerAccountNumber= "0008",
+        //            brokerHinSrn= "X1111118",
+        //            type= "Autolink",
+        //            name="Peter Truong 008",
+        //        },new CorporateActionClientAccountModel{
+        //            edisAccountNumber= "0007",
+        //            brokerAccountNumber= "0007",
+        //            brokerHinSrn= "X1111117",
+        //            type= "Autolink",
+        //            name="Peter Truong 007",
+        //        },new CorporateActionClientAccountModel{
+        //            edisAccountNumber= "0006",
+        //            brokerAccountNumber= "0006",
+        //            brokerHinSrn= "X1111116",
+        //            type= "Autolink",
+        //            name="Peter Truong 006",
+        //        },new CorporateActionClientAccountModel{
+        //            edisAccountNumber= "0005",
+        //            brokerAccountNumber= "0005",
+        //            brokerHinSrn= "X1111115",
+        //            type= "Autolink",
+        //            name="Peter Truong 005",
+        //        },
+        //    };
+        //}
+        //#endregion
 
 
         #region adviser overview services

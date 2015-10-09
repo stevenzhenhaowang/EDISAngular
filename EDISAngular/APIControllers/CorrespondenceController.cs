@@ -32,7 +32,7 @@ namespace EDISAngular.APIControllers
         private EdisRepository edisRepo;
         private CommonReferenceDataRepository comRepo;
         private CorrespondenceRepository corresRepo;
-        // private AdviserRepository advRepo;
+        //private AdviserRepository advRepo;
         private edisDbEntities db;
         private EdisRepository repo;
         public CorrespondenceController()
@@ -40,7 +40,7 @@ namespace EDISAngular.APIControllers
             edisDbEntities db = new edisDbEntities();
             comRepo = new CommonReferenceDataRepository(db);
             corresRepo = new CorrespondenceRepository(db);
-            advRepo = new AdviserRepository(db);
+            //advRepo = new AdviserRepository(db);
             edisRepo = new EdisRepository();
         }
 

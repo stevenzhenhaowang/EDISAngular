@@ -250,6 +250,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Authorization\AuthorizationParameters.cs" />
+    <Compile Include="Infrastructure\DatabaseAccess\AdviserRepository.cs" />
     <Compile Include="Infrastructure\DatabaseAccess\BaseRepository.cs" />
     <Compile Include="Infrastructure\DatabaseAccess\CommonReferenceDataRepository.cs" />
     <Compile Include="Infrastructure\DatabaseAccess\CorrespondenceRepository.cs">
@@ -262,10 +263,19 @@
     <Compile Include="Infrastructure\DbFirst\Adviser.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\DbFirst\AssetPrice.cs">
+    <Compile Include="Infrastructure\DbFirst\AspNetRole.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\DbFirst\Attachment.cs">
+    <Compile Include="Infrastructure\DbFirst\AspNetUser.cs">
+      <DependentUpon>EFModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\DbFirst\AspNetUserClaim.cs">
+      <DependentUpon>EFModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\DbFirst\AspNetUserLogin.cs">
+      <DependentUpon>EFModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\DbFirst\AssetPrice.cs">
       <DependentUpon>EFModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\DbFirst\Attachment.cs">
@@ -2092,16 +2102,6 @@
     <Content Include="Images\validation_forclients.png" />
     <Content Include="Images\validation_marketupdates.png" />
     <Content Include="Images\_notes\dwsync.xml" />
-    <Content Include="Infrastructure\DbFirst\EFModels.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EFModels.edmx</DependentUpon>
-      <LastGenOutput>EFModels.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Infrastructure\DbFirst\EFModels.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EFModels.edmx</DependentUpon>
-      <LastGenOutput>EFModels.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
@@ -2228,8 +2228,18 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EFModels.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Infrastructure\DbFirst\EFModels.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EFModels.edmx</DependentUpon>
+      <LastGenOutput>EFModels.Context.cs</LastGenOutput>
+    </Content>
     <Content Include="Infrastructure\DbFirst\EFModels.edmx.diagram">
       <DependentUpon>EFModels.edmx</DependentUpon>
+    </Content>
+    <Content Include="Infrastructure\DbFirst\EFModels.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EFModels.edmx</DependentUpon>
+      <LastGenOutput>EFModels.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\globalize\cultures\globalize.culture.af-ZA.js" />

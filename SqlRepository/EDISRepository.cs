@@ -56,8 +56,10 @@ namespace SqlRepository
             _db.Dispose();
         }
 
-        public void CreateTestSectors() {
-            _db.Sectors.Add(new Sector {
+        public void CreateTestSectors()
+        {
+            _db.Sectors.Add(new Sector
+            {
                 Id = Guid.NewGuid().ToString(),
                 SectorName = "Test Sector"
             });
@@ -89,8 +91,89 @@ namespace SqlRepository
             _db.SaveChanges();
         }
 
+        public void insertData3()
+        {
+            var account = GetClientGroupAccountSync("65593420", DateTime.Now);
+            account.MakeTransactionSync(new InsuranceTransactionCreation()
+            {
+                AmountInsured = 20000,
+                EntitiesInsured = "123",
+                ExpiryDate = DateTime.Now.AddDays(30),
+                GrantedOn = DateTime.Now,
+                InsuranceType = InsuranceType.AssetInsurance,
+                NameOfPolicy = PolicyType.Car.ToString(),
+                PolicyType = PolicyType.Car,
+                Premium = 28000,
+                IsAcquire = true,
+                Issuer = "Steven",
+                PolicyAddress = "517 flinders lane, melbourne, vic",
+                PolicyNumber = "0193"
+            });
+            account.MakeTransactionSync(new InsuranceTransactionCreation()
+            {
+                AmountInsured = 23000,
+                EntitiesInsured = "123",
+                ExpiryDate = DateTime.Now.AddDays(30),
+                GrantedOn = DateTime.Now,
+                InsuranceType = InsuranceType.PersoanlInsurance,
+                NameOfPolicy = PolicyType.Accident.ToString(),
+                PolicyType = PolicyType.Accident,
+                Premium = 54000,
+                IsAcquire = true,
+                Issuer = "Steven",
+                PolicyAddress = "517 flinders lane, melbourne, vic",
+                PolicyNumber = "0193"
+            });
+            account.MakeTransactionSync(new InsuranceTransactionCreation()
+            {
+                AmountInsured = 10000,
+                EntitiesInsured = "123",
+                ExpiryDate = DateTime.Now.AddDays(30),
+                GrantedOn = DateTime.Now,
+                InsuranceType = InsuranceType.AssetInsurance,
+                NameOfPolicy = PolicyType.Boat.ToString(),
+                PolicyType = PolicyType.Boat,
+                Premium = 18000,
+                IsAcquire = true,
+                Issuer = "Steven",
+                PolicyAddress = "517 flinders lane, melbourne, vic",
+                PolicyNumber = "0193"
+            });
+            account.MakeTransactionSync(new InsuranceTransactionCreation()
+            {
+                AmountInsured = 80000,
+                EntitiesInsured = "123",
+                ExpiryDate = DateTime.Now.AddDays(30),
+                GrantedOn = DateTime.Now,
+                InsuranceType = InsuranceType.AssetInsurance,
+                NameOfPolicy = PolicyType.Building.ToString(),
+                PolicyType = PolicyType.Building,
+                Premium = 98000,
+                IsAcquire = true,
+                Issuer = "Steven",
+                PolicyAddress = "517 flinders lane, melbourne, vic",
+                PolicyNumber = "0193"
+            });
+            account.MakeTransactionSync(new InsuranceTransactionCreation()
+            {
+                AmountInsured = 10000,
+                EntitiesInsured = "123",
+                ExpiryDate = DateTime.Now.AddDays(30),
+                GrantedOn = DateTime.Now,
+                InsuranceType = InsuranceType.MiscellaneousInsurance,
+                NameOfPolicy = PolicyType.RentalIncome.ToString(),
+                PolicyType = PolicyType.RentalIncome,
+                Premium = 10099,
+                IsAcquire = true,
+                Issuer = "Steven",
+                PolicyAddress = "517 flinders lane, melbourne, vic",
+                PolicyNumber = "0193"
+            });
+        }
 
-        public void insertData2() {
+
+        public void insertData2()
+        {
 
             var account = GetClientGroupAccountSync("65593420", DateTime.Now);
 
@@ -125,7 +208,8 @@ namespace SqlRepository
                 PaymentOn = DateTime.Now,
                 PropertyId = "0fd8e41f-d599-4a7a-848a-fbf4531e60fd"
             });
-            account.MakeTransactionSync(new HomeLoanTransactionCreation() { 
+            account.MakeTransactionSync(new HomeLoanTransactionCreation()
+            {
                 ExpiryDate = DateTime.Now.AddDays(30),
                 GrantedOn = DateTime.Now,
                 Institution = "Monash",
@@ -148,7 +232,8 @@ namespace SqlRepository
                 TypeOfMortgageRates = TypeOfMortgageRates.Fixed,
                 IsAcquire = true
             });
-            account.RecordIncomeSync(new InterestPaymentCreation() { 
+            account.RecordIncomeSync(new InterestPaymentCreation()
+            {
                 Amount = 4000,
                 CashAccountId = "b54c7d6a-b9d8-4528-aef1-8a90f01165d3",
                 PaymentOn = DateTime.Now.AddDays(-20)
@@ -178,7 +263,8 @@ namespace SqlRepository
         }
 
 
-        public void insertTestingData() {
+        public void insertTestingData()
+        {
             var account = GetClientGroupAccountSync("65593420", DateTime.Now);
 
             //account.MakeTransactionSync(new PropertyTransactionCreation()
@@ -326,7 +412,7 @@ namespace SqlRepository
             //            TransactionExpenseType = TransactionExpenseType.AdviserTransactionFee
             //        }
             //    }
-                
+
             //});
 
 
@@ -590,7 +676,8 @@ namespace SqlRepository
 
         }
 
-        public void CreateCashFlowInfoForAssets() {
+        public void CreateCashFlowInfoForAssets()
+        {
             var groupAccount = GetClientGroupAccountSync("65593420", DateTime.Now);
 
             groupAccount.MakeTransactionSync(new EquityTransactionCreation()
@@ -635,10 +722,12 @@ namespace SqlRepository
 
 
         }
-        public void InsertRandomDataIntoAssets() {
+        public void InsertRandomDataIntoAssets()
+        {
 
             List<AssetPrice> priceList = new List<AssetPrice>();
-            for (int i = 0; i < 5; i++) { 
+            for (int i = 0; i < 5; i++)
+            {
                 AssetPrice assetPrice = new AssetPrice
                 {
                     Id = MemberNumberGenerator(8),
@@ -657,7 +746,7 @@ namespace SqlRepository
                     case 5: assetPrice.AssetType = AssetTypes.ManagedInvestments; break;
                 }
                 priceList.Add(assetPrice);
-                
+
             }
 
 
@@ -670,9 +759,9 @@ namespace SqlRepository
                 AccountNumber = MemberNumberGenerator(5),
                 MaturityDate = DateTime.Now,
                 TermsInMonths = _rdm.Next(4),
-                InterestRate = Convert.ToDouble(MemberNumberGenerator(3))/100,
-                AnnualInterest = Convert.ToDouble(MemberNumberGenerator(4))/100,
-                FaceValue = Convert.ToDouble(MemberNumberGenerator(6))/100,
+                InterestRate = Convert.ToDouble(MemberNumberGenerator(3)) / 100,
+                AnnualInterest = Convert.ToDouble(MemberNumberGenerator(4)) / 100,
+                FaceValue = Convert.ToDouble(MemberNumberGenerator(6)) / 100,
                 CurrencyType = CurrencyType.AustralianDollar
             };
 
@@ -699,7 +788,8 @@ namespace SqlRepository
 
 
             List<CashTransaction> cashTransactionList = new List<CashTransaction>();
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 5; i++)
+            {
                 CashTransaction cashTransaction = new CashTransaction
                 {
                     Id = MemberNumberGenerator(8),
@@ -709,15 +799,16 @@ namespace SqlRepository
                     TransactionDate = DateTime.Now
                 };
                 cashTransactionList.Add(cashTransaction);
-            } 
+            }
 
             List<Interest> interestList = new List<Interest>();
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 5; i++)
+            {
                 Interest interest = new Interest
                 {
                     Id = MemberNumberGenerator(8),
                     CreatedOn = DateTime.Now,
-                    CashAccount = cashAccount,                    
+                    CashAccount = cashAccount,
                     Amount = Convert.ToDouble(MemberNumberGenerator(6)) / 100,
                     PaymentOn = DateTime.Now,
                 };
@@ -729,12 +820,13 @@ namespace SqlRepository
             //Equity -------------------------------------------------------------------------
 
 
-            Equity equity = new Equity{
+            Equity equity = new Equity
+            {
                 AssetId = MemberNumberGenerator(8),
                 Ticker = MemberNumberGenerator(6),
                 Name = "Name : " + MemberNumberGenerator(5),
                 Sector = MemberNumberGenerator(5),
-                Prices = priceList                
+                Prices = priceList
             };
 
             int rdmIntForEquity = _rdm.Next(3);
@@ -747,12 +839,14 @@ namespace SqlRepository
 
 
             List<Dividend> dividendList = new List<Dividend>();
-            for (int i = 0; i < 5; i ++){
-                Dividend divident = new Dividend{
+            for (int i = 0; i < 5; i++)
+            {
+                Dividend divident = new Dividend
+                {
                     Id = MemberNumberGenerator(8),
                     PaymentOn = DateTime.Now,
-                    Amount = Convert.ToDouble(MemberNumberGenerator(6))/100,
-                    FrankingCredit = Convert.ToDouble(MemberNumberGenerator(6))/100,
+                    Amount = Convert.ToDouble(MemberNumberGenerator(6)) / 100,
+                    FrankingCredit = Convert.ToDouble(MemberNumberGenerator(6)) / 100,
                     Equity = equity,
                     CreatedOn = DateTime.Now,
                 };
@@ -761,11 +855,13 @@ namespace SqlRepository
 
 
             List<EquityTransaction> equityTransactionList = new List<EquityTransaction>();
-            for (int i = 0; i < 5; i ++){
-                EquityTransaction equityTransaction = new EquityTransaction{
+            for (int i = 0; i < 5; i++)
+            {
+                EquityTransaction equityTransaction = new EquityTransaction
+                {
                     Id = MemberNumberGenerator(8),
                     NumberOfUnits = _rdm.Next(100),
-                    UnitPriceAtPurchase = Convert.ToDouble(MemberNumberGenerator(6))/100,
+                    UnitPriceAtPurchase = Convert.ToDouble(MemberNumberGenerator(6)) / 100,
                     Equity = equity,
                     CreatedOn = DateTime.Now,
                     TransactionDate = DateTime.Now,
@@ -774,11 +870,13 @@ namespace SqlRepository
             }
 
             List<ResearchValue> researchValueList = new List<ResearchValue>();
-            for (int i = 0; i < 5; i ++){
-                ResearchValue researchValue = new ResearchValue{
+            for (int i = 0; i < 5; i++)
+            {
+                ResearchValue researchValue = new ResearchValue
+                {
                     Id = MemberNumberGenerator(8),
                     Key = MemberNumberGenerator(5),
-                    Value = Convert.ToDouble(MemberNumberGenerator(5))/100,
+                    Value = Convert.ToDouble(MemberNumberGenerator(5)) / 100,
                     Issuer = MemberNumberGenerator(5),
                     CreatedOn = DateTime.Now
                 };
@@ -813,19 +911,21 @@ namespace SqlRepository
 
 
 
-            CouponPayment couponPayment = new CouponPayment{
+            CouponPayment couponPayment = new CouponPayment
+            {
                 Id = MemberNumberGenerator(8),
-                Amount = Convert.ToDouble(MemberNumberGenerator(8))/100,
+                Amount = Convert.ToDouble(MemberNumberGenerator(8)) / 100,
                 Bond = bond,
                 CreatedOn = DateTime.Now,
                 PaymentOn = DateTime.Now
             };
 
-            BondTransaction bondTransaction = new BondTransaction{
+            BondTransaction bondTransaction = new BondTransaction
+            {
                 Id = MemberNumberGenerator(8),
                 CreatedOn = DateTime.Now,
                 NumberOfUnits = _rdm.Next(100),
-                UnitPriceAtPurchase = Convert.ToDouble(MemberNumberGenerator(6))/100,
+                UnitPriceAtPurchase = Convert.ToDouble(MemberNumberGenerator(6)) / 100,
                 Bond = bond,
                 TransactionDate = DateTime.Now
             };
@@ -847,13 +947,15 @@ namespace SqlRepository
                 Prices = priceList,
 
             };
-            
+
             List<Rental> rentalList = new List<Rental>();
-            for (int i = 0; i < 5; i ++){
-                Rental rental = new Rental{
+            for (int i = 0; i < 5; i++)
+            {
+                Rental rental = new Rental
+                {
                     Id = MemberNumberGenerator(8),
                     PaymentOn = DateTime.Now,
-                    Amount = Convert.ToDouble(MemberNumberGenerator(10))/100,
+                    Amount = Convert.ToDouble(MemberNumberGenerator(10)) / 100,
                     PropertyAddress = property,
                     CreatedOn = DateTime.Now,
                 };
@@ -861,14 +963,16 @@ namespace SqlRepository
             }
 
             List<PropertyTransaction> propertyTransactionList = new List<PropertyTransaction>();
-            for (int i = 0; i < 5; i ++){
-                PropertyTransaction propertyTransaction = new PropertyTransaction{
+            for (int i = 0; i < 5; i++)
+            {
+                PropertyTransaction propertyTransaction = new PropertyTransaction
+                {
                     Id = MemberNumberGenerator(8),
-                    Price = Convert.ToDouble(MemberNumberGenerator(10))/100,
+                    Price = Convert.ToDouble(MemberNumberGenerator(10)) / 100,
                     PropertyAddress = property,
                     CreatedOn = DateTime.Now,
                     IsBuy = _rdm.Next(2) == 0 ? true : false,
-                    TransactionDate = DateTime.Now,                    
+                    TransactionDate = DateTime.Now,
                 };
                 propertyTransactionList.Add(propertyTransaction);
             }
@@ -1327,10 +1431,10 @@ namespace SqlRepository
 
         public async Task<Adviser> CreateAdviser(Adviser newAdviser)
         {
-            
+
             //if (_db.Advisers.Local.SingleOrDefault(a => a.AdviserNumber == adviserNumber && a.CreatedOn.HasValue && a.CreatedOn.Value <= DateTime.Now) != null)
-        
-            
+
+
             _db.Advisers.Add(new Edis.Db.Adviser
             {
                 CreatedOn = DateTime.Now,
@@ -1489,6 +1593,20 @@ namespace SqlRepository
                 CourseTitle = newAdviser.CourseTitle,
                 CourseStatus = newAdviser.CourseStatus,
                 EducationLevelId = newAdviser.EducationLevelId,
+                CAFDescription = newAdviser.CAFDescription,
+                CAFId = newAdviser.CAFId,
+                CAFSelected = newAdviser.CAFSelected,
+                GroupName = newAdviser.GroupName,
+                Image = newAdviser.Image,
+                ImageMimeType = newAdviser.ImageMimeType,
+                NewsLetterSelected = newAdviser.NewsLetterSelected,
+                NewsLetterServiceId = newAdviser.NewsLetterServiceId,
+                NewsLetterServiceName = newAdviser.NewsLetterServiceName,
+                Providing = newAdviser.Providing,
+                RoleAndServicesSummary = newAdviser.RoleAndServicesSummary,
+                ServiceId = newAdviser.ServiceId,
+                ServiceName = newAdviser.ServiceName,
+                TotalAssetLevelId = newAdviser.TotalAssetLevelId
             });
 
             //await _db.SaveChangesAsync();
@@ -1500,17 +1618,101 @@ namespace SqlRepository
             return GetAdviserSync(newAdviser.AdviserNumber, DateTime.Now.AddSeconds(20));
         }
 
-        public async Task<Adviser> UpdateAdviser(Adviser adviser, DateTime date) {
+        public Adviser UpdateAdviser(Adviser adviser)
+        {
 
-            Edis.Db.Adviser currentAdviser = _db.Advisers.SingleOrDefault(a => a.AdviserId == adviser.Id);
+            Edis.Db.Adviser currentAdviser = _db.Advisers.SingleOrDefault(a => a.AdviserNumber == adviser.AdviserNumber);
 
             currentAdviser.FirstName = adviser.FirstName;
+            currentAdviser.ABNACN = adviser.ABNACN;
+            currentAdviser.AddressLn1 = adviser.AddressLn1;
+            currentAdviser.AddressLn2 = adviser.AddressLn2;
+            currentAdviser.AddressLn3 = adviser.AddressLn3;
+            currentAdviser.AnnualIncomeLevelId = adviser.AnnualIncomeLevelId;
+            currentAdviser.ApproximateNumberOfClients = adviser.ApproximateNumberOfClients;
+            currentAdviser.Asfl = adviser.Asfl;
+            currentAdviser.AuthorizedRepresentativeNumber = adviser.AuthorizedRepresentativeNumber;
+            currentAdviser.BusinessFax = adviser.BusinessFax;
+            currentAdviser.BusinessMobile = adviser.BusinessMobile;
+            currentAdviser.BusinessPhone = adviser.BusinessPhone;
+            currentAdviser.CAFDescription = adviser.CAFDescription;
+            currentAdviser.CAFId = adviser.CAFId;
+            currentAdviser.CAFSelected = adviser.CAFSelected;
+            currentAdviser.CompanyName = adviser.CompanyName;
+            currentAdviser.Country = adviser.Country;
+            currentAdviser.CourseStatus = adviser.CourseStatus;
+            currentAdviser.CourseTitle = adviser.CourseTitle;
+            currentAdviser.CreatedOn = adviser.CreatedOn;
+            currentAdviser.CurrentTitle = adviser.CurrentTitle;
+            currentAdviser.DAddressLine1 = adviser.DAddressLine1;
+            currentAdviser.DAddressLine2 = adviser.DAddressLine2;
+            currentAdviser.DAddressLine3 = adviser.DAddressLine3;
+            currentAdviser.DCountry = adviser.DCountry;
+            currentAdviser.DealerGroupHasDerivativesLicense = adviser.DealerGroupHasDerivativesLicense;
+            currentAdviser.DealerGroupName = adviser.DealerGroupName;
+            currentAdviser.DPostcode = adviser.DPostcode;
+            currentAdviser.DState = adviser.DState;
+            currentAdviser.DSuburb = adviser.DSuburb;
+            currentAdviser.EducationLevelId = adviser.EducationLevelId;
+            currentAdviser.ExperienceStartDate = adviser.ExperienceStartDate;
+            currentAdviser.Fax = adviser.Fax;
+            currentAdviser.FirstName = adviser.FirstName;
+            currentAdviser.Gender = adviser.Gender;
+            currentAdviser.GroupName = adviser.GroupName;
+            currentAdviser.IndustryExperienceStartDate = adviser.IndustryExperienceStartDate;
+            currentAdviser.Institution = adviser.Institution;
+            currentAdviser.InvestibleAssetLevel = adviser.InvestibleAssetLevel;
+            currentAdviser.IsAuthorizedRepresentative = adviser.IsAuthorizedRepresentative;
+            currentAdviser.LastName = adviser.LastName;
+            currentAdviser.LastUpdate = adviser.LastUpdate;
+            currentAdviser.Lat = adviser.Lat;
+            currentAdviser.Lng = adviser.Lng;
+            currentAdviser.MiddleName = adviser.MiddleName;
+            currentAdviser.Mobile = adviser.Mobile;
+            currentAdviser.NewsLetterSelected = adviser.NewsLetterSelected;
+            currentAdviser.NewsLetterServiceId = adviser.NewsLetterServiceId;
+            currentAdviser.NewsLetterServiceName = adviser.NewsLetterServiceName;
+            currentAdviser.NumberOfClientsId = adviser.NumberOfClientsId;
+            currentAdviser.Phone = adviser.Phone;
+            currentAdviser.PostCode = adviser.PostCode;
+            currentAdviser.ProfessiontypeId = adviser.ProfessiontypeId;
+            currentAdviser.Providing = adviser.Providing;
+            currentAdviser.RemunerationMethod = adviser.RemunerationMethod;
+            currentAdviser.RemunerationMethodSpecified = adviser.RemunerationMethodSpecified;
+            currentAdviser.RoleAndServicesSummary = adviser.RoleAndServicesSummary;
+            currentAdviser.ServiceId = adviser.ServiceId;
+            currentAdviser.ServiceName = adviser.ServiceName;
+            currentAdviser.State = adviser.State;
+            currentAdviser.Suburb = adviser.Suburb;
+            currentAdviser.Title = adviser.Title;
+            currentAdviser.TotalAssetLevel = adviser.TotalAssetLevel;
+            currentAdviser.TotalAssetLevelId = adviser.TotalAssetLevelId;
+            currentAdviser.TotalAssetUnderManagement = adviser.TotalAssetUnderManagement;
+            currentAdviser.TotalDirectAustralianEquitiesUnderManagement = adviser.TotalDirectAustralianEquitiesUnderManagement;
+            currentAdviser.TotalDirectFixedInterestUnderManagement = adviser.TotalDirectFixedInterestUnderManagement;
+            currentAdviser.TotalDirectInterantionalEquitiesUnderManagement = adviser.TotalDirectInterantionalEquitiesUnderManagement;
+            currentAdviser.TotalDirectLendingBookInterestUnderManagement = adviser.TotalDirectLendingBookInterestUnderManagement;
+            currentAdviser.TotalInvestmentUndermanagement = adviser.TotalInvestmentUndermanagement;
+            currentAdviser.VerifiedId = adviser.VerifiedId;
 
-            await _db.SaveChangesAsync();
+            _db.SaveChanges();
 
-            return await GetAdviser(adviser.Id, date.AddSeconds(20));
+            return GetAdviserSync(currentAdviser.AdviserNumber, DateTime.Now.AddSeconds(20));
         }
-        
+
+        public Adviser UpdateAdviserImage(Adviser adviser)
+        {
+
+            Edis.Db.Adviser currentAdviser = _db.Advisers.SingleOrDefault(a => a.AdviserNumber == adviser.AdviserNumber);
+
+            currentAdviser.Image = adviser.Image;
+            currentAdviser.ImageMimeType = adviser.ImageMimeType;
+
+            _db.SaveChanges();
+
+            return GetAdviserSync(currentAdviser.AdviserNumber, DateTime.Now.AddSeconds(20));
+        }
+
         public async Task CreateNewClient(ClientRegistration client)
         {
             var group = await _db.ClientGroups.SingleOrDefaultAsync(g => g.ClientGroupId == client.GroupNumber);
@@ -1580,9 +1782,10 @@ namespace SqlRepository
             _db.SaveChanges();
         }
 
-        public void UpdateClientSync(ClientRegistration client) {
+        public void UpdateClientSync(ClientRegistration client)
+        {
             Edis.Db.Client currentClient = _db.Clients.SingleOrDefault(c => c.ClientNumber == client.ClientNumber);
-           
+
             currentClient.ClientGroup = currentClient.ClientGroup;
             currentClient.FirstName = client.FirstName;
             currentClient.LastName = client.LastName;
@@ -2406,24 +2609,28 @@ namespace SqlRepository
             return result;
         }
 
-        public List<ClientAccount> getAllClientAccountsForAdviser(string adviserNumber, DateTime toDate) {                        //added
+        public List<ClientAccount> getAllClientAccountsForAdviser(string adviserNumber, DateTime toDate)
+        {                        //added
 
             Adviser adviser = GetAdviserSync(adviserNumber, toDate);
             List<ClientGroup> clientGroups = GetAllClientGroupsForAdviserSync(adviserNumber, toDate);
-            
+
             List<Client> clients = new List<Client>();
-            foreach (var clientGroup in clientGroups) {
+            foreach (var clientGroup in clientGroups)
+            {
                 clients.AddRange(clientGroup.GetClientsSync());
             }
 
             List<ClientAccount> clientAccounts = new List<ClientAccount>();
-            foreach (var client in clients ){
+            foreach (var client in clients)
+            {
                 clientAccounts.AddRange(client.GetAccountsSync());
             }
             return clientAccounts;
         }
 
-        public List<GroupAccount> getAllClientGroupAccountsForAdviser(string adviserNumber, DateTime toDate){                        //added
+        public List<GroupAccount> getAllClientGroupAccountsForAdviser(string adviserNumber, DateTime toDate)
+        {                        //added
 
             Adviser adviser = GetAdviserSync(adviserNumber, toDate);
             List<ClientGroup> clientGroups = GetAllClientGroupsForAdviserSync(adviserNumber, toDate);
@@ -2435,7 +2642,7 @@ namespace SqlRepository
                 groupAccounts.AddRange(group.GetAccountsSync());
             }
             return groupAccounts;
-        }   
+        }
 
         public async Task<List<ClientAccount>> GetAccountsForClient(string clientNumber, DateTime toDate, AccountType accountType)
         {
@@ -2513,9 +2720,11 @@ namespace SqlRepository
             return result;
         }
 
-        public ClientGroup getClientGroupByGroupId(string groupId) {
+        public ClientGroup getClientGroupByGroupId(string groupId)
+        {
             var group = _db.ClientGroups.FirstOrDefault(g => g.ClientGroupId == groupId);
-            ClientGroup clientGroup = new ClientGroup(this) { 
+            ClientGroup clientGroup = new ClientGroup(this)
+            {
                 Id = group.ClientGroupId,
                 ClientGroupNumber = group.GroupNumber,
                 CreatedOn = group.CreatedOn,
@@ -2841,6 +3050,35 @@ namespace SqlRepository
             _db.SaveChanges();
         }
 
+        public List<Domain.Portfolio.AggregateRoots.Asset.Equity> GetAllEquities()
+        {
+            List<Domain.Portfolio.AggregateRoots.Asset.Equity> equities = new List<Domain.Portfolio.AggregateRoots.Asset.Equity>();
+
+            foreach (var equity in _db.Equities.ToList())
+            {
+                Domain.Portfolio.AggregateRoots.Asset.Equity subEquity = null;
+                switch (equity.EquityType)
+                {
+                    case EquityTypes.AustralianEquity:
+                        subEquity = new AustralianEquity(this);
+                        break;
+                    case EquityTypes.InternationalEquity:
+                        subEquity = new InternationalEquity(this);
+                        break;
+                    case EquityTypes.ManagedInvestments:
+                        subEquity = new ManagedInvestment(this);
+                        break;
+                }
+                subEquity.Id = equity.AssetId;
+                subEquity.Ticker = equity.Ticker;
+                subEquity.Name = equity.Name;
+                subEquity.Sector = equity.Sector;
+                subEquity.EquityType = equity.EquityType;
+                equities.Add(subEquity);
+            }
+            return equities;
+        }
+
         public async Task<double?> GetResearchValueForEquity(string key, string ticker)
         {
             var equity =
@@ -2882,6 +3120,28 @@ namespace SqlRepository
                     .OrderByDescending(c => c.CreatedOn)
                     .FirstOrDefault()
                     .Value;
+        }
+
+
+        public string GetStringResearchValueForEquitySync(string key, string ticker)             //added
+        {
+            var equity =
+                _db.Equities.Local.SingleOrDefault(
+                    eq => eq.Ticker == ticker) ??
+                    _db.Equities.Where(eq => eq.Ticker == ticker)
+                        .Include(eq => eq.ResearchValues)
+                        .FirstOrDefault();
+            if (equity == null)
+            {
+                throw new Exception("Cannot find equity with ticker " + ticker +
+                                    " or no research value for this equity of key " + key +
+                                    " is yet available from database");
+            }
+            return equity.ResearchValues == null || !equity.ResearchValues.Any() ? "" :
+                equity.ResearchValues.Where(v => v.Key == key)
+                    .OrderByDescending(c => c.CreatedOn)
+                    .FirstOrDefault()
+                    .Value.ToString();              // StringValue => Value.ToString()
         }
 
         public async Task FeedResearchValueForProperty(string key, double value, string propertyId, string issuer)
@@ -4891,7 +5151,77 @@ namespace SqlRepository
                 Id = dbAdviser.AdviserId,
                 AdviserNumber = dbAdviser.AdviserNumber,
                 FirstName = dbAdviser.FirstName,
-                LastName = dbAdviser.LastName
+                LastName = dbAdviser.LastName,
+                ABNACN = dbAdviser.ABNACN,
+                AddressLn1 = dbAdviser.AddressLn1,
+                AddressLn2 = dbAdviser.AddressLn2,
+                AddressLn3 = dbAdviser.AddressLn3,
+                AnnualIncomeLevelId = dbAdviser.AnnualIncomeLevelId,
+                ApproximateNumberOfClients = dbAdviser.ApproximateNumberOfClients,
+                Asfl = dbAdviser.Asfl,
+                AuthorizedRepresentativeNumber = dbAdviser.AuthorizedRepresentativeNumber,
+                BusinessFax = dbAdviser.BusinessFax,
+                BusinessMobile = dbAdviser.BusinessMobile,
+                BusinessPhone = dbAdviser.BusinessPhone,
+                CAFDescription = dbAdviser.CAFDescription,
+                CAFId = dbAdviser.CAFId,
+                CAFSelected = dbAdviser.CAFSelected,
+                CompanyName = dbAdviser.CompanyName,
+                Country = dbAdviser.Country,
+                CourseStatus = dbAdviser.CourseStatus,
+                CourseTitle = dbAdviser.CourseTitle,
+                CreatedOn = dbAdviser.CreatedOn,
+                CurrentTitle = dbAdviser.CurrentTitle,
+                DAddressLine1 = dbAdviser.DAddressLine1,
+                DAddressLine2 = dbAdviser.DAddressLine2,
+                DAddressLine3 = dbAdviser.DAddressLine3,
+                DCountry = dbAdviser.DCountry,
+                DealerGroupHasDerivativesLicense = dbAdviser.DealerGroupHasDerivativesLicense,
+                DealerGroupName = dbAdviser.DealerGroupName,
+                DPostcode = dbAdviser.DPostcode,
+                DState = dbAdviser.DState,
+                DSuburb = dbAdviser.DSuburb,
+                EducationLevelId = dbAdviser.EducationLevelId,
+                ExperienceStartDate = dbAdviser.ExperienceStartDate,
+                Fax = dbAdviser.Fax,
+                Gender = dbAdviser.Gender,
+                GroupName = dbAdviser.GroupName,
+                Image = dbAdviser.Image,
+                ImageMimeType = dbAdviser.ImageMimeType,
+                IndustryExperienceStartDate = dbAdviser.IndustryExperienceStartDate,
+                Institution = dbAdviser.Institution,
+                InvestibleAssetLevel = dbAdviser.InvestibleAssetLevel,
+                IsAuthorizedRepresentative = dbAdviser.IsAuthorizedRepresentative,
+                LastUpdate = dbAdviser.LastUpdate,
+                Lat = dbAdviser.Lat,
+                Lng = dbAdviser.Lng,
+                MiddleName = dbAdviser.MiddleName,
+                Mobile = dbAdviser.Mobile,
+                NewsLetterSelected = dbAdviser.NewsLetterSelected,
+                NewsLetterServiceId = dbAdviser.NewsLetterServiceId,
+                NewsLetterServiceName = dbAdviser.NewsLetterServiceName,
+                NumberOfClientsId = dbAdviser.NumberOfClientsId,
+                Phone = dbAdviser.Phone,
+                PostCode = dbAdviser.PostCode,
+                ProfessiontypeId = dbAdviser.ProfessiontypeId,
+                Providing = dbAdviser.Providing,
+                RemunerationMethod = dbAdviser.RemunerationMethod,
+                RemunerationMethodSpecified = dbAdviser.RemunerationMethodSpecified,
+                RoleAndServicesSummary = dbAdviser.RoleAndServicesSummary,
+                ServiceId = dbAdviser.ServiceId,
+                ServiceName = dbAdviser.ServiceName,
+                State = dbAdviser.State,
+                Suburb = dbAdviser.Suburb,
+                Title = dbAdviser.Title,
+                TotalAssetLevel = dbAdviser.TotalAssetLevel,
+                TotalAssetLevelId = dbAdviser.TotalAssetLevelId,
+                TotalAssetUnderManagement = dbAdviser.TotalAssetUnderManagement,
+                TotalDirectAustralianEquitiesUnderManagement = dbAdviser.TotalDirectAustralianEquitiesUnderManagement,
+                TotalDirectFixedInterestUnderManagement = dbAdviser.TotalDirectFixedInterestUnderManagement,
+                TotalDirectInterantionalEquitiesUnderManagement = dbAdviser.TotalDirectInterantionalEquitiesUnderManagement,
+                TotalDirectLendingBookInterestUnderManagement = dbAdviser.TotalDirectLendingBookInterestUnderManagement,
+                TotalInvestmentUndermanagement = dbAdviser.TotalInvestmentUndermanagement,
+                VerifiedId = dbAdviser.VerifiedId
             };
             return adviser;
         }
@@ -4916,7 +5246,16 @@ namespace SqlRepository
                 ClientGroupNumber = dbClient.ClientGroup.GroupNumber,
                 LastName = dbClient.LastName,
                 ClientNumber = dbClient.ClientNumber,
-                Id = dbClient.ClientId
+                Id = dbClient.ClientId,
+                ABN = dbClient.ABN,
+                ACN = dbClient.ACN,
+                Address = dbClient.Address,
+                ClientGroupId = dbClient.ClientGroupId,
+                ClientType = dbClient.ClientType,
+                CreatedOn = dbClient.CreatedOn,
+                Dob = dbClient.Dob,
+                Email = dbClient.Email,
+                EntityName = dbClient.EntityName
             };
 
             return client;
@@ -4954,7 +5293,7 @@ namespace SqlRepository
                 Phone = dbClient.Phone,
                 LastName = dbClient.LastName,
                 EntityName = dbClient.EntityName,
-                //Age = (int)((todate - dbClient.Dob.Value).TotalDays / 365),
+                Age = dbClient.Dob == null ? 0 : (int)((todate - dbClient.Dob.Value).TotalDays / 365),
                 ClientGroupNumber = dbClient.ClientGroup.GroupNumber,
                 ClientNumber = dbClient.ClientNumber,
                 Id = dbClient.ClientId
@@ -5003,7 +5342,7 @@ namespace SqlRepository
             {
                 Id = id,
                 ClientGroupNumber = dbGroup.GroupNumber,
-                
+
                 MainClientId = dbGroup.MainClientId
             };
 
@@ -6191,7 +6530,7 @@ namespace SqlRepository
                     if (transaction != null)
                     {
                         var property = transaction.PropertyAddress;
-                        
+
                         var clientAverageAge =
                             _db.Clients.Where(c => c.ClientGroupId == clientGroup.ClientGroupId)
                                 .ToList()
@@ -6551,7 +6890,7 @@ namespace SqlRepository
             return result;
         }
 
-        private  List<AustralianEquity> GenerateAustralianEquityForAccountSync(string accountId, DateTime todate,            //added
+        private List<AustralianEquity> GenerateAustralianEquityForAccountSync(string accountId, DateTime todate,            //added
             Account dbAccount)
         {
             var result = new List<AustralianEquity>();
@@ -6764,9 +7103,6 @@ namespace SqlRepository
                 PayoutRatio = (GetResearchValueForEquitySync(Nameof<Ratios>.Property(r => r.PayoutRatio), ticker)).GetValueOrDefault(),
                 ThreeYearReturn = (GetResearchValueForEquitySync(Nameof<Ratios>.Property(r => r.ThreeYearReturn), ticker)).GetValueOrDefault()
             };
-
-
-
             return ratio;
         }
 
@@ -6775,7 +7111,8 @@ namespace SqlRepository
         public void CreateNewMessageSync(Message message, int senderRole)
         {
             var resource = _db.ResourcesReferences.SingleOrDefault(r => r.TokenValue == message.resourceToken);
-            Edis.Db.Notes note = new Edis.Db.Notes {
+            Edis.Db.Notes note = new Edis.Db.Notes
+            {
                 AccountId = "",
                 AdviserId = message.adviserNumber,
                 AssetTypeId = message.assetTypeId,
@@ -6800,7 +7137,8 @@ namespace SqlRepository
 
             if (!string.IsNullOrEmpty(resource.ResourceUrl))
             {
-                _db.Attachments.Add(new Edis.Db.Attachments {
+                _db.Attachments.Add(new Edis.Db.Attachments
+                {
                     AttachmentId = Guid.NewGuid().ToString(),
                     DateCreated = DateTime.Now,
                     DateModified = DateTime.Now,
@@ -6809,10 +7147,11 @@ namespace SqlRepository
                     Title = note.Subject,
                     AttachmentType = resource.FileExtension
                 });
-                
+
             }
 
             _db.SaveChanges();
         }
+
     }
 }

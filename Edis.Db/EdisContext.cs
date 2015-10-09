@@ -53,7 +53,7 @@ namespace Edis.Db
 
 
 
-        public EdisContext() : base("EdisDb")
+        public EdisContext() : base("EDIS")
         {            
         }
 
